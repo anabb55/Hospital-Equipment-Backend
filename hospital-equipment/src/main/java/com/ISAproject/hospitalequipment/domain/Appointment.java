@@ -1,4 +1,4 @@
-package com.ISAproject.hospitalequipment.Model;
+package com.ISAproject.hospitalequipment.domain;
 
 import jakarta.persistence.Entity;
 
