@@ -25,6 +25,10 @@ public class CompanyProfile {
         Grade = grade;
     }
 
+    public CompanyProfile() {
+
+    }
+
     public Long getId() {
         return Id;
     }

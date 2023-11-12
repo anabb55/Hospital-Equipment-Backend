@@ -1,6 +1,6 @@
 package com.ISAproject.hospitalequipment.Controller;
 
-import com.ISAproject.hospitalequipment.Model.CompanyProfile;
+import com.ISAproject.hospitalequipment.domain.CompanyProfile;
 import com.ISAproject.hospitalequipment.repository.CompanyProfileRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
