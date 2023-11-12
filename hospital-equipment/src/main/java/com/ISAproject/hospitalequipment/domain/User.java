@@ -1,5 +1,7 @@
 package com.ISAproject.hospitalequipment.domain;
 
+import com.ISAproject.hospitalequipment.domain.enums.UserCategory;
+import com.ISAproject.hospitalequipment.domain.enums.UserType;
 import jakarta.persistence.*;
 
 
@@ -20,8 +22,15 @@ public class User {
     private String company;
     private boolean activated; // Flag to track account activation
 
+    private int penaltyPoints;
 
-    public User(Long id, String email, String password, String firstName, String lastName, String city, String country, String phoneNumber, String occupation, String company, boolean activated) {
+    @Enumerated(EnumType.STRING)
+    private UserCategory userCategory;
+    @Enumerated(EnumType.STRING)
+    private UserType userType;
+
+
+    public User(Long id, String email, String password, String firstName, String lastName, String city, String country, String phoneNumber, String occupation, String company, boolean activated, int penaltyPoints, UserCategory userCategory, UserType userType) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -33,10 +42,29 @@ public class User {
         this.occupation = occupation;
         this.company = company;
         this.activated = activated;
+        this.penaltyPoints = penaltyPoints;
+        this.userCategory = userCategory;
+        this.userType = userType;
     }
 
     public User() {
 
+    }
+
+    public UserCategory getUserCategory() {
+        return userCategory;
+    }
+
+    public void setUserCategory(UserCategory userCategory) {
+        this.userCategory = userCategory;
+    }
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
     }
 
     public Long getId() {
@@ -47,6 +75,13 @@ public class User {
         this.id = id;
     }
 
+    public int getPenaltyPoints() {
+        return penaltyPoints;
+    }
+
+    public void setPenaltyPoints(int penaltyPoints) {
+        this.penaltyPoints = penaltyPoints;
+    }
     public String getEmail() {
         return email;
     }
