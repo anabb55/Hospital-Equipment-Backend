@@ -1,7 +1,9 @@
 package com.ISAproject.hospitalequipment.domain;
 
 import com.ISAproject.hospitalequipment.domain.enums.UserCategory;
-import com.ISAproject.hospitalequipment.domain.enums.UserType;
+import com.ISAproject.hospitalequipment.domain.enums.UserRole;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -10,91 +12,78 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Collection;
+import java.util.List;
+
 
 @Entity
 @Table(name="Users")
-public class User {
+@Getter
+@Setter
+public class User{
+
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
-    @Getter @Setter
     private Long id;
 
     @Email(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
-    @Getter @Setter
     private String email;
 
     @NotNull
     @Size(min=6, max=20)
-    @Getter @Setter
     private String password;
 
     @NotEmpty
-    @Getter @Setter
     private String firstName;
 
     @NotEmpty
-    @Getter @Setter
     private String lastName;
 
-    @NotEmpty
-    @Getter @Setter
-    private String city;
-
-    @NotEmpty
-    @Getter @Setter
-    private String country;
-
     @NotNull
-    @Getter @Setter
     private String phoneNumber;
 
     @NotEmpty
-    @Getter @Setter
     private String occupation;
 
-    @NotEmpty
-    @Getter @Setter
-    private String company;
+    private boolean enabled;
 
-    @Getter @Setter
-    private boolean activated;
-
-    @Getter @Setter
-    private int penaltyPoints;
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @NotNull
+    private  Address address;
 
 
-
-    @Enumerated(EnumType.STRING)
-    @Getter @Setter
-    private UserCategory userCategory;
-
-    @Enumerated(EnumType.STRING)
-    @Getter @Setter
-    private UserType userType;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private List<Role> roles;
 
 
-    public User(Long id, String email, String password, String firstName, String lastName, String city, String country, String phoneNumber, String occupation, String company, boolean activated, int penaltyPoints, UserCategory userCategory, UserType userType) {
+   // private String company;
+   //private int penaltyPoints;
+  // @Enumerated(EnumType.STRING)
+  // private UserCategory userCategory;
+
+
+    public User(Long id, String email, String password, String firstName, String lastName,Address address,  String phoneNumber, String occupation,  boolean enabled) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.city = city;
-        this.country = country;
+        this.address=address;
         this.phoneNumber = phoneNumber;
         this.occupation = occupation;
-        this.company = company;
-        this.activated = activated;
-        this.penaltyPoints = penaltyPoints;
-        this.userCategory = userCategory;
-        this.userType = userType;
+        this.enabled = enabled;
+
+
     }
 
     public User() {
 
     }
-
-
 }
 

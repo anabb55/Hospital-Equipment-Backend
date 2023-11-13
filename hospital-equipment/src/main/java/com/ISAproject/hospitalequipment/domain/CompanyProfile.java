@@ -1,82 +1,51 @@
 package com.ISAproject.hospitalequipment.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
+@Getter
+@Setter
 @Table(name="CompanyProfiles")
 public class CompanyProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long Id;
-    public String Name;
-    public String Adress;
-    public String Description;
-    public Double Grade;
-    // dodati public List<Appointment> Appointments;
-    // dodati spisak administratora kompanije
+    private Long id;
 
+    @NotNull
+    private String name;
 
-    public CompanyProfile(String name, String adress, String description, Double grade) {
-        Name = name;
-        Adress = adress;
-        Description = description;
-        Grade = grade;
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @NotNull
+    private Address address;
+
+    @NotNull
+    private String description;
+
+    @NotNull
+    private Double grade;
+
+    @OneToMany(mappedBy = "company", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Appointment> appointemnts = new HashSet<Appointment>();
+
+    public CompanyProfile(Long id,String name, String description,Address address, Double grade) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.grade = grade;
+        this.address = address;
     }
 
     public CompanyProfile() {
 
     }
 
-    public Long getId() {
-        return Id;
-    }
 
-    public void setId(Long id) {
-        Id = id;
-    }
-
-    public String getName() {
-        return Name;
-    }
-
-    public String getAdress() {
-        return Adress;
-    }
-
-    public String getDescription() {
-        return Description;
-    }
-
-    public Double getGrade() {
-        return Grade;
-    }
-
-    /*
-    public List<Appointment> getAppointments() {
-        return Appointments;
-    }
-    */
-    public void setName(String name) {
-        Name = name;
-    }
-
-    public void setAdress(String adress) {
-        Adress = adress;
-    }
-
-    public void setDescription(String description) {
-        Description = description;
-    }
-
-    public void setGrade(Double grade) {
-        Grade = grade;
-    }
-
-    /*
-    public void setAppointments(List<Appointment> appointments) {
-        Appointments = appointments;
-    }
-    */
 }
