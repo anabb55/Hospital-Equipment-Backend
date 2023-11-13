@@ -3,6 +3,12 @@ package com.ISAproject.hospitalequipment.domain;
 import com.ISAproject.hospitalequipment.domain.enums.UserCategory;
 import com.ISAproject.hospitalequipment.domain.enums.UserType;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
@@ -10,23 +16,61 @@ import jakarta.persistence.*;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
+    @Getter @Setter
     private Long id;
-    private String email;
-    private String password;
-    private String firstName;
-    private String lastName;
-    private String city;
-    private String country;
-    private String phoneNumber;
-    private String occupation;
-    private String company;
-    private boolean activated; // Flag to track account activation
 
+    @Email(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
+    @Getter @Setter
+    private String email;
+
+    @NotNull
+    @Size(min=6, max=20)
+    @Getter @Setter
+    private String password;
+
+    @NotEmpty
+    @Getter @Setter
+    private String firstName;
+
+    @NotEmpty
+    @Getter @Setter
+    private String lastName;
+
+    @NotEmpty
+    @Getter @Setter
+    private String city;
+
+    @NotEmpty
+    @Getter @Setter
+    private String country;
+
+    @NotNull
+    @Getter @Setter
+    private String phoneNumber;
+
+    @NotEmpty
+    @Getter @Setter
+    private String occupation;
+
+    @NotEmpty
+    @Getter @Setter
+    private String company;
+
+    @Getter @Setter
+    private boolean activated;
+
+    @Getter @Setter
     private int penaltyPoints;
 
+
+
     @Enumerated(EnumType.STRING)
+    @Getter @Setter
     private UserCategory userCategory;
+
     @Enumerated(EnumType.STRING)
+    @Getter @Setter
     private UserType userType;
 
 
@@ -51,115 +95,6 @@ public class User {
 
     }
 
-    public UserCategory getUserCategory() {
-        return userCategory;
-    }
 
-    public void setUserCategory(UserCategory userCategory) {
-        this.userCategory = userCategory;
-    }
-
-    public UserType getUserType() {
-        return userType;
-    }
-
-    public void setUserType(UserType userType) {
-        this.userType = userType;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public int getPenaltyPoints() {
-        return penaltyPoints;
-    }
-
-    public void setPenaltyPoints(int penaltyPoints) {
-        this.penaltyPoints = penaltyPoints;
-    }
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getOccupation() {
-        return occupation;
-    }
-
-    public void setOccupation(String occupation) {
-        this.occupation = occupation;
-    }
-
-    public String getCompany() {
-        return company;
-    }
-
-    public void setCompany(String company) {
-        this.company = company;
-    }
-
-    public boolean isActivated() {
-        return activated;
-    }
-
-    public void setActivated(boolean activated) {
-        this.activated = activated;
-    }
 }
 
