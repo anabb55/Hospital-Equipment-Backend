@@ -1,8 +1,8 @@
 package com.ISAproject.hospitalequipment.domain.enums;
 
-public enum UserType {
+public enum UserRole {
     REGISTERED_USER,
     COMPANY_ADMIN,
     SYSTEM_ADMIN,
-    UNAUTHENTICATED_USER
+
 }

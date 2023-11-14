@@ -1,165 +1,89 @@
 package com.ISAproject.hospitalequipment.domain;
 
 import com.ISAproject.hospitalequipment.domain.enums.UserCategory;
-import com.ISAproject.hospitalequipment.domain.enums.UserType;
+import com.ISAproject.hospitalequipment.domain.enums.UserRole;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.Collection;
+import java.util.List;
 
 
 @Entity
 @Table(name="Users")
-public class User {
+@Getter
+@Setter
+public class User{
+
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
     private Long id;
+
+    @Email(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
     private String email;
+
+    @NotNull
+    @Size(min=6, max=20)
     private String password;
+
+    @NotEmpty
     private String firstName;
+
+    @NotEmpty
     private String lastName;
-    private String city;
-    private String country;
+
+    @NotNull
     private String phoneNumber;
+
+    @NotEmpty
     private String occupation;
-    private String company;
-    private boolean activated; // Flag to track account activation
 
-    private int penaltyPoints;
+    private boolean enabled;
 
-    @Enumerated(EnumType.STRING)
-    private UserCategory userCategory;
-    @Enumerated(EnumType.STRING)
-    private UserType userType;
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @NotNull
+    private  Address address;
 
 
-    public User(Long id, String email, String password, String firstName, String lastName, String city, String country, String phoneNumber, String occupation, String company, boolean activated, int penaltyPoints, UserCategory userCategory, UserType userType) {
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private List<Role> roles;
+
+
+   // private String company;
+   //private int penaltyPoints;
+  // @Enumerated(EnumType.STRING)
+  // private UserCategory userCategory;
+
+
+    public User(Long id, String email, String password, String firstName, String lastName,Address address,  String phoneNumber, String occupation,  boolean enabled) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.city = city;
-        this.country = country;
+        this.address=address;
         this.phoneNumber = phoneNumber;
         this.occupation = occupation;
-        this.company = company;
-        this.activated = activated;
-        this.penaltyPoints = penaltyPoints;
-        this.userCategory = userCategory;
-        this.userType = userType;
+        this.enabled = enabled;
+
+
     }
 
     public User() {
 
-    }
-
-    public UserCategory getUserCategory() {
-        return userCategory;
-    }
-
-    public void setUserCategory(UserCategory userCategory) {
-        this.userCategory = userCategory;
-    }
-
-    public UserType getUserType() {
-        return userType;
-    }
-
-    public void setUserType(UserType userType) {
-        this.userType = userType;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public int getPenaltyPoints() {
-        return penaltyPoints;
-    }
-
-    public void setPenaltyPoints(int penaltyPoints) {
-        this.penaltyPoints = penaltyPoints;
-    }
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getOccupation() {
-        return occupation;
-    }
-
-    public void setOccupation(String occupation) {
-        this.occupation = occupation;
-    }
-
-    public String getCompany() {
-        return company;
-    }
-
-    public void setCompany(String company) {
-        this.company = company;
-    }
-
-    public boolean isActivated() {
-        return activated;
-    }
-
-    public void setActivated(boolean activated) {
-        this.activated = activated;
     }
 }
 
