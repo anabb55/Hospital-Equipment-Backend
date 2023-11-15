@@ -1,5 +1,6 @@
 package com.ISAproject.hospitalequipment;
 
+import com.ISAproject.hospitalequipment.domain.RegisteredUser;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -11,6 +12,7 @@ public class HospitalEquipmentApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(HospitalEquipmentApplication.class, args);
+
 	}
 
 }
