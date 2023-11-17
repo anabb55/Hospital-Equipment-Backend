@@ -43,6 +43,7 @@ public class CompanyProfile {
     private Set<Appointment> appointments = new HashSet<Appointment>();
 
 
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name="company_equipment",
             joinColumns = @JoinColumn(name="company_profile_id", referencedColumnName = "id"),

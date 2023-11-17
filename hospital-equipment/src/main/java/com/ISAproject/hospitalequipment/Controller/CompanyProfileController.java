@@ -2,6 +2,7 @@ package com.ISAproject.hospitalequipment.Controller;
 
 import com.ISAproject.hospitalequipment.domain.CompanyAdministrator;
 import com.ISAproject.hospitalequipment.domain.CompanyProfile;
+import com.ISAproject.hospitalequipment.domain.Equipment;
 import com.ISAproject.hospitalequipment.repository.CompanyProfileRepo;
 import com.ISAproject.hospitalequipment.service.CompanyProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,11 @@ public class CompanyProfileController {
     public ResponseEntity<CompanyProfile> saveCompanyProfile(@RequestBody CompanyProfile companyProfile) {
         CompanyProfile createdCompany = companyProfileService.save(companyProfile);
         return new ResponseEntity<>(createdCompany, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/getCompanyProfilesByEquipment")
+    public List<CompanyProfile> findCompanyProfilesByEquipment(Equipment e){
+        return companyProfileService.findCompanyProfilesByEquipment(e);
     }
 
 
