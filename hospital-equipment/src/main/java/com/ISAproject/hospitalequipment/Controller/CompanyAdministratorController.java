@@ -19,10 +19,13 @@ public class CompanyAdministratorController {
     @Autowired
     private CompanyAdministratorService companyAdministratorService;
 
+    /*
     @GetMapping("/getAll")
     public ResponseEntity<List<CompanyAdministrator>> getAll(){
         List<CompanyAdministrator> administrators= companyAdministratorService.findAll();
 
         return new ResponseEntity<>(administrators, HttpStatus.OK);
     }
+
+     */
 }

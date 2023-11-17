@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface CompanyAdministratorRepo extends JpaRepository<CompanyAdministrator,Long> {
 
-    List<CompanyAdministrator> findByCompany(CompanyProfile company);
+    //List<CompanyAdministrator> findByCompany(CompanyProfile company);
 }

@@ -8,5 +8,5 @@ import java.util.List;
 public interface CompanyAdministratorService {
     public List<CompanyAdministrator> findAll();
 
-    public List<CompanyAdministrator> findByCompany(CompanyProfile company);
+    //public List<CompanyAdministrator> findByCompany(CompanyProfile company);
 }
