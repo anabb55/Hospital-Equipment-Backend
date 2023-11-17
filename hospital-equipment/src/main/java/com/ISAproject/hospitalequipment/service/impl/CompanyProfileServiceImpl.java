@@ -8,12 +8,16 @@ import com.ISAproject.hospitalequipment.service.CompanyProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CompanyProfileServiceImpl  implements CompanyProfileService {
     @Autowired
     private CompanyProfileRepo companyProfileRepo;
 
-
+    public List<CompanyProfile> getAll(){
+        return companyProfileRepo.findAll();
+    }
     public CompanyProfile save(CompanyProfile companyProfile){
         return companyProfileRepo.save(companyProfile);
     }
