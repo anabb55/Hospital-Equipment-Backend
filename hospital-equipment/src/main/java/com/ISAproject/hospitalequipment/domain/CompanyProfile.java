@@ -38,6 +38,9 @@ public class CompanyProfile {
     @OneToMany(mappedBy = "company", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<CompanyAdministrator> administrators = new HashSet<CompanyAdministrator>();
 
+    @ManyToMany(mappedBy = "company", fetch=FetchType.EAGER, cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+    private Set<Equipment> equipment = new HashSet<Equipment>();
+
     public CompanyProfile(Long id,String name, String description,Address address, Double grade) {
         this.id = id;
         this.name = name;

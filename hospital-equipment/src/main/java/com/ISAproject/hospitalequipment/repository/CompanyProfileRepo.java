@@ -8,6 +8,8 @@ import java.util.List;
 @Repository
 public interface CompanyProfileRepo extends JpaRepository<CompanyProfile,Long> {
 
+
     List<CompanyProfile> findAll();
+    CompanyProfile save(CompanyProfile company);
 
 }
