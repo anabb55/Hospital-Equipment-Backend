@@ -1,5 +1,7 @@
 package com.ISAproject.hospitalequipment.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -25,11 +27,4 @@ public class Equipment {
     public Double grade;
 
     public Integer amount;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="company_equipment",
-                joinColumns = @JoinColumn(name="equipment_id", referencedColumnName = "id"),
-                inverseJoinColumns = @JoinColumn(name = "company_profile_id", referencedColumnName = "id"))
-    public List<CompanyProfile> companies ;
-
 }
