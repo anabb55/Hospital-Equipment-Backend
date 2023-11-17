@@ -13,7 +13,6 @@ import java.util.List;
 @Getter
 @Entity
 @Table(name="equipments")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Equipment {
 
     @Id
@@ -28,11 +27,4 @@ public class Equipment {
     public Double grade;
 
     public Integer amount;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="company_equipment",
-                joinColumns = @JoinColumn(name="equipment_id", referencedColumnName = "id"),
-                inverseJoinColumns = @JoinColumn(name = "company_profile_id", referencedColumnName = "id"))
-    public List<CompanyProfile> companies ;
-
 }
