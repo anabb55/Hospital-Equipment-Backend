@@ -23,17 +23,19 @@ public class CompanyAdministratorController {
     @Autowired
     private CompanyAdministratorService companyAdministratorService;
 
+    /*
     @GetMapping("/getAll")
     public ResponseEntity<List<CompanyAdministrator>> getAll(){
         List<CompanyAdministrator> administrators= companyAdministratorService.findAll();
 
         return new ResponseEntity<>(administrators, HttpStatus.OK);
     }
-
+*/
     @PostMapping("/create")
     public ResponseEntity<CompanyAdministrator> createAdministrator(@RequestBody CompanyAdministrator administrator) {
         CompanyAdministrator createdAdministrator = companyAdministratorService.save(administrator);
         return new ResponseEntity<>(createdAdministrator, HttpStatus.CREATED);
     }
+
 
 }

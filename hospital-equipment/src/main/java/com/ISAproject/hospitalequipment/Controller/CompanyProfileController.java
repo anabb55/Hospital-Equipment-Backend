@@ -20,11 +20,12 @@ public class CompanyProfileController {
     @Autowired
     private CompanyProfileRepo companyProfileRepo;
     @Autowired
+
     private CompanyProfileService companyProfileService;
 
-    @GetMapping(value="/")
+    @GetMapping("/")
     public List<CompanyProfile> getAllCompanyProfiles(){
-        return companyProfileRepo.findAll();
+        return companyProfileService.getAll();
     }
 
 
