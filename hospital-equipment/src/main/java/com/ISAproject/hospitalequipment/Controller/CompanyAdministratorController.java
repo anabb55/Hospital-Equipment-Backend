@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+
 import java.util.List;
 
 @RestController
@@ -26,6 +30,12 @@ public class CompanyAdministratorController {
 
         return new ResponseEntity<>(administrators, HttpStatus.OK);
     }
+*/
+    @PostMapping("/create")
+    public ResponseEntity<CompanyAdministrator> createAdministrator(@RequestBody CompanyAdministrator administrator) {
+        CompanyAdministrator createdAdministrator = companyAdministratorService.save(administrator);
+        return new ResponseEntity<>(createdAdministrator, HttpStatus.CREATED);
+    }
 
-     */
+
 }

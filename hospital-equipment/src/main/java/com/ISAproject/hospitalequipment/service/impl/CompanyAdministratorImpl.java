@@ -18,7 +18,10 @@ public class CompanyAdministratorImpl implements CompanyAdministratorService {
         return companyAdministratorRepo.findAll();
     }
 
+    public CompanyAdministrator save(CompanyAdministrator admin){return companyAdministratorRepo.save(admin);}
+
     /*
+
     public List<CompanyAdministrator> findByCompany(CompanyProfile company){
         return companyAdministratorRepo.findByCompany(company);
     }

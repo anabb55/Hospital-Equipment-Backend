@@ -9,6 +9,7 @@ import java.util.List;
 
 @Repository
 public interface CompanyAdministratorRepo extends JpaRepository<CompanyAdministrator,Long> {
+    CompanyAdministrator save(CompanyAdministrator admin);
 
     //List<CompanyAdministrator> findByCompany(CompanyProfile company);
 }
