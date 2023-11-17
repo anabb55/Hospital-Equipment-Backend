@@ -38,14 +38,16 @@ public class CompanyProfile {
     @NotNull
     private Double grade;
 
-/*
+
     @OneToMany(mappedBy = "company", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Appointment> appointments = new HashSet<Appointment>();
-*/
 
-    @ManyToMany(mappedBy = "company", fetch=FetchType.EAGER, cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+
+    @ManyToMany(mappedBy = "companies", fetch=FetchType.EAGER, cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     private Set<Equipment> equipment = new HashSet<Equipment>();
 
+    @OneToMany(mappedBy = "company", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<CompanyAdministrator> administrators = new HashSet<CompanyAdministrator>();
 
     public CompanyProfile(Long id,String name, String description,Address address, Double grade) {
         this.id = id;

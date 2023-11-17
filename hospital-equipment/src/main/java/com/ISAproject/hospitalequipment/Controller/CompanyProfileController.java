@@ -16,9 +16,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/companyProfile")
 public class CompanyProfileController {
-
-    @Autowired
-    private CompanyProfileRepo companyProfileRepo;
     @Autowired
 
     private CompanyProfileService companyProfileService;
