@@ -64,10 +64,7 @@ public class User {
     private List<Role> roles;
 
 
-   // private String company;
-   //private int penaltyPoints;
-  // @Enumerated(EnumType.STRING)
-  // private UserCategory userCategory;
+
 
 
     public User(Long id, String email, String password, String firstName, String lastName, String phoneNumber, String occupation, boolean enabled, Address address) {

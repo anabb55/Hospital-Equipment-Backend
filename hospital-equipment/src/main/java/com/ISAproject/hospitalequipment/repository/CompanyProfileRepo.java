@@ -11,6 +11,8 @@ import java.util.List;
 public interface CompanyProfileRepo extends JpaRepository<CompanyProfile,Long> {
 
 
+
+   // @Query(value = "SELECT * FROM company_profiles", nativeQuery = true)
     List<CompanyProfile> findAll();
     CompanyProfile save(CompanyProfile company);
 
