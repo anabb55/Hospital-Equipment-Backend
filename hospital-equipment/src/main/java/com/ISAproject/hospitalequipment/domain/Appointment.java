@@ -17,19 +17,19 @@ public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
-    public long Id;
+    public long id;
 
     @NotEmpty
-    public String AdminName;
+    public String adminName;
 
     @NotEmpty
-    public String AdminLastName;
+    public String adminLastName;
 
     @NotEmpty
-    public Date Date;
+    public Date date;
 
     @NotNull
-    public Integer Duration;
+    public Integer duration;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="company_profile_id")

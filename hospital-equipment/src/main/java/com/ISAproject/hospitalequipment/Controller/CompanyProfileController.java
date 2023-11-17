@@ -16,14 +16,13 @@ public class CompanyProfileController {
     @Autowired
     private CompanyProfileRepo companyProfileRepo;
 
-    @GetMapping("/")
+    @GetMapping(value="/")
     public List<CompanyProfile> getAllCompanyProfiles(){
         return companyProfileRepo.findAll();
     }
 
-    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addCompanyProfile(@RequestBody CompanyProfile companyProfile){
-        companyProfileRepo.save(companyProfile);
-    }
+
+
+
 
 }
