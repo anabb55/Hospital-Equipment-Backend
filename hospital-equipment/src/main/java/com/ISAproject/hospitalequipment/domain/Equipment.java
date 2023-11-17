@@ -22,6 +22,10 @@ public class Equipment {
 
     public String description;
 
+    public Double grade;
+
+    public Integer amount;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="company_equipment",
                 joinColumns = @JoinColumn(name="equipment_id", referencedColumnName = "id"),

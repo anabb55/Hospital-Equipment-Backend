@@ -16,10 +16,12 @@ public class CompanyProfileController {
     @Autowired
     private CompanyProfileRepo companyProfileRepo;
 
-    @GetMapping("/")
+    @GetMapping(value="/")
     public List<CompanyProfile> getAllCompanyProfiles(){
         return companyProfileRepo.findAll();
     }
+
+
 
 
 
