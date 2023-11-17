@@ -43,7 +43,7 @@ public class CompanyProfile {
     private Set<Appointment> appointments = new HashSet<Appointment>();
 
 
-    @ManyToMany(mappedBy = "companies", fetch=FetchType.EAGER, cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+    @ManyToMany(mappedBy = "companies", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Equipment> equipment = new HashSet<Equipment>();
 
     @OneToMany(mappedBy = "company", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
