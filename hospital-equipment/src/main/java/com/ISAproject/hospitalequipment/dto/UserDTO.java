@@ -24,4 +24,19 @@ public class UserDTO {
     private Address address;
 
     private String phoneNumber;
+
+    public UserDTO() {
+    }
+
+    public UserDTO(Long id, String firstName, String lastName, String password, String email, String occupation, Address address, String phoneNumber){
+        this.id= id;
+        this.password = password;
+        this.firstname = firstName;
+        this.lastname = lastName;
+        this.email = email;
+        this.occupation = occupation;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+
+    }
 }

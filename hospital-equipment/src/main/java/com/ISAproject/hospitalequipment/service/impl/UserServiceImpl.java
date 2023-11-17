@@ -22,8 +22,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RoleService roleService;
 
-    public User create(UserDTO userDTO){
-       User user = new User(); //tranzijentno stanje
+    public User createUser(User user,UserDTO userDTO){
+
 
         user.setEmail(userDTO.getEmail());
         user.setPassword(userDTO.getPassword());
@@ -32,13 +32,8 @@ public class UserServiceImpl implements UserService {
         user.setAddress(userDTO.getAddress());
         user.setPhoneNumber(userDTO.getPhoneNumber());
         user.setOccupation(userDTO.getOccupation());
-        List<Role> roles = roleService.findByName("ROLE_USER");
-        user.setRoles(roles);
-        user.setEnabled(true);
 
-        return this.userRepo.save(user);
-
-
+        return userRepo.save(user);
 
     }
 

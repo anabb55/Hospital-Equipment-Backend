@@ -23,11 +23,11 @@ public class UserController {
         return userService.findAll();
     }
 
-    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
-   // @PreAuthorize("hasRole('')")  videti koja rola treba
-    public void create(@RequestBody UserDTO userDTO){
-        userService.create(userDTO);
-    }
+//    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
+//
+//    public void create(@RequestBody UserDTO userDTO){
+//        userService.createUser(userDTO);
+//    }
 
 
 
