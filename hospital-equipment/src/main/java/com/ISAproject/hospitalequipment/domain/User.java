@@ -18,9 +18,10 @@ import java.util.List;
 
 @Entity
 @Table(name="Users")
+@Inheritance(strategy = InheritanceType.JOINED)
 @Getter
 @Setter
-public class User{
+public class User {
 
     private static final long serialVersionUID = 1L;
 
@@ -55,6 +56,7 @@ public class User{
     private  Address address;
 
 
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
@@ -68,22 +70,23 @@ public class User{
   // private UserCategory userCategory;
 
 
-    public User(Long id, String email, String password, String firstName, String lastName,Address address,  String phoneNumber, String occupation,  boolean enabled) {
+    public User(Long id, String email, String password, String firstName, String lastName, String phoneNumber, String occupation, boolean enabled, Address address) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.address=address;
         this.phoneNumber = phoneNumber;
         this.occupation = occupation;
         this.enabled = enabled;
-
-
+        this.address = address;
     }
+
 
     public User() {
 
     }
+
+
 }
 

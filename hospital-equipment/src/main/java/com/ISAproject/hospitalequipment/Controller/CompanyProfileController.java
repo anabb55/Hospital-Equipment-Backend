@@ -2,6 +2,7 @@ package com.ISAproject.hospitalequipment.Controller;
 
 import com.ISAproject.hospitalequipment.domain.CompanyProfile;
 import com.ISAproject.hospitalequipment.repository.CompanyProfileRepo;
+import com.ISAproject.hospitalequipment.service.CompanyProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -14,16 +15,15 @@ import java.util.List;
 public class CompanyProfileController {
 
     @Autowired
-    private CompanyProfileRepo companyProfileRepo;
+    private CompanyProfileService companyProfileService;
 
     @GetMapping("/")
     public List<CompanyProfile> getAllCompanyProfiles(){
-        return companyProfileRepo.findAll();
+        return companyProfileService.getAll();
     }
 
-    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addCompanyProfile(@RequestBody CompanyProfile companyProfile){
-        companyProfileRepo.save(companyProfile);
-    }
+
+
+
 
 }
