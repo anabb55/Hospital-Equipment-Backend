@@ -32,8 +32,11 @@ public class CompanyProfile {
     @NotNull
     private Double grade;
 
-    @OneToMany(mappedBy = "company", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Appointment> appointemnts = new HashSet<Appointment>();
+    @OneToMany(mappedBy = "company", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Appointment> appointments = new HashSet<Appointment>();
+
+    @OneToMany(mappedBy = "company", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<CompanyAdministrator> administrators = new HashSet<CompanyAdministrator>();
 
     public CompanyProfile(Long id,String name, String description,Address address, Double grade) {
         this.id = id;
