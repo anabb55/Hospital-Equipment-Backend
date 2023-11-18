@@ -10,4 +10,6 @@ public interface CompanyProfileService {
     public List<CompanyProfile> getAll();
 
     public List<CompanyProfile> getByAdministrator(int id);
+
+    public CompanyProfile update(CompanyProfile company,Long id);
 }
