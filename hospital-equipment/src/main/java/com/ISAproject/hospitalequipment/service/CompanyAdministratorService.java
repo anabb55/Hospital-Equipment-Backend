@@ -10,4 +10,6 @@ public interface CompanyAdministratorService {
     public CompanyAdministrator save(CompanyAdministrator admin);
 
     public CompanyAdministrator getById(Long id);
+
+    public CompanyAdministrator update(CompanyAdministrator admin, Long id);
 }

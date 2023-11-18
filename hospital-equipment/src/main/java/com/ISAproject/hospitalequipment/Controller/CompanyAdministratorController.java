@@ -38,4 +38,12 @@ public class CompanyAdministratorController {
         return new ResponseEntity<>(companyAdmin,HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "*")
+    @PutMapping("/update/{id}")
+    public ResponseEntity<CompanyAdministrator> update(@PathVariable Long id, @RequestBody CompanyAdministrator admin) {
+        CompanyAdministrator updatedAdmin = companyAdministratorService.update(admin, id);
+        return new ResponseEntity<>(updatedAdmin, HttpStatus.OK);
+
+    }
+
 }
