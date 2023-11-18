@@ -11,4 +11,6 @@ public interface UserService {
    User createUser(User user, UserDTO userDTO);
 
    List<User> findAll();
+
+   public User findByEmailIgnoreCase(String email);
 }

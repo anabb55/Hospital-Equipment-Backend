@@ -62,6 +62,8 @@ public class RegisteredUserController {
         return  new ResponseEntity<>(registeredUser, HttpStatus.CREATED);
     }
 
+
+
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @CrossOrigin
     @PutMapping("/update/{id}")
