@@ -46,16 +46,16 @@ public class RegisteredUserController {
         return new ResponseEntity<>(teachersDTO, HttpStatus.OK);
     }
 
-    @PostMapping(value="/signUp")
-    public ResponseEntity<User> createRegisteredUser(@RequestBody UserDTO userDTO){
-
-       RegisteredUser registeredUser= registeredUserService.createRegisteredUser(userDTO);
-
-        if(registeredUser == null){
-            return new  ResponseEntity<>(registeredUser, HttpStatus.BAD_REQUEST);
-        }
-        return  new ResponseEntity<>(registeredUser, HttpStatus.CREATED);
-    }
+//    @PostMapping(value="/signUp")
+//    public ResponseEntity<User> createRegisteredUser(@RequestBody UserDTO userDTO){
+//
+//       RegisteredUser registeredUser= registeredUserService.createRegisteredUser(userDTO);
+//
+//        if(registeredUser == null){
+//            return new  ResponseEntity<>(registeredUser, HttpStatus.BAD_REQUEST);
+//        }
+//        return  new ResponseEntity<>(registeredUser, HttpStatus.CREATED);
+//    }
 
 //    izmestiti impl u servis
 //    @ResponseStatus(HttpStatus.NO_CONTENT)
