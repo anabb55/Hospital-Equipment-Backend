@@ -9,5 +9,5 @@ public interface CompanyAdministratorService {
     public List<CompanyAdministrator> findAll();
     public CompanyAdministrator save(CompanyAdministrator admin);
 
-    //public List<CompanyAdministrator> findByCompany(CompanyProfile company);
+    public CompanyAdministrator getById(Long id);
 }
