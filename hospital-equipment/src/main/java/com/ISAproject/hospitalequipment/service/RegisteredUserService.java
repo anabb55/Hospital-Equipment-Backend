@@ -1,13 +1,14 @@
 package com.ISAproject.hospitalequipment.service;
 
 import com.ISAproject.hospitalequipment.domain.RegisteredUser;
+import com.ISAproject.hospitalequipment.dto.UserDTO;
 
 import java.util.List;
 
 public interface RegisteredUserService {
     public List<RegisteredUser> findAll() ;
     public RegisteredUser findOne(Integer id) ;
-    public RegisteredUser save(RegisteredUser course) ;
+    public RegisteredUser createRegisteredUser(UserDTO userDTO) ;
     public void remove(Integer id);
     public boolean existsById(Integer id);
 

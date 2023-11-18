@@ -1,5 +1,7 @@
 package com.ISAproject.hospitalequipment.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -11,25 +13,26 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Table(name="Appointments")
 public class Appointment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
-    public long Id;
+    public long id;
 
     @NotEmpty
-    public String AdminName;
+    public String adminName;
 
     @NotEmpty
-    public String AdminLastName;
+    public String adminLastName;
 
     @NotEmpty
-    public Date Date;
+    public Date date;
 
     @NotNull
-    public Integer Duration;
+    public Integer duration;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="company_profile_id")

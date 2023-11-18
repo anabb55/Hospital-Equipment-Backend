@@ -1,9 +1,14 @@
 package com.ISAproject.hospitalequipment.Controller;
 
+import com.ISAproject.hospitalequipment.domain.CompanyAdministrator;
 import com.ISAproject.hospitalequipment.domain.CompanyProfile;
+import com.ISAproject.hospitalequipment.domain.Equipment;
 import com.ISAproject.hospitalequipment.repository.CompanyProfileRepo;
+import com.ISAproject.hospitalequipment.service.CompanyProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.awt.*;
@@ -12,18 +17,27 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/companyProfile")
 public class CompanyProfileController {
-
     @Autowired
-    private CompanyProfileRepo companyProfileRepo;
+
+    private CompanyProfileService companyProfileService;
 
     @GetMapping("/")
     public List<CompanyProfile> getAllCompanyProfiles(){
-        return companyProfileRepo.findAll();
+        return companyProfileService.getAll();
     }
 
-    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addCompanyProfile(@RequestBody CompanyProfile companyProfile){
-        companyProfileRepo.save(companyProfile);
+
+    @PostMapping("/save")
+    public ResponseEntity<CompanyProfile> saveCompanyProfile(@RequestBody CompanyProfile companyProfile) {
+        CompanyProfile createdCompany = companyProfileService.save(companyProfile);
+        return new ResponseEntity<>(createdCompany, HttpStatus.CREATED);
     }
+
+    @GetMapping("/getCompanyProfilesByEquipment")
+    public List<CompanyProfile> findCompanyProfilesByEquipment(Equipment e){
+        return companyProfileService.findCompanyProfilesByEquipment(e);
+    }
+
+
 
 }
