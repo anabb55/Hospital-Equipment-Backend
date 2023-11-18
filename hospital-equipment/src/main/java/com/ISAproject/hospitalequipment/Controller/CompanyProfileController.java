@@ -32,6 +32,12 @@ public class CompanyProfileController {
         return new ResponseEntity<>(createdCompany, HttpStatus.CREATED);
     }
 
+    @GetMapping("/byAdmin/{id}")
+    public ResponseEntity<List<CompanyProfile>> getByAdministrator(@PathVariable int id){
+        List<CompanyProfile> companies= companyProfileService.getByAdministrator(id);
+        return new ResponseEntity<>(companies,HttpStatus.OK);
+    }
+
 
 
 }

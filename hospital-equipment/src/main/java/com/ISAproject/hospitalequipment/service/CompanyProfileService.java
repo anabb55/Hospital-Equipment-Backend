@@ -9,4 +9,5 @@ public interface CompanyProfileService {
 
     public List<CompanyProfile> getAll();
 
+    public List<CompanyProfile> getByAdministrator(int id);
 }

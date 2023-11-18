@@ -22,4 +22,8 @@ public class CompanyProfileServiceImpl  implements CompanyProfileService {
         return companyProfileRepo.save(companyProfile);
     }
 
+    public List<CompanyProfile> getByAdministrator(int id){
+        return companyProfileRepo.findCompanyProfilesByAdministrators(id);
+    }
+
 }
