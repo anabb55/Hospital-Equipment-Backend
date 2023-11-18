@@ -8,7 +8,9 @@ import java.util.List;
 
 public interface UserService {
 
-   User create(UserDTO userDTO);
+   User createUser(User user, UserDTO userDTO);
 
    List<User> findAll();
+
+   public User findByEmailIgnoreCase(String email);
 }

@@ -2,6 +2,7 @@ package com.ISAproject.hospitalequipment.service.impl;
 
 import com.ISAproject.hospitalequipment.domain.CompanyAdministrator;
 import com.ISAproject.hospitalequipment.domain.CompanyProfile;
+import com.ISAproject.hospitalequipment.domain.Equipment;
 import com.ISAproject.hospitalequipment.repository.CompanyAdministratorRepo;
 import com.ISAproject.hospitalequipment.repository.CompanyProfileRepo;
 import com.ISAproject.hospitalequipment.service.AddressService;
@@ -28,6 +29,7 @@ public class CompanyProfileServiceImpl  implements CompanyProfileService {
         return companyProfileRepo.save(companyProfile);
     }
 
+
     public List<CompanyProfile> getByAdministrator(int id){
         return companyProfileRepo.findCompanyProfilesByAdministrators(id);
     }
@@ -46,6 +48,11 @@ public class CompanyProfileServiceImpl  implements CompanyProfileService {
             return null;
         }
 
+    }
+
+
+    public List<CompanyProfile> findCompanyProfilesByEquipment(Equipment equipment){
+        return companyProfileRepo.findCompanyProfilesByEquipment(equipment);
     }
 
 }
