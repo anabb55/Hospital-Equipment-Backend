@@ -19,7 +19,6 @@ import java.util.List;
 @Service
 
 public class RegisteredUserServiceImpl implements RegisteredUserService {
-
     @Autowired
     private RegisteredUserRepo registeredUserRepo;
 

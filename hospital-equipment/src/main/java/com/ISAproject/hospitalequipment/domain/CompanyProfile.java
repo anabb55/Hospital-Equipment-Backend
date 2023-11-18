@@ -41,11 +41,17 @@ public class CompanyProfile {
 
     @OneToMany(mappedBy = "company", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Appointment> appointments = new HashSet<Appointment>();
-  /*
-    @JsonManagedReference
+
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name="company_equipment",
+            joinColumns = @JoinColumn(name="company_profile_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "equipment_id", referencedColumnName = "id"))
+    private Set<Equipment> equipment = new HashSet<Equipment>();
+
     @OneToMany(mappedBy = "company", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<CompanyAdministrator> administrators = new HashSet<CompanyAdministrator>();
-*/
+
     public CompanyProfile(Long id,String name, String description,Address address, Double grade) {
         this.id = id;
         this.name = name;
