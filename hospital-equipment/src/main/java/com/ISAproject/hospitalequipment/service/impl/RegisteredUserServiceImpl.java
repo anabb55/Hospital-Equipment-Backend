@@ -53,6 +53,10 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
 
     }
 
+    public RegisteredUser save(RegisteredUser registeredUser) {
+        return registeredUserRepo.save(registeredUser);
+    }
+
     public boolean existsById(Integer id)
     {
         if(id!=null)
