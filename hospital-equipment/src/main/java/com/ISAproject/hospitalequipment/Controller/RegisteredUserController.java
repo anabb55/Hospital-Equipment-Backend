@@ -6,6 +6,7 @@ import com.ISAproject.hospitalequipment.dto.RegisterUserDTO;
 import com.ISAproject.hospitalequipment.dto.UserDTO;
 import com.ISAproject.hospitalequipment.mapper.registredUserDTOMapper;
 import com.ISAproject.hospitalequipment.service.RegisteredUserService;
+import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,7 +53,7 @@ public class RegisteredUserController {
 
 
     @PostMapping(value="/signUp")
-    public ResponseEntity<User> createRegisteredUser(@RequestBody UserDTO userDTO){
+    public ResponseEntity<User> createRegisteredUser(@RequestBody UserDTO userDTO) throws MessagingException {
 
        RegisteredUser registeredUser= registeredUserService.createRegisteredUser(userDTO);
 

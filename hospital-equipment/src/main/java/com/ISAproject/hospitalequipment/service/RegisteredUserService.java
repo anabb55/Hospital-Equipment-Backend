@@ -10,10 +10,14 @@ import java.util.List;
 public interface RegisteredUserService {
     public List<RegisteredUser> findAll() ;
     public RegisteredUser findOne(Integer id) ;
-    public RegisteredUser createRegisteredUser(UserDTO userDTO) throws MessagingException, UnsupportedEncodingException;
+    public RegisteredUser createRegisteredUser(UserDTO userDTO) throws MessagingException;
     public void remove(Integer id);
     public boolean existsById(Integer id);
 
+
+    public boolean verify(String email);
+
     public RegisteredUser save(RegisteredUser registeredUser) ;
+
 
 }

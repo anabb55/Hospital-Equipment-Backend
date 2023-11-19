@@ -7,10 +7,14 @@ import com.ISAproject.hospitalequipment.domain.Role;
 import com.ISAproject.hospitalequipment.domain.enums.UserCategory;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+
+import jakarta.validation.constraints.NotNull;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,6 +27,7 @@ public class RegisterUserDTO extends UserDTO{
 
     @Enumerated(EnumType.STRING)
     private UserCategory userCategory;
+
 
     private LoyaltyProgram loyaltyProgram;
 
@@ -41,6 +46,7 @@ public class RegisterUserDTO extends UserDTO{
         this.penaltyPoints = registeredUser.getPenaltyPoints();
         this.userCategory = registeredUser.getUserCategory();
         this.loyaltyProgram=registeredUser.getLoyaltyProgram();
+
     }
 
     public RegisterUserDTO(){

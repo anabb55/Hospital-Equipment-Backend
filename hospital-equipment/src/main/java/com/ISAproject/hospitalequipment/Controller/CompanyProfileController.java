@@ -48,6 +48,9 @@ public class CompanyProfileController {
         return new ResponseEntity<>(updatedCompany, HttpStatus.OK);
 
     }
+
+
+
     @GetMapping("/getCompanyProfilesByEquipment")
     public List<CompanyProfile> findCompanyProfilesByEquipment(Equipment e){
         return companyProfileService.findCompanyProfilesByEquipment(e);
