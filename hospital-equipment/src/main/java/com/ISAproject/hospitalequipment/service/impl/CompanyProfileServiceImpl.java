@@ -55,4 +55,7 @@ public class CompanyProfileServiceImpl  implements CompanyProfileService {
         return companyProfileRepo.findCompanyProfilesByEquipment(equipment);
     }
 
+    public CompanyProfile getById(Long id){
+        return companyProfileRepo.findById(id).get();
+    }
 }

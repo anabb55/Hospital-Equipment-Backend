@@ -17,4 +17,5 @@ public interface CompanyProfileService {
 
     List<CompanyProfile> findCompanyProfilesByEquipment(Equipment equipment);
 
+    public  CompanyProfile getById(Long id);
 }
