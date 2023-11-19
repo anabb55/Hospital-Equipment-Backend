@@ -17,7 +17,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Table(name="CompanyProfiles")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = CompanyProfile.class)
 public class CompanyProfile {
     private static final long serialVersionUID = 1L;
 
@@ -41,6 +41,7 @@ public class CompanyProfile {
 
     @OneToMany(mappedBy = "company", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Appointment> appointments = new HashSet<Appointment>();
+
 
 
     @ManyToMany(fetch = FetchType.LAZY)

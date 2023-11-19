@@ -27,4 +27,6 @@ public class Equipment {
     public Double grade;
 
     public Integer amount;
+
+
 }

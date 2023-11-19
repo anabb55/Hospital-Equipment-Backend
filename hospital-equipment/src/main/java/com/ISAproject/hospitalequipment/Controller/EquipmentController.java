@@ -22,4 +22,9 @@ public class EquipmentController {
         List<Equipment> equipmentsByCompany = equipmentService.getByCompany(companyId);
         return new ResponseEntity<>(equipmentsByCompany, HttpStatus.OK) ;
     }
+    @GetMapping(value = "/findByName")
+    public ResponseEntity<List<Equipment>> findEquipmentByName(String name){
+        List<Equipment> equipmentsByName = equipmentService.findEquipmentByName(name);
+        return new ResponseEntity<>(equipmentsByName, HttpStatus.OK) ;
+    }
 }

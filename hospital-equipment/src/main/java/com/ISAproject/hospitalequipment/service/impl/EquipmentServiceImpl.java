@@ -17,4 +17,8 @@ public class EquipmentServiceImpl implements EquipmentService {
     public List<Equipment> getByCompany(Long companyId){
         return equipmentRepo.findByCompany(companyId);
     }
+    public List<Equipment> findEquipmentByName(String name){
+        return equipmentRepo.findEquipmentByName(name);
+    }
+
 }
