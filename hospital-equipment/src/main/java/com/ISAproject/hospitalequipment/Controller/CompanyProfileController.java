@@ -43,9 +43,10 @@ public class CompanyProfileController {
 
     @CrossOrigin(origins = "*")
     @PutMapping("/update/{id}")
-    public ResponseEntity<CompanyProfile> update(@PathVariable Long id, @RequestBody CompanyProfile company){
-        CompanyProfile updatedCompany= companyProfileService.update(company,id);
-        return new ResponseEntity<>(updatedCompany,HttpStatus.OK);
+    public ResponseEntity<CompanyProfile> update(@PathVariable Long id, @RequestBody CompanyProfile company) {
+        CompanyProfile updatedCompany = companyProfileService.update(company, id);
+        return new ResponseEntity<>(updatedCompany, HttpStatus.OK);
+    }
 
     @GetMapping("/getCompanyProfilesByEquipment")
     public List<CompanyProfile> findCompanyProfilesByEquipment(Equipment e){

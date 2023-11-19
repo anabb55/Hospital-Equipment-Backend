@@ -29,21 +29,24 @@ public class EmailServiceImpl implements EmailService {
 
 
     @Async
-    public void sendEmail(User user) throws UnsupportedEncodingException {
+    public void sendEmail(User user)  {
         String subject = "Complete Registration";
-        String text = "Click on the link for activation";
+
         String titile="Comfirm your email";
+        String text ="To confirm your account, please click here : " + "http://localhost:8081/api/authentication/verify?email=" + user.getEmail();
 
         try {
-            sendMess(user, subject);
-        } catch (MessagingException | IOException e) {
+            sendMess(user, subject,text);
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
 
     }
 
-    private void sendMess(User user, String subject)  throws MessagingException, IOException{
+    private void sendMess(User user, String subject, String text)  throws MessagingException, IOException{
 
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
@@ -54,7 +57,7 @@ public class EmailServiceImpl implements EmailService {
         helper.setSubject(subject);
 
 
-       helper.setText("Ana pozuri, nemoj kasniti!");
+       helper.setText(text);
         javaMailSender.send(message);
     }
 }

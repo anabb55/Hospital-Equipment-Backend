@@ -4,6 +4,7 @@ import com.ISAproject.hospitalequipment.domain.RegisteredUser;
 import com.ISAproject.hospitalequipment.domain.enums.UserCategory;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,9 +16,12 @@ public class RegisterUserDTO extends UserDTO{
     @Enumerated(EnumType.STRING)
     private UserCategory userCategory;
 
+
+
     public RegisterUserDTO(int penaltyPoints, UserCategory userCategory) {
         this.penaltyPoints = penaltyPoints;
         this.userCategory = userCategory;
+
     }
 
     public RegisterUserDTO() {

@@ -39,7 +39,7 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
         return registeredUserRepo.findById(Long.valueOf(id)).orElseGet(null);
     }
 
-    public RegisteredUser createRegisteredUser(UserDTO userDTO) throws MessagingException, UnsupportedEncodingException {
+    public RegisteredUser createRegisteredUser(UserDTO userDTO) throws MessagingException {
        RegisteredUser registeredUser = new RegisteredUser(); //tranzijentno
 
         registeredUser = (RegisteredUser) userService.createUser(registeredUser,userDTO);
@@ -49,6 +49,7 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
         registeredUser.setUserCategory(UserCategory.REGULAR);
         registeredUser.setPenaltyPoints(0);
         registeredUser.setEnabled(false);
+
 
         registeredUserRepo.save(registeredUser);
         emailService.sendEmail(registeredUser);
@@ -68,6 +69,19 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
             }
 
         return false;
+    }
+
+    public boolean verify(String email){
+        RegisteredUser registeredUser = registeredUserRepo.findByEmail(email);
+
+        if(registeredUser==null || registeredUser.isEnabled()){
+            return  false;
+        }
+        else{
+            registeredUser.setEnabled(true);
+            registeredUserRepo.save(registeredUser);
+            return true;
+        }
     }
 
 

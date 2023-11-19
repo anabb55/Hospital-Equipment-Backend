@@ -12,5 +12,5 @@ public interface UserService {
 
    List<User> findAll();
 
-   public User findByEmailIgnoreCase(String email);
+   public User findByEmail(String email);
 }
