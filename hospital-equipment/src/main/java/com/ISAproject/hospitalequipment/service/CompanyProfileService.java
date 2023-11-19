@@ -10,10 +10,16 @@ public interface CompanyProfileService {
 
     public List<CompanyProfile> getAll();
 
+
+    public List<CompanyProfile> getByAdministrator(int id);
+
+    public CompanyProfile update(CompanyProfile company,Long id);
+
     List<CompanyProfile> findCompanyProfilesByEquipment(Equipment equipment);
 
     List<CompanyProfile> findByNameContainingIgnoreCaseOrAddressCityContainingIgnoreCase(String name, String city);
 
     List<CompanyProfile> findByRate(Integer rate);
 
+    public  CompanyProfile getById(Long id);
 }
