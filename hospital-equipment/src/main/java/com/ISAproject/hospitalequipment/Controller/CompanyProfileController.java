@@ -54,6 +54,11 @@ public class CompanyProfileController {
 
     }
 
+    @GetMapping("/getById/{id}")
+    public CompanyProfile getById( @PathVariable Long id){
+        return companyProfileService.getById(id);
+    }
+
 
 
 }
