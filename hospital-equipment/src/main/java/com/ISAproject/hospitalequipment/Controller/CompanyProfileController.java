@@ -38,6 +38,24 @@ public class CompanyProfileController {
         return companyProfileService.findCompanyProfilesByEquipment(e);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<CompanyProfile>> searchCompanies(
+            @RequestParam(name = "name", required = false) String name,
+            @RequestParam(name = "city", required = false) String city) {
+
+        List<CompanyProfile> companies = companyProfileService.findByNameContainingIgnoreCaseOrAddressCityContainingIgnoreCase(name, city);
+
+        return new ResponseEntity<>(companies, HttpStatus.OK);
+    }
+
+    @GetMapping("/searchByRating")
+    public ResponseEntity<List<CompanyProfile>> searchCompaniesByRating(
+            @RequestParam(name = "grade", required = false) Integer rate) {
+
+        List<CompanyProfile> companies = companyProfileService.findByRate(rate);
+
+        return new ResponseEntity<>(companies, HttpStatus.OK);
+    }
 
 
 }
