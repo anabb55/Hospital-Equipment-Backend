@@ -50,7 +50,7 @@ public class CompanyProfileController {
     }
 
 
-    }
+
     @GetMapping("/getCompanyProfilesByEquipment")
     public List<CompanyProfile> findCompanyProfilesByEquipment(Equipment e){
         return companyProfileService.findCompanyProfilesByEquipment(e);
