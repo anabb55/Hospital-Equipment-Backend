@@ -51,15 +51,27 @@ INSERT INTO user_role(
 VALUES (2, 3);
 
 
+INSERT INTO loyalty_program(
+    discount_percentage, penalty_threshold, points_per_equipment)
+VALUES (10, 1, 10);
+
+INSERT INTO loyalty_program(
+    discount_percentage, penalty_threshold, points_per_equipment)
+VALUES (20, 2, 10);
+
+INSERT INTO loyalty_program(
+    discount_percentage, penalty_threshold, points_per_equipment)
+VALUES (30, 3, 10);
+
 
 INSERT INTO registered_users(
-    penalty_points, id, user_category)
-VALUES (3, 1, 'REGULAR');
+    penalty_points, id,loyalty_id, user_category)
+VALUES (3, 1,1, 'REGULAR');
 
 INSERT INTO registered_users(
-    penalty_points, id, user_category)
-VALUES (100, 2, 'GOLD');
+    penalty_points, id,loyalty_id, user_category)
+VALUES (100, 2, 2,'GOLD');
 
 INSERT INTO registered_users(
-    penalty_points, id, user_category)
-VALUES (27, 3, 'SILVER');
+    penalty_points, id,loyalty_id, user_category)
+VALUES (27, 3,3, 'SILVER');
