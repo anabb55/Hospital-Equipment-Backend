@@ -17,7 +17,7 @@ public class RegisteredUser extends User {
     @Enumerated(EnumType.STRING)
     private UserCategory userCategory;
 
-   
+
 
 
     public RegisteredUser() {
