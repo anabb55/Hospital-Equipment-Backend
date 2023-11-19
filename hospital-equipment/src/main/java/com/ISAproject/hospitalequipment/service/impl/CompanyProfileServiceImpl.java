@@ -54,6 +54,15 @@ public class CompanyProfileServiceImpl  implements CompanyProfileService {
     public List<CompanyProfile> findCompanyProfilesByEquipment(Equipment equipment){
         return companyProfileRepo.findCompanyProfilesByEquipment(equipment);
     }
+   public List<CompanyProfile> findByNameContainingIgnoreCaseOrAddressCityContainingIgnoreCase(String name, String city){
+        return companyProfileRepo.findByNameContainingIgnoreCaseOrAddressCityContainingIgnoreCase(name, city);
+    }
+
+    public List<CompanyProfile> findByRate(Integer rate){
+        return  companyProfileRepo.findByGrade(rate);
+    }
+
+
 
     public CompanyProfile getById(Long id){
         return companyProfileRepo.findById(id).get();
