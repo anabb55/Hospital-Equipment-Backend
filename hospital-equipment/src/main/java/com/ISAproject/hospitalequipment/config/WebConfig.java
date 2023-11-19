@@ -13,8 +13,10 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
+        System.out.println("CORS Mappings Configured");
         registry.addMapping("/**").allowedOrigins("http://localhost:4200");
     }
+
 
     @Bean(name = "modelMapper")
     public ModelMapper modelMapper() {

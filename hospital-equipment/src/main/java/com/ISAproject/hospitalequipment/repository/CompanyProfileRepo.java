@@ -24,4 +24,10 @@ public interface CompanyProfileRepo extends JpaRepository<CompanyProfile,Long> {
 
     List<CompanyProfile> findCompanyProfilesByEquipment(Equipment equipmentId);
 
+    List<CompanyProfile> findByNameContainingIgnoreCaseOrAddressCityContainingIgnoreCase(String name, String city);
+    List<CompanyProfile> findByGrade(Integer rate);
+
+    
+
+
 }

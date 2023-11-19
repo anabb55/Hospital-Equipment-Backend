@@ -14,6 +14,10 @@ public interface RegisteredUserService {
     public void remove(Integer id);
     public boolean existsById(Integer id);
 
+
     public boolean verify(String email);
+
+    public RegisteredUser save(RegisteredUser registeredUser) ;
+
 
 }

@@ -17,4 +17,9 @@ public interface CompanyProfileService {
 
     List<CompanyProfile> findCompanyProfilesByEquipment(Equipment equipment);
 
+    List<CompanyProfile> findByNameContainingIgnoreCaseOrAddressCityContainingIgnoreCase(String name, String city);
+
+    List<CompanyProfile> findByRate(Integer rate);
+
+    public  CompanyProfile getById(Long id);
 }
