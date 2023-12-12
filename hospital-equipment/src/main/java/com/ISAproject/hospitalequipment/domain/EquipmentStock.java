@@ -63,4 +63,6 @@ public class EquipmentStock {
     public void setAmount(int amount) {
         this.amount = amount;
     }
+
+    public EquipmentStock(){}
 }

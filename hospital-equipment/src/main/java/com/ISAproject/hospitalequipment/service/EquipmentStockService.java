@@ -5,4 +5,5 @@ import com.ISAproject.hospitalequipment.domain.EquipmentStock;
 public interface EquipmentStockService {
 
     public EquipmentStock create(EquipmentStock equipmentStock);
+
 }
