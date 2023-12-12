@@ -31,7 +31,7 @@ public class CompanyAdministratorController {
         return new ResponseEntity<>(administrators, HttpStatus.OK);
     }
 */
-    @PostMapping("/create")
+    @PostMapping("/save")
     public ResponseEntity<CompanyAdministrator> createAdministrator(@RequestBody CompanyAdministrator administrator) {
         CompanyAdministrator createdAdministrator = companyAdministratorService.save(administrator);
         return new ResponseEntity<>(createdAdministrator, HttpStatus.CREATED);

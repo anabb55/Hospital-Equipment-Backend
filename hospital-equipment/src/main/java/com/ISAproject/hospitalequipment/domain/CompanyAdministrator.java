@@ -18,4 +18,10 @@ public class CompanyAdministrator extends User{
     private CompanyProfile company;
 
     public CompanyAdministrator(){}
+
+    public CompanyAdministrator(String email, String password, String firstName, String lastName, String phoneNumber, String occupation, boolean enabled, Address address, CompanyProfile company) {
+        super(email, password, firstName, lastName, phoneNumber, occupation, enabled, address);
+        this.company = company;
+    }
+
 }
