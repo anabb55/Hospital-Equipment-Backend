@@ -10,7 +10,7 @@ import lombok.Setter;
 @Table(name="companyAdministrators")
 @Setter
 @Getter
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = CompanyAdministrator.class)
 public class CompanyAdministrator extends User{
 
     @ManyToOne(fetch = FetchType.EAGER)

@@ -33,11 +33,53 @@ public class CompanyProfileController {
         return new ResponseEntity<>(createdCompany, HttpStatus.CREATED);
     }
 
+
+    @GetMapping("/byAdmin/{id}")
+    public ResponseEntity<List<CompanyProfile>> getByAdministrator(@PathVariable int id){
+        List<CompanyProfile> companies= companyProfileService.getByAdministrator(id);
+        return new ResponseEntity<>(companies,HttpStatus.OK);
+    }
+
+
+    @CrossOrigin(origins = "*")
+    @PutMapping("/update/{id}")
+    public ResponseEntity<CompanyProfile> update(@PathVariable Long id, @RequestBody CompanyProfile company) {
+        CompanyProfile updatedCompany = companyProfileService.update(company, id);
+        return new ResponseEntity<>(updatedCompany, HttpStatus.OK);
+
+    }
+
+
+
     @GetMapping("/getCompanyProfilesByEquipment")
     public List<CompanyProfile> findCompanyProfilesByEquipment(Equipment e){
         return companyProfileService.findCompanyProfilesByEquipment(e);
+
     }
 
+    @GetMapping("/getById/{id}")
+    public CompanyProfile getById( @PathVariable Long id){
+        return companyProfileService.getById(id);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<CompanyProfile>> searchCompanies(
+            @RequestParam(name = "name", required = false) String name,
+            @RequestParam(name = "city", required = false) String city) {
+
+        List<CompanyProfile> companies = companyProfileService.findByNameContainingIgnoreCaseOrAddressCityContainingIgnoreCase(name, city);
+
+        return new ResponseEntity<>(companies, HttpStatus.OK);
+    }
+
+    @GetMapping("/searchByRating")
+    public ResponseEntity<List<CompanyProfile>> searchCompaniesByRating(
+            @RequestParam(name = "grade", required = false) Integer rate) {
+
+        List<CompanyProfile> companies = companyProfileService.findByRate(rate);
+
+        return new ResponseEntity<>(companies, HttpStatus.OK);
+    }
 
 
 }

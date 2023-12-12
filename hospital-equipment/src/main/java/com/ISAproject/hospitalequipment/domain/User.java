@@ -49,11 +49,15 @@ public class User {
     @NotEmpty
     private String occupation;
 
+    @Getter
+    @Setter
     private boolean enabled;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @NotNull
     private  Address address;
+
+
 
 
 
@@ -67,7 +71,7 @@ public class User {
 
 
 
-    public User(Long id, String email, String password, String firstName, String lastName, String phoneNumber, String occupation, boolean enabled, Address address) {
+    public User(Long id, String email, String password, String firstName, String lastName, String phoneNumber, String occupation, boolean enabled, Address address, String companyName) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -77,6 +81,7 @@ public class User {
         this.occupation = occupation;
         this.enabled = enabled;
         this.address = address;
+
     }
 
 

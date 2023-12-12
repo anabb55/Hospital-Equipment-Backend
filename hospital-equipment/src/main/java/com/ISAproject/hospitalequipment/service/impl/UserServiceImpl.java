@@ -40,4 +40,6 @@ public class UserServiceImpl implements UserService {
     public List<User> findAll() {
         return  userRepo.findAll();
     }
+
+   public User findByEmail(String email) {return userRepo.findByEmail(email);}
 }

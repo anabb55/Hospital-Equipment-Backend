@@ -17,6 +17,12 @@ public class AddressServiceImpl implements AddressService {
         return addressRepo.findAll();
     }
     public Address save(Address address){
-        return addressRepo.save(address);
+             return addressRepo.save(address);
     }
+     
+     public Address update(Address address){
+      return addressRepo.save(address);
+    }
+  
 }
+ 

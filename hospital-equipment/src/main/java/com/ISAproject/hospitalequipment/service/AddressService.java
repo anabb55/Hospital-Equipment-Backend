@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface AddressService {
     public List<Address> findAll();
-    Address save(Address address);
+    public Address save(Address address);
+    public Address update(Address address);
+
 }

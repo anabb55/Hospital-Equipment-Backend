@@ -6,12 +6,7 @@ import com.ISAproject.hospitalequipment.service.CompanyAdministratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
@@ -37,5 +32,18 @@ public class CompanyAdministratorController {
         return new ResponseEntity<>(createdAdministrator, HttpStatus.CREATED);
     }
 
+    @GetMapping("/getById/{id}")
+    public ResponseEntity<CompanyAdministrator> getById( @PathVariable Long id){
+        CompanyAdministrator companyAdmin= companyAdministratorService.getById(id);
+        return new ResponseEntity<>(companyAdmin,HttpStatus.OK);
+    }
+
+    @CrossOrigin(origins = "*")
+    @PutMapping("/update/{id}")
+    public ResponseEntity<CompanyAdministrator> update(@PathVariable Long id, @RequestBody CompanyAdministrator admin) {
+        CompanyAdministrator updatedAdmin = companyAdministratorService.update(admin, id);
+        return new ResponseEntity<>(updatedAdmin, HttpStatus.OK);
+
+    }
 
 }

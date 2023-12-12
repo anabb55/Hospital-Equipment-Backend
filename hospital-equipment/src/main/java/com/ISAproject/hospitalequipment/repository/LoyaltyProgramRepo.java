@@ -1,11 +1,10 @@
 package com.ISAproject.hospitalequipment.repository;
 
-import com.ISAproject.hospitalequipment.domain.User;
+import com.ISAproject.hospitalequipment.domain.RegisteredUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
 @Repository
-public interface UserRepo extends JpaRepository<User,Long> {
-
-    User findByEmail(String email);
-
+public interface LoyaltyProgramRepo extends JpaRepository<RegisteredUser, Long> {
 }
+
