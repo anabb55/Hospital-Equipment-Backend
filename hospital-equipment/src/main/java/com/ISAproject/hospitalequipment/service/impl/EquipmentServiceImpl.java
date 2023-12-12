@@ -1,6 +1,5 @@
 package com.ISAproject.hospitalequipment.service.impl;
 
-import com.ISAproject.hospitalequipment.domain.CompanyProfile;
 import com.ISAproject.hospitalequipment.domain.Equipment;
 import com.ISAproject.hospitalequipment.repository.EquipmentRepo;
 import com.ISAproject.hospitalequipment.service.EquipmentService;

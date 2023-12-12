@@ -1,7 +1,6 @@
 package com.ISAproject.hospitalequipment.service.impl;
 
 import com.ISAproject.hospitalequipment.domain.CompanyAdministrator;
-import com.ISAproject.hospitalequipment.domain.CompanyProfile;
 import com.ISAproject.hospitalequipment.repository.CompanyAdministratorRepo;
 import com.ISAproject.hospitalequipment.service.AddressService;
 import com.ISAproject.hospitalequipment.service.CompanyAdministratorService;
