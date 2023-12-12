@@ -53,8 +53,7 @@ public class CompanyProfile {
     @OneToMany(mappedBy = "company", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<CompanyAdministrator> administrators = new HashSet<CompanyAdministrator>();
 
-    public CompanyProfile(Long id,String name, String description,Address address, Double grade) {
-        this.id = id;
+    public CompanyProfile(String name, String description,Address address, Double grade) {
         this.name = name;
         this.description = description;
         this.grade = grade;

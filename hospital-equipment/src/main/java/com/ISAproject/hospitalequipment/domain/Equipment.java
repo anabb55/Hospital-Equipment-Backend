@@ -29,4 +29,12 @@ public class Equipment {
     public Integer amount;
 
 
+    public Equipment(Long id,String name, String description, Double grade, Integer amount){
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.grade = grade;
+        this.amount = amount;
+    }
+    public Equipment(){}
 }
