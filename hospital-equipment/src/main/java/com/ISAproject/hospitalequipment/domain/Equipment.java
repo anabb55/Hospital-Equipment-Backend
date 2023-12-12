@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -29,6 +30,8 @@ public class Equipment {
     public Integer amount;
 
 
+    @OneToMany(mappedBy = "equipment")
+    private Set<EquipmentStock> equipmentStocks;
     public Equipment(Long id,String name, String description, Double grade, Integer amount){
         this.id = id;
         this.name = name;

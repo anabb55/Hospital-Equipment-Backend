@@ -1,6 +1,5 @@
 package com.ISAproject.hospitalequipment.Controller;
 
-import com.ISAproject.hospitalequipment.domain.CompanyProfile;
 import com.ISAproject.hospitalequipment.domain.Equipment;
 import com.ISAproject.hospitalequipment.service.EquipmentService;
 import org.springframework.beans.factory.annotation.Autowired;
