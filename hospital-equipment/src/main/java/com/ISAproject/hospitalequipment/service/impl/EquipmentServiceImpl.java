@@ -11,6 +11,7 @@ import java.util.List;
 @Service
 public class EquipmentServiceImpl implements EquipmentService {
 
+
     @Autowired
     public EquipmentRepo equipmentRepo;
     public List<Equipment> getByCompany(Long companyId){
@@ -20,4 +21,7 @@ public class EquipmentServiceImpl implements EquipmentService {
         return equipmentRepo.findEquipmentByName(name);
     }
 
+    public List<Equipment> findAvailableEquipmentForCompany(Long companyId){
+        return this.equipmentRepo.findMissingEquipmentForCompany(companyId);
+    }
 }

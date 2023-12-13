@@ -139,28 +139,6 @@ INSERT INTO equipments(
      amount, grade, description, name)
 VALUES ( 500, 5, 'elastic', 'Bandage');
 
-
-
-
-
-
-
-INSERT INTO appointments(
-     duration, company_id, date, admin_last_name, admin_name)
-VALUES ( 22, 1,'2023-10-22 21:48:24.891+02','Nina','Nina');
-INSERT INTO appointments(
-     duration, company_id, date, admin_last_name, admin_name)
-VALUES ( 10, 1,'2023-10-22 21:48:24.891+02','Ana','Ana');
-INSERT INTO appointments(
-     duration, company_id, date, admin_last_name, admin_name)
-VALUES ( 30, 2,'2023-10-22 21:48:24.891+02','Helena','Helena');
-INSERT INTO appointments(
-     duration, company_id, date, admin_last_name, admin_name)
-VALUES ( 22, 3,'2023-10-22 21:48:24.891+02','Dajana','Dajana');
-INSERT INTO appointments(
-     duration, company_id, date, admin_last_name, admin_name)
-VALUES ( 2, 3,'2023-10-22 21:48:24.891+02','Katarina','Katarina');
-
 INSERT INTO company_administrators(
      company_id, id)
 VALUES ( 1,3);
