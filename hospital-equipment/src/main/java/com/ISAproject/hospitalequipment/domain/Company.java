@@ -1,24 +1,22 @@
 package com.ISAproject.hospitalequipment.domain;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
 @Getter
 @Setter
-@Table(name="CompanyProfiles")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = CompanyProfile.class)
-public class CompanyProfile {
+@Table(name="Company")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Company.class)
+public class Company {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -39,31 +37,28 @@ public class CompanyProfile {
     private Double grade;
 
 
-    @OneToMany(mappedBy = "company", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<Appointment> appointments = new HashSet<Appointment>();
+
 
     @OneToOne(mappedBy = "company", cascade = CascadeType.ALL)
     private WorkingTimeCalender workingTimeCalender;
 
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name="company_equipment",
-            joinColumns = @JoinColumn(name="company_profile_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "equipment_id", referencedColumnName = "id"))
-    private Set<Equipment> equipment = new HashSet<Equipment>();
+
 
     @OneToMany(mappedBy = "company", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<CompanyAdministrator> administrators = new HashSet<CompanyAdministrator>();
 
-    public CompanyProfile(Long id,String name, String description,Address address, Double grade) {
-        this.id = id;
+    @JsonIgnore
+    @OneToMany(mappedBy = "company")
+    private Set<EquipmentStock> equipmentStocks;
+    public Company(String name, String description, Address address, Double grade) {
         this.name = name;
         this.description = description;
         this.grade = grade;
         this.address = address;
     }
 
-    public CompanyProfile() {
+    public Company() {
 
     }
 

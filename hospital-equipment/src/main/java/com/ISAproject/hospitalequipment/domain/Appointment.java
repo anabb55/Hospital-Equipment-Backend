@@ -34,9 +34,11 @@ public class Appointment {
     @NotNull
     public Integer duration;
 
+
 //    @ManyToOne(fetch = FetchType.EAGER)
 //    @JoinColumn(name="company_profile_id")
 //    private CompanyProfile company;
+
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="working_calender_id")
@@ -54,3 +56,4 @@ public class Appointment {
 
 
 }
+

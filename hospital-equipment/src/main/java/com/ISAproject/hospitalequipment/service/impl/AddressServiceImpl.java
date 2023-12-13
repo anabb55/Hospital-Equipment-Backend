@@ -6,12 +6,23 @@ import com.ISAproject.hospitalequipment.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AddressServiceImpl implements AddressService {
-
     @Autowired
-    public AddressRepo addressRepo;
-    public Address update(Address address){
-        return addressRepo.save(address);
+    private AddressRepo addressRepo;
+
+    public List<Address> findAll() {
+        return addressRepo.findAll();
     }
+    public Address save(Address address){
+             return addressRepo.save(address);
+    }
+     
+     public Address update(Address address){
+      return addressRepo.save(address);
+    }
+  
 }
+ 
