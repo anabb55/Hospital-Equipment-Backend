@@ -1,4 +1,4 @@
-INSERT INTO public.addresses(
+INSERT INTO addresses(
      city, country, number, street)
 VALUES ( 'Novi Sad', 'Serbia', '37', 'Dimitrija Tucovica');
 
