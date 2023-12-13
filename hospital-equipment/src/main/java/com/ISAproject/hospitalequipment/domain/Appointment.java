@@ -50,6 +50,9 @@ public class Appointment {
     @ManyToOne
     @JoinColumn(name = "administrator_id")
     private CompanyAdministrator administrator;
+
+    @OneToOne(mappedBy = "appointment", cascade = CascadeType.ALL)
+    private Reservation reservation;
     public Appointment() {
 
     }

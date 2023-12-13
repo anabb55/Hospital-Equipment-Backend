@@ -10,7 +10,6 @@ import java.util.Set;
 
 @Entity
 @Table(name="WorkingTimeCalenders")
-@Inheritance(strategy = InheritanceType.JOINED)
 @Getter
 @Setter
 public class WorkingTimeCalender {
