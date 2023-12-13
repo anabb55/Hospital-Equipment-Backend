@@ -1,7 +1,6 @@
 package com.ISAproject.hospitalequipment.service;
 
 import com.ISAproject.hospitalequipment.domain.CompanyAdministrator;
-import com.ISAproject.hospitalequipment.domain.CompanyProfile;
 
 import java.util.List;
 

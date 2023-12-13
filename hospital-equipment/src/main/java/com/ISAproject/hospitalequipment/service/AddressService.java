@@ -2,7 +2,12 @@ package com.ISAproject.hospitalequipment.service;
 
 import com.ISAproject.hospitalequipment.domain.Address;
 
-public interface AddressService {
+import java.util.List;
 
+
+public interface AddressService {
+    public List<Address> findAll();
+    public Address save(Address address);
     public Address update(Address address);
+
 }

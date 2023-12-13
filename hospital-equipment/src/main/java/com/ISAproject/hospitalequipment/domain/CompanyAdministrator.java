@@ -14,8 +14,14 @@ import lombok.Setter;
 public class CompanyAdministrator extends User{
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="company_profile_id")
-    private CompanyProfile company;
+    @JoinColumn(name="company_id")
+    private Company company;
 
     public CompanyAdministrator(){}
+
+    public CompanyAdministrator(String email, String password, String firstName, String lastName, String phoneNumber, String occupation, boolean enabled, Address address, Company company) {
+        super(email, password, firstName, lastName, phoneNumber, occupation, enabled, address);
+        this.company = company;
+    }
+
 }

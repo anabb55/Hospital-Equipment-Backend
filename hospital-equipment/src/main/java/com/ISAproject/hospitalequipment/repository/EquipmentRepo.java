@@ -1,6 +1,5 @@
 package com.ISAproject.hospitalequipment.repository;
 
-import com.ISAproject.hospitalequipment.domain.CompanyProfile;
 import com.ISAproject.hospitalequipment.domain.Equipment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
