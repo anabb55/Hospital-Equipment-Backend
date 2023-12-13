@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/companyAdministrators")
 public class CompanyAdministratorController {
@@ -14,14 +16,14 @@ public class CompanyAdministratorController {
     @Autowired
     private CompanyAdministratorService companyAdministratorService;
 
-    /*
+
     @GetMapping("/getAll")
     public ResponseEntity<List<CompanyAdministrator>> getAll(){
         List<CompanyAdministrator> administrators= companyAdministratorService.findAll();
 
         return new ResponseEntity<>(administrators, HttpStatus.OK);
     }
-*/
+
     @PostMapping("/save")
     public ResponseEntity<CompanyAdministrator> createAdministrator(@RequestBody CompanyAdministrator administrator) {
         CompanyAdministrator createdAdministrator = companyAdministratorService.save(administrator);

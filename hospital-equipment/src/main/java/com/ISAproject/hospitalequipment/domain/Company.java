@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -39,8 +40,10 @@ public class Company {
 
 
 
+
     @OneToOne(mappedBy = "company", cascade = CascadeType.ALL)
     private WorkingTimeCalender workingTimeCalender;
+
 
 
 
@@ -56,6 +59,14 @@ public class Company {
         this.description = description;
         this.grade = grade;
         this.address = address;
+    }
+
+    public Company(String name, String description, Address address, Double grade, Set<CompanyAdministrator> admins) {
+        this.name = name;
+        this.description = description;
+        this.grade = grade;
+        this.address = address;
+        this.administrators =  admins;
     }
 
     public Company() {
