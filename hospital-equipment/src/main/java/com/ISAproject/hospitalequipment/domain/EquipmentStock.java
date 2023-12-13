@@ -15,12 +15,12 @@ public class EquipmentStock {
 
 
     @JoinColumn(name = "equipment_id")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     Equipment equipment;
 
 
     @JoinColumn(name="company_id")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     Company company;
 
     @Column(name = "amount")

@@ -49,7 +49,7 @@ public class Company {
     private Set<CompanyAdministrator> administrators = new HashSet<CompanyAdministrator>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "company")
+    @OneToMany(mappedBy = "company",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<EquipmentStock> equipmentStocks;
     public Company(String name, String description, Address address, Double grade) {
         this.name = name;

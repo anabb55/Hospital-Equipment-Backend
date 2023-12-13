@@ -138,3 +138,16 @@ VALUES ( 500, 5, 'Cotton', 'Coat');
 INSERT INTO equipments(
      amount, grade, description, name)
 VALUES ( 500, 5, 'elastic', 'Bandage');
+
+INSERT INTO company_administrators(
+     company_id, id)
+VALUES ( 1,3);
+INSERT INTO company_administrators(
+     company_id, id)
+VALUES ( 1,6);
+INSERT INTO company_administrators(
+     company_id, id)
+VALUES ( 2,4);
+INSERT INTO company_administrators(
+     company_id, id)
+VALUES ( 3,5);
