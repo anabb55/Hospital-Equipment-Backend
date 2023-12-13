@@ -25,7 +25,7 @@ public class WorkingTimeCalender {
 
     @OneToOne
     @JoinColumn(name = "company_id")
-    private CompanyProfile company;
+    private Company company;
 
 
 }

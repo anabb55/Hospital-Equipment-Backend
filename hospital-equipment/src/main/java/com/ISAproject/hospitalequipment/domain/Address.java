@@ -11,7 +11,6 @@ import lombok.Setter;
 @Table(name="Addresses")
 public class Address {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
