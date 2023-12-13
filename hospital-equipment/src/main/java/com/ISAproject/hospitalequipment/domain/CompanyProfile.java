@@ -42,6 +42,8 @@ public class CompanyProfile {
     @OneToMany(mappedBy = "company", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Appointment> appointments = new HashSet<Appointment>();
 
+    @OneToOne(mappedBy = "company", cascade = CascadeType.ALL)
+    private WorkingTimeCalender workingTimeCalender;
 
 
     @ManyToMany(fetch = FetchType.LAZY)

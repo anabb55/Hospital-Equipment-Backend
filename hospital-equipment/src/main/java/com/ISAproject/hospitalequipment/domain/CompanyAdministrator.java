@@ -6,6 +6,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name="companyAdministrators")
 @Setter
@@ -16,6 +19,10 @@ public class CompanyAdministrator extends User{
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="company_profile_id")
     private CompanyProfile company;
+
+    @OneToMany(mappedBy = "administrator", cascade = CascadeType.ALL)
+    private Set<Appointment> scheduledAppointments = new HashSet<Appointment>();
+
 
     public CompanyAdministrator(){}
 }

@@ -165,16 +165,16 @@ VALUES ( 3,3);
 
 
 INSERT INTO appointments(
-     duration, company_profile_id, date, admin_last_name, admin_name)
+     duration, working_calender_id, date, admin_last_name, admin_name)
 VALUES ( 22, 1,'2023-10-22 21:48:24.891+02','Nina','Nina');
 INSERT INTO appointments(
-     duration, company_profile_id, date, admin_last_name, admin_name)
+     duration, working_calender_id, date, admin_last_name, admin_name)
 VALUES ( 10, 1,'2023-10-22 21:48:24.891+02','Ana','Ana');
 INSERT INTO appointments(
-     duration, company_profile_id, date, admin_last_name, admin_name)
+     duration, working_calender_id, date, admin_last_name, admin_name)
 VALUES ( 30, 2,'2023-10-22 21:48:24.891+02','Helena','Helena');
 INSERT INTO appointments(
-     duration, company_profile_id, date, admin_last_name, admin_name)
+     duration, working_calender_id, date, admin_last_name, admin_name)
 VALUES ( 22, 3,'2023-10-22 21:48:24.891+02','Dajana','Dajana');
 INSERT INTO appointments(
      duration, company_profile_id, date, admin_last_name, admin_name)
