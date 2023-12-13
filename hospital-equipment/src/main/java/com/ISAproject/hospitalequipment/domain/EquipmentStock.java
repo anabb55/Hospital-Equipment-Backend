@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.Columns;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="equipment_stock")
@@ -25,6 +27,9 @@ public class EquipmentStock {
 
     @Column(name = "amount")
     int amount;
+
+    @OneToMany(mappedBy = "equipmentStock", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<ReservationEquipmentStock> reservationEquipmentStocks = new HashSet<ReservationEquipmentStock>();
 
     public EquipmentStock(Equipment equipment, Company company, int amount) {
         this.equipment = equipment;
