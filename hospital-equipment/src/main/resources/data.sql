@@ -105,23 +105,38 @@ INSERT INTO registered_users(
     penalty_points, id,loyalty_id, user_category)
 VALUES (100, 2, 2,'GOLD');
 
-INSERT INTO registered_users(
-    penalty_points, id,loyalty_id, user_category)
-VALUES (27, 3,3, 'SILVER');
-
-INSERT INTO company(
-     name, description, grade, address_id)
-VALUES ( 'Corpore Sano', 'The best service', 5, 1);
-
-INSERT INTO company(
-     name, description, grade, address_id)
-VALUES ( 'Health Company', 'Safe with us', 4, 2);
-
-INSERT INTO company(
-     name, description, grade, address_id)
-VALUES ( 'HealthGroup', 'Best service', 4, 3);
 
 
+INSERT INTO company(name, description, grade, address_id, work_start_time, work_end_time)
+VALUES ('Corpore Sano', 'The best service', 5, 1, '08:00:00', '17:00:00');
+
+INSERT INTO company(name, description, grade, address_id, work_start_time, work_end_time)
+VALUES ('Health Company', 'Safe with us', 4, 2, '08:00:00', '17:00:00');
+
+INSERT INTO company(name, description, grade, address_id, work_start_time, work_end_time)
+VALUES ('HealthGroup', 'Best service', 4, 3, '08:00:00', '17:00:00');
+
+INSERT INTO company_administrators(
+    company_id,id)
+VALUES (1,1);
+
+INSERT INTO company_administrators(
+    company_id,id)
+VALUES (1,2);
+
+INSERT INTO company_administrators(
+    company_id,id)
+VALUES (2,3);
+INSERT INTO company_administrators(
+    company_id,id)
+VALUES (2,4);
+
+INSERT INTO company_administrators(
+    company_id,id)
+VALUES (3,5);
+INSERT INTO company_administrators(
+    company_id,id)
+VALUES (3,6);
 
 INSERT INTO equipments(
      amount, grade, description, name)
@@ -138,3 +153,33 @@ VALUES ( 500, 5, 'Cotton', 'Coat');
 INSERT INTO equipments(
      amount, grade, description, name)
 VALUES ( 500, 5, 'elastic', 'Bandage');
+
+INSERT INTO equipment_stock(
+    amount, company_id, equipment_id)
+VALUES ( 100,1,1);
+
+INSERT INTO equipment_stock(
+    amount, company_id, equipment_id)
+VALUES ( 200,1,2);
+
+INSERT INTO equipment_stock(
+    amount, company_id, equipment_id)
+VALUES ( 200,2,3);
+
+INSERT INTO equipment_stock(
+    amount, company_id, equipment_id)
+VALUES ( 200,3,1);
+
+INSERT INTO equipment_stock(
+    amount, company_id, equipment_id)
+VALUES ( 200,3,2);
+
+
+INSERT INTO appointments(date, duration, start_time, administrator_id, company_id, appointment_status)
+VALUES ('2023-12-22', 180,'08:00:00', 1, 1, 'PREDEFINED');
+
+INSERT INTO appointments(date, duration, start_time, administrator_id, company_id, appointment_status)
+VALUES ('2023-12-26', 180,'08:00:00', 2, 2, 'PREDEFINED');
+
+INSERT INTO appointments(date, duration, start_time, administrator_id, company_id, appointment_status)
+VALUES ('2023-12-27', 180,'08:00:00', 2, 3, 'PREDEFINED');

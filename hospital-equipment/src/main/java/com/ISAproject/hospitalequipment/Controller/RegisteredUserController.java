@@ -2,12 +2,14 @@ package com.ISAproject.hospitalequipment.Controller;
 
 import com.ISAproject.hospitalequipment.domain.RegisteredUser;
 import com.ISAproject.hospitalequipment.domain.User;
+import com.ISAproject.hospitalequipment.dto.AppointmentDTO;
 import com.ISAproject.hospitalequipment.dto.RegisterUserDTO;
 import com.ISAproject.hospitalequipment.dto.UserDTO;
 import com.ISAproject.hospitalequipment.mapper.registredUserDTOMapper;
 import com.ISAproject.hospitalequipment.service.RegisteredUserService;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,16 +29,8 @@ public class RegisteredUserController {
 
 
 
-    @GetMapping(value = "/all")
-    public ResponseEntity<List<RegisterUserDTO>> getAllRegisteredUsers() {
-        List<RegisteredUser> registerUsers = registeredUserService.findAll();
 
-        List<RegisterUserDTO> regUserDTO = registerUsers.stream()
-                .map(RegisterUserDTO::new)
-                .collect(Collectors.toList());
 
-        return new ResponseEntity<>(regUserDTO, HttpStatus.OK);
-    }
 
     @GetMapping("/getById/{id}")
     public ResponseEntity<RegisterUserDTO> getUser(@PathVariable Integer id) {
