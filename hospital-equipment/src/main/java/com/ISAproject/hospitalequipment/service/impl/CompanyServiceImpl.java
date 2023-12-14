@@ -55,6 +55,9 @@ public class CompanyServiceImpl implements CompanyService {
    public List<Company> findByNameContainingIgnoreCaseOrAddressCityContainingIgnoreCase(String name, String city){
         return companyRepo.findByNameContainingIgnoreCaseOrAddressCityContainingIgnoreCase(name, city);
     }
+    public List<Equipment> getEquipmentByCompanyId(Long companyId) {
+        return companyRepo.findEquipmentByCompanyId(companyId);
+    }
 
     public List<Company> findByRate(Integer rate){
         return  companyRepo.findByGrade(rate);
@@ -64,5 +67,9 @@ public class CompanyServiceImpl implements CompanyService {
 
     public Company getById(Long id){
         return companyRepo.findById(id).get();
+    }
+
+    public List<Equipment> findEquipmentByCompanyIdAndName(Long companyId,String name){
+     return  companyRepo.findEquipmentByCompanyIdAndName(companyId,name);
     }
 }

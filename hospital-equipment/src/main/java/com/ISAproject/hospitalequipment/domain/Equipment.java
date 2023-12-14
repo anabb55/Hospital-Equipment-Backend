@@ -32,7 +32,7 @@ public class Equipment {
 
 
     @JsonIgnore
-    @OneToMany(mappedBy = "equipment")
+    @OneToMany(mappedBy = "equipment", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<EquipmentStock> equipmentStocks;
     public Equipment(Long id,String name, String description, Double grade, Integer amount){
         this.id = id;

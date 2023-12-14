@@ -20,7 +20,7 @@ public class CompanyAdministrator extends User{
     @JoinColumn(name="company_id")
     private Company company;
 
-    @OneToMany(mappedBy = "administrator", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "administrator", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private Set<Appointment> scheduledAppointments = new HashSet<Appointment>();
 
 

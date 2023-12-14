@@ -78,5 +78,18 @@ public class CompanyController {
         return new ResponseEntity<>(companies, HttpStatus.OK);
     }
 
+    @GetMapping("/company/{companyId}/equipment")
+    public List<Equipment> getEquipmentByCompanyId(@PathVariable Long companyId) {
+        return companyService.getEquipmentByCompanyId(companyId);
+    }
+
+    @GetMapping("/equipment/{companyId}/search")
+    public ResponseEntity<List<Equipment>> searchEquipmentByCompanyIdAndName(
+            @PathVariable Long companyId,
+            @RequestParam String name) {
+        List<Equipment> equipmentList = companyService.findEquipmentByCompanyIdAndName(companyId, name);
+        return new ResponseEntity<>(equipmentList, HttpStatus.OK);
+    }
+
 
 }

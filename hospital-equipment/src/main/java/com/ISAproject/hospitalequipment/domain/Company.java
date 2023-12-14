@@ -45,12 +45,12 @@ public class Company {
 
 
 
-    @OneToMany(mappedBy = "company", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<CompanyAdministrator> administrators = new HashSet<CompanyAdministrator>();
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "company")
-    private Set<EquipmentStock> equipmentStocks;
+
+    @OneToMany(mappedBy = "company",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<EquipmentStock> equipmentStocks= new HashSet<EquipmentStock>();
     public Company(String name, String description, Address address, Double grade) {
         this.name = name;
         this.description = description;

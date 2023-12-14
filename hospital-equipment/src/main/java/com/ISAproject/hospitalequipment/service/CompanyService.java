@@ -21,6 +21,9 @@ public interface CompanyService {
     List<Company> findByNameContainingIgnoreCaseOrAddressCityContainingIgnoreCase(String name, String city);
 
     List<Company> findByRate(Integer rate);
+    List<Equipment> getEquipmentByCompanyId(Long companyId) ;
 
     public Company getById(Long id);
+
+    List<Equipment> findEquipmentByCompanyIdAndName(Long companyId,String name);
 }

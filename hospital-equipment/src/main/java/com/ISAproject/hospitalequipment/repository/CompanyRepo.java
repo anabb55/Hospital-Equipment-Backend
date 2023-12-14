@@ -28,7 +28,12 @@ public interface CompanyRepo extends JpaRepository<Company,Long> {
     List<Company> findByNameContainingIgnoreCaseOrAddressCityContainingIgnoreCase(String name, String city);
     List<Company> findByGrade(Integer rate);
 
-    
+    @Query("SELECT es.equipment FROM EquipmentStock es WHERE es.company.id = :companyId")
+    List<Equipment> findEquipmentByCompanyId(@Param("companyId") Long companyId);
+
+    @Query("SELECT es.equipment FROM EquipmentStock es WHERE es.company.id = :companyId AND es.equipment.name LIKE %:name%")
+    List<Equipment> findEquipmentByCompanyIdAndName(@Param("companyId") Long companyId, @Param("name") String name);
+
 
 
 }
