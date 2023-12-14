@@ -1,5 +1,6 @@
 package com.ISAproject.hospitalequipment.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Columns;
 
@@ -20,11 +21,9 @@ public class EquipmentStock {
     @ManyToOne(fetch = FetchType.EAGER)
     Equipment equipment;
 
-
     @JoinColumn(name="company_id")
     @ManyToOne(fetch = FetchType.EAGER)
     Company company;
-
     @Column(name = "amount")
     int amount;
 
@@ -36,7 +35,7 @@ public class EquipmentStock {
         this.company = company;
         this.amount = amount;
     }
-
+    public EquipmentStock(){}
     public Long getId() {
         return id;
     }
@@ -69,5 +68,5 @@ public class EquipmentStock {
         this.amount = amount;
     }
 
-    public EquipmentStock(){}
+
 }

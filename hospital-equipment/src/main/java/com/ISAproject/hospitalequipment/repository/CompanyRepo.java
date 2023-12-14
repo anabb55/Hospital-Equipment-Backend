@@ -16,9 +16,9 @@ public interface CompanyRepo extends JpaRepository<Company,Long> {
     @Query("SELECT cp FROM Company cp JOIN cp.administrators a WHERE a.id = :administratorId")
     List<Company> findCompaniesByAdministrators(@Param("administratorId")int id);
 
-    /* nisam sigurna da li ce raditi
-    List<Company> findCompaniesByEquipment(Equipment equipmentId);
-*/
+    @Query("SELECT DISTINCT c FROM Company c JOIN c.equipmentStocks es WHERE es.equipment.id = :equipmentId")
+    List<Company> findCompaniesByEquipment(@Param("equipmentId") Long equipmentId);
+
     List<Company> findByNameContainingIgnoreCaseOrAddressCityContainingIgnoreCase(String name, String city);
     List<Company> findByGrade(Integer rate);
 

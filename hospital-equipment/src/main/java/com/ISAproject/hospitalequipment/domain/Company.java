@@ -38,14 +38,8 @@ public class Company {
     private Double grade;
 
 
-
-
-
     @OneToOne(mappedBy = "company", cascade = CascadeType.ALL)
     private WorkingTimeCalender workingTimeCalender;
-
-
-
 
 
     @OneToMany(mappedBy = "company", fetch = FetchType.EAGER, cascade = CascadeType.ALL)

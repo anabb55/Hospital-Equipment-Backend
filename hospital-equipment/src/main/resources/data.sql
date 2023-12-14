@@ -37,7 +37,7 @@ VALUES (3, 'SYSTEM_ADMIN');
 
 INSERT INTO users(
      email, enabled, first_name, last_name, occupation, password, phone_number, address_id)
-VALUES ( 'taraboskovic066@gmail.com', false, 'Tara', 'Boskovic', 'student', '123', '066-2678-772', 1);
+VALUES ( 'taraboskovic066@gmail.com', false, 'Tara', 'Boskovic', 'student', '123', '066-2678-772',1);
 
 INSERT INTO users(
      email, enabled, first_name, last_name, occupation, password, phone_number, address_id)
@@ -124,20 +124,20 @@ VALUES ( 'HealthGroup', 'Best service', 4, 3);
 
 
 INSERT INTO equipments(
-     amount, grade, description, name)
-VALUES ( 50, 5, 'Strong', 'Scissors');
+     amount, grade, description, name,type)
+VALUES ( 50, 5, 'Metal', 'Scissors','Strong');
 
 INSERT INTO equipments(
-     amount, grade, description, name)
-VALUES ( 2000, 4, 'Medical', 'Gloves');
+     amount, grade, description, name,type)
+VALUES ( 2000, 4, 'Medical', 'Gloves','Type1');
 
 INSERT INTO equipments(
-     amount, grade, description, name)
-VALUES ( 500, 5, 'Cotton', 'Coat');
+     amount, grade, description, name,type)
+VALUES ( 500, 5, 'Cotton', 'Coat','White');
 
 INSERT INTO equipments(
-     amount, grade, description, name)
-VALUES ( 500, 5, 'elastic', 'Bandage');
+     amount, grade, description, name,type)
+VALUES ( 500, 5, 'elastic', 'Bandage','Hard');
 
 INSERT INTO company_administrators(
      company_id, id)
@@ -151,3 +151,16 @@ VALUES ( 2,4);
 INSERT INTO company_administrators(
      company_id, id)
 VALUES ( 3,5);
+
+
+INSERT INTO public.equipment_stock(
+	amount, company_id, equipment_id, id)
+	VALUES (10, 1, 1, 1);
+INSERT INTO public.equipment_stock(
+	amount, company_id, equipment_id, id)
+	VALUES (11, 2, 1, 2);
+
+INSERT INTO public.equipment_stock(
+	amount, company_id, equipment_id, id)
+	VALUES (3, 3, 2, 3);
+

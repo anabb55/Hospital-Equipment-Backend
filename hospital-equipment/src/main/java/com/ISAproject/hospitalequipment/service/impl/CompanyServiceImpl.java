@@ -57,12 +57,10 @@ public class CompanyServiceImpl implements CompanyService {
 
     }
 
-
-    /*
-    public List<Company> findCompanyProfilesByEquipment(Equipment equipment){
-        return companyRepo.findCompanyProfilesByEquipment(equipment);
+    public List<Company> findCompaniesByEquipment(Long equipmentId){
+        return companyRepo.findCompaniesByEquipment(equipmentId);
     }
-    */
+
    public List<Company> findByNameContainingIgnoreCaseOrAddressCityContainingIgnoreCase(String name, String city){
         return companyRepo.findByNameContainingIgnoreCaseOrAddressCityContainingIgnoreCase(name, city);
     }
