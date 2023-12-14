@@ -164,3 +164,58 @@ INSERT INTO public.equipment_stock(
 	amount, company_id, equipment_id, id)
 	VALUES (3, 3, 2, 3);
 
+INSERT INTO public.working_time_calenders(
+	company_id, id)
+	VALUES (1, 1);
+INSERT INTO public.working_time_calenders(
+	company_id, id)
+	VALUES (2, 2);
+
+
+INSERT INTO public.appointments(
+	duration, administrator_id, date, id, working_calender_id, appointment_status)
+	VALUES (3, 4,  TO_DATE('31-12-2020', 'DD-MM-YYYY'), 1,1,'EXTRAORDINARY');
+
+INSERT INTO public.appointments(
+	duration, administrator_id, date, id, working_calender_id, appointment_status)
+	VALUES (4, 3,  TO_DATE('11-05-2020', 'DD-MM-YYYY'), 2,2,'EXTRAORDINARY');
+
+
+
+
+INSERT INTO public.qrcode(
+	id, qr_code_status)
+	VALUES (1, 'NEW');
+INSERT INTO public.qrcode(
+	id, qr_code_status)
+	VALUES (2, 'NEW');
+
+
+
+
+
+INSERT INTO public.reservations(
+	appointment_id, id, penalty_points, qr_cod_id, reservation_status)
+	VALUES (1, 1, 5, 1, 'TAKEN');
+
+INSERT INTO public.reservations(
+	appointment_id, id, penalty_points, qr_cod_id, reservation_status)
+	VALUES (2, 2, 3, 2, 'TAKEN');
+
+
+
+
+INSERT INTO public.reservation_equipment_stock(
+	amount, equipment_stock_id, id, reservation_id)
+	VALUES (2, 1, 1, 1);
+
+INSERT INTO public.reservation_equipment_stock(
+	amount, equipment_stock_id, id, reservation_id)
+	VALUES (4, 2, 2, 2);
+
+
+
+
+
+
+
