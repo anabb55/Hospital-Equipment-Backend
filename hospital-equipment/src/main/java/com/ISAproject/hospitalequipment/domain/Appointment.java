@@ -1,5 +1,6 @@
 package com.ISAproject.hospitalequipment.domain;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.ISAproject.hospitalequipment.domain.enums.AppointmentStatus;
 import jakarta.persistence.*;
@@ -54,11 +55,12 @@ public class Appointment {
     @Enumerated(EnumType.STRING)
     private AppointmentStatus appointmentStatus;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "administrator_id")
     private CompanyAdministrator administrator;
 
     @OneToOne(mappedBy = "appointment",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     private Reservation reservation;
     public Appointment() {
 

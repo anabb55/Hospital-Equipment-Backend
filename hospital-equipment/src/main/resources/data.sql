@@ -176,7 +176,7 @@ VALUES ( 200,3,2);
 
 
 INSERT INTO appointments(date, duration, start_time, administrator_id, company_id, appointment_status)
-VALUES ('2023-12-22', 180,'08:00:00', 1, 1, 'PREDEFINED');
+VALUES ('2023-12-22', 180,'08:00:00', 1, 1, 'TAKEN');
 
 INSERT INTO appointments(date, duration, start_time, administrator_id, company_id, appointment_status)
 VALUES ('2023-12-26', 180,'08:00:00', 2, 2, 'PREDEFINED');

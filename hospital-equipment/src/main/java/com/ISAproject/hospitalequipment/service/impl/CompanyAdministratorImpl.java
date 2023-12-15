@@ -7,6 +7,8 @@ import com.ISAproject.hospitalequipment.service.CompanyAdministratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -24,6 +26,10 @@ public class CompanyAdministratorImpl implements CompanyAdministratorService {
     public CompanyAdministrator save(CompanyAdministrator admin){return companyAdministratorRepo.save(admin);}
 
     public CompanyAdministrator getById(Long id){return companyAdministratorRepo.findById(id).get();}
+
+    public CompanyAdministrator findAvailableAdministrator(LocalTime startTime, LocalTime endTime, LocalDate date){
+        return companyAdministratorRepo.findAvailableAdministrator(date,startTime,endTime);
+    }
 
     public CompanyAdministrator update(CompanyAdministrator admin, Long id){
         CompanyAdministrator old= companyAdministratorRepo.findById(id).get();

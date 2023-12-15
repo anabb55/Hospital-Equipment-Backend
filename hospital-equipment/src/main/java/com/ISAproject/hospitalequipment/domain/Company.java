@@ -9,6 +9,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,7 +19,7 @@ import java.util.Set;
 @Setter
 @Table(name = "Company")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Company.class)
-public class Company {
+public class Company implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -28,7 +29,7 @@ public class Company {
     @NotNull
     private String name;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @NotNull
     private Address address;
 
@@ -46,22 +47,24 @@ public class Company {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
     private LocalTime workEndTime;
 
-    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "company", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<CompanyAdministrator> administrators = new HashSet<CompanyAdministrator>();
 
-    @OneToMany(mappedBy = "company", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<EquipmentStock> equipmentStocks = new HashSet<EquipmentStock>();
 
     @OneToMany(mappedBy = "company", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Appointment> appointments = new HashSet<Appointment>();
 
-    public Company(String name, String description, Address address, Double grade, LocalTime workStartTime, LocalTime workEndTime) {
+    public Company(Long id, String name, Address address, String description, Double grade, LocalTime workStartTime, LocalTime workEndTime) {
+        this.id = id;
         this.name = name;
+        this.address = address;
         this.description = description;
         this.grade = grade;
-        this.address = address;
         this.workStartTime = workStartTime;
         this.workEndTime = workEndTime;
+
     }
 
     public Company() {

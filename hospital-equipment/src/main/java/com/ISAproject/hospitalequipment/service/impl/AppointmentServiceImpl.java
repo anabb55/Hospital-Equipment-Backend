@@ -1,10 +1,11 @@
 package com.ISAproject.hospitalequipment.service.impl;
 
-import com.ISAproject.hospitalequipment.domain.Appointment;
-import com.ISAproject.hospitalequipment.domain.Company;
+import com.ISAproject.hospitalequipment.domain.*;
 import com.ISAproject.hospitalequipment.domain.enums.AppointmentStatus;
+import com.ISAproject.hospitalequipment.dto.AppointmentDTO;
 import com.ISAproject.hospitalequipment.repository.AppointmentRepo;
 import com.ISAproject.hospitalequipment.service.AppointmentService;
+import com.ISAproject.hospitalequipment.service.CompanyAdministratorService;
 import com.ISAproject.hospitalequipment.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,56 +25,90 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Autowired
     private CompanyService companyService;
 
+    @Autowired
+    private CompanyAdministratorService companyAdministratorService;
 
 
-
-
-    public List<Appointment> findFreeAppointmentsByCompanyAndDate(Long companyId, LocalDate date){
-        return appointmentRepo.findFreeAppointmentsByCompanyAndDate(companyId,date);
+    public List<Appointment> findFreeAppointmentsByCompanyAndDate(Long companyId, LocalDate date) {
+        return appointmentRepo.findFreeAppointmentsByCompanyAndDate(companyId, date);
 
 
     }
 
-    public List<Appointment>findAll()
-    {
+    public Appointment createExtraOrdinaryAppointment(Appointment appointment, AppointmentDTO appointmentDTO){
+
+
+
+
+        return appointmentRepo.save(appointment);
+
+    }
+
+    public CompanyAdministrator findAvailableAdministrator(LocalTime startTime, LocalTime endTime, LocalDate date){
+        return  companyAdministratorService.findAvailableAdministrator(startTime,endTime,date);
+    }
+
+    public Appointment save(Appointment appointment) {
+        return appointmentRepo.save(appointment);
+    }
+
+    public List<Appointment> findAll() {
         return appointmentRepo.findAll();
     }
 
-    public List<Appointment>generateRandomAppointments(Long companyId, LocalDate date) {
-        System.out.println("In service: " + companyId + " and date: " + date);
+    public List<Appointment> findTakenAppointmentsByCompanyAndDate(Long companyId, LocalDate date) {
+        return appointmentRepo.findTakenAppointmentsByCompanyAndDate(companyId, date);
+    }
+    public long getMaxAppointmentId() {
+        List<Appointment> allAppointments = findAll();
 
-        List<Appointment> existingAppointments = findFreeAppointmentsByCompanyAndDate(companyId, date);
-        List<Appointment> allAppointments=findAll();
-
-                 long maxId = allAppointments.stream()
+        return allAppointments.stream()
                 .mapToLong(Appointment::getId)
                 .max()
                 .orElse(1);
-                 maxId++;
-        if (existingAppointments.isEmpty()) {
+    }
+    public long increaseAppointmentId(){
+        long id=getMaxAppointmentId();
+        return ++id;
+    }
 
-            List<Appointment> generatedAppointments = new ArrayList<>();
-            Company company = companyService.getById(companyId);
-            LocalTime startWorkingTime = company.getWorkStartTime();
-            LocalTime endWorkingTime = company.getWorkEndTime();
-            int duration = 160;
 
-            while (startWorkingTime.plusMinutes(duration).isBefore(endWorkingTime)) {
+
+
+    public List<Appointment> generateRandomAppointments(Long companyId, LocalDate date) {
+        List<Appointment> takenAppointments = findTakenAppointmentsByCompanyAndDate(companyId, date);
+        long nextId=increaseAppointmentId();
+        List<Appointment> generatedAppointments = new ArrayList<>();
+        Company company = companyService.getById(companyId);
+        LocalTime startWorkingTime = company.getWorkStartTime();
+        LocalTime endWorkingTime = company.getWorkEndTime();
+        int duration = 160;
+
+        List<LocalTime> takenTimes = takenAppointments.stream()
+                .map(Appointment::getStartTime)
+                .toList();
+
+        while (startWorkingTime.plusMinutes(duration).isBefore(endWorkingTime)) {
+            LocalTime currentStartTime = startWorkingTime;
+            LocalTime currentEndTime = startWorkingTime.plusMinutes(duration);
+
+            boolean isTimeSlotFree = takenTimes.stream()
+                    .noneMatch(takenTime -> takenTime.isBefore(currentEndTime) && takenTime.plusMinutes(duration).isAfter(currentStartTime));
+
+            if (isTimeSlotFree) {
                 Appointment appointment = new Appointment();
-                appointment.setId(maxId);
+                appointment.setId(nextId);
                 appointment.setDate(date);
-                appointment.setStartTime(startWorkingTime);
+                appointment.setStartTime(currentStartTime);
                 appointment.setDuration(duration);
-                appointment.setAppointmentStatus(AppointmentStatus.valueOf("EXTRAORDINARY"));
+                appointment.setAppointmentStatus(AppointmentStatus.EXTRAORDINARY);
                 appointment.setCompany(company);
-
                 generatedAppointments.add(appointment);
 
-                startWorkingTime = startWorkingTime.plusMinutes(duration);
             }
-            return generatedAppointments;
-        } else
-            return existingAppointments;
 
+            startWorkingTime = startWorkingTime.plusMinutes(duration);
+        }
+        return generatedAppointments;
     }
 }

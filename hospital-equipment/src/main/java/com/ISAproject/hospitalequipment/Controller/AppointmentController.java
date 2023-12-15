@@ -1,15 +1,24 @@
 package com.ISAproject.hospitalequipment.Controller;
 
 import com.ISAproject.hospitalequipment.domain.Appointment;
+import com.ISAproject.hospitalequipment.domain.CompanyAdministrator;
+import com.ISAproject.hospitalequipment.domain.RegisteredUser;
+import com.ISAproject.hospitalequipment.domain.User;
+import com.ISAproject.hospitalequipment.domain.enums.AppointmentStatus;
 import com.ISAproject.hospitalequipment.dto.AppointmentDTO;
+import com.ISAproject.hospitalequipment.dto.UserDTO;
 import com.ISAproject.hospitalequipment.service.AppointmentService;
+import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,15 +31,36 @@ public class AppointmentController {
     @GetMapping("/generateRandomAppointments/{companyId}")
     public ResponseEntity<List<AppointmentDTO>> generateRandomAppointments(
             @PathVariable Long companyId,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date
+            @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date
     ) {
-        List<Appointment> generatedAppointments = appointmentService.generateRandomAppointments(companyId, date);
+        Instant instant = date.toInstant();
+        ZoneId zoneId = ZoneId.systemDefault();
+        LocalDate localDate = instant.atZone(zoneId).toLocalDate();
+
+        List<Appointment> generatedAppointments = appointmentService.generateRandomAppointments(companyId, localDate);
 
         List<AppointmentDTO> appointmentDTOs = generatedAppointments.stream()
                 .map(AppointmentDTO::new)
                 .collect(Collectors.toList());
 
         return new ResponseEntity<>(appointmentDTOs, HttpStatus.OK);
+    }
+
+    @PostMapping(value="/create")
+    public ResponseEntity<AppointmentDTO> saveAppointment(@RequestBody AppointmentDTO appointmentDTO) {
+
+        Appointment appointment = new Appointment();
+        appointment.setId(appointmentDTO.getId());
+        appointment.setDate(appointmentDTO.getDate());
+        appointment.setAppointmentStatus(AppointmentStatus.TAKEN);
+        appointment.setDuration(appointmentDTO.getDuration());
+        CompanyAdministrator administrator = appointmentService.findAvailableAdministrator(appointmentDTO.getCompany().getWorkStartTime(), appointmentDTO.getCompany().getWorkEndTime(), appointmentDTO.getDate());
+        appointment.setAdministrator(administrator);
+        appointment.setCompany(appointmentDTO.getCompany());
+        appointment.setStartTime(appointmentDTO.getStartTime());
+
+        appointment = appointmentService.save(appointment);
+        return new ResponseEntity<>(new AppointmentDTO(appointment), HttpStatus.CREATED);
     }
 }
 

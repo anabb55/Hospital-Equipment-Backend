@@ -68,9 +68,9 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
     public boolean existsById(Integer id)
     {
         if(id!=null)
-            {
+
                return  registeredUserRepo.existsById(Long.valueOf(id));
-            }
+
 
         return false;
     }
