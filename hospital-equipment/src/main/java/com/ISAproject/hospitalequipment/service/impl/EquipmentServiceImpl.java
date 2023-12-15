@@ -24,4 +24,6 @@ public class EquipmentServiceImpl implements EquipmentService {
     public List<Equipment> findAvailableEquipmentForCompany(Long companyId){
         return this.equipmentRepo.findMissingEquipmentForCompany(companyId);
     }
+
+
 }

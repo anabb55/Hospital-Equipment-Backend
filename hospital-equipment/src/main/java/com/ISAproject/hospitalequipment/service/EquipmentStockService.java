@@ -11,4 +11,7 @@ public interface EquipmentStockService {
 
     public List<Equipment> findEquipmentsByCompany(Long companyId);
 
+    Integer findEquipmentAmountByCompany(Long companyId,Long equipmentId);
+
+    public void updateAmount(Long equipmentId, Long companyId, int newAmount);
 }
