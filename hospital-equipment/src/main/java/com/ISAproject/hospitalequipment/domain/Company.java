@@ -11,6 +11,7 @@ import lombok.Setter;
 
 import java.time.LocalTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -46,8 +47,11 @@ public class Company {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
     private LocalTime workEndTime;
 
+
     @OneToMany(mappedBy = "company", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<CompanyAdministrator> administrators = new HashSet<CompanyAdministrator>();
+
+
 
     @OneToMany(mappedBy = "company", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<EquipmentStock> equipmentStocks = new HashSet<EquipmentStock>();
@@ -55,13 +59,23 @@ public class Company {
     @OneToMany(mappedBy = "company", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Appointment> appointments = new HashSet<Appointment>();
 
+
     public Company(String name, String description, Address address, Double grade, LocalTime workStartTime, LocalTime workEndTime) {
+
         this.name = name;
         this.description = description;
         this.grade = grade;
         this.address = address;
         this.workStartTime = workStartTime;
         this.workEndTime = workEndTime;
+    }
+
+    public Company(String name, String description, Address address, Double grade, Set<CompanyAdministrator> admins) {
+        this.name = name;
+        this.description = description;
+        this.grade = grade;
+        this.address = address;
+        this.administrators =  admins;
     }
 
     public Company() {
