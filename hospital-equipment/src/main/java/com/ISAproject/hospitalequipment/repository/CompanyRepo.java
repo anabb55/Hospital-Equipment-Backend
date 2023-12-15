@@ -10,17 +10,11 @@ import java.util.List;
 
 @Repository
 public interface CompanyRepo extends JpaRepository<Company,Long> {
-
-
-
     List<Company> findAll();
     Company save(Company company);
 
-
-
     @Query("SELECT cp FROM Company cp JOIN cp.administrators a WHERE a.id = :administratorId")
     List<Company> findCompaniesByAdministrators(@Param("administratorId")int id);
-
 
     /* nisam sigurna da li ce raditi
     List<Company> findCompaniesByEquipment(Equipment equipmentId);

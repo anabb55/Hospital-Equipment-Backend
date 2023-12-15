@@ -1,5 +1,6 @@
 package com.ISAproject.hospitalequipment.domain;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.ISAproject.hospitalequipment.domain.enums.AppointmentStatus;
 import jakarta.persistence.*;
@@ -36,7 +37,8 @@ public class Appointment {
     public LocalDate date;
 
     @NotNull
-    public Integer duration;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+    public LocalTime duration;
 
     @NotNull
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
@@ -47,18 +49,19 @@ public class Appointment {
 //    private CompanyProfile company;
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="company_id")
-    private Company company;
+   // @ManyToOne(fetch = FetchType.EAGER)
+    //@JoinColumn(name="company_id")
+    //private Company company;
 
     @Enumerated(EnumType.STRING)
     private AppointmentStatus appointmentStatus;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "administrator_id")
     private CompanyAdministrator administrator;
 
     @OneToOne(mappedBy = "appointment",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     private Reservation reservation;
     public Appointment() {
 
