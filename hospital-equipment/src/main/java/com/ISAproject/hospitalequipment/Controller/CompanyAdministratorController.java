@@ -35,9 +35,13 @@ public class CompanyAdministratorController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<CompanyAdministrator> createAdministrator(@RequestBody CompanyAdministrator administrator) {
+    public ResponseEntity<CompanyAdministratorDTO> createAdministrator(@RequestBody CompanyAdministrator administrator) {
         CompanyAdministrator createdAdministrator = companyAdministratorService.save(administrator);
-        return new ResponseEntity<>(createdAdministrator, HttpStatus.CREATED);
+        if (createdAdministrator == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(new CompanyAdministratorDTO(createdAdministrator), HttpStatus.OK);
     }
 
 
@@ -55,9 +59,13 @@ public class CompanyAdministratorController {
 
     @CrossOrigin(origins = "*")
     @PutMapping("/update/{id}")
-    public ResponseEntity<CompanyAdministrator> update(@PathVariable Long id, @RequestBody CompanyAdministrator admin) {
+    public ResponseEntity<CompanyAdministratorDTO> update(@PathVariable Long id, @RequestBody CompanyAdministrator admin) {
         CompanyAdministrator updatedAdmin = companyAdministratorService.update(admin, id);
-        return new ResponseEntity<>(updatedAdmin, HttpStatus.OK);
+        if (updatedAdmin == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(new CompanyAdministratorDTO(updatedAdmin), HttpStatus.OK);
 
     }
 
