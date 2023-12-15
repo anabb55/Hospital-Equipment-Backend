@@ -71,8 +71,10 @@ public class WebSecurityConfig {
         http.exceptionHandling(configurer -> configurer.authenticationEntryPoint(restAuthenticationEntryPoint));
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("api/authentication/**").permitAll()
+                        .requestMatchers("api/companyProfile/**").permitAll()
+                        .requestMatchers("api/registeredUsers/**").hasRole("REGISTERED_USER")
                         .requestMatchers("api/users/**").hasRole("REGISTERED_USER")
-                        .requestMatchers("api/companyProfile/**").hasRole("REGISTERED_USER")
+
                 .anyRequest().authenticated())
 
                 .cors(withDefaults())

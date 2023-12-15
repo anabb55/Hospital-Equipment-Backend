@@ -62,14 +62,14 @@ public class TokenUtils {
 
 
   //generisanje tokena za usera sa prosledjenim username-om
-    public String generateToken(String username, List<Role> roles) {
+    public String generateToken(String username, List<String> roles, long id) {
         //User user = userRepo.findByUsername(username);
         return Jwts.builder()
                 .setIssuer(APP_NAME)
                 .setSubject(username)
                 .setAudience(generateAudience())
                 .claim("role", roles)
-                //.claim("id", user.getId())
+                .claim("id", id)
                 .setIssuedAt(new Date())
                 .setExpiration(generateExpirationDate())
                 .signWith(SIGNATURE_ALGORITHM, SECRET).compact();

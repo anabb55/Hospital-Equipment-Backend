@@ -1,4 +1,5 @@
 package com.ISAproject.hospitalequipment.Controller;
+import com.ISAproject.hospitalequipment.domain.Role;
 import com.ISAproject.hospitalequipment.dto.LoginDTO;
 import com.ISAproject.hospitalequipment.dto.UserTokenState;
 import com.ISAproject.hospitalequipment.util.TokenUtils;
@@ -24,6 +25,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/authentication")
@@ -54,7 +57,14 @@ public class AuthenticationController {
 
 
         User user = (User) authentication.getPrincipal();
-        String jwt = tokenUtils.generateToken(user.getUsername(), user.getRoles());
+        List<Role> roles = user.getRoles();
+        List<String> rolesString = new ArrayList<>();
+
+        for (Role role : roles){
+            rolesString.add(role.getName());
+        }
+
+        String jwt = tokenUtils.generateToken(user.getUsername(),rolesString, user.getId());
         int expiresIn = tokenUtils.getExpiredIn();
 
 
