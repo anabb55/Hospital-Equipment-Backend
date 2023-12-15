@@ -2,7 +2,9 @@ package com.ISAproject.hospitalequipment.dto;
 
 import com.ISAproject.hospitalequipment.domain.Company;
 import com.ISAproject.hospitalequipment.domain.CompanyAdministrator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) // Ignoriše Hibernate specifične propertije
 public class CompanyAdministratorDTO {
 
     private Long id;
@@ -20,4 +22,5 @@ public class CompanyAdministratorDTO {
         this.id = id;
         this.company = company;
     }
+
 }
