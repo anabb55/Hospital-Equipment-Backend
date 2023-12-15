@@ -1,7 +1,6 @@
 package com.ISAproject.hospitalequipment.Controller;
 
 import com.ISAproject.hospitalequipment.domain.Address;
-import com.ISAproject.hospitalequipment.domain.CompanyProfile;
 import com.ISAproject.hospitalequipment.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

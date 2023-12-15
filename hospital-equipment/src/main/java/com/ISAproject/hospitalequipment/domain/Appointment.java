@@ -1,14 +1,17 @@
 package com.ISAproject.hospitalequipment.domain;
-
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.ISAproject.hospitalequipment.domain.enums.AppointmentStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Getter
 @Setter
@@ -22,25 +25,45 @@ public class Appointment {
     @NotNull
     public long id;
 
-    @NotEmpty
-    public String adminName;
+//    @NotEmpty
+//    public String adminName;
+//
+//    @NotEmpty
+//    public String adminLastName;
 
     @NotEmpty
-    public String adminLastName;
-
-    @NotEmpty
-    public Date date;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    public LocalDate date;
 
     @NotNull
     public Integer duration;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="company_profile_id")
-    private CompanyProfile company;
+    @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+    private LocalTime startTime;
 
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name="company_profile_id")
+//    private CompanyProfile company;
+
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="company_id")
+    private Company company;
+
+    @Enumerated(EnumType.STRING)
+    private AppointmentStatus appointmentStatus;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "administrator_id")
+    private CompanyAdministrator administrator;
+
+    @OneToOne(mappedBy = "appointment",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Reservation reservation;
     public Appointment() {
 
     }
 
 
 }
+
