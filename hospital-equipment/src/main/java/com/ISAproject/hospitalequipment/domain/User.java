@@ -11,6 +11,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
@@ -21,7 +23,7 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Getter
 @Setter
-public class User {
+public class User implements UserDetails {
 
     private static final long serialVersionUID = 1L;
 
@@ -32,6 +34,10 @@ public class User {
 
     @Email(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
     private String email;
+
+    @NotEmpty
+    private String username;
+
 
     @NotNull
     @Size(min=6, max=20)
@@ -59,8 +65,6 @@ public class User {
 
 
 
-
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
@@ -71,7 +75,7 @@ public class User {
 
 
 
-    public User(Long id, String email, String password, String firstName, String lastName, String phoneNumber, String occupation, boolean enabled, Address address, String companyName) {
+    public User(Long id, String email, String password, String username, String  firstName, String lastName, String phoneNumber, String occupation, boolean enabled, Address address, String companyName) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -81,6 +85,7 @@ public class User {
         this.occupation = occupation;
         this.enabled = enabled;
         this.address = address;
+        this.username = username;
 
     }
 
@@ -99,6 +104,32 @@ public class User {
         this.occupation = occupation;
         this.enabled = enabled;
         this.address = address;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @JsonIgnore
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+    @JsonIgnore
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+    @JsonIgnore
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
     }
 }
 

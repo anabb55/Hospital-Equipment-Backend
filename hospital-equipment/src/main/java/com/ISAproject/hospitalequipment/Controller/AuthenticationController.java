@@ -1,4 +1,7 @@
 package com.ISAproject.hospitalequipment.Controller;
+import com.ISAproject.hospitalequipment.dto.LoginDTO;
+import com.ISAproject.hospitalequipment.dto.UserTokenState;
+import com.ISAproject.hospitalequipment.util.TokenUtils;
 
 import com.ISAproject.hospitalequipment.domain.RegisteredUser;
 import com.ISAproject.hospitalequipment.domain.User;
@@ -13,10 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -26,11 +30,36 @@ import java.io.UnsupportedEncodingException;
 public class AuthenticationController {
 
     @Autowired
+    private TokenUtils tokenUtils;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
     private UserService userService;
 
     @Autowired
     private RegisteredUserService registeredUserService;
 
+
+    @PostMapping("/login")
+    public ResponseEntity<UserTokenState> createAuthenticationToken(
+            @RequestBody LoginDTO authenticationRequest, HttpServletResponse response) {
+
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                authenticationRequest.getUsername(), authenticationRequest.getPassword()));
+
+        //ubacuje se korisnik u trenutni security context
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+
+        User user = (User) authentication.getPrincipal();
+        String jwt = tokenUtils.generateToken(user.getUsername(), user.getRoles());
+        int expiresIn = tokenUtils.getExpiredIn();
+
+
+        return ResponseEntity.ok(new UserTokenState(jwt, expiresIn));
+    }
 
     @RequestMapping(value="/signUp", method = RequestMethod.POST)
     public ResponseEntity<User> signUp(@RequestBody UserDTO userDTO) throws MessagingException {
