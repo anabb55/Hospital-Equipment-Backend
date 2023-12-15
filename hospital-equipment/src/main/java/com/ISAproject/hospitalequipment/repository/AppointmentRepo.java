@@ -14,7 +14,7 @@ import java.util.List;
 public interface AppointmentRepo extends JpaRepository<Appointment,Long> {
     //Ana ovo je metoda za tvoj deo!!
     @Query("SELECT a FROM Appointment a " +
-            "WHERE a.company.id = :companyId " +
+            "WHERE a.administrator.company.id = :companyId " +
             "AND a.date = :date " +
             "AND (a.appointmentStatus = 'PREDEFINED')")
     List<Appointment> findFreeAppointmentsByCompanyAndDate(
@@ -23,7 +23,7 @@ public interface AppointmentRepo extends JpaRepository<Appointment,Long> {
     );
 
     @Query("SELECT a FROM Appointment a " +
-            "WHERE a.company.id = :companyId " +
+            "WHERE a.administrator.company.id = :companyId " +
             "AND a.date = :date " +
             "AND (a.appointmentStatus = 'TAKEN' )")
     List<Appointment> findTakenAppointmentsByCompanyAndDate(

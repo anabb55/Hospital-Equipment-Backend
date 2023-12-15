@@ -12,6 +12,7 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.time.LocalTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -47,14 +48,21 @@ public class Company implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
     private LocalTime workEndTime;
 
+
+
+
+
     @OneToMany(mappedBy = "company", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<CompanyAdministrator> administrators = new HashSet<CompanyAdministrator>();
 
-    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+
+
+    @OneToMany(mappedBy = "company", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<EquipmentStock> equipmentStocks = new HashSet<EquipmentStock>();
 
-    @OneToMany(mappedBy = "company", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<Appointment> appointments = new HashSet<Appointment>();
+   // @OneToMany(mappedBy = "company", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    //private Set<Appointment> appointments = new HashSet<Appointment>();
+
 
     public Company(Long id, String name, Address address, String description, Double grade, LocalTime workStartTime, LocalTime workEndTime) {
         this.id = id;
@@ -66,6 +74,8 @@ public class Company implements Serializable {
         this.workEndTime = workEndTime;
 
     }
+
+
 
     public Company() {
     }

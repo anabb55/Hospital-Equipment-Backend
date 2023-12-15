@@ -37,7 +37,8 @@ public class Appointment {
     public LocalDate date;
 
     @NotNull
-    public Integer duration;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+    public LocalTime duration;
 
     @NotNull
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
@@ -48,9 +49,9 @@ public class Appointment {
 //    private CompanyProfile company;
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="company_id")
-    private Company company;
+   // @ManyToOne(fetch = FetchType.EAGER)
+    //@JoinColumn(name="company_id")
+    //private Company company;
 
     @Enumerated(EnumType.STRING)
     private AppointmentStatus appointmentStatus;

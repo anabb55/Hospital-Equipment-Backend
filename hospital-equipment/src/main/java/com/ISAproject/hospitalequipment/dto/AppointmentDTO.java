@@ -6,6 +6,7 @@ import com.ISAproject.hospitalequipment.domain.CompanyAdministrator;
 import com.ISAproject.hospitalequipment.domain.enums.AppointmentStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,12 +22,12 @@ public class AppointmentDTO {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate date;
 
-    private Integer duration;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+    public LocalTime duration;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
     private LocalTime startTime;
 
-    private Company company;
 
     private AppointmentStatus appointmentStatus;
     private CompanyAdministratorDTO companyAdministrator;
@@ -37,9 +38,7 @@ public class AppointmentDTO {
         this.date = appointment.getDate();
         this.duration = appointment.getDuration();
         this.startTime = appointment.getStartTime();
-        if (appointment.getCompany() != null) {
-            this.company = appointment.getCompany();
-        }
+
         this.appointmentStatus=appointment.getAppointmentStatus();
         if (appointment.getAdministrator() != null) {
 

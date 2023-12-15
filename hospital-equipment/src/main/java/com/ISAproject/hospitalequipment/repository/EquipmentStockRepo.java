@@ -15,4 +15,13 @@ public interface EquipmentStockRepo extends JpaRepository<EquipmentStock,Long> {
     List<EquipmentStock> findByEquipment(@Param("equipmentId") Long equipmentId);
 */
 
+    @Query("SELECT es.equipment FROM EquipmentStock es WHERE es.company.id = :companyId")
+    List<Equipment> findEquipmentByCompanyId(@Param("companyId") Long companyId);
+
+    @Query("SELECT es.amount FROM EquipmentStock es WHERE es.company.id = :companyId and es.equipment.id = :equipmentId")
+    Integer findAmountByCompanyAndEquipment(@Param("companyId") Long companyId,@Param("equipmentId") Long equipmentId);
+
+    @Query("SELECT es FROM EquipmentStock es WHERE es.equipment.id = :equipmentId AND es.company.id = :companyId")
+    EquipmentStock findByEquipmentIdAndCompanyId(@Param("equipmentId") Long equipmentId, @Param("companyId") Long companyId);
+
 }

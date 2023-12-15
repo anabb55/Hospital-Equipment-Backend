@@ -82,18 +82,17 @@ public class AppointmentServiceImpl implements AppointmentService {
         Company company = companyService.getById(companyId);
         LocalTime startWorkingTime = company.getWorkStartTime();
         LocalTime endWorkingTime = company.getWorkEndTime();
-        int duration = 160;
-
+        LocalTime duration = LocalTime.of(2, 30);
         List<LocalTime> takenTimes = takenAppointments.stream()
                 .map(Appointment::getStartTime)
                 .toList();
 
-        while (startWorkingTime.plusMinutes(duration).isBefore(endWorkingTime)) {
+        while (startWorkingTime.plusHours(2).isBefore(endWorkingTime)) {
             LocalTime currentStartTime = startWorkingTime;
-            LocalTime currentEndTime = startWorkingTime.plusMinutes(duration);
+            LocalTime currentEndTime = startWorkingTime.plusHours(2);
 
             boolean isTimeSlotFree = takenTimes.stream()
-                    .noneMatch(takenTime -> takenTime.isBefore(currentEndTime) && takenTime.plusMinutes(duration).isAfter(currentStartTime));
+                    .noneMatch(takenTime -> takenTime.isBefore(currentEndTime) && takenTime.plusHours(2).isAfter(currentStartTime));
 
             if (isTimeSlotFree) {
                 Appointment appointment = new Appointment();
@@ -102,12 +101,11 @@ public class AppointmentServiceImpl implements AppointmentService {
                 appointment.setStartTime(currentStartTime);
                 appointment.setDuration(duration);
                 appointment.setAppointmentStatus(AppointmentStatus.EXTRAORDINARY);
-                appointment.setCompany(company);
                 generatedAppointments.add(appointment);
 
             }
 
-            startWorkingTime = startWorkingTime.plusMinutes(duration);
+            startWorkingTime = startWorkingTime.plusHours(2);
         }
         return generatedAppointments;
     }
