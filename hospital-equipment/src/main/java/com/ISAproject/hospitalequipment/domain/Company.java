@@ -30,7 +30,7 @@ public class Company implements Serializable {
     @NotNull
     private String name;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @NotNull
     private Address address;
 

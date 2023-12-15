@@ -43,17 +43,27 @@ public class CompanyController {
 
 
     @GetMapping("/byAdmin/{id}")
-    public ResponseEntity<List<Company>> getByAdministrator(@PathVariable int id){
+    public ResponseEntity<List<CompanyDTO>> getByAdministrator(@PathVariable int id){
         List<Company> companies= companyService.getByAdministrator(id);
-        return new ResponseEntity<>(companies,HttpStatus.OK);
+        List<CompanyDTO> companyDTOs = new ArrayList<>();
+
+        for (Company s : companies) {
+            companyDTOs.add(new CompanyDTO(s));
+        }
+
+        return new ResponseEntity<>(companyDTOs, HttpStatus.OK);
     }
 
 
     @CrossOrigin(origins = "*")
     @PutMapping("/update/{id}")
-    public ResponseEntity<Company> update(@PathVariable Long id, @RequestBody Company company) {
+    public ResponseEntity<CompanyDTO> update(@PathVariable Long id, @RequestBody Company company) {
         Company updatedCompany = companyService.update(company, id);
-        return new ResponseEntity<>(updatedCompany, HttpStatus.OK);
+        if (updatedCompany == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(new CompanyDTO(updatedCompany), HttpStatus.OK);
 
     }
 
