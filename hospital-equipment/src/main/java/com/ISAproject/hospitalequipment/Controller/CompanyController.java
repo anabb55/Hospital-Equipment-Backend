@@ -54,6 +54,13 @@ public class CompanyController {
         return new ResponseEntity<>(companyDTOs, HttpStatus.OK);
     }
 
+    @GetMapping("/byEquipment/{equipmentId}")
+    public List<Company> getByEquipment(@PathVariable Long equipmentId){
+        List<Company> companies= companyService.findCompaniesByEquipment(equipmentId);
+        return companies;
+    }
+
+
 
     @CrossOrigin(origins = "*")
     @PutMapping("/update/{id}")

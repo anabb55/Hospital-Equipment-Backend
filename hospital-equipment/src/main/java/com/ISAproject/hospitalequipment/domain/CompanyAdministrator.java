@@ -30,5 +30,15 @@ public class CompanyAdministrator extends User{
     public CompanyAdministrator(){}
 
 
+    public CompanyAdministrator(String email, String password, String firstName, String lastName, String phoneNumber, String occupation, boolean enabled, Address address, Company company) {
+        super(email, password, firstName, lastName, phoneNumber, occupation, enabled, address);
+        this.company = company;
+    }
+    public CompanyAdministrator(String email, String password, String firstName, String lastName, String phoneNumber, String occupation, boolean enabled, Address address) {
+        super(email, password, firstName, lastName, phoneNumber, occupation, enabled, address);
+    }
+    public CompanyAdministrator(Long id,String email, String password, String firstName, String lastName, String phoneNumber, String occupation, Address address,Company company) {
+        super(email, password, firstName, lastName, phoneNumber, occupation, address);
+    }
 
 }

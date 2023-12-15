@@ -21,11 +21,12 @@ public class EquipmentServiceImpl implements EquipmentService {
         return equipmentRepo.findEquipmentByName(name);
     }
 
-    public List<Equipment> findAvailableEquipmentForCompany(Long companyId){
+    public List<Equipment> findAvailableEquipmentForCompany(Long companyId) {
         return this.equipmentRepo.findMissingEquipmentForCompany(companyId);
     }
-    public List<Equipment> findAll(){
+
+    @Override
+    public List<Equipment> findAll() {
         return equipmentRepo.findAll();
     }
-
 }

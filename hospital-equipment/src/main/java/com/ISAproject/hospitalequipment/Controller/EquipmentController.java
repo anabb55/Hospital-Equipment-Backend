@@ -27,11 +27,7 @@ public class EquipmentController {
         List<Equipment> equipmentsByName = equipmentService.findEquipmentByName(name);
         return new ResponseEntity<>(equipmentsByName, HttpStatus.OK) ;
     }
-    @GetMapping(value = "/findAll")
-    public ResponseEntity<List<Equipment>> findAll(){
-        List<Equipment> equipments = equipmentService.findAll();
-        return new ResponseEntity<>(equipments, HttpStatus.OK) ;
-    }
+
 
     @GetMapping(value = "/findAvailable/{id}")
     public ResponseEntity<List<Equipment>> findAvailableEquipmentForCompany( @PathVariable("id") Long companyId){
@@ -39,5 +35,11 @@ public class EquipmentController {
         return new ResponseEntity<>(availableEquipment, HttpStatus.OK) ;
     }
 
+
+    @GetMapping(value = "/findAll")
+    public ResponseEntity<List<Equipment>> findAll(){
+        List<Equipment> equipments = equipmentService.findAll();
+        return new ResponseEntity<>(equipments, HttpStatus.OK) ;
+    }
 
 }

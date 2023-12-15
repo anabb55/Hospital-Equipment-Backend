@@ -37,7 +37,7 @@ VALUES (3, 'SYSTEM_ADMIN');
 
 INSERT INTO users(
      email, enabled, first_name, last_name, occupation, password, phone_number, address_id)
-VALUES ( 'taraboskovic066@gmail.com', false, 'Tara', 'Boskovic', 'student', '123', '066-2678-772', 1);
+VALUES ( 'taraboskovic066@gmail.com', false, 'Tara', 'Boskovic', 'student', '123', '066-2678-772',1);
 
 INSERT INTO users(
      email, enabled, first_name, last_name, occupation, password, phone_number, address_id)
@@ -139,20 +139,20 @@ INSERT INTO company_administrators(
 VALUES (3,6);
 
 INSERT INTO equipments(
-     amount, grade, description, name)
-VALUES ( 50, 5, 'Strong', 'Scissors');
+     amount, grade, description, name,type)
+VALUES ( 50, 5, 'Metal', 'Scissors','Strong');
 
 INSERT INTO equipments(
-     amount, grade, description, name)
-VALUES ( 2000, 4, 'Medical', 'Gloves');
+     amount, grade, description, name,type)
+VALUES ( 2000, 4, 'Medical', 'Gloves','Type1');
 
 INSERT INTO equipments(
-     amount, grade, description, name)
-VALUES ( 500, 5, 'Cotton', 'Coat');
+     amount, grade, description, name,type)
+VALUES ( 500, 5, 'Cotton', 'Coat','White');
 
 INSERT INTO equipments(
-     amount, grade, description, name)
-VALUES ( 500, 5, 'elastic', 'Bandage');
+     amount, grade, description, name,type)
+VALUES ( 500, 5, 'elastic', 'Bandage','Hard');
 
 
 INSERT INTO equipment_stock(
@@ -184,5 +184,38 @@ VALUES ('2023-12-26', '01:00:00','08:00:00', 2,'PREDEFINED');
 
 INSERT INTO appointments(date, duration, start_time, administrator_id, appointment_status)
 VALUES ('2023-12-27', '01:30:00','08:00:00', 2, 'PREDEFINED');
+
+
+INSERT INTO public.qrcode(
+	id, qr_code_status)
+	VALUES (1, 'NEW');
+INSERT INTO public.qrcode(
+	id, qr_code_status)
+	VALUES (2, 'NEW');
+
+
+
+
+
+INSERT INTO public.reservations(
+	appointment_id, id, penalty_points, qr_cod_id, reservation_status)
+	VALUES (1, 1, 5, 1, 'TAKEN');
+
+INSERT INTO public.reservations(
+	appointment_id, id, penalty_points, qr_cod_id, reservation_status)
+	VALUES (2, 2, 3, 2, 'TAKEN');
+
+
+
+
+INSERT INTO public.reservation_equipment_stock(
+	amount, equipment_stock_id, id, reservation_id)
+	VALUES (2, 1, 1, 1);
+
+INSERT INTO public.reservation_equipment_stock(
+	amount, equipment_stock_id, id, reservation_id)
+	VALUES (4, 2, 2, 2);
+
+
 
 
