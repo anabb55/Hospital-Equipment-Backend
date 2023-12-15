@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.Columns;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="equipment_stock")
@@ -15,16 +17,22 @@ public class EquipmentStock {
 
 
     @JoinColumn(name = "equipment_id")
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.EAGER)
+
     Equipment equipment;
 
 
     @JoinColumn(name="company_id")
-    @ManyToOne(fetch = FetchType.EAGER)
+
+    @ManyToOne(fetch=FetchType.EAGER)
+
     Company company;
 
     @Column(name = "amount")
     int amount;
+
+    @OneToMany(mappedBy = "equipmentStock", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<ReservationEquipmentStock> reservationEquipmentStocks = new HashSet<ReservationEquipmentStock>();
 
     public EquipmentStock(Equipment equipment, Company company, int amount) {
         this.equipment = equipment;
