@@ -26,4 +26,5 @@ public interface CompanyService {
     public Company getById(Long id);
 
     List<Equipment> findEquipmentByCompanyIdAndName(Long companyId,String name);
+
 }

@@ -2,12 +2,16 @@ package com.ISAproject.hospitalequipment.Controller;
 
 import com.ISAproject.hospitalequipment.domain.Company;
 import com.ISAproject.hospitalequipment.domain.Equipment;
+import com.ISAproject.hospitalequipment.domain.RegisteredUser;
+import com.ISAproject.hospitalequipment.dto.CompanyDTO;
+import com.ISAproject.hospitalequipment.dto.RegisterUserDTO;
 import com.ISAproject.hospitalequipment.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,9 +22,17 @@ public class CompanyController {
     private CompanyService companyService;
 
     @GetMapping("/")
-    public List<Company> getAllCompanyProfiles(){
-        return companyService.getAll();
+    public ResponseEntity<List<CompanyDTO>> getAllCompanyProfiles(){
+        List<Company>companies=companyService.getAll();
+        List<CompanyDTO> companyDTOs = new ArrayList<>();
+
+        for (Company s : companies) {
+            companyDTOs.add(new CompanyDTO(s));
+        }
+
+        return new ResponseEntity<>(companyDTOs, HttpStatus.OK);
     }
+
 
 
     @PostMapping("/save")
@@ -54,9 +66,18 @@ public class CompanyController {
 
     }
     */
+
+
     @GetMapping("/getById/{id}")
-    public Company getById(@PathVariable Long id){
-        return companyService.getById(id);
+    public ResponseEntity<CompanyDTO> getCompany(@PathVariable Long id) {
+
+        Company company = companyService.getById(id);
+
+        if (company == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(new CompanyDTO(company), HttpStatus.OK);
     }
 
     @GetMapping("/search")

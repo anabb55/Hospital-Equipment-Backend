@@ -176,13 +176,13 @@ INSERT INTO equipment_stock(
 VALUES ( 200,3,2);
 
 
-INSERT INTO appointments(date, duration, start_time, administrator_id, company_id, appointment_status)
-VALUES ('2023-12-22', 180,'08:00:00', 1, 1, 'PREDEFINED');
+INSERT INTO appointments(date, duration, start_time, administrator_id,appointment_status)
+VALUES ('2023-12-22', '02:00:00','08:00:00', 1, 'TAKEN');
 
-INSERT INTO appointments(date, duration, start_time, administrator_id, company_id, appointment_status)
-VALUES ('2023-12-26', 180,'08:00:00', 2, 2, 'PREDEFINED');
+INSERT INTO appointments(date, duration, start_time, administrator_id,  appointment_status)
+VALUES ('2023-12-26', '01:00:00','08:00:00', 2,'PREDEFINED');
 
-INSERT INTO appointments(date, duration, start_time, administrator_id, company_id, appointment_status)
-VALUES ('2023-12-27', 180,'08:00:00', 2, 3, 'PREDEFINED');
+INSERT INTO appointments(date, duration, start_time, administrator_id, appointment_status)
+VALUES ('2023-12-27', '01:30:00','08:00:00', 2, 'PREDEFINED');
 
 
