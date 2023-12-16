@@ -20,8 +20,10 @@ public class CompanyController {
 
     @GetMapping("/")
 //    @PreAuthorize("hasRole('REGISTEREDUSER')")
-    public List<Company> getAllCompanyProfiles(){
-        return companyService.getAll();
+    public ResponseEntity<List<Company>> getAllCompanyProfiles(){
+        List<Company> companies = companyService.getAll();
+
+        return new ResponseEntity<>( companyService.getAll(), HttpStatus.OK);
     }
 
 
