@@ -79,5 +79,12 @@ public class AppointmentController {
 
         return new ResponseEntity<>(new AppointmentDTO(appointment), HttpStatus.CREATED);
     }
+
+    @PostMapping(value="/createApp")
+    public ResponseEntity<Appointment> createApp(Appointment appointment){
+        Appointment app= appointmentService.save(appointment);
+
+        return new ResponseEntity<>(app,HttpStatus.OK);
+    }
 }
 

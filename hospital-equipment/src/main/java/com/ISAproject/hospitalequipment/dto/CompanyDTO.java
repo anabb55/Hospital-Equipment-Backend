@@ -30,10 +30,10 @@ public class CompanyDTO {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
     private LocalTime workEndTime;
 
-    private Set<CompanyAdministrator> administrators;
+
 
     public CompanyDTO(Company company) {
-        this(company.getId(),company.getName(),company.getAddress(),company.getDescription(),company.getGrade(),company.getWorkStartTime(),company.getWorkEndTime(),company.getAdministrators());
+        this(company.getId(),company.getName(),company.getAddress(),company.getDescription(),company.getGrade(),company.getWorkStartTime(),company.getWorkEndTime());
 
 
 
@@ -49,14 +49,5 @@ public class CompanyDTO {
         this.workEndTime = workEndTime;
     }
 
-    public CompanyDTO(Long id, String name, Address address, String description, Double grade, LocalTime workStartTime, LocalTime workEndTime, Set<CompanyAdministrator> administrators) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.description = description;
-        this.grade = grade;
-        this.workStartTime = workStartTime;
-        this.workEndTime = workEndTime;
-        this.administrators=administrators;
-    }
+
 }

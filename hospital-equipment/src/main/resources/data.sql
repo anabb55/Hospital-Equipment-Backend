@@ -140,40 +140,22 @@ VALUES (3,6);
 
 INSERT INTO equipments(
      amount, grade, description, name)
-VALUES ( 50, 5, 'Strong', 'Scissors');
+VALUES ( 1, 5, 'Strong', 'Scissors');
 
 INSERT INTO equipments(
      amount, grade, description, name)
-VALUES ( 2000, 4, 'Medical', 'Gloves');
+VALUES ( 1, 4, 'Medical', 'Gloves');
 
 INSERT INTO equipments(
      amount, grade, description, name)
-VALUES ( 500, 5, 'Cotton', 'Coat');
+VALUES ( 1, 5, 'Cotton', 'Coat');
 
 INSERT INTO equipments(
      amount, grade, description, name)
-VALUES ( 500, 5, 'elastic', 'Bandage');
+VALUES ( 1, 5, 'elastic', 'Bandage');
 
 
-INSERT INTO equipment_stock(
-    amount, company_id, equipment_id)
-VALUES ( 100,1,1);
 
-INSERT INTO equipment_stock(
-    amount, company_id, equipment_id)
-VALUES ( 200,1,2);
-
-INSERT INTO equipment_stock(
-    amount, company_id, equipment_id)
-VALUES ( 200,2,3);
-
-INSERT INTO equipment_stock(
-    amount, company_id, equipment_id)
-VALUES ( 200,3,1);
-
-INSERT INTO equipment_stock(
-    amount, company_id, equipment_id)
-VALUES ( 200,3,2);
 
 
 INSERT INTO appointments(date, duration, start_time, administrator_id,appointment_status)
