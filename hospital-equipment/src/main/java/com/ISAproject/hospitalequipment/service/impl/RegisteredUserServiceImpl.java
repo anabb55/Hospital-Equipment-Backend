@@ -44,7 +44,7 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
 
         registeredUser = (RegisteredUser) userService.createUser(registeredUser,userDTO);
 
-        List<Role> roles = roleService.findByName("REGISTERED_USER");
+        List<Role> roles = roleService.findByName("ROLE_REGISTERED_USER");
         registeredUser.setRoles(roles);
         registeredUser.setUserCategory(UserCategory.REGULAR);
         registeredUser.setPenaltyPoints(0);
@@ -68,9 +68,9 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
     public boolean existsById(Integer id)
     {
         if(id!=null)
-            {
+
                return  registeredUserRepo.existsById(Long.valueOf(id));
-            }
+
 
         return false;
     }

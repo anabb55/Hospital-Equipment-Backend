@@ -1,6 +1,9 @@
 package com.ISAproject.hospitalequipment.Controller;
 
+import com.ISAproject.hospitalequipment.domain.Company;
 import com.ISAproject.hospitalequipment.domain.CompanyAdministrator;
+import com.ISAproject.hospitalequipment.dto.CompanyAdministratorDTO;
+import com.ISAproject.hospitalequipment.dto.CompanyDTO;
 import com.ISAproject.hospitalequipment.service.CompanyAdministratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,10 +33,17 @@ public class CompanyAdministratorController {
         return new ResponseEntity<>(createdAdministrator, HttpStatus.CREATED);
     }
 
+
     @GetMapping("/getById/{id}")
-    public ResponseEntity<CompanyAdministrator> getById( @PathVariable Long id){
-        CompanyAdministrator companyAdmin= companyAdministratorService.getById(id);
-        return new ResponseEntity<>(companyAdmin,HttpStatus.OK);
+    public ResponseEntity<CompanyAdministratorDTO> getCompany(@PathVariable Long id) {
+
+        CompanyAdministrator companyA = companyAdministratorService.getById(id);
+
+        if (companyA == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(new CompanyAdministratorDTO(companyA), HttpStatus.OK);
     }
 
     @CrossOrigin(origins = "*")
