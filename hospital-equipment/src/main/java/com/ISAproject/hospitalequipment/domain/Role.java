@@ -4,12 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
 
 @Entity
 @Table(name="ROLE")
 @Getter
 @Setter
-public class Role {
+public class Role implements GrantedAuthority {
 
     private static final long serialVersionUID = 1L;
 
@@ -20,4 +21,9 @@ public class Role {
 
     @Column(name="name")
     private String name;
+    @JsonIgnore
+    @Override
+    public String getAuthority() {
+        return name;
+    }
 }
