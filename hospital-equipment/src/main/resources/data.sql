@@ -39,6 +39,7 @@ INSERT INTO users(
      email, enabled, first_name, last_name,username ,occupation, password, phone_number, address_id)
 VALUES ( 'taraboskovic066@gmail.com', true, 'Tara', 'Boskovic','taric', 'student', '$2a$10$mD0kgZJFbHEdEM5ICKJbgecF3qjIzP.i3zVV.nszlWh8Adp4gs4K6', '066-2678-772', 1);
 
+
 INSERT INTO users(
      email, enabled, first_name, last_name,username, occupation, password, phone_number, address_id)
 VALUES ( 'example@gmail.com', false, 'Milos', 'Milosevic','anic', 'doctor', '2670', '064-3782-892', 2);
@@ -124,42 +125,20 @@ VALUES ( 'HealthGroup', 'Best service', 4, 3);
 
 
 INSERT INTO equipments(
-     amount, grade, description, name)
-VALUES ( 50, 5, 'Strong', 'Scissors');
+     amount, grade, description, name,type)
+VALUES ( 50, 5, 'Metal', 'Scissors','Strong');
 
 INSERT INTO equipments(
-     amount, grade, description, name)
-VALUES ( 2000, 4, 'Medical', 'Gloves');
+     amount, grade, description, name,type)
+VALUES ( 2000, 4, 'Medical', 'Gloves','Type1');
 
 INSERT INTO equipments(
-     amount, grade, description, name)
-VALUES ( 500, 5, 'Cotton', 'Coat');
+     amount, grade, description, name,type)
+VALUES ( 500, 5, 'Cotton', 'Coat','White');
 
 INSERT INTO equipments(
-     amount, grade, description, name)
-VALUES ( 500, 5, 'elastic', 'Bandage');
-
-
-
-
-
-
-
-INSERT INTO appointments(
-     duration, company_id, date, admin_last_name, admin_name)
-VALUES ( 22, 1,'2023-10-22 21:48:24.891+02','Nina','Nina');
-INSERT INTO appointments(
-     duration, company_id, date, admin_last_name, admin_name)
-VALUES ( 10, 1,'2023-10-22 21:48:24.891+02','Ana','Ana');
-INSERT INTO appointments(
-     duration, company_id, date, admin_last_name, admin_name)
-VALUES ( 30, 2,'2023-10-22 21:48:24.891+02','Helena','Helena');
-INSERT INTO appointments(
-     duration, company_id, date, admin_last_name, admin_name)
-VALUES ( 22, 3,'2023-10-22 21:48:24.891+02','Dajana','Dajana');
-INSERT INTO appointments(
-     duration, company_id, date, admin_last_name, admin_name)
-VALUES ( 2, 3,'2023-10-22 21:48:24.891+02','Katarina','Katarina');
+     amount, grade, description, name,type)
+VALUES ( 500, 5, 'elastic', 'Bandage','Hard');
 
 INSERT INTO company_administrators(
      company_id, id)
@@ -173,3 +152,71 @@ VALUES ( 2,4);
 INSERT INTO company_administrators(
      company_id, id)
 VALUES ( 3,5);
+
+
+INSERT INTO public.equipment_stock(
+	amount, company_id, equipment_id, id)
+	VALUES (10, 1, 1, 1);
+INSERT INTO public.equipment_stock(
+	amount, company_id, equipment_id, id)
+	VALUES (11, 2, 1, 2);
+
+INSERT INTO public.equipment_stock(
+	amount, company_id, equipment_id, id)
+	VALUES (3, 3, 2, 3);
+
+INSERT INTO public.working_time_calenders(
+	company_id, id)
+	VALUES (1, 1);
+INSERT INTO public.working_time_calenders(
+	company_id, id)
+	VALUES (2, 2);
+
+
+INSERT INTO public.appointments(
+	duration, administrator_id, date, id, working_calender_id, appointment_status)
+	VALUES (3, 4,  TO_DATE('31-12-2020', 'DD-MM-YYYY'), 1,1,'EXTRAORDINARY');
+
+INSERT INTO public.appointments(
+	duration, administrator_id, date, id, working_calender_id, appointment_status)
+	VALUES (4, 3,  TO_DATE('11-05-2020', 'DD-MM-YYYY'), 2,2,'EXTRAORDINARY');
+
+
+
+
+INSERT INTO public.qrcode(
+	id, qr_code_status)
+	VALUES (1, 'NEW');
+INSERT INTO public.qrcode(
+	id, qr_code_status)
+	VALUES (2, 'NEW');
+
+
+
+
+
+INSERT INTO public.reservations(
+	appointment_id, id, penalty_points, qr_cod_id, reservation_status)
+	VALUES (1, 1, 5, 1, 'TAKEN');
+
+INSERT INTO public.reservations(
+	appointment_id, id, penalty_points, qr_cod_id, reservation_status)
+	VALUES (2, 2, 3, 2, 'TAKEN');
+
+
+
+
+INSERT INTO public.reservation_equipment_stock(
+	amount, equipment_stock_id, id, reservation_id)
+	VALUES (2, 1, 1, 1);
+
+INSERT INTO public.reservation_equipment_stock(
+	amount, equipment_stock_id, id, reservation_id)
+	VALUES (4, 2, 2, 2);
+
+
+
+
+
+
+

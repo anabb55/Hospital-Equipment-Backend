@@ -106,6 +106,7 @@ public class User implements UserDetails {
         this.address = address;
     }
 
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;
@@ -131,6 +132,9 @@ public class User implements UserDetails {
     public boolean isCredentialsNonExpired() {
         return true;
     }
+
 }
+
+
 
 

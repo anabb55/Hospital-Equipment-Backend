@@ -1,6 +1,7 @@
 package com.ISAproject.hospitalequipment.domain;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -25,14 +26,16 @@ public class Equipment {
 
     public String description;
 
+    public String type;
     public Double grade;
 
     public Integer amount;
 
 
-    @OneToMany(mappedBy = "equipment")
+    @JsonIgnore
+    @OneToMany(mappedBy = "equipment",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<EquipmentStock> equipmentStocks;
-    public Equipment(Long id,String name, String description, Double grade, Integer amount){
+    public Equipment(Long id,String name, String description,String type, Double grade, Integer amount){
         this.id = id;
         this.name = name;
         this.description = description;

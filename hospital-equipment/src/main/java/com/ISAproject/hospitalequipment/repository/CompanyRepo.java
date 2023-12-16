@@ -10,21 +10,15 @@ import java.util.List;
 
 @Repository
 public interface CompanyRepo extends JpaRepository<Company,Long> {
-
-
-
     List<Company> findAll();
     Company save(Company company);
-
-
 
     @Query("SELECT cp FROM Company cp JOIN cp.administrators a WHERE a.id = :administratorId")
     List<Company> findCompaniesByAdministrators(@Param("administratorId")int id);
 
+    @Query("SELECT DISTINCT c FROM Company c JOIN c.equipmentStocks es WHERE es.equipment.id = :equipmentId")
+    List<Company> findCompaniesByEquipment(@Param("equipmentId") Long equipmentId);
 
-    /* nisam sigurna da li ce raditi
-    List<Company> findCompaniesByEquipment(Equipment equipmentId);
-*/
     List<Company> findByNameContainingIgnoreCaseOrAddressCityContainingIgnoreCase(String name, String city);
     List<Company> findByGrade(Integer rate);
 
