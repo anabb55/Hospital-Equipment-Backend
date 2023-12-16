@@ -37,4 +37,8 @@ public class Reservation {
     @JoinColumn(name = "qr_cod_id")
     private QRCode qrCode;
 
+    @JoinColumn(name = "registered_user_id")
+    @ManyToOne(fetch=FetchType.EAGER)
+    private RegisteredUser registeredUser;
+
 }
