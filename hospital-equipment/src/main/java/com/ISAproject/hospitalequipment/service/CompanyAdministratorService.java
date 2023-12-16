@@ -13,5 +13,5 @@ public interface CompanyAdministratorService {
     public CompanyAdministrator getById(Long id);
 
     public CompanyAdministrator update(CompanyAdministrator admin, Long id);
-    public CompanyAdministrator findAvailableAdministrator(LocalTime startTime, LocalTime endTime, LocalDate date);
+    public List<CompanyAdministrator> findAvailableAdministrator(LocalTime startTime, LocalTime endTime, LocalDate date,Long companyId);
 }

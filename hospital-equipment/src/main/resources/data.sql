@@ -101,9 +101,7 @@ INSERT INTO registered_users(
     penalty_points, id,loyalty_id, user_category)
 VALUES (3, 1,1, 'REGULAR');
 
-INSERT INTO registered_users(
-    penalty_points, id,loyalty_id, user_category)
-VALUES (100, 2, 2,'GOLD');
+
 
 
 
@@ -116,27 +114,24 @@ VALUES ('Health Company', 'Safe with us', 4, 2, '08:00:00', '17:00:00');
 INSERT INTO company(name, description, grade, address_id, work_start_time, work_end_time)
 VALUES ('HealthGroup', 'Best service', 4, 3, '08:00:00', '17:00:00');
 
-INSERT INTO company_administrators(
-    company_id,id)
-VALUES (1,1);
 
 INSERT INTO company_administrators(
     company_id,id)
-VALUES (1,2);
+VALUES (3,1);
+INSERT INTO company_administrators(
+    company_id,id)
+VALUES (1,3);
+INSERT INTO company_administrators(
+    company_id,id)
+VALUES (1,4);
 
 INSERT INTO company_administrators(
     company_id,id)
-VALUES (2,3);
+VALUES (2,5);
 INSERT INTO company_administrators(
     company_id,id)
-VALUES (2,4);
+VALUES (2,6);
 
-INSERT INTO company_administrators(
-    company_id,id)
-VALUES (3,5);
-INSERT INTO company_administrators(
-    company_id,id)
-VALUES (3,6);
 
 INSERT INTO equipments(
      amount, grade, description, name)
@@ -176,13 +171,15 @@ INSERT INTO equipment_stock(
 VALUES ( 200,3,2);
 
 
-INSERT INTO appointments(date, duration, start_time, administrator_id,appointment_status)
-VALUES ('2023-12-22', '02:00:00','08:00:00', 1, 'TAKEN');
+INSERT INTO appointments(date, end_time, start_time, administrator_id,appointment_status)
+VALUES ('2023-12-22', '10:00:00','08:00:00', 3, 'TAKEN');
 
-INSERT INTO appointments(date, duration, start_time, administrator_id,  appointment_status)
-VALUES ('2023-12-26', '01:00:00','08:00:00', 2,'PREDEFINED');
+INSERT INTO appointments(date, end_time, start_time, administrator_id,  appointment_status)
+VALUES ('2023-12-26', '10:00:00','08:00:00', 3,'PREDEFINED');
 
-INSERT INTO appointments(date, duration, start_time, administrator_id, appointment_status)
-VALUES ('2023-12-27', '01:30:00','08:00:00', 2, 'PREDEFINED');
+INSERT INTO appointments(date, end_time, start_time, administrator_id, appointment_status)
+VALUES ('2023-12-27', '10:30:00','08:00:00', 4, 'PREDEFINED');
 
+INSERT INTO appointments(date, end_time, start_time, administrator_id, appointment_status)
+VALUES ('2023-12-27', '10:30:00','08:00:00', 4, 'PREDEFINED');
 

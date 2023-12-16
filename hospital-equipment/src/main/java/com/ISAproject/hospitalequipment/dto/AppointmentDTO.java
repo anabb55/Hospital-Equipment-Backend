@@ -22,8 +22,7 @@ public class AppointmentDTO {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate date;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
-    public LocalTime duration;
+
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
     private LocalTime startTime;
@@ -32,18 +31,28 @@ public class AppointmentDTO {
     private AppointmentStatus appointmentStatus;
     private CompanyAdministratorDTO companyAdministrator;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+    public LocalTime endTime;
 
     public AppointmentDTO(Appointment appointment) {
         this.id = appointment.getId();
         this.date = appointment.getDate();
-        this.duration = appointment.getDuration();
+        this.endTime=appointment.getEndTime();
         this.startTime = appointment.getStartTime();
-
         this.appointmentStatus=appointment.getAppointmentStatus();
         if (appointment.getAdministrator() != null) {
 
             this.companyAdministrator = new CompanyAdministratorDTO(appointment.getAdministrator());
         }
+    }
+
+    public AppointmentDTO(Long id, LocalDate date, LocalTime endTime, LocalTime startTime, AppointmentStatus appointmentStatus, CompanyAdministratorDTO companyAdministrator) {
+        this.id = id;
+        this.date = date;
+        this.endTime=endTime;
+        this.startTime = startTime;
+        this.appointmentStatus = appointmentStatus;
+        this.companyAdministrator = companyAdministrator;
     }
 
     public AppointmentDTO()

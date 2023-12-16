@@ -32,6 +32,7 @@ public class RegisteredUserController {
 
 
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/getById/{id}")
     public ResponseEntity<RegisterUserDTO> getUser(@PathVariable Integer id) {
         RegisteredUser registeredUser = registeredUserService.findOne(id);
