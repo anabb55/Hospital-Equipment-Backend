@@ -29,7 +29,7 @@ public class RegisterUserDTO extends UserDTO{
     private UserCategory userCategory;
 
 
-    private LoyaltyProgram loyaltyProgram;
+    private LoyaltyProgramDTO loyaltyProgram;
 
 
     public RegisterUserDTO(RegisteredUser registeredUser) {
@@ -45,7 +45,7 @@ public class RegisterUserDTO extends UserDTO{
         );
         this.penaltyPoints = registeredUser.getPenaltyPoints();
         this.userCategory = registeredUser.getUserCategory();
-        this.loyaltyProgram=registeredUser.getLoyaltyProgram();
+        this.loyaltyProgram=new LoyaltyProgramDTO(registeredUser.getLoyaltyProgram());
 
     }
 

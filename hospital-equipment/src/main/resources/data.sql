@@ -115,9 +115,7 @@ INSERT INTO company(name, description, grade, address_id, work_start_time, work_
 VALUES ('HealthGroup', 'Best service', 4, 3, '08:00:00', '17:00:00');
 
 
-INSERT INTO company_administrators(
-    company_id,id)
-VALUES (3,1);
+
 INSERT INTO company_administrators(
     company_id,id)
 VALUES (1,3);

@@ -38,6 +38,8 @@ public class AppointmentController {
 
     @Autowired
     private CompanyService companyService;
+    @CrossOrigin(origins = "*")
+
     @GetMapping("/generateRandomAppointments/{companyId}")
     public ResponseEntity<List<AppointmentDTO>> generateRandomAppointments(
             @PathVariable Long companyId,
@@ -55,6 +57,7 @@ public class AppointmentController {
 
         return new ResponseEntity<>(appointmentDTOs, HttpStatus.OK);
     }
+    @CrossOrigin(origins = "*")
 
     @PostMapping(value="/create/{companyId}")
     public ResponseEntity<AppointmentDTO> saveAppointment(@PathVariable Long companyId, @RequestBody AppointmentDTO appointmentDTO) {

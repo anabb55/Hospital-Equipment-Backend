@@ -19,6 +19,22 @@ public class ReservationServiceImpl implements ReservationService {
     @Autowired
     AppointmentService appointmentService;
 
+    public List<Reservation> getAll()
+    {
+        return reservationRepo.findAll();
+    }
+
+    public Reservation getLast() {
+        List<Reservation> reservations = reservationRepo.findAll();
+
+        if (!reservations.isEmpty()) {
+            return reservations.get(reservations.size() - 1);
+        } else {
+            return null;
+        }
+    }
+
+
     public Reservation save(Reservation reservation)
     {
         List<Appointment> appointmentList=appointmentService.findAll();

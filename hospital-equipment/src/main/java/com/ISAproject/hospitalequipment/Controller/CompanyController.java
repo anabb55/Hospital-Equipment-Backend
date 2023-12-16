@@ -20,6 +20,7 @@ public class CompanyController {
     @Autowired
 
     private CompanyService companyService;
+    @CrossOrigin(origins = "*")
 
     @GetMapping("/")
     public ResponseEntity<List<CompanyDTO>> getAllCompanyProfiles(){
@@ -34,6 +35,7 @@ public class CompanyController {
     }
 
 
+    @CrossOrigin(origins = "*")
 
     @PostMapping("/save")
     public ResponseEntity<Company> saveCompanyProfile(@RequestBody Company company) {
@@ -41,6 +43,7 @@ public class CompanyController {
         return new ResponseEntity<>(createdCompany, HttpStatus.CREATED);
     }
 
+    @CrossOrigin(origins = "*")
 
     @GetMapping("/byAdmin/{id}")
     public ResponseEntity<List<Company>> getByAdministrator(@PathVariable int id){
@@ -67,6 +70,7 @@ public class CompanyController {
     }
     */
 
+    @CrossOrigin(origins = "*")
 
     @GetMapping("/getById/{id}")
     public ResponseEntity<CompanyDTO> getCompany(@PathVariable Long id) {
@@ -79,6 +83,7 @@ public class CompanyController {
 
         return new ResponseEntity<>(new CompanyDTO(company), HttpStatus.OK);
     }
+    @CrossOrigin(origins = "*")
 
     @GetMapping("/search")
     public ResponseEntity<List<Company>> searchCompanies(
@@ -89,6 +94,7 @@ public class CompanyController {
 
         return new ResponseEntity<>(companies, HttpStatus.OK);
     }
+    @CrossOrigin(origins = "*")
 
     @GetMapping("/searchByRating")
     public ResponseEntity<List<Company>> searchCompaniesByRating(
@@ -98,11 +104,13 @@ public class CompanyController {
 
         return new ResponseEntity<>(companies, HttpStatus.OK);
     }
+    @CrossOrigin(origins = "*")
 
     @GetMapping("/company/{companyId}/equipment")
     public List<Equipment> getEquipmentByCompanyId(@PathVariable Long companyId) {
         return companyService.getEquipmentByCompanyId(companyId);
     }
+    @CrossOrigin(origins = "*")
 
     @GetMapping("/equipment/{companyId}/search")
     public ResponseEntity<List<Equipment>> searchEquipmentByCompanyIdAndName(

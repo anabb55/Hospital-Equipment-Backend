@@ -37,15 +37,10 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     public Appointment createExtraOrdinaryAppointment(Appointment appointment, AppointmentDTO appointmentDTO){
 
-
-
-
         return appointmentRepo.save(appointment);
 
     }
-//    public List<Appointment> findByAdministratorAndDate(CompanyAdministrator administrator, LocalDate date) {
-//        return appointmentRepo.findByAdministratorAndDate(administrator,date);
-//    }
+
     public List<CompanyAdministrator> findAvailableAdministrator(LocalTime startTime, LocalTime endTime, LocalDate date,Long companyId){
         return  companyAdministratorService.findAvailableAdministrator(startTime,endTime,date,companyId);
     }
