@@ -1,6 +1,7 @@
 package com.ISAproject.hospitalequipment.domain;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -16,7 +17,6 @@ import java.util.Set;
 @Getter
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class CompanyAdministrator extends User{
-
 
 
     @ManyToOne(fetch = FetchType.EAGER)
