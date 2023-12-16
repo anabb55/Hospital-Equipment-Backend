@@ -30,4 +30,20 @@ public class EquipmentStockController {
         List<Equipment> equipmentsByCompany= this.equipmentStockService.findEquipmentsByCompany(companyId);
         return new ResponseEntity<>(equipmentsByCompany,HttpStatus.OK);
     }
+
+    @GetMapping(value = "/equipmentAmount/{companyId}/{equipmentId}")
+    public ResponseEntity<Integer> getEquipmentAmountByCompany(@PathVariable("companyId") Long companyId,@PathVariable("equipmentId") Long equipmentId){
+        Integer amount= this.equipmentStockService.findEquipmentAmountByCompany(companyId, equipmentId);
+        return new ResponseEntity<>(amount,HttpStatus.OK);
+
+    }
+
+    //method for setting new amount instead of old
+    @CrossOrigin(origins = "*")
+    @PostMapping (value = "/update/{eqId}/{comId}")
+    public ResponseEntity<Void> updateAmount(@PathVariable("eqId") Long equipmentId,@PathVariable("comId")  Long comapnyId,@RequestParam("amount") Long amount){
+        this.equipmentStockService.updateAmount(equipmentId,comapnyId,amount);
+
+        return new ResponseEntity<>( HttpStatus.OK);
+    }
 }

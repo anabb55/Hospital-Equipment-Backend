@@ -2,6 +2,9 @@ package com.ISAproject.hospitalequipment.Controller;
 
 import com.ISAproject.hospitalequipment.domain.Company;
 import com.ISAproject.hospitalequipment.domain.Equipment;
+import com.ISAproject.hospitalequipment.domain.RegisteredUser;
+import com.ISAproject.hospitalequipment.dto.CompanyDTO;
+import com.ISAproject.hospitalequipment.dto.RegisterUserDTO;
 import com.ISAproject.hospitalequipment.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -19,12 +23,21 @@ public class CompanyController {
     private CompanyService companyService;
 
     @GetMapping("/")
-//    @PreAuthorize("hasRole('REGISTEREDUSER')")
-    public ResponseEntity<List<Company>> getAllCompanyProfiles(){
-        List<Company> companies = companyService.getAll();
 
-        return new ResponseEntity<>( companyService.getAll(), HttpStatus.OK);
+
+    public ResponseEntity<List<CompanyDTO>> getAllCompanyProfiles(){
+        List<Company>companies=companyService.getAll();
+        List<CompanyDTO> companyDTOs = new ArrayList<>();
+
+        for (Company s : companies) {
+            companyDTOs.add(new CompanyDTO(s));
+        }
+
+        return new ResponseEntity<>(companyDTOs, HttpStatus.OK);
+
+
     }
+
 
 
     @PostMapping("/save")
@@ -66,9 +79,18 @@ public class CompanyController {
 
     }
     */
+
+
     @GetMapping("/getById/{id}")
-    public Company getById(@PathVariable Long id){
-        return companyService.getById(id);
+    public ResponseEntity<CompanyDTO> getCompany(@PathVariable Long id) {
+
+        Company company = companyService.getById(id);
+
+        if (company == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(new CompanyDTO(company), HttpStatus.OK);
     }
 
     @GetMapping("/search")
@@ -88,6 +110,19 @@ public class CompanyController {
         List<Company> companies = companyService.findByRate(rate);
 
         return new ResponseEntity<>(companies, HttpStatus.OK);
+    }
+
+    @GetMapping("/company/{companyId}/equipment")
+    public List<Equipment> getEquipmentByCompanyId(@PathVariable Long companyId) {
+        return companyService.getEquipmentByCompanyId(companyId);
+    }
+
+    @GetMapping("/equipment/{companyId}/search")
+    public ResponseEntity<List<Equipment>> searchEquipmentByCompanyIdAndName(
+            @PathVariable Long companyId,
+            @RequestParam String name) {
+        List<Equipment> equipmentList = companyService.findEquipmentByCompanyIdAndName(companyId, name);
+        return new ResponseEntity<>(equipmentList, HttpStatus.OK);
     }
 
 
