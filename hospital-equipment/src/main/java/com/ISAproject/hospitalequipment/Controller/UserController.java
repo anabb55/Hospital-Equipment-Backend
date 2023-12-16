@@ -20,7 +20,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-        @PreAuthorize("hasRole('REGISTERED_USER')")
+        //@PreAuthorize("hasRole('REGISTERED_USER')")
     @GetMapping("/")
 
     public List<User> getAllUsers() {
