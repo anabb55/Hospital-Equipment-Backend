@@ -28,6 +28,7 @@ public class CompanyAdministratorDTO extends UserDTO {
                 a.getId(),
                 a.getFirstName(),
                 a.getLastName(),
+                a.getUsername(),
                 a.getPassword(),
                 a.getEmail(),
                 a.getOccupation(),

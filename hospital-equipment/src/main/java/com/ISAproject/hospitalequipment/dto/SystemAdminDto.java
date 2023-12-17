@@ -22,6 +22,7 @@ public class SystemAdminDto extends UserDTO{
                 admin.getId(),
                 admin.getFirstName(),
                 admin.getLastName(),
+                admin.getUsername(),
                 admin.getPassword(),
                 admin.getEmail(),
                 admin.getOccupation(),
