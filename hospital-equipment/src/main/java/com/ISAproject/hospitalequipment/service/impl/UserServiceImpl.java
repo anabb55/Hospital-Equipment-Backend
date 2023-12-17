@@ -1,5 +1,6 @@
 package com.ISAproject.hospitalequipment.service.impl;
 
+import com.ISAproject.hospitalequipment.domain.Address;
 import com.ISAproject.hospitalequipment.domain.Role;
 import com.ISAproject.hospitalequipment.domain.User;
 import com.ISAproject.hospitalequipment.dto.UserDTO;
@@ -8,7 +9,9 @@ import com.ISAproject.hospitalequipment.service.RoleService;
 import com.ISAproject.hospitalequipment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 @Service
@@ -16,20 +19,29 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepo userRepo;
 
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private RoleService roleService;
 
+    @Transactional
     public User createUser(User user,UserDTO userDTO){
 
-
+        user.setUsername(userDTO.getUsername());
         user.setEmail(userDTO.getEmail());
-        user.setPassword(userDTO.getPassword());
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         user.setFirstName(userDTO.getFirstname());
         user.setLastName(userDTO.getLastname());
-        user.setAddress(userDTO.getAddress());
+        Address address = new Address(); // Primer za novi Address
+        // Postavite odgovarajuće atribute Adrese iz userDTO-a
+        address.setStreet(userDTO.getAddress().getStreet());
+        address.setCity(userDTO.getAddress().getCity());
+        address.setCountry((userDTO.getAddress().getCountry()));
+        address.setId((userDTO.getAddress().getId()));
+        address.setNumber((userDTO.getAddress().getNumber()));
+        // Postavite Address objekat na User entitet
+        user.setAddress(address);
         user.setPhoneNumber(userDTO.getPhoneNumber());
         user.setOccupation(userDTO.getOccupation());
 

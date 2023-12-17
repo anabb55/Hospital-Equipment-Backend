@@ -7,6 +7,10 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "registeredUsers")
 @Getter
@@ -24,6 +28,8 @@ public class RegisteredUser extends User {
     @Enumerated(EnumType.STRING)
     private UserCategory userCategory;
 
+    @OneToMany(mappedBy = "registeredUser", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Reservation> reservations = new HashSet<Reservation>();
 
 
 

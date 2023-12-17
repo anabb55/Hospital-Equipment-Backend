@@ -4,8 +4,13 @@ import com.ISAproject.hospitalequipment.domain.Address;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface AddressRepo extends JpaRepository<Address,Long> {
+import java.util.List;
 
-    Address save(Address address);
+@Repository
+public interface AddressRepo  extends JpaRepository<Address,Long> {
+
+    List<Address> findAll();
+      Address save(Address address);
 }
+
+

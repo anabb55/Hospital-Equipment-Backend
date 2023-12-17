@@ -1,14 +1,19 @@
 package com.ISAproject.hospitalequipment.domain;
-
+import com.ISAproject.hospitalequipment.dto.AppointmentDTO;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.ISAproject.hospitalequipment.domain.enums.AppointmentStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Getter
 @Setter
@@ -22,24 +27,44 @@ public class Appointment {
     @NotNull
     public long id;
 
-    @NotEmpty
-    public String adminName;
+
 
     @NotEmpty
-    public String adminLastName;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    public LocalDate date;
 
-    @NotEmpty
-    public Date date;
 
     @NotNull
-    public Integer duration;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+    public LocalTime endTime;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="company_profile_id")
-    private CompanyProfile company;
+    @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+    private LocalTime startTime;
+
+
+
+    @Enumerated(EnumType.STRING)
+    private AppointmentStatus appointmentStatus;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "administrator_id")
+    private CompanyAdministrator administrator;
+
+    @OneToOne(mappedBy = "appointment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Reservation reservation;
 
     public Appointment() {
 
+    }
+
+    public Appointment(long id, LocalDate date, LocalTime endTime, LocalTime startTime, AppointmentStatus appointmentStatus) {
+        this.id = id;
+        this.date = date;
+        this.endTime = endTime;
+        this.startTime = startTime;
+        this.appointmentStatus = appointmentStatus;
     }
 
 
