@@ -119,14 +119,14 @@ VALUES ('HealthGroup', 'Best service', 4, 3, '08:00', '17:00');
 
 INSERT INTO company_administrators(
     company_id,id)
-VALUES (1,3);
+VALUES (1,1);
 INSERT INTO company_administrators(
     company_id,id)
-VALUES (1,4);
+VALUES (1,2);
 
 INSERT INTO company_administrators(
     company_id,id)
-VALUES (2,5);
+VALUES (2,3);
 INSERT INTO company_administrators(
     company_id,id)
 VALUES (2,6);
@@ -151,14 +151,38 @@ VALUES ( 500, 5, 'elastic', 'Bandage','Hard');
 
 
 
-INSERT INTO appointments(date, duration, start_time, administrator_id,appointment_status)
-VALUES ('2023-12-22', '02:00','08:00', 1, 'TAKEN');
 
-INSERT INTO appointments(date, duration, start_time, administrator_id,  appointment_status)
-VALUES ('2023-12-26', '01:00','08:00', 2,'PREDEFINED');
 
-INSERT INTO appointments(date, duration, start_time, administrator_id, appointment_status)
-VALUES ('2023-12-27', '01:30','08:00', 2, 'PREDEFINED');
+INSERT INTO appointments(date, end_time, start_time, administrator_id,appointment_status)
+VALUES ('2023-12-22', '10:00','08:00', 1, 'TAKEN');
+
+INSERT INTO appointments(date, end_time, start_time, administrator_id,  appointment_status)
+VALUES ('2023-12-26', '10:00','08:00', 2,'PREDEFINED');
+
+INSERT INTO appointments(date, end_time, start_time, administrator_id, appointment_status)
+VALUES ('2023-12-27', '10:30','08:00', 3, 'PREDEFINED');
+
+
+
+INSERT INTO equipment_stock(
+    amount, company_id, equipment_id)
+VALUES ( 100,1,1);
+
+INSERT INTO equipment_stock(
+    amount, company_id, equipment_id)
+VALUES ( 200,1,2);
+
+INSERT INTO equipment_stock(
+    amount, company_id, equipment_id)
+VALUES ( 200,2,3);
+
+INSERT INTO equipment_stock(
+    amount, company_id, equipment_id)
+VALUES ( 200,3,1);
+
+INSERT INTO equipment_stock(
+    amount, company_id, equipment_id)
+VALUES ( 200,3,2);
 
 
 INSERT INTO public.qrcode(
@@ -191,7 +215,4 @@ INSERT INTO public.reservation_equipment_stock(
 	amount, equipment_stock_id, id, reservation_id)
 	VALUES (4, 2, 2, 2);
 
-
-INSERT INTO appointments(date, end_time, start_time, administrator_id, appointment_status)
-VALUES ('2023-12-27', '10:30','08:00', 4, 'PREDEFINED');
 
