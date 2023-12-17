@@ -24,6 +24,7 @@ public class CompanyController {
 
     @GetMapping("/")
 
+
     public ResponseEntity<List<CompanyDTO>> getAllCompanyProfiles(){
         List<Company>companies=companyService.getAll();
         List<CompanyDTO> companyDTOs = new ArrayList<>();
@@ -33,6 +34,7 @@ public class CompanyController {
         }
 
         return new ResponseEntity<>(companyDTOs, HttpStatus.OK);
+
 
     }
 
