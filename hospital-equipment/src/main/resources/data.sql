@@ -107,46 +107,46 @@ VALUES (3, 1,1, 'REGULAR');
 
 
 INSERT INTO company(name, description, grade, address_id, work_start_time, work_end_time)
-VALUES ('Corpore Sano', 'The best service', 5, 1, '08:00:00', '17:00:00');
+VALUES ('Corpore Sano', 'The best service', 5, 1, '08:00', '17:00');
 
 INSERT INTO company(name, description, grade, address_id, work_start_time, work_end_time)
-VALUES ('Health Company', 'Safe with us', 4, 2, '08:00:00', '17:00:00');
+VALUES ('Health Company', 'Safe with us', 4, 2, '08:00', '17:00');
 
 INSERT INTO company(name, description, grade, address_id, work_start_time, work_end_time)
-VALUES ('HealthGroup', 'Best service', 4, 3, '08:00:00', '17:00:00');
+VALUES ('HealthGroup', 'Best service', 4, 3, '08:00', '17:00');
 
 
 
 INSERT INTO company_administrators(
     company_id,id)
-VALUES (1,3);
+VALUES (1,1);
 INSERT INTO company_administrators(
     company_id,id)
-VALUES (1,4);
+VALUES (1,2);
 
 INSERT INTO company_administrators(
     company_id,id)
-VALUES (2,5);
+VALUES (2,3);
 INSERT INTO company_administrators(
     company_id,id)
 VALUES (2,6);
 
 
 INSERT INTO equipments(
-    amount, grade, description, name)
-VALUES ( 50, 5, 'Strong', 'Scissors');
+     amount, grade, description, name,type)
+VALUES ( 50, 5, 'Metal', 'Scissors','Strong');
 
 INSERT INTO equipments(
-    amount, grade, description, name)
-VALUES ( 2000, 4, 'Medical', 'Gloves');
+     amount, grade, description, name,type)
+VALUES ( 2000, 4, 'Medical', 'Gloves','Type1');
 
 INSERT INTO equipments(
-    amount, grade, description, name)
-VALUES ( 500, 5, 'Cotton', 'Coat');
+     amount, grade, description, name,type)
+VALUES ( 500, 5, 'Cotton', 'Coat','White');
 
 INSERT INTO equipments(
-    amount, grade, description, name)
-VALUES ( 500, 5, 'elastic', 'Bandage');
+     amount, grade, description, name,type)
+VALUES ( 500, 5, 'elastic', 'Bandage','Hard');
 
 
 
@@ -154,14 +154,65 @@ VALUES ( 500, 5, 'elastic', 'Bandage');
 
 
 INSERT INTO appointments(date, end_time, start_time, administrator_id,appointment_status)
-VALUES ('2023-12-22', '10:00:00','08:00:00', 3, 'TAKEN');
+VALUES ('2023-12-22', '10:00','08:00', 1, 'TAKEN');
 
 INSERT INTO appointments(date, end_time, start_time, administrator_id,  appointment_status)
-VALUES ('2023-12-26', '10:00:00','08:00:00', 3,'PREDEFINED');
+VALUES ('2023-12-26', '10:00','08:00', 2,'PREDEFINED');
 
 INSERT INTO appointments(date, end_time, start_time, administrator_id, appointment_status)
-VALUES ('2023-12-27', '10:30:00','08:00:00', 4, 'PREDEFINED');
+VALUES ('2023-12-27', '10:30','08:00', 3, 'PREDEFINED');
 
-INSERT INTO appointments(date, end_time, start_time, administrator_id, appointment_status)
-VALUES ('2023-12-27', '10:30:00','08:00:00', 4, 'PREDEFINED');
+
+
+INSERT INTO equipment_stock(
+    amount, company_id, equipment_id)
+VALUES ( 100,1,1);
+
+INSERT INTO equipment_stock(
+    amount, company_id, equipment_id)
+VALUES ( 200,1,2);
+
+INSERT INTO equipment_stock(
+    amount, company_id, equipment_id)
+VALUES ( 200,2,3);
+
+INSERT INTO equipment_stock(
+    amount, company_id, equipment_id)
+VALUES ( 200,3,1);
+
+INSERT INTO equipment_stock(
+    amount, company_id, equipment_id)
+VALUES ( 200,3,2);
+
+
+INSERT INTO public.qrcode(
+	id, qr_code_status)
+	VALUES (1, 'NEW');
+INSERT INTO public.qrcode(
+	id, qr_code_status)
+	VALUES (2, 'NEW');
+
+
+
+
+
+INSERT INTO public.reservations(
+	appointment_id, id, penalty_points, qr_cod_id, reservation_status)
+	VALUES (1, 1, 5, 1, 'TAKEN');
+
+INSERT INTO public.reservations(
+	appointment_id, id, penalty_points, qr_cod_id, reservation_status)
+	VALUES (2, 2, 3, 2, 'TAKEN');
+
+
+
+
+INSERT INTO public.reservation_equipment_stock(
+	amount, equipment_stock_id, id, reservation_id)
+	VALUES (2, 1, 1, 1);
+
+INSERT INTO public.reservation_equipment_stock(
+	amount, equipment_stock_id, id, reservation_id)
+	VALUES (4, 2, 2, 2);
+
 

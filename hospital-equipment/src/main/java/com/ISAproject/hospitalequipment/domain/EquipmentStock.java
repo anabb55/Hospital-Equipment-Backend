@@ -23,14 +23,14 @@ public class EquipmentStock {
 
     @JoinColumn(name = "equipment_id")
     @ManyToOne(fetch=FetchType.EAGER)
-
     Equipment equipment;
 
+
     @JoinColumn(name="company_id")
-
     @ManyToOne(fetch=FetchType.EAGER)
-
     Company company;
+
+
     @Column(name = "amount")
     Long amount;
 
@@ -44,6 +44,9 @@ public class EquipmentStock {
     }
 
     public EquipmentStock(){}
+
+
+
 
 
 

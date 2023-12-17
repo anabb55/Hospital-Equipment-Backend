@@ -41,26 +41,19 @@ public class Company implements Serializable {
     private Double grade;
 
     @NotNull
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private LocalTime workStartTime;
 
 
     @NotNull
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private LocalTime workEndTime;
-
-
 
     @OneToMany(mappedBy = "company", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<CompanyAdministrator> administrators = new HashSet<CompanyAdministrator>();
 
-
-
     @OneToMany(mappedBy = "company", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<EquipmentStock> equipmentStocks = new HashSet<EquipmentStock>();
-
-   // @OneToMany(mappedBy = "company", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-    //private Set<Appointment> appointments = new HashSet<Appointment>();
 
 
     public Company(Long id, String name, Address address, String description, Double grade, LocalTime workStartTime, LocalTime workEndTime) {
@@ -71,10 +64,7 @@ public class Company implements Serializable {
         this.grade = grade;
         this.workStartTime = workStartTime;
         this.workEndTime = workEndTime;
-
     }
-
-
 
     public Company() {
     }

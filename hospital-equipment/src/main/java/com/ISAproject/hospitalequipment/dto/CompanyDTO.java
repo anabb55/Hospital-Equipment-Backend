@@ -4,7 +4,6 @@ import com.ISAproject.hospitalequipment.domain.Address;
 import com.ISAproject.hospitalequipment.domain.Company;
 import com.ISAproject.hospitalequipment.domain.CompanyAdministrator;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,7 +15,6 @@ import java.util.stream.Collectors;
 
 @Getter
 @Setter
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) // Ignoriše Hibernate specifične propertije
 public class CompanyDTO {
     private Long id;
     private String name;
@@ -24,18 +22,18 @@ public class CompanyDTO {
     private String description;
     private Double grade;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private LocalTime workStartTime;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private LocalTime workEndTime;
 
 
-
+    public CompanyDTO(){}
+  
     public CompanyDTO(Company company) {
 
         this(company.getId(),company.getName(),new AddressDTO(company.getAddress()),company.getDescription(),company.getGrade(),company.getWorkStartTime(),company.getWorkEndTime());
-
     }
 
     public CompanyDTO(Long id, String name, AddressDTO address, String description, Double grade, LocalTime workStartTime, LocalTime workEndTime) {

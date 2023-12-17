@@ -20,7 +20,7 @@ public class CompanyAdministrator extends User{
 
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="company_id")
+    @JoinColumn(name="company_id",nullable = true)
     private Company company;
 
     @OneToMany(mappedBy = "administrator", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
