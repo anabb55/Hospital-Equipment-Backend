@@ -70,7 +70,21 @@ public class AppointmentController {
 
         return new ResponseEntity<>(appointmentDTOs, HttpStatus.OK);
     }
-    @CrossOrigin(origins = "*")
+
+    @GetMapping("/futureAppointment/{userId}")
+    public ResponseEntity<List<AppointmentDTO>> getFutureAppointments(  @PathVariable Long userId){
+        List<Appointment> futureAppointments = appointmentService.findFutureAppointmentsByUserId(userId);
+        List<AppointmentDTO> appointmentDTOs = futureAppointments.stream()
+                .map(AppointmentDTO::new)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(appointmentDTOs, HttpStatus.OK);
+
+    }
+
+
+
+
+            @CrossOrigin(origins = "*")
 
     @PostMapping(value="/create/{companyId}")
     public ResponseEntity<AppointmentDTO> saveAppointment(@PathVariable Long companyId, @RequestBody AppointmentDTO appointmentDTO) {

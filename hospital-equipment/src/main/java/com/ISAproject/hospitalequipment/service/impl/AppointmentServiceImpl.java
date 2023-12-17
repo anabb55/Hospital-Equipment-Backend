@@ -44,6 +44,10 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     }
 
+    public List<Appointment> findFutureAppointmentsByUserId(Long userId){
+        return appointmentRepo.findFutureAppointmentsByUserId(userId);
+    }
+
     public List<CompanyAdministrator> findAvailableAdministrator(LocalTime startTime, LocalTime endTime, LocalDate date,Long companyId){
         return  companyAdministratorService.findAvailableAdministrator(startTime,endTime,date,companyId);
     }
