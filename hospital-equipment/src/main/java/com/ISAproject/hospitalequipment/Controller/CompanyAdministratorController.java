@@ -10,6 +10,7 @@ import com.ISAproject.hospitalequipment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -25,6 +26,8 @@ public class CompanyAdministratorController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/getAll")
     public ResponseEntity<List<CompanyAdministratorDTO>> getAll(){
@@ -59,20 +62,26 @@ public class CompanyAdministratorController {
     }
 
     @CrossOrigin(origins = "*")
-    @PutMapping("/update/{id}")
-    public ResponseEntity<CompanyAdministrator> update(@PathVariable Long id, @RequestBody CompanyAdministrator admin) {
+    @PutMapping("/update/{id}/{firstname}/{lastname}/{occupation}/{phone}/{email}/{password}")
+    public ResponseEntity<Long> update(@PathVariable("id") Long id,@PathVariable("firstname") String firstname, @PathVariable("lastname") String lastname, @PathVariable("occupation") String occupation, @PathVariable("phone") String phone, @PathVariable("email") String email,@PathVariable("password") String password ) {
        // CompanyAdministrator updatedAdmin = companyAdministratorService.update(admin, id);
 
-       // User user= userService.getById(id);
+        User user= userService.getById(id);
 
-       // user.setUsername(admin.getUsername());
+
        // user.setEmail(admin.getEmail());
+        user.setLastName(lastname);
+        user.setFirstName(firstname);
+        user.setEmail(email);
+        user.setOccupation(occupation);
+        user.setPhoneNumber(phone);
+        user.setPassword(passwordEncoder.encode(password));
 
-       // userService.save(user);
+        userService.save(user);
 
-        userService.updateUsername(3L,admin.getUsername());
+      //  userService.updateUsername(3L,admin.getUsername());
 
-        return new ResponseEntity<>(admin, HttpStatus.OK);
+        return new ResponseEntity<>(id, HttpStatus.OK);
 
     }
     @GetMapping("/getAdminById/{id}")

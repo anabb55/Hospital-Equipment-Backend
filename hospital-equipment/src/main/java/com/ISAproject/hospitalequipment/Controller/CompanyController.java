@@ -1,5 +1,6 @@
 package com.ISAproject.hospitalequipment.Controller;
 
+import com.ISAproject.hospitalequipment.domain.Address;
 import com.ISAproject.hospitalequipment.domain.Company;
 import com.ISAproject.hospitalequipment.domain.Equipment;
 import com.ISAproject.hospitalequipment.domain.RegisteredUser;
@@ -135,5 +136,18 @@ public class CompanyController {
         return new ResponseEntity<>(equipmentList, HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "*")
+    @PutMapping("/update/{id}/{name}/{description}")
+    public ResponseEntity<Company> updateCompany(@PathVariable("id") Long id, @PathVariable("name") String name, @PathVariable("description" ) String description, @RequestBody Address address ) {
+        Company oldCompany = companyService.getById(id);
+
+        oldCompany.setName(name);
+        oldCompany.setDescription(description);
+        oldCompany.setAddress(address);
+        companyService.save(oldCompany);
+
+        return new ResponseEntity<>(oldCompany, HttpStatus.OK);
+
+    }
 
 }

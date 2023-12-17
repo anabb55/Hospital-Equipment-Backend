@@ -72,7 +72,7 @@ public class User implements UserDetails {
     private List<Role> roles;
 
 
-
+    private boolean waslogged;
 
 
     public User(Long id, String email, String password, String username, String  firstName, String lastName, String phoneNumber, String occupation, boolean enabled, Address address, String companyName) {
@@ -86,12 +86,12 @@ public class User implements UserDetails {
         this.enabled = enabled;
         this.address = address;
         this.username = username;
-
+        this.waslogged=false;
     }
 
 
     public User() {
-
+    this.waslogged=false;
     }
 
 
@@ -143,6 +143,8 @@ public class User implements UserDetails {
     public boolean isCredentialsNonExpired() {
         return true;
     }
+
+
 
 }
 

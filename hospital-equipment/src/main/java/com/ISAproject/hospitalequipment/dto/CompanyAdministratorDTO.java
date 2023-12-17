@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 
-public class CompanyAdministratorDTO {
+public class CompanyAdministratorDTO extends UserDTO {
 
     private Long id;
 

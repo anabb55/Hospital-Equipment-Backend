@@ -33,8 +33,7 @@ public class Equipment {
 
 
     @JsonIgnore
-
-    @OneToMany(mappedBy = "equipment", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "equipment", fetch=FetchType.EAGER)
 
     private Set<EquipmentStock> equipmentStocks;
 

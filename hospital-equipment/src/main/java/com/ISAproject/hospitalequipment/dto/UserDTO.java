@@ -27,6 +27,7 @@ public class UserDTO {
 
     private String phoneNumber;
 
+    private boolean waslogged;
     public UserDTO() {
     }
 
@@ -40,6 +41,7 @@ public class UserDTO {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.username = username;
+        this.waslogged=false;
 
     }
 }

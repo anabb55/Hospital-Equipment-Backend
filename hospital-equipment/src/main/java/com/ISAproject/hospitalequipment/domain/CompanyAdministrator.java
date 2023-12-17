@@ -19,9 +19,11 @@ import java.util.Set;
 public class CompanyAdministrator extends User{
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="company_id")
     private Company company;
+
 
     @OneToMany(mappedBy = "administrator", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private Set<Appointment> scheduledAppointments = new HashSet<Appointment>();
