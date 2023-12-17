@@ -65,26 +65,26 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http.sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+       // http.sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
 
-        http.exceptionHandling(configurer -> configurer.authenticationEntryPoint(restAuthenticationEntryPoint));
+     //   http.exceptionHandling(configurer -> configurer.authenticationEntryPoint(restAuthenticationEntryPoint));
        // http.authorizeHttpRequests(auth -> auth
          //       .requestMatchers("api/authentication/**").permitAll()
-          //              .requestMatchers("api/companyProfile/**").permitAll()
-            //            .requestMatchers("api/registeredUsers/**").hasRole("REGISTERED_USER")
-              //          .requestMatchers("api/appointments/**").hasRole("REGISTERED_USER")
-                //        .requestMatchers("api/users/**").hasRole("REGISTERED_USER")
-//
-  //              .anyRequest().authenticated())
+           //             .requestMatchers("api/companyProfile/**").permitAll()
+             //           .requestMatchers("api/registeredUsers/**").hasRole("REGISTERED_USER")
+               //         .requestMatchers("api/appointments/**").hasRole("REGISTERED_USER")
+                 //       .requestMatchers("api/users/**").hasRole("REGISTERED_USER")
 
-    //            .cors(withDefaults())
-      //          .addFilterBefore(new TokenAuthenticationFilter(tokenUtils,  userDetailsService()), BasicAuthenticationFilter.class)
-        //        .csrf(csrf -> csrf.disable());
+                //.anyRequest().authenticated())
+
+                //.cors(withDefaults())
+                //.addFilterBefore(new TokenAuthenticationFilter(tokenUtils,  userDetailsService()), BasicAuthenticationFilter.class)
+                //.csrf(csrf -> csrf.disable());
 
 
 
-        http.authenticationProvider(authenticationProvider());
+       // http.authenticationProvider(authenticationProvider());
 
         return http.build();
     }
