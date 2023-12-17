@@ -28,6 +28,7 @@ public class EquipmentController {
         return new ResponseEntity<>(equipmentsByName, HttpStatus.OK) ;
     }
 
+
     @GetMapping(value = "/findAvailable/{id}")
     public ResponseEntity<List<Equipment>> findAvailableEquipmentForCompany( @PathVariable("id") Long companyId){
         List<Equipment> availableEquipment= equipmentService.findAvailableEquipmentForCompany(companyId);

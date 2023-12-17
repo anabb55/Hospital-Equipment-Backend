@@ -43,7 +43,35 @@ public class EquipmentStock {
         this.amount = amount;
     }
 
+
     public EquipmentStock(){}
+
+    public EquipmentStock(){}
+    public Long getId() {
+        return id;
+    }
+
+    public Equipment getEquipment() {
+        return equipment;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setEquipment(Equipment equipment) {
+        this.equipment = equipment;
+    }
+
+
 
 
 

@@ -38,11 +38,12 @@ public class Equipment {
 
     private Set<EquipmentStock> equipmentStocks;
 
-    public Equipment(Long id,String name, String description, Double grade, Long amount){
+    public Equipment(Long id,String name, String description, String type, Double grade, Long amount){
 
         this.id = id;
         this.name = name;
         this.description = description;
+        this.type = type;
         this.grade = grade;
         this.amount = amount;
     }

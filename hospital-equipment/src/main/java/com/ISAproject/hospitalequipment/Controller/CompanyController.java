@@ -1,5 +1,6 @@
 package com.ISAproject.hospitalequipment.Controller;
 
+import com.ISAproject.hospitalequipment.domain.Address;
 import com.ISAproject.hospitalequipment.domain.Company;
 import com.ISAproject.hospitalequipment.domain.Equipment;
 import com.ISAproject.hospitalequipment.domain.RegisteredUser;
@@ -41,11 +42,31 @@ public class CompanyController {
 
 
     @PostMapping("/save")
+    public ResponseEntity<CompanyDTO> saveCompanyProfile(@RequestBody CompanyDTO companyDto) {
+        Company company = new Company();
+        company.setId(companyDto.getId());
 
-    public ResponseEntity<Company> saveCompanyProfile(@RequestBody Company company) {
+        Address address = new Address();
+        address.setId(companyDto.getAddress().getId());
+        address.setCity(companyDto.getAddress().getCity());
+        address.setCountry(companyDto.getAddress().getCountry());
+        address.setStreet(companyDto.getAddress().getStreet());
+        address.setNumber(companyDto.getAddress().getNumber());
+
+        company.setAddress(address);
+        company.setDescription(companyDto.getDescription());
+        company.setName(companyDto.getName());
+        company.setGrade(companyDto.getGrade());
+        company.setWorkStartTime(companyDto.getWorkStartTime());
+        company.setWorkEndTime(companyDto.getWorkEndTime());
+
         Company createdCompany = companyService.save(company);
-        return new ResponseEntity<>(createdCompany, HttpStatus.CREATED);
-    }
+
+        if (createdCompany == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(new CompanyDTO(company), HttpStatus.OK);    }
 
 
     @GetMapping("/byAdmin/{id}")
