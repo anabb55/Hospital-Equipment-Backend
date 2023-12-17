@@ -37,4 +37,17 @@ public class ReservationController {
         return new ResponseEntity<>(new ReservationDTO(reservation), HttpStatus.CREATED);
     }
 
+
+    @PostMapping("/createReservationPredefined/{UserId}")
+    public ResponseEntity<ReservationDTO> createReservationPredefined(@RequestBody Appointment appointment,@PathVariable Long UserId) {
+        Reservation reservation = new Reservation();
+        RegisteredUser user=registeredUserService.findOne(Math.toIntExact(UserId));
+        reservation.setPenaltyPoints(0L);
+        reservation.setRegisteredUser(user);
+        reservation.setReservationStatus(ReservationStatus.RESERVED);
+        reservation.setAppointment(appointment);
+        reservation = reservationService.create(reservation);
+        return new ResponseEntity<>(new ReservationDTO(reservation), HttpStatus.CREATED);
+    }
+
 }

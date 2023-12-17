@@ -37,4 +37,11 @@ public class EquipmentController {
         List<Equipment> availableEquipment= equipmentService.findAvailableEquipmentForCompany(companyId);
         return new ResponseEntity<>(availableEquipment, HttpStatus.OK) ;
     }
+
+    @GetMapping(value = "/findAll")
+    public ResponseEntity<List<Equipment>> findAll(){
+        List<Equipment> equipments = equipmentService.findAll();
+        return new ResponseEntity<>(equipments, HttpStatus.OK) ;
+    }
+
 }

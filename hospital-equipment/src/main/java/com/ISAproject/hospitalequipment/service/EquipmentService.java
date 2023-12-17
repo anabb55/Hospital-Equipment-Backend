@@ -11,4 +11,6 @@ public interface EquipmentService {
 
     //returns equipment that Company doesn't possess
     public List<Equipment> findAvailableEquipmentForCompany(Long companyId);
+
+    public List<Equipment> findAll();
 }
