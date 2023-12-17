@@ -25,6 +25,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -38,7 +39,18 @@ public class AppointmentController {
 
     @Autowired
     private CompanyService companyService;
+
     @CrossOrigin(origins = "*")
+
+
+    @GetMapping("/getAppointmentsForCompany/{id}")
+    public ResponseEntity<List<AppointmentDTO>> getAppointmentsByCompany(@PathVariable Long id){
+        List<Appointment> appointments = appointmentService.getFreeAppointmentsByCompany(id);
+
+        List<AppointmentDTO> appointmentDTOS = appointments.stream().map(AppointmentDTO::new).collect(Collectors.toList());
+
+        return new ResponseEntity<>(appointmentDTOS, HttpStatus.OK);
+    }
 
     @GetMapping("/generateRandomAppointments/{companyId}")
     public ResponseEntity<List<AppointmentDTO>> generateRandomAppointments(
@@ -106,6 +118,22 @@ public class AppointmentController {
         appointmentService.save(appointment);
 
         return new ResponseEntity<>(new AppointmentDTO(appointment), HttpStatus.CREATED);
+    }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @CrossOrigin
+    @PutMapping(value = "/update/{id}")
+    public ResponseEntity<AppointmentDTO> update(@PathVariable Long id, @RequestBody AppointmentDTO appointmentDTO){
+        Optional<Appointment> appointmentOptional = appointmentService.findById(id);
+
+        Appointment appointment = appointmentOptional.get();
+
+        appointment.setAppointmentStatus(AppointmentStatus.TAKEN);
+
+        appointmentService.save(appointment);
+
+        return new ResponseEntity<>(new AppointmentDTO(appointment), HttpStatus.OK);
+
+
     }
 }
 

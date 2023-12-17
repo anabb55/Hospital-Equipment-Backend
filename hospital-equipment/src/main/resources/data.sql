@@ -1,62 +1,63 @@
 INSERT INTO public.addresses(
-     city, country, number, street)
+    city, country, number, street)
 VALUES ( 'Novi Sad', 'Serbia', '37', 'Dimitrija Tucovica');
 
 INSERT INTO addresses(
-     city, country, number, street)
+    city, country, number, street)
 VALUES ( 'Belgrad', 'Serbia', '45', 'Knez Mihailova');
 
 INSERT INTO addresses(
-     city, country, number, street)
+    city, country, number, street)
 VALUES ( 'Nis', 'Serbia', '60', 'Mileve Maric');
 INSERT INTO addresses(
-     city, country, number, street)
+    city, country, number, street)
 VALUES ( 'Trebinje', 'Bih', '60', 'Nemanjina');
 
 INSERT INTO addresses(
-     city, country, number, street)
+    city, country, number, street)
 VALUES ( 'Bijeljina', 'Bih', '50', 'Vozda Karadjordja');
 
 INSERT INTO addresses(
-     city, country, number, street)
+    city, country, number, street)
 VALUES ( 'Kragujevac', 'Serbia', '10', 'Mileve Maric');
 
 
 INSERT INTO role(
     id, name)
-VALUES (1, 'REGISTERED_USER');
+VALUES (1, 'ROLE_REGISTERED_USER');
 
 INSERT INTO role(
     id, name)
-VALUES (2, 'COMPANY_ADMIN');
+VALUES (2, 'ROLE_COMPANY_ADMIN');
 
 INSERT INTO role(
     id, name)
-VALUES (3, 'SYSTEM_ADMIN');
+VALUES (3, 'ROLE_SYSTEM_ADMIN');
 
 
 INSERT INTO users(
-     email, enabled, first_name, last_name, occupation, password, phone_number, address_id)
-VALUES ( 'taraboskovic066@gmail.com', false, 'Tara', 'Boskovic', 'student', '123', '066-2678-772', 1);
+    email, enabled, first_name, last_name,username ,occupation, password, phone_number, address_id)
+VALUES ( 'taraboskovic066@gmail.com', true, 'Tara', 'Boskovic','taric', 'student', '$2a$10$mD0kgZJFbHEdEM5ICKJbgecF3qjIzP.i3zVV.nszlWh8Adp4gs4K6', '066-2678-772', 1);
+
 
 INSERT INTO users(
-     email, enabled, first_name, last_name, occupation, password, phone_number, address_id)
-VALUES ( 'example@gmail.com', false, 'Milos', 'Milosevic', 'doctor', '2670', '064-3782-892', 2);
+    email, enabled, first_name, last_name,username, occupation, password, phone_number, address_id)
+VALUES ( 'example@gmail.com', false, 'Milos', 'Milosevic','anic', 'doctor', '2670', '064-3782-892', 2);
 
 INSERT INTO users(
-     email, enabled, first_name, last_name, occupation, password, phone_number, address_id)
-VALUES ( 'nikolinaskiljevic@gmail.com',false, 'Nikolina', 'Skiljevic', 'nurse', '36782',  '069-3782-738', 3);
+    email, enabled, first_name, last_name,username, occupation, password, phone_number, address_id)
+VALUES ( 'nikolinaskiljevic@gmail.com',false, 'Nikolina', 'Skiljevic','aaa', 'nurse', '36782',  '069-3782-738', 3);
 INSERT INTO users(
-     email, enabled, first_name, last_name, occupation, password, phone_number, address_id)
-VALUES ( 'janko@gmail.com',false, 'Janko', 'Jankovic', 'nurse', '36782',  '069-3782-738', 4);
+    email, enabled, first_name, last_name,username, occupation, password, phone_number, address_id)
+VALUES ( 'janko@gmail.com',false, 'Janko', 'Jankovic','aaa', 'nurse', '36782',  '069-3782-738', 4);
 
 INSERT INTO users(
-     email, enabled, first_name, last_name, occupation, password, phone_number, address_id)
-VALUES ( 'marko@gmail.com',false, 'Marko', 'Markovic', 'nurse', '222345',  '069-3782-738', 5);
+    email, enabled, first_name, last_name, username, occupation, password, phone_number, address_id)
+VALUES ( 'marko@gmail.com',false, 'Marko', 'Markovic', 'aaa', 'nurse', '222345',  '069-3782-738', 5);
 
 INSERT INTO users(
-     email, enabled, first_name, last_name, occupation, password, phone_number, address_id)
-VALUES ( 'Mirko@gmail.com',false, 'Mirko', 'Mirkovic', 'nurse', '36782',  '069-3782-738', 6);
+    email, enabled, first_name, last_name,username, occupation, password, phone_number, address_id)
+VALUES ( 'Mirko@gmail.com',false, 'Mirko', 'Mirkovic','banana', 'nurse', '36782',  '069-3782-738', 6);
 
 
 
@@ -132,19 +133,19 @@ VALUES (2,6);
 
 
 INSERT INTO equipments(
-     amount, grade, description, name)
+    amount, grade, description, name)
 VALUES ( 50, 5, 'Strong', 'Scissors');
 
 INSERT INTO equipments(
-     amount, grade, description, name)
+    amount, grade, description, name)
 VALUES ( 2000, 4, 'Medical', 'Gloves');
 
 INSERT INTO equipments(
-     amount, grade, description, name)
+    amount, grade, description, name)
 VALUES ( 500, 5, 'Cotton', 'Coat');
 
 INSERT INTO equipments(
-     amount, grade, description, name)
+    amount, grade, description, name)
 VALUES ( 500, 5, 'elastic', 'Bandage');
 
 

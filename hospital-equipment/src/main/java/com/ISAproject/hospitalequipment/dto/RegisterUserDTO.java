@@ -37,6 +37,7 @@ public class RegisterUserDTO extends UserDTO{
                 registeredUser.getId(),
                 registeredUser.getFirstName(),
                 registeredUser.getLastName(),
+                registeredUser.getUsername(),
                 registeredUser.getPassword(),
                 registeredUser.getEmail(),
                 registeredUser.getOccupation(),

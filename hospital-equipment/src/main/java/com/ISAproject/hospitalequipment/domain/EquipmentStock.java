@@ -1,5 +1,6 @@
 package com.ISAproject.hospitalequipment.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,15 +23,16 @@ public class EquipmentStock {
 
     @JoinColumn(name = "equipment_id")
     @ManyToOne(fetch=FetchType.EAGER)
-
     Equipment equipment;
-
 
     @JoinColumn(name="company_id")
 
+
     @ManyToOne(fetch=FetchType.LAZY)
 
+
     Company company;
+
 
     @Column(name = "amount")
     Long amount;
@@ -44,6 +46,8 @@ public class EquipmentStock {
         this.amount = amount;
     }
 
-
     public EquipmentStock(){}
+
+
+
 }

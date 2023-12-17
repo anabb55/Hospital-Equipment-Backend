@@ -11,8 +11,12 @@ public interface ReservationService {
 
     public Reservation save(Reservation reservation);
 
+
     public Reservation getLast();
 
     public List<Reservation> getAll();
+
+
+    public Reservation create(Reservation reservation);
 
 }

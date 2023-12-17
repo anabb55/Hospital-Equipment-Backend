@@ -44,6 +44,7 @@ public class Company implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
     private LocalTime workStartTime;
 
+
     @NotNull
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
     private LocalTime workEndTime;
@@ -52,7 +53,9 @@ public class Company implements Serializable {
 
 
 
+
     @OneToMany(mappedBy = "company", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+
     private Set<CompanyAdministrator> administrators = new HashSet<CompanyAdministrator>();
 
 

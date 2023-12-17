@@ -17,5 +17,13 @@ public class SystemAdmin extends User {
     @Enumerated(EnumType.STRING)
     private UserCategory userCategory;
 
-
+    SystemAdmin(Long id, String email, String password, String firstName, String lastName, String phoneNumber, String occupation, boolean enabled, Address address,UserCategory userCategory){
+        super(email, password, firstName, lastName, phoneNumber, occupation, enabled, address);
+        this.userCategory = userCategory;
+    }
+    SystemAdmin(Long id, String email, String password, String firstName, String lastName, String phoneNumber, String occupation, Address address,UserCategory userCategory){
+        super(email, password, firstName, lastName, phoneNumber, occupation,  address);
+        this.userCategory = userCategory;
+    }
+    SystemAdmin(){}
 }

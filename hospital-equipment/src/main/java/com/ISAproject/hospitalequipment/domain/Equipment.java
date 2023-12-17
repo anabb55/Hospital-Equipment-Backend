@@ -26,6 +26,7 @@ public class Equipment {
 
     public String description;
 
+    public String type;
     public Double grade;
 
     public Long amount;
@@ -36,7 +37,9 @@ public class Equipment {
     @OneToMany(mappedBy = "equipment", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
 
     private Set<EquipmentStock> equipmentStocks;
+
     public Equipment(Long id,String name, String description, Double grade, Long amount){
+
         this.id = id;
         this.name = name;
         this.description = description;
