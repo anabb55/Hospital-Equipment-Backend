@@ -1,7 +1,12 @@
 package com.ISAproject.hospitalequipment.dto;
 
+import com.ISAproject.hospitalequipment.domain.EquipmentStock;
 import com.ISAproject.hospitalequipment.domain.ReservationEquipmentStock;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class ReservationEquipmentStockDTO {
     private Long id;
     private ReservationDTO reservationDTO;
@@ -27,5 +32,8 @@ public class ReservationEquipmentStockDTO {
     {
 
     }
+
+
+
 }
 

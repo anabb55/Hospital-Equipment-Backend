@@ -26,6 +26,10 @@ public class EquipmentStockServiceImpl implements EquipmentStockService {
         return this.equipmentStockRepo.findAmountByCompanyAndEquipment(companyId,equipmentId);
     }
 
+    public List<EquipmentStock> getAll()
+    {
+        return this.equipmentStockRepo.findAll();
+    }
     public void updateAmount(Long equipmentId, Long companyId, Long newAmount) {
         EquipmentStock oldEquipmentStock = equipmentStockRepo.findByEquipmentIdAndCompanyId(equipmentId, companyId);
 
@@ -37,4 +41,9 @@ public class EquipmentStockServiceImpl implements EquipmentStockService {
             throw new RuntimeException("EquipmentStock not found for given equipment and company");
         }
     }
+
+    public EquipmentStock findById(Long id){
+        return equipmentStockRepo.findById(id).get();
+    }
+
 }

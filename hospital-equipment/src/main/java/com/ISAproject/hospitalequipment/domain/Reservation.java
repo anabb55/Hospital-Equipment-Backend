@@ -26,10 +26,10 @@ public class Reservation {
     @Enumerated(EnumType.STRING)
     private ReservationStatus reservationStatus;
 
-    @OneToMany(mappedBy = "reservation", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "reservation", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<ReservationEquipmentStock> reservationEquipmentStocks = new HashSet<ReservationEquipmentStock>();
 
-    @OneToOne
+    @OneToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "appointment_id")
     private Appointment appointment;
 
@@ -38,7 +38,7 @@ public class Reservation {
     private QRCode qrCode;
 
     @JoinColumn(name = "registered_user_id")
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.LAZY)
     private RegisteredUser registeredUser;
 
 }

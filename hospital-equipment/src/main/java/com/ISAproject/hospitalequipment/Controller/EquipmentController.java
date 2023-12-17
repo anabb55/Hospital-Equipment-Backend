@@ -16,17 +16,21 @@ public class EquipmentController {
 
     @Autowired
     public EquipmentService equipmentService;
+    @CrossOrigin(origins = "*")
 
     @GetMapping(value = "/byCompany")
     public ResponseEntity<List<Equipment>> getByCompany(Long companyId){
         List<Equipment> equipmentsByCompany = equipmentService.getByCompany(companyId);
         return new ResponseEntity<>(equipmentsByCompany, HttpStatus.OK) ;
     }
+    @CrossOrigin(origins = "*")
+
     @GetMapping(value = "/findByName")
     public ResponseEntity<List<Equipment>> findEquipmentByName(String name){
         List<Equipment> equipmentsByName = equipmentService.findEquipmentByName(name);
         return new ResponseEntity<>(equipmentsByName, HttpStatus.OK) ;
     }
+    @CrossOrigin(origins = "*")
 
     @GetMapping(value = "/findAvailable/{id}")
     public ResponseEntity<List<Equipment>> findAvailableEquipmentForCompany( @PathVariable("id") Long companyId){

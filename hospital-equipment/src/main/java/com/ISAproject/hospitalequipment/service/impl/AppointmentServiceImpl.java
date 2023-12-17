@@ -40,9 +40,6 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     public Appointment createExtraOrdinaryAppointment(Appointment appointment, AppointmentDTO appointmentDTO){
 
-
-
-
         return appointmentRepo.save(appointment);
 
     }

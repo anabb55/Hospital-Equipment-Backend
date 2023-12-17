@@ -15,11 +15,11 @@ public class ReservationEquipmentStock {
     @NotNull
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="reservation_id")
     private Reservation reservation;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="equipment_stock_id")
     private EquipmentStock equipmentStock;
 

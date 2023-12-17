@@ -40,6 +40,9 @@ public class AppointmentController {
     @Autowired
     private CompanyService companyService;
 
+    @CrossOrigin(origins = "*")
+
+
     @GetMapping("/getAppointmentsForCompany/{id}")
     public ResponseEntity<List<AppointmentDTO>> getAppointmentsByCompany(@PathVariable Long id){
         List<Appointment> appointments = appointmentService.getFreeAppointmentsByCompany(id);
@@ -66,6 +69,7 @@ public class AppointmentController {
 
         return new ResponseEntity<>(appointmentDTOs, HttpStatus.OK);
     }
+    @CrossOrigin(origins = "*")
 
     @PostMapping(value="/create/{companyId}")
     public ResponseEntity<AppointmentDTO> saveAppointment(@PathVariable Long companyId, @RequestBody AppointmentDTO appointmentDTO) {
