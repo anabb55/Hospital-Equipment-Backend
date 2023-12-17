@@ -9,10 +9,13 @@ import com.ISAproject.hospitalequipment.dto.ReservationDTO;
 import com.ISAproject.hospitalequipment.service.AppointmentService;
 import com.ISAproject.hospitalequipment.service.RegisteredUserService;
 import com.ISAproject.hospitalequipment.service.ReservationService;
+import com.google.zxing.WriterException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/reservation")
@@ -48,6 +51,11 @@ public class ReservationController {
         reservation.setAppointment(appointment);
         reservation = reservationService.create(reservation);
         return new ResponseEntity<>(new ReservationDTO(reservation), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/sendEmailWithQRCode")
+    public void sendQRCode() throws IOException, WriterException {
+        reservationService.getDataForQRCode();
     }
 
 }

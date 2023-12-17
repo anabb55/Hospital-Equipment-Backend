@@ -16,6 +16,7 @@ import com.ISAproject.hospitalequipment.service.CompanyService;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -105,10 +106,12 @@ public class AppointmentController {
 
         return new ResponseEntity<>(new AppointmentDTO(appointment), HttpStatus.CREATED);
     }
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+
     @CrossOrigin
     @PutMapping(value = "/update/{id}")
     public ResponseEntity<AppointmentDTO> update(@PathVariable Long id, @RequestBody AppointmentDTO appointmentDTO){
+
+
         Optional<Appointment> appointmentOptional = appointmentService.findById(id);
 
         Appointment appointment = appointmentOptional.get();
