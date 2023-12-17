@@ -37,7 +37,7 @@ VALUES (3, 'ROLE_SYSTEM_ADMIN');
 
 INSERT INTO users(
     email, enabled, first_name, last_name,username ,occupation, password, phone_number, address_id)
-VALUES ( 'taraboskovic066@gmail.com', true, 'Tara', 'Boskovic','taric', 'student', '$2a$10$mD0kgZJFbHEdEM5ICKJbgecF3qjIzP.i3zVV.nszlWh8Adp4gs4K6', '066-2678-772', 1);
+VALUES ( 'anoka1810@gmail.com', true, 'Tara', 'Boskovic','taric', 'student', '$2a$10$mD0kgZJFbHEdEM5ICKJbgecF3qjIzP.i3zVV.nszlWh8Adp4gs4K6', '066-2678-772', 1);
 
 
 INSERT INTO users(

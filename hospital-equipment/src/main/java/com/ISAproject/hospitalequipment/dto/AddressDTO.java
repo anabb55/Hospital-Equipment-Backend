@@ -28,4 +28,7 @@ public class AddressDTO {
         this.number=address.getNumber();
         this.street=address.getStreet();
     }
+
+    public AddressDTO() {
+    }
 }

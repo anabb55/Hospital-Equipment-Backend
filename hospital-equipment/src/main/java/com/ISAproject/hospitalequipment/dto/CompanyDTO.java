@@ -24,6 +24,8 @@ public class CompanyDTO {
     private LocalTime workEndTime;
 
 
+    public CompanyDTO() {
+    }
 
     public CompanyDTO(Company company) {
         this(company.getId(),company.getName(),new AddressDTO(company.getAddress()),company.getDescription(),company.getGrade(),company.getWorkStartTime(),company.getWorkEndTime());
