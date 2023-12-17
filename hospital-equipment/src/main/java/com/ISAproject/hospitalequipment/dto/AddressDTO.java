@@ -13,6 +13,8 @@ public class AddressDTO {
     private String street;
     private String number;
 
+   public AddressDTO(){}
+  
     public AddressDTO(Long id, String country, String city, String street, String number) {
         this.id = id;
         this.country = country;
@@ -31,4 +33,7 @@ public class AddressDTO {
 
     public AddressDTO() {
     }
+
+
 }
+

@@ -29,18 +29,20 @@ public class UserServiceImpl implements UserService {
     public User createUser(User user,UserDTO userDTO){
 
         user.setUsername(userDTO.getUsername());
+
         user.setEmail(userDTO.getEmail());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         user.setFirstName(userDTO.getFirstname());
         user.setLastName(userDTO.getLastname());
-        Address address = new Address(); // Primer za novi Address
-        // Postavite odgovarajuće atribute Adrese iz userDTO-a
-        address.setStreet(userDTO.getAddress().getStreet());
+
+
+        Address address = new Address();
+        address.setId(userDTO.getAddress().getId());
         address.setCity(userDTO.getAddress().getCity());
-        address.setCountry((userDTO.getAddress().getCountry()));
-        address.setId((userDTO.getAddress().getId()));
-        address.setNumber((userDTO.getAddress().getNumber()));
-        // Postavite Address objekat na User entitet
+        address.setCountry(userDTO.getAddress().getCountry());
+        address.setStreet(userDTO.getAddress().getStreet());
+        address.setNumber(userDTO.getAddress().getNumber());
+
         user.setAddress(address);
         user.setPhoneNumber(userDTO.getPhoneNumber());
         user.setOccupation(userDTO.getOccupation());

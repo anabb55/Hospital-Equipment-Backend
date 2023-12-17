@@ -21,9 +21,11 @@ public class CompanyAdministrator extends User{
 
 
 
+
     @ManyToOne(fetch = FetchType.LAZY)
 
     @JoinColumn(name="company_id")
+
     private Company company;
 
     @OneToMany(mappedBy = "administrator", fetch = FetchType.LAZY,cascade = CascadeType.ALL)

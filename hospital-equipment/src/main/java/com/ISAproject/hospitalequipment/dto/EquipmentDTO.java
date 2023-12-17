@@ -30,7 +30,5 @@ public class EquipmentDTO {
         this.grade=equipment.getGrade();
     }
 
-    public EquipmentDTO(){
-
-    }
+    public EquipmentDTO(){}
 }

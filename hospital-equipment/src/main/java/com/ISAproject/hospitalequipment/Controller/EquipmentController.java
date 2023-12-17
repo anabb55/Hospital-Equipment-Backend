@@ -32,6 +32,7 @@ public class EquipmentController {
     }
     @CrossOrigin(origins = "*")
 
+
     @GetMapping(value = "/findAvailable/{id}")
     public ResponseEntity<List<Equipment>> findAvailableEquipmentForCompany( @PathVariable("id") Long companyId){
         List<Equipment> availableEquipment= equipmentService.findAvailableEquipmentForCompany(companyId);

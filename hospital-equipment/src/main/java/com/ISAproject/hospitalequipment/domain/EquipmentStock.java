@@ -25,12 +25,12 @@ public class EquipmentStock {
     @ManyToOne(fetch=FetchType.EAGER)
     Equipment equipment;
 
-    @JoinColumn(name="company_id")
+
 
 
     @ManyToOne(fetch=FetchType.LAZY)
-
-
+    @JoinColumn(name="company_id")
+ 
     Company company;
 
 
@@ -47,6 +47,9 @@ public class EquipmentStock {
     }
 
     public EquipmentStock(){}
+
+
+
 
 
 

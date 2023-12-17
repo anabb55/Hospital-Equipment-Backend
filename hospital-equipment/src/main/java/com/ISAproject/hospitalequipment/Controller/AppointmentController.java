@@ -121,6 +121,7 @@ public class AppointmentController {
         return new ResponseEntity<>(new AppointmentDTO(appointment), HttpStatus.CREATED);
     }
 
+
     @CrossOrigin
     @PutMapping(value = "/update/{id}")
     public ResponseEntity<AppointmentDTO> update(@PathVariable Long id, @RequestBody AppointmentDTO appointmentDTO){
@@ -136,6 +137,13 @@ public class AppointmentController {
 
         return new ResponseEntity<>(new AppointmentDTO(appointment), HttpStatus.OK);
 
+
+
+    @PostMapping(value="/createApp")
+    public ResponseEntity<Appointment> createApp(Appointment appointment){
+        Appointment app= appointmentService.save(appointment);
+
+        return new ResponseEntity<>(app,HttpStatus.OK);
 
     }
 }

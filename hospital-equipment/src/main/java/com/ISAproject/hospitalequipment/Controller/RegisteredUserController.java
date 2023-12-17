@@ -1,5 +1,6 @@
 package com.ISAproject.hospitalequipment.Controller;
 
+import com.ISAproject.hospitalequipment.domain.Address;
 import com.ISAproject.hospitalequipment.domain.RegisteredUser;
 import com.ISAproject.hospitalequipment.domain.User;
 import com.ISAproject.hospitalequipment.dto.AppointmentDTO;
@@ -77,7 +78,15 @@ public class RegisteredUserController {
         registeredUser.setPassword(registerUserDTO.getPassword());
         registeredUser.setEmail(registerUserDTO.getEmail());
         registeredUser.setOccupation(registerUserDTO.getOccupation());
-        registeredUser.setAddress(registerUserDTO.getAddress());
+
+        Address address = new Address();
+        address.setId(registerUserDTO.getAddress().getId());
+        address.setCity(registerUserDTO.getAddress().getCity());
+        address.setCountry(registerUserDTO.getAddress().getCountry());
+        address.setStreet(registerUserDTO.getAddress().getStreet());
+        address.setNumber(registerUserDTO.getAddress().getNumber());
+
+        registeredUser.setAddress(address);
         registeredUser.setPhoneNumber(registerUserDTO.getPhoneNumber());
         RegisteredUser updatedRegUser = registeredUserService.save(registeredUser);
 
