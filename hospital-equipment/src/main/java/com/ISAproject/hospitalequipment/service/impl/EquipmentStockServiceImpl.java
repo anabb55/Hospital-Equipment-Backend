@@ -26,7 +26,7 @@ public class EquipmentStockServiceImpl implements EquipmentStockService {
         return this.equipmentStockRepo.findAmountByCompanyAndEquipment(companyId,equipmentId);
     }
 
-    public void updateAmount(Long equipmentId, Long companyId, int newAmount) {
+    public void updateAmount(Long equipmentId, Long companyId, Long newAmount) {
         EquipmentStock oldEquipmentStock = equipmentStockRepo.findByEquipmentIdAndCompanyId(equipmentId, companyId);
 
         if (oldEquipmentStock!=null) {

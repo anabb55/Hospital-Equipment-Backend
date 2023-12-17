@@ -24,7 +24,7 @@ public class ReservationEquipmentStock {
     private EquipmentStock equipmentStock;
 
     @Column(name = "amount")
-    int amount;
+    Long amount;
 
 
 

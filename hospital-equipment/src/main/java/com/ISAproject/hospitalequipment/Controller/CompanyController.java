@@ -9,6 +9,7 @@ import com.ISAproject.hospitalequipment.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -22,6 +23,8 @@ public class CompanyController {
     private CompanyService companyService;
 
     @GetMapping("/")
+
+
     public ResponseEntity<List<CompanyDTO>> getAllCompanyProfiles(){
         List<Company>companies=companyService.getAll();
         List<CompanyDTO> companyDTOs = new ArrayList<>();
@@ -31,11 +34,14 @@ public class CompanyController {
         }
 
         return new ResponseEntity<>(companyDTOs, HttpStatus.OK);
+
+
     }
 
 
 
     @PostMapping("/save")
+
     public ResponseEntity<Company> saveCompanyProfile(@RequestBody Company company) {
         Company createdCompany = companyService.save(company);
         return new ResponseEntity<>(createdCompany, HttpStatus.CREATED);
@@ -53,6 +59,13 @@ public class CompanyController {
 
         return new ResponseEntity<>(companyDTOs, HttpStatus.OK);
     }
+
+    @GetMapping("/byEquipment/{equipmentId}")
+    public List<Company> getByEquipment(@PathVariable Long equipmentId){
+        List<Company> companies= companyService.findCompaniesByEquipment(equipmentId);
+        return companies;
+    }
+
 
 
     @CrossOrigin(origins = "*")

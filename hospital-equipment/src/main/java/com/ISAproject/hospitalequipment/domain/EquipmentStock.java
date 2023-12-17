@@ -1,12 +1,17 @@
 package com.ISAproject.hospitalequipment.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.Columns;
 
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+@Getter
+@Setter
 @Entity
 @Table(name="equipment_stock")
 public class EquipmentStock {
@@ -21,56 +26,25 @@ public class EquipmentStock {
 
     Equipment equipment;
 
-
     @JoinColumn(name="company_id")
 
     @ManyToOne(fetch=FetchType.EAGER)
 
     Company company;
-
     @Column(name = "amount")
-    int amount;
+    Long amount;
 
     @OneToMany(mappedBy = "equipmentStock", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<ReservationEquipmentStock> reservationEquipmentStocks = new HashSet<ReservationEquipmentStock>();
 
-    public EquipmentStock(Equipment equipment, Company company, int amount) {
+    public EquipmentStock(Equipment equipment, Company company, Long amount) {
         this.equipment = equipment;
         this.company = company;
-        this.amount = amount;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Equipment getEquipment() {
-        return equipment;
-    }
-
-    public Company getCompany() {
-        return company;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setEquipment(Equipment equipment) {
-        this.equipment = equipment;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
-    }
-
-    public void setAmount(int amount) {
         this.amount = amount;
     }
 
     public EquipmentStock(){}
+
+
+
 }

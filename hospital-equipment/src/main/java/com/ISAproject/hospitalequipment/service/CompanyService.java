@@ -15,9 +15,9 @@ public interface CompanyService {
 
     public Company update(Company company, Long id);
 
-    /*
-    List<Company> findCompanyProfilesByEquipment(Equipment equipment);
-*/
+
+    List<Company> findCompaniesByEquipment(Long equipmentId);
+
     List<Company> findByNameContainingIgnoreCaseOrAddressCityContainingIgnoreCase(String name, String city);
 
     List<Company> findByRate(Integer rate);
