@@ -8,14 +8,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
+
+
 @Getter
 @Setter
 public class CompanyAdministratorDTO extends UserDTO {
     private CompanyDTO company;
+  
     public CompanyAdministratorDTO() {
     }
 
-
+  
     public CompanyAdministratorDTO(CompanyAdministrator a) {
         super(
                 a.getId(),
@@ -39,4 +46,5 @@ public class CompanyAdministratorDTO extends UserDTO {
         }
 
     }
+
 }

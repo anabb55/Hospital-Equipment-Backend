@@ -15,12 +15,13 @@ public interface AppointmentService {
 
     List<Appointment>generateRandomAppointments(Long companyId,LocalDate date);
     List<Appointment> findTakenAppointmentsByCompanyAndDate(Long companyId,LocalDate date);
+//    public List<Appointment> findByAdministratorAndDate(CompanyAdministrator administrator, LocalDate date) ;
 
     Appointment save(Appointment appointment);
 
     Appointment createExtraOrdinaryAppointment(Appointment appointment, AppointmentDTO appointmentDTO);
 
-    public CompanyAdministrator findAvailableAdministrator(LocalTime startTime, LocalTime endTime, LocalDate date);
+    public List<CompanyAdministrator> findAvailableAdministrator(LocalTime startTime, LocalTime endTime, LocalDate date,Long companyId);
 
 
 }

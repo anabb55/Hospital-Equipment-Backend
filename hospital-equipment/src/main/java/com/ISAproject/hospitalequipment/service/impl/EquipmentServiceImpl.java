@@ -29,4 +29,5 @@ public class EquipmentServiceImpl implements EquipmentService {
     public List<Equipment> findAll() {
         return equipmentRepo.findAll();
     }
+
 }

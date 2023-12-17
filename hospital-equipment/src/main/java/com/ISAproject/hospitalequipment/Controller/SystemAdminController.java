@@ -1,6 +1,7 @@
 package com.ISAproject.hospitalequipment.Controller;
 
 import com.ISAproject.hospitalequipment.domain.Address;
+
 import com.ISAproject.hospitalequipment.domain.CompanyAdministrator;
 import com.ISAproject.hospitalequipment.domain.SystemAdmin;
 import com.ISAproject.hospitalequipment.dto.CompanyAdministratorDTO;
@@ -48,5 +49,6 @@ public class SystemAdminController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(new SystemAdminDto(createdAdministrator), HttpStatus.OK);
+
     }
 }

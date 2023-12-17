@@ -29,7 +29,7 @@ public class Equipment {
     public String type;
     public Double grade;
 
-    public Integer amount;
+    public Long amount;
 
 
     @JsonIgnore
@@ -37,10 +37,13 @@ public class Equipment {
     @OneToMany(mappedBy = "equipment", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 
     private Set<EquipmentStock> equipmentStocks;
-    public Equipment(Long id,String name, String description,String type, Double grade, Integer amount){
+
+    public Equipment(Long id,String name, String description, String type, Double grade, Long amount){
+
         this.id = id;
         this.name = name;
         this.description = description;
+        this.type = type;
         this.grade = grade;
         this.amount = amount;
     }

@@ -9,6 +9,7 @@ import com.ISAproject.hospitalequipment.service.RoleService;
 import com.ISAproject.hospitalequipment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,16 +18,18 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepo userRepo;
 
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private RoleService roleService;
 
     public User createUser(User user,UserDTO userDTO){
 
+        user.setUsername(userDTO.getUsername());
+
         user.setEmail(userDTO.getEmail());
-        user.setPassword(userDTO.getPassword());
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         user.setFirstName(userDTO.getFirstname());
         user.setLastName(userDTO.getLastname());
 

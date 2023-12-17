@@ -1,10 +1,12 @@
 package com.ISAproject.hospitalequipment.Controller;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.ISAproject.hospitalequipment.domain.Appointment;
 import com.ISAproject.hospitalequipment.domain.CompanyAdministrator;
 import com.ISAproject.hospitalequipment.domain.RegisteredUser;
 import com.ISAproject.hospitalequipment.domain.Company;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.ISAproject.hospitalequipment.domain.User;
 import com.ISAproject.hospitalequipment.domain.enums.AppointmentStatus;
 import com.ISAproject.hospitalequipment.dto.AppointmentDTO;
@@ -28,6 +30,8 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/appointments")
 public class AppointmentController {
+
+    private static final Logger logger = LoggerFactory.getLogger(AppointmentController.class);
 
     @Autowired
     private AppointmentService appointmentService;
@@ -58,26 +62,40 @@ public class AppointmentController {
         appointment.setId(appointmentDTO.getId());
         appointment.setDate(appointmentDTO.getDate());
         appointment.setAppointmentStatus(AppointmentStatus.TAKEN);
-        appointment.setDuration(appointmentDTO.getDuration());
+        appointment.setEndTime(appointmentDTO.getEndTime());
 
         Company company = companyService.getById(companyId);
+
 
         if (company == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        CompanyAdministrator administrator = appointmentService.findAvailableAdministrator(company.getWorkStartTime(), company.getWorkEndTime(), appointmentDTO.getDate());
 
-        if (administrator == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        List<CompanyAdministrator> administrators = appointmentService.findAvailableAdministrator(appointmentDTO.getStartTime(),appointmentDTO.getEndTime(), appointmentDTO.getDate(),companyId);
+
+        for (CompanyAdministrator administrator : administrators) {
+            if (administrator.getCompany().getId().equals(companyId)){
+                appointment.setAdministrator(administrator);
+                break;
+            }
         }
 
-        appointment.setAdministrator(administrator);
+
+
+
         appointment.setStartTime(appointmentDTO.getStartTime());
 
         appointmentService.save(appointment);
 
         return new ResponseEntity<>(new AppointmentDTO(appointment), HttpStatus.CREATED);
+    }
+
+    @PostMapping(value="/createApp")
+    public ResponseEntity<Appointment> createApp(Appointment appointment){
+        Appointment app= appointmentService.save(appointment);
+
+        return new ResponseEntity<>(app,HttpStatus.OK);
     }
 }
 

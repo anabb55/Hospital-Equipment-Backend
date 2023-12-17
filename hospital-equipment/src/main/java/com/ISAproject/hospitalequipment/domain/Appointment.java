@@ -1,4 +1,5 @@
 package com.ISAproject.hospitalequipment.domain;
+import com.ISAproject.hospitalequipment.dto.AppointmentDTO;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -36,9 +37,10 @@ public class Appointment {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     public LocalDate date;
 
+
     @NotNull
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
-    public LocalTime duration;
+    public LocalTime endTime;
 
     @NotNull
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
@@ -49,7 +51,7 @@ public class Appointment {
 //    private CompanyProfile company;
 
 
-   // @ManyToOne(fetch = FetchType.EAGER)
+    // @ManyToOne(fetch = FetchType.EAGER)
     //@JoinColumn(name="company_id")
     //private Company company;
 
@@ -60,13 +62,21 @@ public class Appointment {
     @JoinColumn(name = "administrator_id")
     private CompanyAdministrator administrator;
 
-    @OneToOne(mappedBy = "appointment",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "appointment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private Reservation reservation;
+
     public Appointment() {
 
     }
 
+    public Appointment(long id, LocalDate date, LocalTime endTime, LocalTime startTime, AppointmentStatus appointmentStatus) {
+        this.id = id;
+        this.date = date;
+        this.endTime = endTime;
+        this.startTime = startTime;
+        this.appointmentStatus = appointmentStatus;
+    }
+
 
 }
-

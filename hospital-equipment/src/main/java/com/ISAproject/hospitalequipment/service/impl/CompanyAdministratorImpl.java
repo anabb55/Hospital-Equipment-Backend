@@ -27,8 +27,8 @@ public class CompanyAdministratorImpl implements CompanyAdministratorService {
 
     public CompanyAdministrator getById(Long id){return companyAdministratorRepo.findById(id).get();}
 
-    public CompanyAdministrator findAvailableAdministrator(LocalTime startTime, LocalTime endTime, LocalDate date){
-        return companyAdministratorRepo.findAvailableAdministrator(date,startTime,endTime);
+    public List<CompanyAdministrator> findAvailableAdministrator(LocalTime startTime, LocalTime endTime, LocalDate date,Long companyId){
+        return companyAdministratorRepo.findAvailableAdministrator(date,startTime,endTime,companyId);
     }
 
     public CompanyAdministrator update(CompanyAdministrator admin, Long id){

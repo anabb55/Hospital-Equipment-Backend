@@ -43,9 +43,11 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentRepo.save(appointment);
 
     }
-
-    public CompanyAdministrator findAvailableAdministrator(LocalTime startTime, LocalTime endTime, LocalDate date){
-        return  companyAdministratorService.findAvailableAdministrator(startTime,endTime,date);
+//    public List<Appointment> findByAdministratorAndDate(CompanyAdministrator administrator, LocalDate date) {
+//        return appointmentRepo.findByAdministratorAndDate(administrator,date);
+//    }
+    public List<CompanyAdministrator> findAvailableAdministrator(LocalTime startTime, LocalTime endTime, LocalDate date,Long companyId){
+        return  companyAdministratorService.findAvailableAdministrator(startTime,endTime,date,companyId);
     }
 
     public Appointment save(Appointment appointment) {
@@ -87,25 +89,25 @@ public class AppointmentServiceImpl implements AppointmentService {
                 .map(Appointment::getStartTime)
                 .toList();
 
-        while (startWorkingTime.plusHours(2).isBefore(endWorkingTime)) {
+        while (startWorkingTime.plusHours(duration.getHour()).plusMinutes(duration.getMinute()).plusSeconds(duration.getSecond()).isBefore(endWorkingTime)) {
             LocalTime currentStartTime = startWorkingTime;
             LocalTime currentEndTime = startWorkingTime.plusHours(2);
 
             boolean isTimeSlotFree = takenTimes.stream()
-                    .noneMatch(takenTime -> takenTime.isBefore(currentEndTime) && takenTime.plusHours(2).isAfter(currentStartTime));
+                    .noneMatch(takenTime -> takenTime.isBefore(currentEndTime) && takenTime.plusHours(duration.getHour()).plusMinutes(duration.getMinute()).plusSeconds(duration.getSecond()).isAfter(currentStartTime));
 
             if (isTimeSlotFree) {
                 Appointment appointment = new Appointment();
                 appointment.setId(nextId);
                 appointment.setDate(date);
                 appointment.setStartTime(currentStartTime);
-                appointment.setDuration(duration);
+                appointment.setEndTime(currentEndTime);
                 appointment.setAppointmentStatus(AppointmentStatus.EXTRAORDINARY);
                 generatedAppointments.add(appointment);
 
             }
 
-            startWorkingTime = startWorkingTime.plusHours(2);
+            startWorkingTime = startWorkingTime.plusHours(duration.getHour()).plusMinutes(duration.getMinute()).plusSeconds(duration.getSecond());
         }
         return generatedAppointments;
     }
