@@ -16,7 +16,7 @@ public class CompanyAdministratorImpl implements CompanyAdministratorService {
     @Autowired
     private CompanyAdministratorRepo companyAdministratorRepo;
 
-    //pazi na ovo=>izmjeni kasnije=> krsis pravila=> referenciranje drugog servisa
+
     @Autowired
     private AddressService addressService;
     public List<CompanyAdministrator> findAll(){
@@ -41,7 +41,7 @@ public class CompanyAdministratorImpl implements CompanyAdministratorService {
             old.setOccupation(admin.getOccupation());
             old.setPhoneNumber(admin.getPhoneNumber());
             old.setPassword(admin.getPassword());
-            addressService.update(admin.getAddress());
+            //addressService.update(admin.getAddress());
             return companyAdministratorRepo.save(old);
         }else{
             return null;

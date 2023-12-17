@@ -72,9 +72,9 @@ public class WebSecurityConfig {
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("api/authentication/**").permitAll()
                         .requestMatchers("api/companyProfile/**").permitAll()
-                        .requestMatchers("api/registeredUsers/**").hasRole("REGISTERED_USER")
-                        .requestMatchers("api/appointments/**").hasRole("REGISTERED_USER")
-                        .requestMatchers("api/users/**").hasRole("REGISTERED_USER")
+                        .requestMatchers("api/registeredUsers/**").permitAll()
+                        .requestMatchers("api/appointments/**").permitAll()
+                        .requestMatchers("api/users/**").permitAll()
 
                 .anyRequest().authenticated())
 

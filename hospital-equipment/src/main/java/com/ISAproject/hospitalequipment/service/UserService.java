@@ -13,4 +13,11 @@ public interface UserService {
    List<User> findAll();
 
    public User findByEmail(String email);
+
+   public User getById(Long id);
+
+
+   public User save(User user);
+
+   public void updateUsername(Long id, String username);
 }

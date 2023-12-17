@@ -111,4 +111,8 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
         return generatedAppointments;
     }
+
+    public void createApp(LocalDate date, LocalTime startTime,LocalTime endTime,Long adminId, Long id, String status ){
+        this.appointmentRepo.insertAppointment(date,startTime,endTime,adminId,id,status);
+    }
 }

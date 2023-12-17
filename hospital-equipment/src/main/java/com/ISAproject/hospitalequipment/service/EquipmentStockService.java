@@ -18,6 +18,6 @@ public interface EquipmentStockService {
 
   
 
-    public void deleteEquipmentStock(Long companyId, Long equipmentId);
+    public Long deleteEquipmentStock(Long companyId, Long equipmentId);
 
 }

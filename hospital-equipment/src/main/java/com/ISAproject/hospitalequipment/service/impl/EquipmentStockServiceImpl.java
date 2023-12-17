@@ -38,7 +38,11 @@ public class EquipmentStockServiceImpl implements EquipmentStockService {
         }
     }
 
-    public void deleteEquipmentStock(Long companyId, Long equipmentId){
-        this.equipmentStockRepo.deleteByEquipmentIdAndCompanyId(equipmentId,companyId);
+    public Long deleteEquipmentStock(Long companyId, Long equipmentId){
+       EquipmentStock eqStock = this.equipmentStockRepo.findByEquipmentIdAndCompanyId(equipmentId,companyId);
+
+        this.equipmentStockRepo.deleteEquipmentStockById(eqStock.getId());
+       //this.equipmentStockRepo.delete(eqStock);
+       return eqStock.getId();
     }
 }

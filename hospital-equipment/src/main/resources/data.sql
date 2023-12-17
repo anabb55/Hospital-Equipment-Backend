@@ -42,11 +42,11 @@ VALUES ( 'taraboskovic066@gmail.com', true, 'Tara', 'Boskovic','taric', 'student
 
 INSERT INTO users(
     email, enabled, first_name, last_name,username, occupation, password, phone_number, address_id)
-VALUES ( 'example@gmail.com', false, 'Milos', 'Milosevic','anic', 'doctor', '2670', '064-3782-892', 2);
+VALUES ( 'example@gmail.com', true, 'Milos', 'Milosevic','anic', 'doctor', '2670', '064-3782-892', 2);
 
 INSERT INTO users(
     email, enabled, first_name, last_name,username, occupation, password, phone_number, address_id)
-VALUES ( 'nikolinaskiljevic@gmail.com',false, 'Nikolina', 'Skiljevic','aaa', 'nurse', '36782',  '069-3782-738', 3);
+VALUES ( 'nikolinaskiljevic@gmail.com',true, 'Nikolina', 'Skiljevic','nina', 'nurse', '$2a$10$8Nm7wMyIxo7da3VfOJcE1eCI9JQOaWv5lVpehrMBSRAuODL2u/2Oq',  '069-3782-738', 3);
 INSERT INTO users(
     email, enabled, first_name, last_name,username, occupation, password, phone_number, address_id)
 VALUES ( 'janko@gmail.com',false, 'Janko', 'Jankovic','aaa', 'nurse', '36782',  '069-3782-738', 4);

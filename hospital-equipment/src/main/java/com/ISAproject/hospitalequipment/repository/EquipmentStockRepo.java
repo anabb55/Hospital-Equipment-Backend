@@ -24,6 +24,6 @@ public interface EquipmentStockRepo extends JpaRepository<EquipmentStock,Long> {
     @Query("SELECT es FROM EquipmentStock es WHERE es.equipment.id = :equipmentId AND es.company.id = :companyId")
     EquipmentStock findByEquipmentIdAndCompanyId(@Param("equipmentId") Long equipmentId, @Param("companyId") Long companyId);
 
-    @Query("DELETE FROM EquipmentStock es WHERE es.equipment.id = :equipmentId AND es.company.id = :companyId")
-    void deleteByEquipmentIdAndCompanyId(@Param("equipmentId") Long equipmentId, @Param("companyId") Long companyId);
+    @Query("DELETE FROM EquipmentStock es WHERE es.id = :equipmentStockId")
+    void deleteEquipmentStockById(Long equipmentStockId);
 }

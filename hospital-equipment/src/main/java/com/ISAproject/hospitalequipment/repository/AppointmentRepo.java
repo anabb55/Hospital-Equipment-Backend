@@ -7,8 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
 import java.time.LocalDate;
+import java.time.LocalTime;
+
 import java.util.List;
 
 @Repository
@@ -40,4 +41,14 @@ public interface AppointmentRepo extends JpaRepository<Appointment,Long> {
 //            @Param("date") LocalDate date);
 
 
+    @Query(value = "INSERT INTO appointments (date, start_time, end_time, administrator_id, id, appointment_status) " +
+            "VALUES (:date, :startTime, :endTime, :adminId, :id, :status)", nativeQuery = true)
+    void insertAppointment(
+            @Param("date") LocalDate date,
+            @Param("startTime") LocalTime startTime,
+            @Param("endTime") LocalTime endTime,
+            @Param("adminId") Long adminId,
+            @Param("id") Long id,
+            @Param("status") String status
+    );
 }

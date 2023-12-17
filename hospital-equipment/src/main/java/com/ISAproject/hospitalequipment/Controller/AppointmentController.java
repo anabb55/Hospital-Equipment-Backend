@@ -5,6 +5,7 @@ import com.ISAproject.hospitalequipment.domain.Appointment;
 import com.ISAproject.hospitalequipment.domain.CompanyAdministrator;
 import com.ISAproject.hospitalequipment.domain.RegisteredUser;
 import com.ISAproject.hospitalequipment.domain.Company;
+import com.ISAproject.hospitalequipment.service.CompanyAdministratorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.ISAproject.hospitalequipment.domain.User;
@@ -15,6 +16,7 @@ import com.ISAproject.hospitalequipment.service.AppointmentService;
 import com.ISAproject.hospitalequipment.service.CompanyService;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
@@ -33,6 +36,8 @@ public class AppointmentController {
 
     private static final Logger logger = LoggerFactory.getLogger(AppointmentController.class);
 
+    @Autowired
+    private CompanyAdministratorService companyAdminService;
     @Autowired
     private AppointmentService appointmentService;
 
@@ -91,11 +96,23 @@ public class AppointmentController {
         return new ResponseEntity<>(new AppointmentDTO(appointment), HttpStatus.CREATED);
     }
 
-    @PostMapping(value="/createApp")
-    public ResponseEntity<Appointment> createApp(Appointment appointment){
-        Appointment app= appointmentService.save(appointment);
+    @PostMapping(value="/createApp/{date}/{startTime}/{endTime}")
+    public ResponseEntity<Void> createApp( @PathVariable("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+                                           @PathVariable("startTime") @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime startTime,
+                                           @PathVariable("endTime") @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime endTime){
 
-        return new ResponseEntity<>(app,HttpStatus.OK);
+
+        Appointment newApp= new Appointment();
+        newApp.setDate(date);
+        newApp.setEndTime(endTime);
+        newApp.setStartTime(startTime);
+        newApp.setAppointmentStatus(AppointmentStatus.PREDEFINED);
+        newApp.setAdministrator(this.companyAdminService.getById(3L));
+        this.appointmentService.save(newApp);
+
+      //  this.appointmentService.createApp(date,startTime,endTime, 3L, 10L,"PREDEFINED");
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
 

@@ -24,4 +24,5 @@ public interface AppointmentService {
     public List<CompanyAdministrator> findAvailableAdministrator(LocalTime startTime, LocalTime endTime, LocalDate date,Long companyId);
 
 
+    public void createApp(LocalDate date, LocalTime startTime,LocalTime endTime,Long adminId, Long id, String status );
 }
