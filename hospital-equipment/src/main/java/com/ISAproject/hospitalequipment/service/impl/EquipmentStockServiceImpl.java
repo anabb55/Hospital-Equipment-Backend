@@ -26,6 +26,10 @@ public class EquipmentStockServiceImpl implements EquipmentStockService {
         return this.equipmentStockRepo.findAmountByCompanyAndEquipment(companyId,equipmentId);
     }
 
+    public List<EquipmentStock> getAll()
+    {
+        return this.equipmentStockRepo.findAll();
+    }
     public void updateAmount(Long equipmentId, Long companyId, Long newAmount) {
         EquipmentStock oldEquipmentStock = equipmentStockRepo.findByEquipmentIdAndCompanyId(equipmentId, companyId);
 
@@ -38,7 +42,14 @@ public class EquipmentStockServiceImpl implements EquipmentStockService {
         }
     }
 
+
+    public EquipmentStock findById(Long id){
+        return equipmentStockRepo.findById(id).get();
+    }
+
+
     public void deleteEquipmentStock(Long companyId, Long equipmentId){
         this.equipmentStockRepo.deleteByEquipmentIdAndCompanyId(equipmentId,companyId);
     }
+
 }

@@ -2,7 +2,11 @@ package com.ISAproject.hospitalequipment.dto;
 
 import com.ISAproject.hospitalequipment.domain.Equipment;
 import com.ISAproject.hospitalequipment.domain.EquipmentStock;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class EquipmentStockDTO {
         private Long id;
         private EquipmentDTO equipmentDTO;
@@ -18,10 +22,12 @@ public class EquipmentStockDTO {
 
          public EquipmentStockDTO(EquipmentStock equipmentStock)
          {
-                 this.id=equipmentStock.getId();
-                 this.amount=equipmentStock.getAmount();
-                 this.equipmentDTO=new EquipmentDTO(equipmentStock.getEquipment());
-                 this.companyDTO=new CompanyDTO(equipmentStock.getCompany());
+             if(equipmentStock!=null) {
+                 this.id = equipmentStock.getId();
+                 this.amount = equipmentStock.getAmount();
+                 this.equipmentDTO = new EquipmentDTO(equipmentStock.getEquipment());
+                 this.companyDTO = new CompanyDTO(equipmentStock.getCompany());
+             }
          }
 
         public EquipmentStockDTO() {

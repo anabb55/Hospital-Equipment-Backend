@@ -13,15 +13,19 @@ import java.util.List;
 
 @Repository
 public interface AppointmentRepo extends JpaRepository<Appointment,Long> {
-    //Ana ovo je metoda za tvoj deo!!
+
     @Query("SELECT a FROM Appointment a " +
             "WHERE a.administrator.company.id = :companyId " +
-            "AND a.date = :date " +
+
             "AND (a.appointmentStatus = 'PREDEFINED')")
-    List<Appointment> findFreeAppointmentsByCompanyAndDate(
-            @Param("companyId") Long companyId,
-            @Param("date") LocalDate date
+    List<Appointment> findFreeAppointmentsByCompany(
+            @Param("companyId") Long companyId
+
     );
+    @Query("SELECT r.appointment FROM Reservation r " +
+            "WHERE r.registeredUser.id = :userId "
+           )
+    List<Appointment> findFutureAppointmentsByUserId(@Param("userId") Long userId);
 
     @Query("SELECT a FROM Appointment a " +
             "WHERE a.administrator.company.id = :companyId " +
@@ -32,12 +36,7 @@ public interface AppointmentRepo extends JpaRepository<Appointment,Long> {
             @Param("date") LocalDate date
     );
 
-//    @Query("SELECT app FROM Appointment app " +
-//            "WHERE app.administrator = :administrator " +
-//            "AND app.date = :date")
-//    List<Appointment> findByAdministratorAndDate(
-//            @Param("administrator") CompanyAdministrator administrator,
-//            @Param("date") LocalDate date);
+
 
 
 }

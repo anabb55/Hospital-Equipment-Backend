@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 
@@ -29,23 +30,24 @@ public class AppointmentServiceImpl implements AppointmentService {
     private CompanyAdministratorService companyAdministratorService;
 
 
-    public List<Appointment> findFreeAppointmentsByCompanyAndDate(Long companyId, LocalDate date) {
-        return appointmentRepo.findFreeAppointmentsByCompanyAndDate(companyId, date);
+    public List<Appointment> getFreeAppointmentsByCompany(Long companyId) {
+        return appointmentRepo.findFreeAppointmentsByCompany(companyId);
 
 
     }
 
+
+
     public Appointment createExtraOrdinaryAppointment(Appointment appointment, AppointmentDTO appointmentDTO){
-
-
-
 
         return appointmentRepo.save(appointment);
 
     }
-//    public List<Appointment> findByAdministratorAndDate(CompanyAdministrator administrator, LocalDate date) {
-//        return appointmentRepo.findByAdministratorAndDate(administrator,date);
-//    }
+
+    public List<Appointment> findFutureAppointmentsByUserId(Long userId){
+        return appointmentRepo.findFutureAppointmentsByUserId(userId);
+    }
+
     public List<CompanyAdministrator> findAvailableAdministrator(LocalTime startTime, LocalTime endTime, LocalDate date,Long companyId){
         return  companyAdministratorService.findAvailableAdministrator(startTime,endTime,date,companyId);
     }
@@ -56,6 +58,10 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     public List<Appointment> findAll() {
         return appointmentRepo.findAll();
+    }
+
+    public Optional<Appointment> findById(Long id){
+        return  appointmentRepo.findById(id);
     }
 
     public List<Appointment> findTakenAppointmentsByCompanyAndDate(Long companyId, LocalDate date) {

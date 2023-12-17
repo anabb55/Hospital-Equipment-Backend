@@ -23,6 +23,7 @@ public class CompanyAdministratorController {
     @Autowired
     private CompanyAdministratorService companyAdministratorService;
 
+    @CrossOrigin(origins = "*")
 
     @GetMapping("/getAll")
     public ResponseEntity<List<CompanyAdministratorDTO>> getAll(){
@@ -36,6 +37,7 @@ public class CompanyAdministratorController {
 
         return new ResponseEntity<>(companyAdministratorDTOs, HttpStatus.OK);
     }
+    @CrossOrigin(origins = "*")
 
     @PostMapping("/save")
     public ResponseEntity<CompanyAdministratorDTO> createAdministrator(@RequestBody CompanyAdministratorDTO administrator) {
@@ -66,6 +68,7 @@ public class CompanyAdministratorController {
         return new ResponseEntity<>(new CompanyAdministratorDTO(createdAdministrator), HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "*")
 
     @GetMapping("/getById/{id}")
     public ResponseEntity<CompanyAdministratorDTO> getCompany(@PathVariable Long id) {

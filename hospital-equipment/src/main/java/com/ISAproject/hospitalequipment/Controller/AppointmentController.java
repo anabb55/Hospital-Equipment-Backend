@@ -16,6 +16,7 @@ import com.ISAproject.hospitalequipment.service.CompanyService;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -38,6 +40,19 @@ public class AppointmentController {
 
     @Autowired
     private CompanyService companyService;
+
+    @CrossOrigin(origins = "*")
+
+
+    @GetMapping("/getAppointmentsForCompany/{id}")
+    public ResponseEntity<List<AppointmentDTO>> getAppointmentsByCompany(@PathVariable Long id){
+        List<Appointment> appointments = appointmentService.getFreeAppointmentsByCompany(id);
+
+        List<AppointmentDTO> appointmentDTOS = appointments.stream().map(AppointmentDTO::new).collect(Collectors.toList());
+
+        return new ResponseEntity<>(appointmentDTOS, HttpStatus.OK);
+    }
+
     @GetMapping("/generateRandomAppointments/{companyId}")
     public ResponseEntity<List<AppointmentDTO>> generateRandomAppointments(
             @PathVariable Long companyId,
@@ -55,6 +70,21 @@ public class AppointmentController {
 
         return new ResponseEntity<>(appointmentDTOs, HttpStatus.OK);
     }
+
+    @GetMapping("/futureAppointment/{userId}")
+    public ResponseEntity<List<AppointmentDTO>> getFutureAppointments(  @PathVariable Long userId){
+        List<Appointment> futureAppointments = appointmentService.findFutureAppointmentsByUserId(userId);
+        List<AppointmentDTO> appointmentDTOs = futureAppointments.stream()
+                .map(AppointmentDTO::new)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(appointmentDTOs, HttpStatus.OK);
+
+    }
+
+
+
+
+            @CrossOrigin(origins = "*")
 
     @PostMapping(value="/create/{companyId}")
     public ResponseEntity<AppointmentDTO> saveAppointment(@PathVariable Long companyId, @RequestBody AppointmentDTO appointmentDTO) {
@@ -91,11 +121,30 @@ public class AppointmentController {
         return new ResponseEntity<>(new AppointmentDTO(appointment), HttpStatus.CREATED);
     }
 
+
+    @CrossOrigin
+    @PutMapping(value = "/update/{id}")
+    public ResponseEntity<AppointmentDTO> update(@PathVariable Long id, @RequestBody AppointmentDTO appointmentDTO){
+
+
+        Optional<Appointment> appointmentOptional = appointmentService.findById(id);
+
+        Appointment appointment = appointmentOptional.get();
+
+        appointment.setAppointmentStatus(AppointmentStatus.TAKEN);
+
+        appointmentService.save(appointment);
+
+        return new ResponseEntity<>(new AppointmentDTO(appointment), HttpStatus.OK);
+
+
+
     @PostMapping(value="/createApp")
     public ResponseEntity<Appointment> createApp(Appointment appointment){
         Appointment app= appointmentService.save(appointment);
 
         return new ResponseEntity<>(app,HttpStatus.OK);
+
     }
 }
 

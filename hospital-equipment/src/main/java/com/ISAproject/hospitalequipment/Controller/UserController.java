@@ -20,7 +20,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-        //@PreAuthorize("hasRole('REGISTERED_USER')")
+
     @GetMapping("/")
 
     public List<User> getAllUsers() {
@@ -30,11 +30,7 @@ public class UserController {
 
 
 
-//    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
-//
-//    public void create(@RequestBody UserDTO userDTO){
-//        userService.createUser(userDTO);
-//    }
+
 
 
 

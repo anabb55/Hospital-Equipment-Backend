@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 @Service
@@ -24,6 +25,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RoleService roleService;
 
+    @Transactional
     public User createUser(User user,UserDTO userDTO){
 
         user.setUsername(userDTO.getUsername());
@@ -32,6 +34,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         user.setFirstName(userDTO.getFirstname());
         user.setLastName(userDTO.getLastname());
+
 
         Address address = new Address();
         address.setId(userDTO.getAddress().getId());

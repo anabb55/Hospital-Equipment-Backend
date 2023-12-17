@@ -18,6 +18,7 @@ public class EquipmentStockController {
 
     @Autowired
     public EquipmentStockService equipmentStockService;
+    @CrossOrigin(origins = "*")
 
     @PostMapping(value = "/create")
     public ResponseEntity<EquipmentStock> createEquipmentStock(@RequestBody EquipmentStock equipmentStock){
@@ -25,12 +26,14 @@ public class EquipmentStockController {
 
         return new ResponseEntity<>(equipmentStock, HttpStatus.OK);
     }
+    @CrossOrigin(origins = "*")
 
     @GetMapping(value = "/equipmentByCompany/{id}")
     public ResponseEntity<List<Equipment>> getEquipmentsByCompany(@PathVariable("id")Long companyId){
         List<Equipment> equipmentsByCompany= this.equipmentStockService.findEquipmentsByCompany(companyId);
         return new ResponseEntity<>(equipmentsByCompany,HttpStatus.OK);
     }
+    @CrossOrigin(origins = "*")
 
     @GetMapping(value = "/equipmentAmount/{companyId}/{equipmentId}")
     public ResponseEntity<Integer> getEquipmentAmountByCompany(@PathVariable("companyId") Long companyId,@PathVariable("equipmentId") Long equipmentId){

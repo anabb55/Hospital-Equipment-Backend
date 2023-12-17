@@ -28,7 +28,7 @@ public class RegisteredUser extends User {
     @Enumerated(EnumType.STRING)
     private UserCategory userCategory;
 
-    @OneToMany(mappedBy = "registeredUser", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "registeredUser", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Reservation> reservations = new HashSet<Reservation>();
 
 

@@ -27,11 +27,7 @@ public class Appointment {
     @NotNull
     public long id;
 
-//    @NotEmpty
-//    public String adminName;
-//
-//    @NotEmpty
-//    public String adminLastName;
+
 
     @NotEmpty
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
@@ -46,19 +42,12 @@ public class Appointment {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
     private LocalTime startTime;
 
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name="company_profile_id")
-//    private CompanyProfile company;
 
-
-    // @ManyToOne(fetch = FetchType.EAGER)
-    //@JoinColumn(name="company_id")
-    //private Company company;
 
     @Enumerated(EnumType.STRING)
     private AppointmentStatus appointmentStatus;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "administrator_id")
     private CompanyAdministrator administrator;
 

@@ -4,11 +4,14 @@ import com.ISAproject.hospitalequipment.domain.User;
 import com.ISAproject.hospitalequipment.dto.UserDTO;
 import com.ISAproject.hospitalequipment.repository.UserRepo;
 import com.ISAproject.hospitalequipment.service.EmailService;
+import com.ISAproject.hospitalequipment.service.QRCodeService;
 import com.ISAproject.hospitalequipment.service.RegisteredUserService;
 import com.ISAproject.hospitalequipment.service.UserService;
+import com.google.zxing.WriterException;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -26,6 +29,9 @@ public class EmailServiceImpl implements EmailService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private QRCodeService qrCodeService;
 
 
     @Async
@@ -59,5 +65,39 @@ public class EmailServiceImpl implements EmailService {
 
        helper.setText(text);
         javaMailSender.send(message);
+    }
+
+    private void sendMessWithQR(User user, String subject, String text,byte[] qrCodeImage)  throws MessagingException, IOException{
+
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message,true);
+
+        helper.setFrom("isaisaprojekat.com");
+
+        helper.setTo(user.getEmail());
+        helper.setSubject(subject);
+
+
+        helper.addAttachment("qrcode.png", new ByteArrayResource(qrCodeImage));
+        helper.setText(text);
+        javaMailSender.send(message);
+    }
+
+    public void SendEmailWithQRCode(String text, User user) throws IOException, WriterException {
+        String subject = "QR Code for Reservation";
+        String emailText = "Scan QR code for more informations about your reservation";
+
+        byte[] qrCodeBytes = qrCodeService.getQRCodeImage(text,300, 300);
+
+        try {
+            sendMessWithQR(user, subject,emailText,qrCodeBytes);
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
+
     }
 }
