@@ -3,6 +3,7 @@ package com.ISAproject.hospitalequipment.service;
 import com.ISAproject.hospitalequipment.domain.Appointment;
 import com.ISAproject.hospitalequipment.domain.CompanyAdministrator;
 import com.ISAproject.hospitalequipment.dto.AppointmentDTO;
+import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -23,5 +24,6 @@ public interface AppointmentService {
 
     public List<CompanyAdministrator> findAvailableAdministrator(LocalTime startTime, LocalTime endTime, LocalDate date,Long companyId);
 
+    public List<Appointment> findFutureAppointmentsByUserId(Long userId);
 
 }
