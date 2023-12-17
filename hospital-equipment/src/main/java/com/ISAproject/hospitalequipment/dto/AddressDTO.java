@@ -31,8 +31,7 @@ public class AddressDTO {
         this.street=address.getStreet();
     }
 
-    public AddressDTO() {
-    }
+
 
 
 }
