@@ -28,4 +28,8 @@ public class ReservationServiceImpl implements ReservationService {
         return reservationRepo.save(reservation);
     }
 
+    public Reservation create(Reservation reservation){
+        return  reservationRepo.save(reservation);
+    }
+
 }

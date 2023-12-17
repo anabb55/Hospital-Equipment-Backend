@@ -9,4 +9,5 @@ public interface ReservationService {
 
     public Reservation save(Reservation reservation);
 
+    public Reservation create(Reservation reservation);
 }

@@ -75,6 +75,7 @@ public class WebSecurityConfig {
                         .requestMatchers("api/registeredUsers/**").hasRole("REGISTERED_USER")
                         .requestMatchers("api/appointments/**").hasRole("REGISTERED_USER")
                         .requestMatchers("api/users/**").hasRole("REGISTERED_USER")
+                        .requestMatchers("api/reservation/**").hasRole("REGISTERED_USER")
 
                 .anyRequest().authenticated())
 
