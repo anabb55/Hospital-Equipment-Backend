@@ -69,18 +69,18 @@ public class WebSecurityConfig {
 
 
         http.exceptionHandling(configurer -> configurer.authenticationEntryPoint(restAuthenticationEntryPoint));
-        http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("api/authentication/**").permitAll()
-                        .requestMatchers("api/companyProfile/**").permitAll()
-                        .requestMatchers("api/registeredUsers/**").hasRole("REGISTERED_USER")
-                        .requestMatchers("api/appointments/**").hasRole("REGISTERED_USER")
-                        .requestMatchers("api/users/**").hasRole("REGISTERED_USER")
+       // http.authorizeHttpRequests(auth -> auth
+         //       .requestMatchers("api/authentication/**").permitAll()
+          //              .requestMatchers("api/companyProfile/**").permitAll()
+            //            .requestMatchers("api/registeredUsers/**").hasRole("REGISTERED_USER")
+              //          .requestMatchers("api/appointments/**").hasRole("REGISTERED_USER")
+                //        .requestMatchers("api/users/**").hasRole("REGISTERED_USER")
+//
+  //              .anyRequest().authenticated())
 
-                .anyRequest().authenticated())
-
-                .cors(withDefaults())
-                .addFilterBefore(new TokenAuthenticationFilter(tokenUtils,  userDetailsService()), BasicAuthenticationFilter.class)
-                .csrf(csrf -> csrf.disable());
+    //            .cors(withDefaults())
+      //          .addFilterBefore(new TokenAuthenticationFilter(tokenUtils,  userDetailsService()), BasicAuthenticationFilter.class)
+        //        .csrf(csrf -> csrf.disable());
 
 
 
