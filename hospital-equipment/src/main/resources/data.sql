@@ -149,25 +149,8 @@ INSERT INTO equipments(
 VALUES ( 500, 5, 'elastic', 'Bandage');
 
 
-INSERT INTO equipment_stock(
-    amount, company_id, equipment_id)
-VALUES ( 100,1,1);
 
-INSERT INTO equipment_stock(
-    amount, company_id, equipment_id)
-VALUES ( 200,1,2);
 
-INSERT INTO equipment_stock(
-    amount, company_id, equipment_id)
-VALUES ( 200,2,3);
-
-INSERT INTO equipment_stock(
-    amount, company_id, equipment_id)
-VALUES ( 200,3,1);
-
-INSERT INTO equipment_stock(
-    amount, company_id, equipment_id)
-VALUES ( 200,3,2);
 
 
 INSERT INTO appointments(date, end_time, start_time, administrator_id,appointment_status)

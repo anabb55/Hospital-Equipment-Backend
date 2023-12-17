@@ -2,14 +2,21 @@ package com.ISAproject.hospitalequipment.dto;
 
 import com.ISAproject.hospitalequipment.domain.Address;
 import com.ISAproject.hospitalequipment.domain.Company;
+import com.ISAproject.hospitalequipment.domain.CompanyAdministrator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) // Ignoriše Hibernate specifične propertije
 public class CompanyDTO {
     private Long id;
     private String name;
@@ -26,7 +33,9 @@ public class CompanyDTO {
 
 
     public CompanyDTO(Company company) {
+
         this(company.getId(),company.getName(),new AddressDTO(company.getAddress()),company.getDescription(),company.getGrade(),company.getWorkStartTime(),company.getWorkEndTime());
+
     }
 
     public CompanyDTO(Long id, String name, AddressDTO address, String description, Double grade, LocalTime workStartTime, LocalTime workEndTime) {
@@ -38,4 +47,6 @@ public class CompanyDTO {
         this.workStartTime = workStartTime;
         this.workEndTime = workEndTime;
     }
+
+
 }

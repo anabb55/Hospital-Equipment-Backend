@@ -2,12 +2,14 @@ package com.ISAproject.hospitalequipment.dto;
 
 import com.ISAproject.hospitalequipment.domain.Company;
 import com.ISAproject.hospitalequipment.domain.CompanyAdministrator;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+
 public class CompanyAdministratorDTO {
 
     private Long id;
@@ -25,4 +27,5 @@ public class CompanyAdministratorDTO {
         this.id = id;
         this.company = new CompanyDTO(company);
     }
+
 }
