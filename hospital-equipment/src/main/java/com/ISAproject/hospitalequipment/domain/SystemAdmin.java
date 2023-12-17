@@ -25,5 +25,5 @@ public class SystemAdmin extends User {
         super(email, password, firstName, lastName, phoneNumber, occupation,  address);
         this.userCategory = userCategory;
     }
-    SystemAdmin(){}
+    public SystemAdmin(){}
 }

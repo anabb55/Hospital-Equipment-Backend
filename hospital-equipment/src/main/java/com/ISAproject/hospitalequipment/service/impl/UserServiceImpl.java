@@ -1,5 +1,6 @@
 package com.ISAproject.hospitalequipment.service.impl;
 
+import com.ISAproject.hospitalequipment.domain.Address;
 import com.ISAproject.hospitalequipment.domain.Role;
 import com.ISAproject.hospitalequipment.domain.User;
 import com.ISAproject.hospitalequipment.dto.UserDTO;
@@ -24,12 +25,19 @@ public class UserServiceImpl implements UserService {
 
     public User createUser(User user,UserDTO userDTO){
 
-
         user.setEmail(userDTO.getEmail());
         user.setPassword(userDTO.getPassword());
         user.setFirstName(userDTO.getFirstname());
         user.setLastName(userDTO.getLastname());
-        user.setAddress(userDTO.getAddress());
+
+        Address address = new Address();
+        address.setId(userDTO.getAddress().getId());
+        address.setCity(userDTO.getAddress().getCity());
+        address.setCountry(userDTO.getAddress().getCountry());
+        address.setStreet(userDTO.getAddress().getStreet());
+        address.setNumber(userDTO.getAddress().getNumber());
+
+        user.setAddress(address);
         user.setPhoneNumber(userDTO.getPhoneNumber());
         user.setOccupation(userDTO.getOccupation());
 

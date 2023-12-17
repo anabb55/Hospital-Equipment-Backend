@@ -1,5 +1,6 @@
 package com.ISAproject.hospitalequipment.dto;
 
+import com.ISAproject.hospitalequipment.domain.Address;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,4 +20,13 @@ public class AddressDTO {
         this.street = street;
         this.number = number;
     }
+
+    public AddressDTO(Address address) {
+        this.id=address.getId() ;
+        this.city= address.getCity();
+        this.country=address.getCountry();
+        this.number=address.getNumber();
+        this.street=address.getStreet();
+    }
+    public AddressDTO(){}
 }

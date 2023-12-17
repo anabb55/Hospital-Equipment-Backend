@@ -108,13 +108,13 @@ VALUES (100, 2, 2,'GOLD');
 
 
 INSERT INTO company(name, description, grade, address_id, work_start_time, work_end_time)
-VALUES ('Corpore Sano', 'The best service', 5, 1, '08:00:00', '17:00:00');
+VALUES ('Corpore Sano', 'The best service', 5, 1, '08:00', '17:00');
 
 INSERT INTO company(name, description, grade, address_id, work_start_time, work_end_time)
-VALUES ('Health Company', 'Safe with us', 4, 2, '08:00:00', '17:00:00');
+VALUES ('Health Company', 'Safe with us', 4, 2, '08:00', '17:00');
 
 INSERT INTO company(name, description, grade, address_id, work_start_time, work_end_time)
-VALUES ('HealthGroup', 'Best service', 4, 3, '08:00:00', '17:00:00');
+VALUES ('HealthGroup', 'Best service', 4, 3, '08:00', '17:00');
 
 INSERT INTO company_administrators(
     company_id,id)
@@ -177,13 +177,13 @@ VALUES ( 200,3,2);
 
 
 INSERT INTO appointments(date, duration, start_time, administrator_id,appointment_status)
-VALUES ('2023-12-22', '02:00:00','08:00:00', 1, 'TAKEN');
+VALUES ('2023-12-22', '02:00','08:00', 1, 'TAKEN');
 
 INSERT INTO appointments(date, duration, start_time, administrator_id,  appointment_status)
-VALUES ('2023-12-26', '01:00:00','08:00:00', 2,'PREDEFINED');
+VALUES ('2023-12-26', '01:00','08:00', 2,'PREDEFINED');
 
 INSERT INTO appointments(date, duration, start_time, administrator_id, appointment_status)
-VALUES ('2023-12-27', '01:30:00','08:00:00', 2, 'PREDEFINED');
+VALUES ('2023-12-27', '01:30','08:00', 2, 'PREDEFINED');
 
 
 INSERT INTO public.qrcode(
