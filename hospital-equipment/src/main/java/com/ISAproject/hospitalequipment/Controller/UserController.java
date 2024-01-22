@@ -5,9 +5,13 @@ import com.ISAproject.hospitalequipment.dto.UserDTO;
 import com.ISAproject.hospitalequipment.repository.UserRepo;
 import com.ISAproject.hospitalequipment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.awt.*;
 import java.util.List;
@@ -20,6 +24,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/")
 
@@ -29,7 +35,26 @@ public class UserController {
     }
 
 
+    @CrossOrigin(origins = "*")
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Long> update(@PathVariable("id") Long id, @RequestBody String password ) {
+        // CompanyAdministrator updatedAdmin = companyAdministratorService.update(admin, id);
 
+        User user= userService.getById(id);
+
+
+        // user.setEmail(admin.getEmail());
+        user.setPassword(passwordEncoder.encode(password));
+        user.setWaslogged(true);
+
+
+        userService.save(user);
+
+        //  userService.updateUsername(3L,admin.getUsername());
+
+        return new ResponseEntity<>(id, HttpStatus.OK);
+
+    }
 
 
 

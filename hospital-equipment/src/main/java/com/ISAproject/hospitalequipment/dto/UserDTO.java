@@ -27,6 +27,7 @@ public class UserDTO {
 
     private String phoneNumber;
 
+    private boolean waslogged;
     public UserDTO() {
     }
 
@@ -41,6 +42,7 @@ public class UserDTO {
         this.occupation = occupation;
         this.address = new AddressDTO(address);
         this.phoneNumber = phoneNumber;
+        this.waslogged=false;
 
     }
 
@@ -54,7 +56,7 @@ public class UserDTO {
         this.phoneNumber = phoneNumber;
         this.occupation = occupation;
         this.address = address;
-
+        this.waslogged=false;
     }
 
 
@@ -70,6 +72,7 @@ public class UserDTO {
         this.username = username;
         this.occupation = occupation;
         this.address = address;
+        this.waslogged=false;
     }
 
 
@@ -82,6 +85,7 @@ public class UserDTO {
         this.phoneNumber = phoneNumber;
         this.occupation = occupation;
         this.address = address;
+        this.waslogged=false;
     }
     public UserDTO(User user){
     this.id = user.getId();
@@ -93,6 +97,7 @@ public class UserDTO {
         this.phoneNumber = user.getLastName();
         this.occupation = user.getOccupation();
         this.address = new AddressDTO(user.getAddress());
+        this.waslogged=false;
     }
 
 

@@ -53,10 +53,10 @@ public class EquipmentStockController {
 
 
     @CrossOrigin(origins = "*")
-    @PutMapping  (value = "/delete/{comId}/{eqId}")
-    public ResponseEntity<Void> deleteEquipmentStock(@PathVariable("eqId") Long equipmentId,@PathVariable("comId")  Long comapnyId){
-        this.equipmentStockService.deleteEquipmentStock(comapnyId,equipmentId);
+    @DeleteMapping(value = "/delete/{comId}/{eqId}")
+    public ResponseEntity<Long> deleteEquipmentStock(@PathVariable("eqId") Long equipmentId,@PathVariable("comId")  Long comapnyId){
+        Long id= this.equipmentStockService.deleteEquipmentStock(comapnyId,equipmentId);
 
-        return new ResponseEntity<>( HttpStatus.OK);
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 }
