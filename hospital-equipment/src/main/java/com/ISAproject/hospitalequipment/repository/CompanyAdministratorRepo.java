@@ -35,9 +35,8 @@ public interface CompanyAdministratorRepo extends JpaRepository<CompanyAdministr
             @Param("startTime") LocalTime startTime,
             @Param("endTime") LocalTime endTime,
             @Param("companyId") Long companyId);
-
-
-
+    @Query("SELECT ca FROM Company c JOIN c.administrators ca WHERE c.id = :companyId")
+    List<CompanyAdministrator> findAllAdministratorsByCompanyId(@Param("companyId") Long companyId);
 
 
 

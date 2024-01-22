@@ -55,7 +55,15 @@ public class AppointmentController {
 
         return new ResponseEntity<>(appointmentDTOs, HttpStatus.OK);
     }
+    @CrossOrigin(origins = "*")
+    @GetMapping("/getAppointmentsForCompany/{id}")
+    public ResponseEntity<List<AppointmentDTO>> getAppointmentsByCompany(@PathVariable Long id){
+        List<Appointment> appointments = appointmentService.getFreeAppointmentsByCompany(id);
 
+        List<AppointmentDTO> appointmentDTOS = appointments.stream().map(AppointmentDTO::new).collect(Collectors.toList());
+
+        return new ResponseEntity<>(appointmentDTOS, HttpStatus.OK);
+    }
     @PostMapping(value="/create/{companyId}")
     public ResponseEntity<AppointmentDTO> saveAppointment(@PathVariable Long companyId, @RequestBody AppointmentDTO appointmentDTO) {
         Appointment appointment = new Appointment();
@@ -97,5 +105,14 @@ public class AppointmentController {
 
         return new ResponseEntity<>(app,HttpStatus.OK);
     }
+    @GetMapping("/getAll")
+    public ResponseEntity<List<AppointmentDTO>> findAll(){
+        List<Appointment> appointments = appointmentService.findAll();
+        List<AppointmentDTO> appointmentDTOs = appointments.stream()
+                .map(AppointmentDTO::new)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(appointmentDTOs, HttpStatus.OK);
+    }
+
 }
 

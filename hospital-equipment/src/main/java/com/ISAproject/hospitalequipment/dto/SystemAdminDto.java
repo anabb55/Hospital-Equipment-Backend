@@ -17,19 +17,19 @@ public class SystemAdminDto extends UserDTO{
     private UserCategory userCategory;
     public SystemAdminDto(){}
 
-    public SystemAdminDto(SystemAdmin admin){
+    public SystemAdminDto(SystemAdmin a){
         super(
-                admin.getId(),
-                admin.getFirstName(),
-                admin.getLastName(),
-                admin.getUsername(),
-                admin.getPassword(),
-                admin.getEmail(),
-                admin.getOccupation(),
-                admin.getAddress(),
-                admin.getPhoneNumber()
+                a.getId(),
+                a.getEmail(),
+                a.getPassword(),
+                a.getFirstName(),
+                a.getLastName(),
+                a.getUsername(),
+                a.getPhoneNumber(),
+                a.getOccupation(),
+                new AddressDTO(a.getAddress())
         );
-    this.userCategory = admin.getUserCategory();
+    this.userCategory = a.getUserCategory();
     }
 
 

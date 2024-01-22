@@ -8,6 +8,7 @@ import com.ISAproject.hospitalequipment.dto.CompanyAdministratorDTO;
 import com.ISAproject.hospitalequipment.dto.CompanyDTO;
 import com.ISAproject.hospitalequipment.service.CompanyAdministratorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,19 @@ public class CompanyAdministratorController {
     @GetMapping("/getAll")
     public ResponseEntity<List<CompanyAdministratorDTO>> getAll(){
         List<CompanyAdministrator> administrators= companyAdministratorService.findAll();
+
+        List<CompanyAdministratorDTO> companyAdministratorDTOs = new ArrayList<>();
+
+        for (CompanyAdministrator s : administrators) {
+            companyAdministratorDTOs.add(new CompanyAdministratorDTO(s));
+        }
+
+        return new ResponseEntity<>(companyAdministratorDTOs, HttpStatus.OK);
+    }
+
+    @GetMapping("/getAllByCompany/{companyId}")
+    public ResponseEntity<List<CompanyAdministratorDTO>> getAllByCompany(@PathVariable Long companyId){
+        List<CompanyAdministrator> administrators= companyAdministratorService.findAllAdministratorsByCompanyId(companyId);
 
         List<CompanyAdministratorDTO> companyAdministratorDTOs = new ArrayList<>();
 

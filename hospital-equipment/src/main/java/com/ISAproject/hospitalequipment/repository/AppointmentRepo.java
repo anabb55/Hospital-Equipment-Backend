@@ -25,6 +25,15 @@ public interface AppointmentRepo extends JpaRepository<Appointment,Long> {
 
     @Query("SELECT a FROM Appointment a " +
             "WHERE a.administrator.company.id = :companyId " +
+
+            "AND (a.appointmentStatus = 'PREDEFINED')")
+    List<Appointment> findFreeAppointmentsByCompany(
+            @Param("companyId") Long companyId
+
+    );
+
+    @Query("SELECT a FROM Appointment a " +
+            "WHERE a.administrator.company.id = :companyId " +
             "AND a.date = :date " +
             "AND (a.appointmentStatus = 'TAKEN' or a.appointmentStatus='PREDEFINED')")
     List<Appointment> findTakenAppointmentsByCompanyAndDate(
@@ -39,5 +48,6 @@ public interface AppointmentRepo extends JpaRepository<Appointment,Long> {
 //            @Param("administrator") CompanyAdministrator administrator,
 //            @Param("date") LocalDate date);
 
+    List<Appointment> findAll();
 
 }

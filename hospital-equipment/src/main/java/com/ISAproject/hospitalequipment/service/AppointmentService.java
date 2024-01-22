@@ -9,7 +9,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 public interface AppointmentService {
-    List<Appointment> findFreeAppointmentsByCompanyAndDate(Long companyId, LocalDate date);
+    List<Appointment> getFreeAppointmentsByCompany(Long companyId);
 
     List<Appointment>findAll();
 

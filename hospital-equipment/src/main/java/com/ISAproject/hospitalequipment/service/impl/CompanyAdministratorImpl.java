@@ -47,4 +47,7 @@ public class CompanyAdministratorImpl implements CompanyAdministratorService {
             return null;
         }
     }
+    public List<CompanyAdministrator> findAllAdministratorsByCompanyId(Long companyId){
+        return companyAdministratorRepo.findAllAdministratorsByCompanyId(companyId);
+    }
 }

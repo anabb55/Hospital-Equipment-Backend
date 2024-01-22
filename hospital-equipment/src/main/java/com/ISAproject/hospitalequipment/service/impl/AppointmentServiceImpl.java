@@ -29,11 +29,13 @@ public class AppointmentServiceImpl implements AppointmentService {
     private CompanyAdministratorService companyAdministratorService;
 
 
-    public List<Appointment> findFreeAppointmentsByCompanyAndDate(Long companyId, LocalDate date) {
-        return appointmentRepo.findFreeAppointmentsByCompanyAndDate(companyId, date);
+
+    public List<Appointment> getFreeAppointmentsByCompany(Long companyId) {
+        return appointmentRepo.findFreeAppointmentsByCompany(companyId);
 
 
     }
+
 
     public Appointment createExtraOrdinaryAppointment(Appointment appointment, AppointmentDTO appointmentDTO){
 

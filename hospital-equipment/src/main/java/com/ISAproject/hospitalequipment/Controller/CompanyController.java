@@ -39,8 +39,6 @@ public class CompanyController {
 
     }
 
-
-
     @PostMapping("/save")
     public ResponseEntity<CompanyDTO> saveCompanyProfile(@RequestBody CompanyDTO companyDto) {
         Company company = new Company();
@@ -96,9 +94,7 @@ public class CompanyController {
         if (updatedCompany == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
         return new ResponseEntity<>(new CompanyDTO(updatedCompany), HttpStatus.OK);
-
     }
 
 

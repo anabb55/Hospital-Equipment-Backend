@@ -65,26 +65,26 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-       // http.sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        http.sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
 
-     //   http.exceptionHandling(configurer -> configurer.authenticationEntryPoint(restAuthenticationEntryPoint));
-       // http.authorizeHttpRequests(auth -> auth
-         //       .requestMatchers("api/authentication/**").permitAll()
-           //             .requestMatchers("api/companyProfile/**").permitAll()
-             //           .requestMatchers("api/registeredUsers/**").hasRole("REGISTERED_USER")
-               //         .requestMatchers("api/appointments/**").hasRole("REGISTERED_USER")
-                 //       .requestMatchers("api/users/**").hasRole("REGISTERED_USER")
+       http.exceptionHandling(configurer -> configurer.authenticationEntryPoint(restAuthenticationEntryPoint));
+       http.authorizeHttpRequests(auth -> auth
+            .requestMatchers("api/authentication/**").permitAll()
+                       .requestMatchers("api/companyProfile/**").permitAll()
+                      .requestMatchers("api/registeredUsers/**").hasRole("REGISTERED_USER")
+                    .requestMatchers("api/appointments/**").hasRole("REGISTERED_USER")
+                  .requestMatchers("api/users/**").hasRole("REGISTERED_USER")
 
-                //.anyRequest().authenticated())
+               .anyRequest().authenticated())
 
-                //.cors(withDefaults())
-                //.addFilterBefore(new TokenAuthenticationFilter(tokenUtils,  userDetailsService()), BasicAuthenticationFilter.class)
-                //.csrf(csrf -> csrf.disable());
+                .cors(withDefaults())
+                .addFilterBefore(new TokenAuthenticationFilter(tokenUtils,  userDetailsService()), BasicAuthenticationFilter.class)
+                .csrf(csrf -> csrf.disable());
 
 
 
-       // http.authenticationProvider(authenticationProvider());
+        http.authenticationProvider(authenticationProvider());
 
         return http.build();
     }
@@ -95,6 +95,16 @@ public class WebSecurityConfig {
     public WebSecurityCustomizer webSecurityCustomizer() {
 
         return (web) -> web.ignoring().requestMatchers(HttpMethod.POST, "api/authentication/login")
+                .requestMatchers(HttpMethod.POST, "api/companyProfile/save")
+                .requestMatchers(HttpMethod.GET, "api/companyProfile/byAdmin/{id}")
+                .requestMatchers(HttpMethod.POST, "api/companyAdministrators/save")
+                .requestMatchers(HttpMethod.GET, "api/companyAdministrators/getAll")
+                .requestMatchers(HttpMethod.GET, "api/companyAdministrators/getAllByCompany/{companyId}")
+                .requestMatchers(HttpMethod.PUT, "api/companyAdministrators/update/{id}")
+                .requestMatchers(HttpMethod.POST, "api/systemAdmins/save")
+                .requestMatchers(HttpMethod.POST, "api/addresses/save")
+                .requestMatchers(HttpMethod.GET, "api/appointments/getAppointmentsForCompany/{id}")
+                .requestMatchers(HttpMethod.GET, "api/appointments/getAll")
 
                 .requestMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "favicon.ico",
                         "/*/*.html", "/*/*.css", "/*/*.js");
