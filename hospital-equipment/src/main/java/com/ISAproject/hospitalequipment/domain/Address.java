@@ -24,13 +24,19 @@ public class Address {
     private String street;
     @Column
     private String number;
+    @Column
+    private Double longitude;
+    @Column
+    private Double latitude;
 
 
-    public Address(String country, String city, String street, String number){
+    public Address(String country, String city, String street, String number,Double longitude, Double latitude){
         this.country = country;
         this.city = city;
         this.street = street;
         this.number = number;
+        this.longitude=longitude;
+        this.latitude=latitude;
     }
 
     public Address() {

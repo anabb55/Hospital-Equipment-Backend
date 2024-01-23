@@ -56,4 +56,15 @@ public class UserServiceImpl implements UserService {
     }
 
    public User findByEmail(String email) {return userRepo.findByEmail(email);}
+
+    public User save(User user){
+        return userRepo.save(user);
+    }
+
+    public User getById(Long id){
+
+        return userRepo.getById(id);
+    }
+
+
 }
