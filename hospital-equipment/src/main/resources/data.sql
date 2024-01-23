@@ -1,25 +1,25 @@
 INSERT INTO public.addresses(
-    city, country, number, street)
-VALUES ( 'Novi Sad', 'Serbia', '37', 'Dimitrija Tucovica');
+    city, country, number, street,latitude,longitude)
+VALUES ( 'Novi Sad', 'Serbia', '37', 'Dimitrija Tucovica','45.24702032809865', '19.840907344141257');
 
 INSERT INTO addresses(
-    city, country, number, street)
-VALUES ( 'Belgrad', 'Serbia', '45', 'Knez Mihailova');
+    city, country, number, street,latitude,longitude)
+VALUES ( 'Belgrad', 'Serbia', '45', 'Knez Mihailova','44.818869399625825', '20.455416881235333');
 
 INSERT INTO addresses(
-    city, country, number, street)
-VALUES ( 'Nis', 'Serbia', '60', 'Mileve Maric');
+    city, country, number, street,latitude,longitude)
+VALUES ( 'Nis', 'Serbia', '60', 'Mileve Maric','43.32885417815908', '21.9470735964939');
 INSERT INTO addresses(
-    city, country, number, street)
-VALUES ( 'Trebinje', 'Bih', '60', 'Nemanjina');
+    city, country, number, street,latitude,longitude)
+VALUES ( 'Trebinje', 'Bih', '1', 'Knez Mihajlova','42.71764591197575', '18.353486891668506');
 
 INSERT INTO addresses(
-    city, country, number, street)
-VALUES ( 'Bijeljina', 'Bih', '50', 'Vozda Karadjordja');
+    city, country, number, street,latitude,longitude)
+VALUES ( 'Nis', 'Serbia', '13', 'Vozda Karadjordja','43.32111628016304', '21.897958796493494');
 
 INSERT INTO addresses(
-    city, country, number, street)
-VALUES ( 'Kragujevac', 'Serbia', '10', 'Mileve Maric');
+    city, country, number, street,latitude,longitude)
+VALUES ( 'Beograd', 'Serbia', '36', 'Nemanjina','44.802974458685824', '20.464545191207794');
 
 
 INSERT INTO role(

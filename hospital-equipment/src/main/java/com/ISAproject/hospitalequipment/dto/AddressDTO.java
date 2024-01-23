@@ -13,14 +13,18 @@ public class AddressDTO {
     private String street;
     private String number;
 
+    private Double longitude;
+    private Double latitude;
    public AddressDTO(){}
   
-    public AddressDTO(Long id, String country, String city, String street, String number) {
+    public AddressDTO(Long id, String country, String city, String street, String number,Double longitude, Double latitude) {
         this.id = id;
         this.country = country;
         this.city = city;
         this.street = street;
         this.number = number;
+        this.latitude=latitude;
+        this.longitude=longitude;
     }
 
     public AddressDTO(Address address) {
@@ -29,6 +33,8 @@ public class AddressDTO {
         this.country=address.getCountry();
         this.number=address.getNumber();
         this.street=address.getStreet();
+        this.longitude=address.getLongitude();
+        this.latitude=address.getLatitude();
     }
 
 
