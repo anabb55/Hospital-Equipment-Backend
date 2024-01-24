@@ -59,16 +59,12 @@ public class UserController {
     }
 
     @CrossOrigin(origins = "*")
-    @PutMapping("/getById/{id}")
-    public ResponseEntity<UserDTO> getById(@PathVariable("id") Long id ) {
+
+    @GetMapping("/getById/{id}")
+    public ResponseEntity<UserDTO> getById(@PathVariable("id") Long id){
 
         User user= userService.getById(id);
-        if (user == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        user.setWaslogged(true);
         return new ResponseEntity<>(new UserDTO(user), HttpStatus.OK);
-
     }
 
 

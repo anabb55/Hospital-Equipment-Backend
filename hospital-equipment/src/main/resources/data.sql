@@ -24,6 +24,7 @@ INSERT INTO addresses(
     city, country, number, street,latitude,longitude)
 VALUES ( 'Nevesinje', 'BiH', '1', 'Narodnih heroja','41.802974458685824', '21.464545191207794');
 
+
 INSERT INTO role(
     id, name)
 VALUES (1, 'ROLE_REGISTERED_USER');
@@ -35,6 +36,7 @@ VALUES (2, 'ROLE_COMPANY_ADMIN');
 INSERT INTO role(
     id, name)
 VALUES (3, 'ROLE_SYSTEM_ADMIN');
+
 
 
 INSERT INTO users(
@@ -91,6 +93,7 @@ VALUES (2, 6);
 INSERT INTO user_role(
     role_id, user_id)
 VALUES (3, 7);
+
 
 INSERT INTO loyalty_program(
     discount_percentage, penalty_threshold, points_per_equipment)
