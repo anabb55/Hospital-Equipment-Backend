@@ -52,6 +52,7 @@ public class CompanyAdministratorController {
         admin.setFirstname(administrator.getFirstname());
         admin.setLastname(administrator.getLastname());
         admin.setPhoneNumber(administrator.getPhoneNumber());
+        admin.setUsername(administrator.getUsername());
         Address address = new Address();
             address.setId(administrator.getAddress().getId());
             address.setCity(administrator.getAddress().getCity());

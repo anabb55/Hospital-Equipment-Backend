@@ -1,6 +1,8 @@
 package com.ISAproject.hospitalequipment.Controller;
 
+import com.ISAproject.hospitalequipment.domain.CompanyAdministrator;
 import com.ISAproject.hospitalequipment.domain.User;
+import com.ISAproject.hospitalequipment.dto.CompanyAdministratorDTO;
 import com.ISAproject.hospitalequipment.dto.UserDTO;
 import com.ISAproject.hospitalequipment.repository.UserRepo;
 import com.ISAproject.hospitalequipment.service.UserService;
@@ -53,6 +55,19 @@ public class UserController {
         //  userService.updateUsername(3L,admin.getUsername());
 
         return new ResponseEntity<>(id, HttpStatus.OK);
+
+    }
+
+    @CrossOrigin(origins = "*")
+    @PutMapping("/getById/{id}")
+    public ResponseEntity<UserDTO> getById(@PathVariable("id") Long id ) {
+
+        User user= userService.getById(id);
+        if (user == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        user.setWaslogged(true);
+        return new ResponseEntity<>(new UserDTO(user), HttpStatus.OK);
 
     }
 
