@@ -49,8 +49,8 @@ public class CompanyAdministratorController {
         admin.setEmail(administrator.getEmail());
         admin.setPassword(administrator.getPassword());
         admin.setOccupation(administrator.getOccupation());
-        admin.setFirstName(administrator.getFirstname());
-        admin.setLastName(administrator.getLastname());
+        admin.setFirstname(administrator.getFirstname());
+        admin.setLastname(administrator.getLastname());
         admin.setPhoneNumber(administrator.getPhoneNumber());
         Address address = new Address();
             address.setId(administrator.getAddress().getId());
@@ -89,11 +89,11 @@ public class CompanyAdministratorController {
         CompanyAdministrator admin  = new CompanyAdministrator();
         admin.setId(id);
         admin.setEmail(administrator.getEmail());
-
+        //admin.setUsername(administrator.getUsername());
         admin.setPassword(administrator.getPassword());
         admin.setOccupation(administrator.getOccupation());
-        admin.setFirstName(administrator.getFirstname());
-        admin.setLastName(administrator.getLastname());
+        admin.setFirstname(administrator.getFirstname());
+        admin.setLastname(administrator.getLastname());
         admin.setPhoneNumber(administrator.getPhoneNumber());
             Address address = new Address();
             address.setId(administrator.getAddress().getId());

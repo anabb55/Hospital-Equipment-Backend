@@ -31,8 +31,8 @@ public class SystemAdminController {
         admin.setEmail(administrator.getEmail());
         admin.setPassword(administrator.getPassword());
         admin.setOccupation(administrator.getOccupation());
-        admin.setFirstName(administrator.getFirstname());
-        admin.setLastName(administrator.getLastname());
+        admin.setFirstname(administrator.getFirstname());
+        admin.setLastname(administrator.getLastname());
         admin.setPhoneNumber((admin.getPhoneNumber()));
 
         Address address = new Address();

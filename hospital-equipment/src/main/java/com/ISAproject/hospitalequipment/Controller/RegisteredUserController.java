@@ -71,8 +71,8 @@ public class RegisteredUserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        registeredUser.setFirstName(registerUserDTO.getFirstname());
-        registeredUser.setLastName(registerUserDTO.getLastname());
+        registeredUser.setFirstname(registerUserDTO.getFirstname());
+        registeredUser.setLastname(registerUserDTO.getLastname());
         registeredUser.setPenaltyPoints(registerUserDTO.getPenaltyPoints());
         registeredUser.setUserCategory(registerUserDTO.getUserCategory());
         registeredUser.setPassword(registerUserDTO.getPassword());

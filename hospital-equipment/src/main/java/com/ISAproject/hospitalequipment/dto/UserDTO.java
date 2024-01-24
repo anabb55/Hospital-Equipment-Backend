@@ -31,7 +31,7 @@ public class UserDTO {
     public UserDTO() {
     }
 
-    public UserDTO(Long id, String firstName,String username, String lastName, String password, String email, String occupation, Address address, String phoneNumber){
+    public UserDTO(Long id, String firstname, String lastname,String username,String password, String email, String occupation, Address address, String phoneNumber){
 
         this.id= id;
         this.password = password;
@@ -63,7 +63,7 @@ public class UserDTO {
 
 
 
-    public UserDTO(String email, String password, String firstName, String lastName, String phoneNumber, String occupation, boolean enabled, AddressDTO address) {
+    public UserDTO(String email, String password, String firstName, String lastName, String phoneNumber, String occupation, boolean enabled, AddressDTO address,String username) {
         this.email = email;
         this.password = password;
         this.firstname = firstName;
@@ -76,12 +76,12 @@ public class UserDTO {
     }
 
 
-    public UserDTO(String email, String password,String username, String firstName, String lastName, String phoneNumber, String occupation,  AddressDTO address) {
+    public UserDTO(String email, String password,String userName, String firstName, String lastName, String phoneNumber, String occupation,  AddressDTO address) {
         this.email = email;
         this.password = password;
         this.firstname = firstName;
         this.lastname = lastName;
-      this.username = username;
+      this.username = userName;
         this.phoneNumber = phoneNumber;
         this.occupation = occupation;
         this.address = address;
@@ -91,10 +91,10 @@ public class UserDTO {
     this.id = user.getId();
         this.email = user.getEmail();
         this.password = user.getPassword();
-        this.firstname = user.getFirstName();
-        this.lastname = user.getLastName();
+        this.firstname = user.getFirstname();
+        this.lastname = user.getLastname();
         this.username = user.getUsername();
-        this.phoneNumber = user.getLastName();
+        this.phoneNumber = user.getLastname();
         this.occupation = user.getOccupation();
         this.address = new AddressDTO(user.getAddress());
         this.waslogged=false;
