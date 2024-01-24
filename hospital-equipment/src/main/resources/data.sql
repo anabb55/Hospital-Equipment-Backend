@@ -100,7 +100,7 @@ VALUES (30, 3, 10);
 
 INSERT INTO registered_users(
     penalty_points, id,loyalty_id, user_category)
-VALUES (3, 1,1, 'REGULAR');
+VALUES (0, 1,1, 'REGULAR');
 
 
 
@@ -171,13 +171,13 @@ VALUES ( 200,3,2);
 
 
 INSERT INTO appointments(date, end_time, start_time, administrator_id,appointment_status)
-VALUES ('2023-12-22', '10:00:00','08:00:00', 3, 'TAKEN');
+VALUES ('2024-01-29', '10:00:00','08:00:00', 3, 'TAKEN');
 
 INSERT INTO appointments(date, end_time, start_time, administrator_id,  appointment_status)
-VALUES ('2023-12-26', '10:00:00','08:00:00', 3,'PREDEFINED');
+VALUES ('2024-02-03', '10:00:00','08:00:00', 3,'PREDEFINED');
 
 INSERT INTO appointments(date, end_time, start_time, administrator_id, appointment_status)
-VALUES ('2023-12-27', '10:30:00','08:00:00', 4, 'PREDEFINED');
+VALUES ('2024-02-04', '10:30:00','08:00:00', 4, 'PREDEFINED');
 
 INSERT INTO appointments(date, end_time, start_time, administrator_id, appointment_status)
-VALUES ('2023-12-27', '10:30:00','08:00:00', 4, 'PREDEFINED');
+VALUES ('2024-02-04', '12:00:00','10:30:00', 4, 'PREDEFINED');

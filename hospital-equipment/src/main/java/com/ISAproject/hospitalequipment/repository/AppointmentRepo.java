@@ -23,8 +23,8 @@ public interface AppointmentRepo extends JpaRepository<Appointment,Long> {
 
     );
     @Query("SELECT r.appointment FROM Reservation r " +
-            "WHERE r.registeredUser.id = :userId "
-           )
+            "WHERE r.registeredUser.id = :userId " +
+            "AND (r.appointment.appointmentStatus = 'TAKEN')")
     List<Appointment> findFutureAppointmentsByUserId(@Param("userId") Long userId);
 
     @Query("SELECT a FROM Appointment a " +

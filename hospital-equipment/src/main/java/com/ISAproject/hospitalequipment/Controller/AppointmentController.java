@@ -1,19 +1,13 @@
 package com.ISAproject.hospitalequipment.Controller;
 
 import ch.qos.logback.core.net.SyslogOutputStream;
-import com.ISAproject.hospitalequipment.domain.Appointment;
-import com.ISAproject.hospitalequipment.domain.CompanyAdministrator;
-import com.ISAproject.hospitalequipment.domain.RegisteredUser;
-import com.ISAproject.hospitalequipment.domain.Company;
-import com.ISAproject.hospitalequipment.service.CompanyAdministratorService;
+import com.ISAproject.hospitalequipment.domain.*;
+import com.ISAproject.hospitalequipment.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.ISAproject.hospitalequipment.domain.User;
 import com.ISAproject.hospitalequipment.domain.enums.AppointmentStatus;
 import com.ISAproject.hospitalequipment.dto.AppointmentDTO;
 import com.ISAproject.hospitalequipment.dto.UserDTO;
-import com.ISAproject.hospitalequipment.service.AppointmentService;
-import com.ISAproject.hospitalequipment.service.CompanyService;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -43,6 +37,12 @@ public class AppointmentController {
     private CompanyAdministratorService companyAdminService;
     @Autowired
     private CompanyService companyService;
+
+    @Autowired
+    private CanceledAppointmentService canceledAppointmentService;
+
+    @Autowired
+    private UserService userService;
 
     @CrossOrigin(origins = "*")
 
@@ -125,15 +125,32 @@ public class AppointmentController {
 
 
     @CrossOrigin
-    @PutMapping(value = "/update/{id}")
-    public ResponseEntity<AppointmentDTO> update(@PathVariable Long id, @RequestBody AppointmentDTO appointmentDTO) {
+    @PutMapping(value = "/update/{id}/{userId}")
+    public ResponseEntity<AppointmentDTO> update(@PathVariable Long id, @RequestBody AppointmentDTO appointmentDTO, @PathVariable Long userId) {
 
 
         Optional<Appointment> appointmentOptional = appointmentService.findById(id);
 
         Appointment appointment = appointmentOptional.get();
 
-        appointment.setAppointmentStatus(AppointmentStatus.TAKEN);
+        User user = userService.getById(userId);
+
+
+
+         if(appointment.getAppointmentStatus() == AppointmentStatus.PREDEFINED) {
+             appointment.setAppointmentStatus(AppointmentStatus.TAKEN);
+        }
+
+         else if(appointment.getAppointmentStatus()==AppointmentStatus.TAKEN){
+             appointment.setAppointmentStatus(AppointmentStatus.PREDEFINED);
+             CanceledAppointment canceledAppointment = new CanceledAppointment();
+             canceledAppointment.setAppointment(appointment);
+             canceledAppointment.setUser(user);
+             canceledAppointmentService.save(canceledAppointment);
+
+
+         }
+
 
         appointmentService.save(appointment);
 

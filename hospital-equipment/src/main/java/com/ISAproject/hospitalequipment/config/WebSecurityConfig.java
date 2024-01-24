@@ -77,6 +77,7 @@ public class WebSecurityConfig {
                         .requestMatchers("api/users/**").permitAll()
                         .requestMatchers("api/reservation/**").hasRole("REGISTERED_USER")
                         .requestMatchers("api/appointments/update/{id}").hasRole("REGISTERED_USER")
+                        .requestMatchers("/api/canceledAppointments/").hasRole("REGISTERED_USER")
 
                 .anyRequest().authenticated())
 
