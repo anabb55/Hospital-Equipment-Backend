@@ -20,7 +20,9 @@ VALUES ( 'Nis', 'Serbia', '13', 'Vozda Karadjordja','43.32111628016304', '21.897
 INSERT INTO addresses(
     city, country, number, street,latitude,longitude)
 VALUES ( 'Beograd', 'Serbia', '36', 'Nemanjina','44.802974458685824', '20.464545191207794');
-
+INSERT INTO addresses(
+    city, country, number, street,latitude,longitude)
+VALUES ( 'Nevesinje', 'BiH', '1', 'Narodnih heroja','41.802974458685824', '21.464545191207794');
 
 INSERT INTO role(
     id, name)
@@ -33,6 +35,7 @@ VALUES (2, 'ROLE_COMPANY_ADMIN');
 INSERT INTO role(
     id, name)
 VALUES (3, 'ROLE_SYSTEM_ADMIN');
+
 
 
 INSERT INTO users(
@@ -58,7 +61,9 @@ VALUES ( 'marko@gmail.com',false, 'Marko', 'Markovic', 'aaa', 'nurse', '222345',
 INSERT INTO users(
     email, enabled, firstname, lastname,username, occupation, password, phone_number, address_id,waslogged)
 VALUES ( 'Mirko@gmail.com',false, 'Mirko', 'Mirkovic','banana', 'nurse', '36782',  '069-3782-738', 6,false);
-
+INSERT INTO users(
+    email, enabled, firstname, lastname,username, occupation, password, phone_number, address_id,waslogged)
+VALUES ( 'dajanaskocajic18@gmail.com',true, 'Dajana', 'Skocajic','daks', 'nurse', '$2a$10$nCS1VJMqNHmfuQiHi9MveO43.fVv/5THgHeFIShfeGE5XYTAjaRci', '069-3782-708', 7,false);
 
 
 INSERT INTO user_role(
@@ -83,6 +88,9 @@ VALUES (2, 5);
 INSERT INTO user_role(
     role_id, user_id)
 VALUES (2, 6);
+INSERT INTO user_role(
+    role_id, user_id)
+VALUES (3, 7);
 
 
 INSERT INTO loyalty_program(
