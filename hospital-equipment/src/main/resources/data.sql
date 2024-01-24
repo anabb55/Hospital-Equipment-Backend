@@ -20,6 +20,9 @@ VALUES ( 'Bijeljina', 'Bih', '50', 'Vozda Karadjordja');
 INSERT INTO addresses(
     city, country, number, street)
 VALUES ( 'Kragujevac', 'Serbia', '10', 'Mileve Maric');
+INSERT INTO addresses(
+    city, country, number, street)
+VALUES ( 'Nevesinje', 'BiH', '1', 'Narodnih heroja');
 
 
 INSERT INTO role(
@@ -58,6 +61,9 @@ VALUES ( 'marko@gmail.com',false, 'Marko', 'Markovic', 'aaa', 'nurse', '222345',
 INSERT INTO users(
     email, enabled, first_name, last_name,username, occupation, password, phone_number, address_id)
 VALUES ( 'Mirko@gmail.com',false, 'Mirko', 'Mirkovic','banana', 'nurse', '36782',  '069-3782-738', 6);
+INSERT INTO users(
+    email, enabled, first_name, last_name,username, occupation, password, phone_number, address_id)
+VALUES ( 'dajanaskocajic18@gmail.com',true, 'Dajana', 'Skocajic','daks', 'nurse', '$2a$10$nCS1VJMqNHmfuQiHi9MveO43.fVv/5THgHeFIShfeGE5XYTAjaRci', '069-3782-708', 7);
 
 
 
@@ -83,6 +89,9 @@ VALUES (2, 5);
 INSERT INTO user_role(
     role_id, user_id)
 VALUES (2, 6);
+INSERT INTO user_role(
+    role_id, user_id)
+VALUES (3, 7);
 
 
 INSERT INTO loyalty_program(

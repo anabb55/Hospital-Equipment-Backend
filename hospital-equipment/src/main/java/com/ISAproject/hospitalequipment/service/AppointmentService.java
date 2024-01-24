@@ -18,6 +18,8 @@ public interface AppointmentService {
     List<Appointment>generateRandomAppointments(Long companyId,LocalDate date);
     List<Appointment> findTakenAppointmentsByCompanyAndDate(Long companyId,LocalDate date);
 
+    List<Appointment> findTakenAppointmentsByCompany(Long companyId);
+
     Optional<Appointment> findById(Long id);
 
     Appointment save(Appointment appointment);

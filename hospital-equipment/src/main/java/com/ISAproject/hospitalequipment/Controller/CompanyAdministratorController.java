@@ -29,11 +29,7 @@ public class CompanyAdministratorController {
     public ResponseEntity<List<CompanyAdministratorDTO>> getAll(){
         List<CompanyAdministrator> administrators= companyAdministratorService.findAll();
 
-        List<CompanyAdministratorDTO> companyAdministratorDTOs = new ArrayList<>();
-
-        for (CompanyAdministrator s : administrators) {
-            companyAdministratorDTOs.add(new CompanyAdministratorDTO(s));
-        }
+        List<CompanyAdministratorDTO> companyAdministratorDTOs = administrators.stream().map(CompanyAdministratorDTO::new).collect(Collectors.toList());
 
         return new ResponseEntity<>(companyAdministratorDTOs, HttpStatus.OK);
     }

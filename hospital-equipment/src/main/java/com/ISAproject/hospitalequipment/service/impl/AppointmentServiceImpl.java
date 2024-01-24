@@ -67,6 +67,9 @@ public class AppointmentServiceImpl implements AppointmentService {
     public List<Appointment> findTakenAppointmentsByCompanyAndDate(Long companyId, LocalDate date) {
         return appointmentRepo.findTakenAppointmentsByCompanyAndDate(companyId, date);
     }
+    public List<Appointment> findTakenAppointmentsByCompany(Long companyId) {
+        return appointmentRepo.findTakenAppointmentsByCompany(companyId);
+    }
     public long getMaxAppointmentId() {
         List<Appointment> allAppointments = findAll();
 

@@ -46,6 +46,17 @@ public class CompanyAdministratorDTO extends UserDTO {
 
     }
 
+    public CompanyAdministratorDTO(Long id, String firstname ,String lastname, String username, String password, String email,
+                                   String occupation,Address address,String phoneNumber,Company company) {
+        super(
+                id,firstname,username,lastname,password,email,occupation,address,phoneNumber
+        );
+        if(company != null){
+            this.company = new CompanyDTO(company);
+        }
+
+    }
+
     public CompanyAdministratorDTO(Company company) {
         if(company!=null){
             this.company = new CompanyDTO(company);

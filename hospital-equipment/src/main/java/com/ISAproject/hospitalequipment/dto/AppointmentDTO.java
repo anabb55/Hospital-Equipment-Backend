@@ -23,16 +23,18 @@ public class AppointmentDTO {
     private LocalDate date;
 
 
-
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
     private LocalTime startTime;
 
-
-    private AppointmentStatus appointmentStatus;
-    private CompanyAdministratorDTO companyAdministrator;
-
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
     public LocalTime endTime;
+
+
+    private AppointmentStatus appointmentStatus;
+
+    private CompanyAdministratorDTO companyAdministrator;
+
+
 
     public AppointmentDTO(Appointment appointment) {
         this.id = appointment.getId();
