@@ -58,13 +58,13 @@ public class ReservationServiceImpl implements ReservationService {
         User user = res.getRegisteredUser();
 
         //korisnik koji preuzima
-        String name = user.getFirstName();
-        String surname = user.getLastName();
+        String name = user.getFirstname();
+        String surname = user.getLastname();
 
         //admin kompanije
         CompanyAdministrator admin = appointment.getAdministrator();
-        String adminName = admin.getFirstName();
-        String adminSurname = admin.getLastName();
+        String adminName = admin.getFirstname();
+        String adminSurname = admin.getLastname();
 
         //kompanija
         Company company = admin.getCompany();

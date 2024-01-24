@@ -44,11 +44,11 @@ public class User implements UserDetails {
     private String password;
 
     @NotEmpty
-    private String firstName;
+    private String firstname;
 
     @NotEmpty
 
-    private String lastName;
+    private String lastname;
 
     @NotNull
     private String phoneNumber;
@@ -77,17 +77,17 @@ public class User implements UserDetails {
     private boolean waslogged;
 
 
-    public User(Long id, String email, String password, String username, String  firstName, String lastName, String phoneNumber, String occupation, boolean enabled, Address address, String companyName) {
+    public User(Long id, String email, String password, String userName, String  firstName, String lastName, String phoneNumber, String occupation, boolean enabled, Address address, String companyName) {
         this.id = id;
         this.email = email;
         this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstname = firstName;
+        this.lastname = lastName;
         this.phoneNumber = phoneNumber;
         this.occupation = occupation;
         this.enabled = enabled;
         this.address = address;
-        this.username = username;
+        this.username = userName;
         this.waslogged=false;
 
     }
@@ -98,28 +98,30 @@ public class User implements UserDetails {
     }
 
 
-    public User(String email, String password, String firstName, String lastName, String phoneNumber, String occupation, boolean enabled, Address address) {
+    public User(String email, String password, String firstName, String lastName, String phoneNumber, String occupation, boolean enabled, Address address,String username) {
         this.email = email;
         this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstname = firstName;
+        this.lastname = lastName;
         this.phoneNumber = phoneNumber;
         this.occupation = occupation;
         this.enabled = enabled;
         this.address = address;
         this.waslogged=false;
+        this.username = username;
     }
 
 
-    public User(String email, String password, String firstName, String lastName, String phoneNumber, String occupation,  Address address) {
+    public User(String email, String password, String firstName, String lastName, String phoneNumber, String occupation,  Address address,String username) {
         this.email = email;
         this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstname = firstName;
+        this.lastname = lastName;
         this.phoneNumber = phoneNumber;
         this.occupation = occupation;
         this.address = address;
         this.waslogged=false;
+        this.username = username;
     }
 
 
@@ -132,6 +134,7 @@ public class User implements UserDetails {
     public String getUsername() {
         return username;
     }
+
 
     @JsonIgnore
     @Override

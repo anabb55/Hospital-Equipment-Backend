@@ -56,6 +56,14 @@ public class UserController {
 
     }
 
+    @CrossOrigin(origins = "*")
+    @GetMapping("/getById/{id}")
+    public ResponseEntity<UserDTO> getById(@PathVariable("id") Long id){
+
+        User user= userService.getById(id);
+        return new ResponseEntity<>(new UserDTO(user), HttpStatus.OK);
+    }
+
 
 
 

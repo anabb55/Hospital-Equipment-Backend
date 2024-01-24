@@ -19,7 +19,7 @@ import lombok.Setter;
 public class CompanyAdministratorDTO extends UserDTO {
 
 
-    private Long id;
+   // private Long id;
 
 
     private CompanyDTO company;
@@ -31,8 +31,8 @@ public class CompanyAdministratorDTO extends UserDTO {
     public CompanyAdministratorDTO(CompanyAdministrator a) {
         super(
                 a.getId(),
-                a.getFirstName(),
-                a.getLastName(),
+                a.getFirstname(),
+                a.getLastname(),
                 a.getUsername(),
                 a.getPassword(),
                 a.getEmail(),
