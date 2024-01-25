@@ -1,10 +1,12 @@
 package com.ISAproject.hospitalequipment.Controller;
 
 import com.ISAproject.hospitalequipment.domain.Appointment;
+import com.ISAproject.hospitalequipment.domain.CompanyAdministrator;
 import com.ISAproject.hospitalequipment.domain.RegisteredUser;
 import com.ISAproject.hospitalequipment.domain.Reservation;
 import com.ISAproject.hospitalequipment.domain.enums.ReservationStatus;
 import com.ISAproject.hospitalequipment.dto.AppointmentDTO;
+import com.ISAproject.hospitalequipment.dto.CompanyAdministratorDTO;
 import com.ISAproject.hospitalequipment.dto.ReservationDTO;
 import com.ISAproject.hospitalequipment.service.AppointmentService;
 import com.ISAproject.hospitalequipment.service.RegisteredUserService;
@@ -16,6 +18,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/reservation")
@@ -56,6 +60,20 @@ public class ReservationController {
     @GetMapping("/sendEmailWithQRCode")
     public void sendQRCode() throws IOException, WriterException {
         reservationService.getDataForQRCode();
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/getAll")
+    public ResponseEntity<List<ReservationDTO>> getAll() {
+        List<Reservation> reservations= reservationService.getAll();
+
+        List<ReservationDTO> reservationDTOS = new ArrayList<>();
+
+        for (Reservation r : reservations) {
+            reservationDTOS.add(new ReservationDTO(r));
+        }
+
+        return new ResponseEntity<>(reservationDTOS, HttpStatus.OK);
     }
 
 }
