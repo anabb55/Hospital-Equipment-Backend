@@ -29,6 +29,7 @@ public class AppointmentDTO {
 
 
     private AppointmentStatus appointmentStatus;
+
     private CompanyAdministratorDTO companyAdministrator;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")

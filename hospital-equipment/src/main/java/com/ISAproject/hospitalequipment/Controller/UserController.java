@@ -1,6 +1,8 @@
 package com.ISAproject.hospitalequipment.Controller;
 
+import com.ISAproject.hospitalequipment.domain.CompanyAdministrator;
 import com.ISAproject.hospitalequipment.domain.User;
+import com.ISAproject.hospitalequipment.dto.CompanyAdministratorDTO;
 import com.ISAproject.hospitalequipment.dto.UserDTO;
 import com.ISAproject.hospitalequipment.repository.UserRepo;
 import com.ISAproject.hospitalequipment.service.UserService;
@@ -57,6 +59,7 @@ public class UserController {
     }
 
     @CrossOrigin(origins = "*")
+
     @GetMapping("/getById/{id}")
     public ResponseEntity<UserDTO> getById(@PathVariable("id") Long id){
 
