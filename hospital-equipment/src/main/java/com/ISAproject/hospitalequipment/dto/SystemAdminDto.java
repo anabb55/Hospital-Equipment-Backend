@@ -27,8 +27,7 @@ public class SystemAdminDto extends UserDTO{
                 admin.getEmail(),
                 admin.getOccupation(),
                 admin.getAddress(),
-                admin.getPhoneNumber(),
-                admin.getRoles()
+                admin.getPhoneNumber()
         );
     this.userCategory = admin.getUserCategory();
     }
