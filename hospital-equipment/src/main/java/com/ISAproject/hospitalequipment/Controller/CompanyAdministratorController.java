@@ -3,10 +3,12 @@ package com.ISAproject.hospitalequipment.Controller;
 import com.ISAproject.hospitalequipment.domain.Address;
 import com.ISAproject.hospitalequipment.domain.Company;
 import com.ISAproject.hospitalequipment.domain.CompanyAdministrator;
+import com.ISAproject.hospitalequipment.domain.EquipmentStock;
 import com.ISAproject.hospitalequipment.dto.AppointmentDTO;
 import com.ISAproject.hospitalequipment.dto.CompanyAdministratorDTO;
 import com.ISAproject.hospitalequipment.dto.CompanyDTO;
 import com.ISAproject.hospitalequipment.service.CompanyAdministratorService;
+import com.ISAproject.hospitalequipment.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -22,6 +25,8 @@ public class CompanyAdministratorController {
 
     @Autowired
     private CompanyAdministratorService companyAdministratorService;
+    @Autowired
+    private CompanyService companyService;
 
     @CrossOrigin(origins = "*")
 
@@ -53,6 +58,7 @@ public class CompanyAdministratorController {
         admin.setLastname(administrator.getLastname());
         admin.setPhoneNumber(administrator.getPhoneNumber());
         admin.setUsername(administrator.getUsername());
+        admin.setRoles(administrator.getRoles());
         Address address = new Address();
             address.setId(administrator.getAddress().getId());
             address.setCity(administrator.getAddress().getCity());
@@ -87,23 +93,40 @@ public class CompanyAdministratorController {
     @PutMapping("/update/{id}")
     public ResponseEntity<CompanyAdministratorDTO> update(@PathVariable Long id, @RequestBody CompanyAdministratorDTO administrator) {
 
-        CompanyAdministrator admin  = new CompanyAdministrator();
-        admin.setId(id);
-        admin.setEmail(administrator.getEmail());
-        //admin.setUsername(administrator.getUsername());
-        admin.setPassword(administrator.getPassword());
-        admin.setOccupation(administrator.getOccupation());
-        admin.setFirstname(administrator.getFirstname());
-        admin.setLastname(administrator.getLastname());
-        admin.setPhoneNumber(administrator.getPhoneNumber());
+        CompanyAdministrator companyAdministrator  = new CompanyAdministrator();
+        companyAdministrator.setId(id);
+        companyAdministrator.setEmail(administrator.getEmail());
+        companyAdministrator.setUsername(administrator.getUsername());
+        companyAdministrator.setPassword(administrator.getPassword());
+        companyAdministrator.setOccupation(administrator.getOccupation());
+        companyAdministrator.setFirstname(administrator.getFirstname());
+        companyAdministrator.setLastname(administrator.getLastname());
+
+        companyAdministrator.setPhoneNumber(administrator.getPhoneNumber());
             Address address = new Address();
             address.setId(administrator.getAddress().getId());
             address.setCity(administrator.getAddress().getCity());
             address.setCountry(administrator.getAddress().getCountry());
             address.setStreet(administrator.getAddress().getStreet());
             address.setNumber(administrator.getAddress().getNumber());
-            admin.setAddress(address);
-        CompanyAdministrator updatedAdmin = companyAdministratorService.update(admin, id);
+        companyAdministrator.setAddress(address);
+
+        Company company = companyService.getById(administrator.getCompany().getId());
+        company.setWorkEndTime(administrator.getCompany().getWorkEndTime());
+        company.setWorkStartTime(administrator.getCompany().getWorkStartTime());
+        company.setName(administrator.getCompany().getName());
+        company.setId(administrator.getCompany().getId());
+        company.setGrade(administrator.getCompany().getGrade());
+        company.setDescription(administrator.getCompany().getDescription());
+        //company.setEquipmentStocks(administrator.getCompany().get());
+
+        Set<CompanyAdministrator> admins = company.getAdministrators();
+        company.setAdministrators(admins);
+        companyService.update(company, company.getId());
+
+        CompanyAdministrator updatedAdmin = companyAdministratorService.update(companyAdministrator, id);
+        admins.add(updatedAdmin);
+
         if (updatedAdmin == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

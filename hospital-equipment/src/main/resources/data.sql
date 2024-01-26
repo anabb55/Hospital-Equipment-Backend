@@ -70,7 +70,7 @@ VALUES ( 'dajanaskocajic18@gmail.com',true, 'Dajana', 'Skocajic','daks', 'nurse'
 
 INSERT INTO user_role(
     role_id, user_id)
-VALUES (1, 1);
+VALUES (3, 1);
 
 INSERT INTO user_role(
     role_id, user_id)
@@ -92,7 +92,7 @@ INSERT INTO user_role(
 VALUES (2, 6);
 INSERT INTO user_role(
     role_id, user_id)
-VALUES (1, 7);
+VALUES (3, 7);
 
 
 INSERT INTO loyalty_program(

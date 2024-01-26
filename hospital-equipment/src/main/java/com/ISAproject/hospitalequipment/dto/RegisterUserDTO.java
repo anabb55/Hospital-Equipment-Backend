@@ -42,7 +42,8 @@ public class RegisterUserDTO extends UserDTO{
                 registeredUser.getEmail(),
                 registeredUser.getOccupation(),
                 registeredUser.getAddress(),
-                registeredUser.getPhoneNumber()
+                registeredUser.getPhoneNumber(),
+                registeredUser.getRoles()
         );
         this.penaltyPoints = registeredUser.getPenaltyPoints();
         this.userCategory = registeredUser.getUserCategory();
