@@ -64,6 +64,13 @@ public class UserController {
         return new ResponseEntity<>(new UserDTO(user), HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "*")
+    @GetMapping("/WasLogged/{id}")
+    public ResponseEntity<Boolean> WasLogged(@PathVariable("id") Long id){
+
+        User user= userService.getById(id);
+        return new ResponseEntity<>(user.isWaslogged(), HttpStatus.OK);
+    }
 
 
 

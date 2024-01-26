@@ -100,4 +100,22 @@ public class EmailServiceImpl implements EmailService {
 
 
     }
+
+    @Async
+    public void sendReservationEmail(User user)  {
+        String subject = "Reservation confirmation";
+
+        String titile="Reservation Confirmation";
+        String text ="To confirm taking your reservation, please click here : " + "http://localhost:8081/api/authentication/verifyReservation?email=" + user.getEmail();
+
+        try {
+            sendMess(user, subject,text);
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
 }
