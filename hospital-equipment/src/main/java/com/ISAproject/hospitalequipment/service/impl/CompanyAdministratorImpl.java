@@ -35,8 +35,8 @@ public class CompanyAdministratorImpl implements CompanyAdministratorService {
         CompanyAdministrator old= companyAdministratorRepo.findById(id).get();
 
         if(old!=null){
-            old.setFirstName(admin.getFirstName());
-            old.setLastName(admin.getLastName());
+            old.setFirstname(admin.getFirstname());
+            old.setLastname(admin.getLastname());
             old.setEmail(admin.getEmail());
             old.setOccupation(admin.getOccupation());
             old.setPhoneNumber(admin.getPhoneNumber());

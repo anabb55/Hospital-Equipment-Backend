@@ -1,5 +1,6 @@
 package com.ISAproject.hospitalequipment.Controller;
 
+import com.ISAproject.hospitalequipment.domain.Address;
 import com.ISAproject.hospitalequipment.domain.Company;
 import com.ISAproject.hospitalequipment.domain.Equipment;
 import com.ISAproject.hospitalequipment.domain.RegisteredUser;
@@ -43,18 +44,44 @@ public class CompanyController {
     @CrossOrigin(origins = "*")
 
     @PostMapping("/save")
+    public ResponseEntity<CompanyDTO> saveCompanyProfile(@RequestBody CompanyDTO companyDto) {
+        Company company = new Company();
+        company.setId(companyDto.getId());
 
-    public ResponseEntity<Company> saveCompanyProfile(@RequestBody Company company) {
+        Address address = new Address();
+        address.setId(companyDto.getAddress().getId());
+        address.setCity(companyDto.getAddress().getCity());
+        address.setCountry(companyDto.getAddress().getCountry());
+        address.setStreet(companyDto.getAddress().getStreet());
+        address.setNumber(companyDto.getAddress().getNumber());
+
+        company.setAddress(address);
+        company.setDescription(companyDto.getDescription());
+        company.setName(companyDto.getName());
+        company.setGrade(companyDto.getGrade());
+        company.setWorkStartTime(companyDto.getWorkStartTime());
+        company.setWorkEndTime(companyDto.getWorkEndTime());
+
         Company createdCompany = companyService.save(company);
-        return new ResponseEntity<>(createdCompany, HttpStatus.CREATED);
-    }
+
+        if (createdCompany == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(new CompanyDTO(company), HttpStatus.OK);    }
 
     @CrossOrigin(origins = "*")
 
     @GetMapping("/byAdmin/{id}")
-    public ResponseEntity<List<Company>> getByAdministrator(@PathVariable int id){
+    public ResponseEntity<List<CompanyDTO>> getByAdministrator(@PathVariable int id){
         List<Company> companies= companyService.getByAdministrator(id);
-        return new ResponseEntity<>(companies,HttpStatus.OK);
+        List<CompanyDTO> companyDTOs = new ArrayList<>();
+
+        for (Company s : companies) {
+            companyDTOs.add(new CompanyDTO(s));
+        }
+
+        return new ResponseEntity<>(companyDTOs, HttpStatus.OK);
     }
 
     @GetMapping("/byEquipment/{equipmentId}")
@@ -67,9 +94,13 @@ public class CompanyController {
 
     @CrossOrigin(origins = "*")
     @PutMapping("/update/{id}")
-    public ResponseEntity<Company> update(@PathVariable Long id, @RequestBody Company company) {
+    public ResponseEntity<CompanyDTO> update(@PathVariable Long id, @RequestBody Company company) {
         Company updatedCompany = companyService.update(company, id);
-        return new ResponseEntity<>(updatedCompany, HttpStatus.OK);
+        if (updatedCompany == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(new CompanyDTO(updatedCompany), HttpStatus.OK);
 
     }
 

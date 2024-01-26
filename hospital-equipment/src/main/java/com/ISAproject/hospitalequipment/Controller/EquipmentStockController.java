@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/equipmentStocks")
+
 public class EquipmentStockController {
 
     @Autowired
@@ -41,12 +42,20 @@ public class EquipmentStockController {
 
     }
 
-    //method for setting new amount instead of old
     @CrossOrigin(origins = "*")
     @PostMapping (value = "/update/{eqId}/{comId}")
     public ResponseEntity<Void> updateAmount(@PathVariable("eqId") Long equipmentId,@PathVariable("comId")  Long comapnyId,@RequestParam("amount") Long amount){
         this.equipmentStockService.updateAmount(equipmentId,comapnyId,amount);
 
         return new ResponseEntity<>( HttpStatus.OK);
+    }
+
+
+    @CrossOrigin(origins = "*")
+    @DeleteMapping(value = "/delete/{comId}/{eqId}")
+    public ResponseEntity<Long> deleteEquipmentStock(@PathVariable("eqId") Long equipmentId,@PathVariable("comId")  Long comapnyId){
+        Long id= this.equipmentStockService.deleteEquipmentStock(comapnyId,equipmentId);
+
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 }

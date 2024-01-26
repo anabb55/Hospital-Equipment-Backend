@@ -35,14 +35,15 @@ public class RegisterUserDTO extends UserDTO{
     public RegisterUserDTO(RegisteredUser registeredUser) {
         super(
                 registeredUser.getId(),
-                registeredUser.getFirstName(),
-                registeredUser.getLastName(),
+                registeredUser.getFirstname(),
+                registeredUser.getLastname(),
                 registeredUser.getUsername(),
                 registeredUser.getPassword(),
                 registeredUser.getEmail(),
                 registeredUser.getOccupation(),
                 registeredUser.getAddress(),
-                registeredUser.getPhoneNumber()
+                registeredUser.getPhoneNumber(),
+                registeredUser.getRoles()
         );
         this.penaltyPoints = registeredUser.getPenaltyPoints();
         this.userCategory = registeredUser.getUserCategory();

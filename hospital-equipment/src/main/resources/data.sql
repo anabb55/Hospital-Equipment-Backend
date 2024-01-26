@@ -1,25 +1,28 @@
 INSERT INTO public.addresses(
-    city, country, number, street)
-VALUES ( 'Novi Sad', 'Serbia', '37', 'Dimitrija Tucovica');
+    city, country, number, street,latitude,longitude)
+VALUES ( 'Novi Sad', 'Serbia', '37', 'Dimitrija Tucovica','45.24702032809865', '19.840907344141257');
 
 INSERT INTO addresses(
-    city, country, number, street)
-VALUES ( 'Belgrad', 'Serbia', '45', 'Knez Mihailova');
+    city, country, number, street,latitude,longitude)
+VALUES ( 'Belgrad', 'Serbia', '45', 'Knez Mihailova','44.818869399625825', '20.455416881235333');
 
 INSERT INTO addresses(
-    city, country, number, street)
-VALUES ( 'Nis', 'Serbia', '60', 'Mileve Maric');
+    city, country, number, street,latitude,longitude)
+VALUES ( 'Nis', 'Serbia', '60', 'Mileve Maric','43.32885417815908', '21.9470735964939');
 INSERT INTO addresses(
-    city, country, number, street)
-VALUES ( 'Trebinje', 'Bih', '60', 'Nemanjina');
+    city, country, number, street,latitude,longitude)
+VALUES ( 'Trebinje', 'Bih', '1', 'Knez Mihajlova','42.71764591197575', '18.353486891668506');
 
 INSERT INTO addresses(
-    city, country, number, street)
-VALUES ( 'Bijeljina', 'Bih', '50', 'Vozda Karadjordja');
+    city, country, number, street,latitude,longitude)
+VALUES ( 'Nis', 'Serbia', '13', 'Vozda Karadjordja','43.32111628016304', '21.897958796493494');
 
 INSERT INTO addresses(
-    city, country, number, street)
-VALUES ( 'Kragujevac', 'Serbia', '10', 'Mileve Maric');
+    city, country, number, street,latitude,longitude)
+VALUES ( 'Beograd', 'Serbia', '36', 'Nemanjina','44.802974458685824', '20.464545191207794');
+INSERT INTO addresses(
+    city, country, number, street,latitude,longitude)
+VALUES ( 'Nevesinje', 'BiH', '1', 'Narodnih heroja','41.802974458685824', '21.464545191207794');
 
 
 INSERT INTO role(
@@ -35,35 +38,39 @@ INSERT INTO role(
 VALUES (3, 'ROLE_SYSTEM_ADMIN');
 
 
+
 INSERT INTO users(
-    email, enabled, first_name, last_name,username ,occupation, password, phone_number, address_id)
-VALUES ( 'anoka1810@gmail.com', true, 'Tara', 'Boskovic','taric', 'student', '$2a$10$mD0kgZJFbHEdEM5ICKJbgecF3qjIzP.i3zVV.nszlWh8Adp4gs4K6', '066-2678-772', 1);
+    email, enabled, firstname, lastname,username ,occupation, password, phone_number, address_id,waslogged)
+VALUES ( 'anoka1810@gmail.com', true, 'Tara', 'Boskovic','taric', 'student', '$2a$10$mD0kgZJFbHEdEM5ICKJbgecF3qjIzP.i3zVV.nszlWh8Adp4gs4K6', '066-2678-772', 1,false);
 
 
 INSERT INTO users(
-    email, enabled, first_name, last_name,username, occupation, password, phone_number, address_id)
-VALUES ( 'example@gmail.com', false, 'Milos', 'Milosevic','anic', 'doctor', '2670', '064-3782-892', 2);
+    email, enabled, firstname, lastname,username, occupation, password, phone_number, address_id,waslogged)
+VALUES ( 'nikolinaskiljevic@gmail.com', false, 'Milos', 'Milosevic','anic', 'doctor', '2670', '064-3782-892', 2,false);
 
 INSERT INTO users(
-    email, enabled, first_name, last_name,username, occupation, password, phone_number, address_id)
-VALUES ( 'nikolinaskiljevic@gmail.com',false, 'Nikolina', 'Skiljevic','aaa', 'nurse', '36782',  '069-3782-738', 3);
+    email, enabled, firstname, lastname,username, occupation, password, phone_number, address_id,waslogged)
+VALUES ( 'nikolinaskiljevic@gmail.com',true, 'Nikolina', 'Skiljevic','nina', 'nurse', '$2a$10$8Nm7wMyIxo7da3VfOJcE1eCI9JQOaWv5lVpehrMBSRAuODL2u/2Oq',  '069-3782-738', 3,false);
 INSERT INTO users(
-    email, enabled, first_name, last_name,username, occupation, password, phone_number, address_id)
-VALUES ( 'janko@gmail.com',false, 'Janko', 'Jankovic','aaa', 'nurse', '36782',  '069-3782-738', 4);
+    email, enabled, firstname, lastname,username, occupation, password, phone_number, address_id,waslogged)
+VALUES ( 'janko@gmail.com',false, 'Janko', 'Jankovic','aaa', 'nurse', '36782',  '069-3782-738', 4,false);
 
 INSERT INTO users(
-    email, enabled, first_name, last_name, username, occupation, password, phone_number, address_id)
-VALUES ( 'marko@gmail.com',false, 'Marko', 'Markovic', 'aaa', 'nurse', '222345',  '069-3782-738', 5);
+    email, enabled, firstname, lastname, username, occupation, password, phone_number, address_id,waslogged)
+VALUES ( 'marko@gmail.com',false, 'Marko', 'Markovic', 'aaa', 'nurse', '222345',  '069-3782-738', 5,false);
 
 INSERT INTO users(
-    email, enabled, first_name, last_name,username, occupation, password, phone_number, address_id)
-VALUES ( 'Mirko@gmail.com',false, 'Mirko', 'Mirkovic','banana', 'nurse', '36782',  '069-3782-738', 6);
+    email, enabled, firstname, lastname,username, occupation, password, phone_number, address_id,waslogged)
+VALUES ( 'Mirko@gmail.com',false, 'Mirko', 'Mirkovic','banana', 'nurse', '36782',  '069-3782-738', 6,false);
+INSERT INTO users(
+    email, enabled, firstname, lastname,username, occupation, password, phone_number, address_id,waslogged)
+VALUES ( 'dajanaskocajic18@gmail.com',true, 'Dajana', 'Skocajic','daks', 'nurse', '$2a$10$nCS1VJMqNHmfuQiHi9MveO43.fVv/5THgHeFIShfeGE5XYTAjaRci', '069-3782-708', 7,false);
 
 
 
 INSERT INTO user_role(
     role_id, user_id)
-VALUES (1, 1);
+VALUES (3, 1);
 
 INSERT INTO user_role(
     role_id, user_id)
@@ -83,6 +90,9 @@ VALUES (2, 5);
 INSERT INTO user_role(
     role_id, user_id)
 VALUES (2, 6);
+INSERT INTO user_role(
+    role_id, user_id)
+VALUES (3, 7);
 
 
 INSERT INTO loyalty_program(
@@ -101,6 +111,11 @@ VALUES (30, 3, 10);
 INSERT INTO registered_users(
     penalty_points, id,loyalty_id, user_category)
 VALUES (3, 1,1, 'REGULAR');
+INSERT INTO registered_users(
+    penalty_points, id,loyalty_id, user_category)
+VALUES (4, 2,2, 'REGULAR');
+
+
 
 
 
@@ -181,4 +196,42 @@ VALUES ('2023-12-27', '10:30:00','08:00:00', 4, 'PREDEFINED');
 
 INSERT INTO appointments(date, end_time, start_time, administrator_id, appointment_status)
 VALUES ('2023-12-27', '10:30:00','08:00:00', 4, 'PREDEFINED');
+
+
+
+
+
+
+
+
+
+INSERT INTO qrcode(
+	id, qr_code_status)
+	VALUES (1, 'NEW');
+INSERT INTO qrcode(
+	id, qr_code_status)
+	VALUES (2, 'NEW');
+INSERT INTO qrcode(
+	id, qr_code_status)
+	VALUES (3, 'NEW');
+INSERT INTO qrcode(
+	id, qr_code_status)
+	VALUES (4, 'NEW');
+INSERT INTO qrcode(
+	id, qr_code_status)
+	VALUES (5, 'NEW');
+
+INSERT INTO reservations(
+	appointment_id, id, penalty_points, qr_cod_id, registered_user_id, reservation_status)
+	VALUES (1, 1, 3, 2, 1, 'RESERVED');
+
+INSERT INTO reservations(
+	appointment_id, id, penalty_points, qr_cod_id, registered_user_id, reservation_status)
+	VALUES (2, 2, 5, 3, 2, 'RESERVED');
+  
+  INSERT INTO reservation_equipment_stock(amount, equipment_stock_id,id,reservation_id)
+VALUES (20,1,1,1);
+INSERT INTO reservation_equipment_stock(amount, equipment_stock_id,id,reservation_id)
+VALUES (50,1,2,2);
+
 

@@ -5,6 +5,7 @@ import com.ISAproject.hospitalequipment.domain.Appointment;
 import com.ISAproject.hospitalequipment.domain.CompanyAdministrator;
 import com.ISAproject.hospitalequipment.domain.RegisteredUser;
 import com.ISAproject.hospitalequipment.domain.Company;
+import com.ISAproject.hospitalequipment.service.CompanyAdministratorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.ISAproject.hospitalequipment.domain.User;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
@@ -37,7 +39,8 @@ public class AppointmentController {
 
     @Autowired
     private AppointmentService appointmentService;
-
+    @Autowired
+    private CompanyAdministratorService companyAdminService;
     @Autowired
     private CompanyService companyService;
 
@@ -71,6 +74,17 @@ public class AppointmentController {
         return new ResponseEntity<>(appointmentDTOs, HttpStatus.OK);
     }
 
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/getTakenAppointmentsForCompany/{id}")
+    public ResponseEntity<List<AppointmentDTO>> getTakenAppointmentsByCompany(@PathVariable Long id){
+        List<Appointment> appointments = appointmentService.findTakenAppointmentsByCompany(id);
+
+        List<AppointmentDTO> appointmentDTOS = appointments.stream().map(AppointmentDTO::new).collect(Collectors.toList());
+
+        return new ResponseEntity<>(appointmentDTOS, HttpStatus.OK);
+    }
+
     @GetMapping("/futureAppointment/{userId}")
     public ResponseEntity<List<AppointmentDTO>> getFutureAppointments(  @PathVariable Long userId){
         List<Appointment> futureAppointments = appointmentService.findFutureAppointmentsByUserId(userId);
@@ -83,8 +97,7 @@ public class AppointmentController {
 
 
 
-
-            @CrossOrigin(origins = "*")
+    @CrossOrigin(origins = "*")
 
     @PostMapping(value="/create/{companyId}")
     public ResponseEntity<AppointmentDTO> saveAppointment(@PathVariable Long companyId, @RequestBody AppointmentDTO appointmentDTO) {
@@ -121,9 +134,10 @@ public class AppointmentController {
         return new ResponseEntity<>(new AppointmentDTO(appointment), HttpStatus.CREATED);
     }
 
+
     @CrossOrigin
     @PutMapping(value = "/update/{id}")
-    public ResponseEntity<AppointmentDTO> update(@PathVariable Long id, @RequestBody AppointmentDTO appointmentDTO){
+    public ResponseEntity<AppointmentDTO> update(@PathVariable Long id, @RequestBody AppointmentDTO appointmentDTO) {
 
 
         Optional<Appointment> appointmentOptional = appointmentService.findById(id);
@@ -136,7 +150,27 @@ public class AppointmentController {
 
         return new ResponseEntity<>(new AppointmentDTO(appointment), HttpStatus.OK);
 
-
     }
+
+    @CrossOrigin(origins = "*")
+    @PostMapping(value="/createApp/{date}/{startTime}/{endTime}/{adminId}")
+    public ResponseEntity<Void> createApp( @PathVariable("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+                                           @PathVariable("startTime") @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime startTime,
+                                           @PathVariable("endTime") @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime endTime, @PathVariable("adminId") Long adminId){
+
+
+        Appointment newApp= new Appointment();
+        newApp.setDate(date);
+        newApp.setEndTime(endTime);
+        newApp.setStartTime(startTime);
+        newApp.setAppointmentStatus(AppointmentStatus.PREDEFINED);
+        newApp.setAdministrator(this.companyAdminService.getById(adminId));
+        this.appointmentService.save(newApp);
+
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
 }
 

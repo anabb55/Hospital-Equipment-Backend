@@ -58,13 +58,13 @@ public class ReservationServiceImpl implements ReservationService {
         User user = res.getRegisteredUser();
 
         //korisnik koji preuzima
-        String name = user.getFirstName();
-        String surname = user.getLastName();
+        String name = user.getFirstname();
+        String surname = user.getLastname();
 
         //admin kompanije
         CompanyAdministrator admin = appointment.getAdministrator();
-        String adminName = admin.getFirstName();
-        String adminSurname = admin.getLastName();
+        String adminName = admin.getFirstname();
+        String adminSurname = admin.getLastname();
 
         //kompanija
         Company company = admin.getCompany();
@@ -99,4 +99,13 @@ public class ReservationServiceImpl implements ReservationService {
         return  reservationRepo.save(reservation);
     }
 
+    public Reservation getById(Long id){
+        return reservationRepo.findById(id).get();
+    }
+
+    public Reservation saveReservation(Reservation reservation)
+    {
+
+        return reservationRepo.save(reservation);
+    }
 }
