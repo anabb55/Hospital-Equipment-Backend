@@ -115,9 +115,7 @@ INSERT INTO registered_users(
     penalty_points, id,loyalty_id, user_category)
 VALUES (4, 2,2, 'REGULAR');
 
-INSERT INTO registered_users(
-    penalty_points, id,loyalty_id, user_category)
-VALUES (3, 2,2, 'REGULAR');
+
 
 
 
@@ -225,11 +223,11 @@ INSERT INTO qrcode(
 
 INSERT INTO reservations(
 	appointment_id, id, penalty_points, qr_cod_id, registered_user_id, reservation_status)
-	VALUES (1, 1, 3, 1, 1, 'RESERVED');
+	VALUES (1, 1, 3, 2, 1, 'RESERVED');
 
 INSERT INTO reservations(
 	appointment_id, id, penalty_points, qr_cod_id, registered_user_id, reservation_status)
-	VALUES (2, 2, 5, 2, 2, 'RESERVED');
+	VALUES (2, 2, 5, 3, 2, 'RESERVED');
   
   INSERT INTO reservation_equipment_stock(amount, equipment_stock_id,id,reservation_id)
 VALUES (20,1,1,1);
