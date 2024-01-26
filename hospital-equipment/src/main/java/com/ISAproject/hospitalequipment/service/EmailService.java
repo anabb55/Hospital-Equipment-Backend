@@ -14,6 +14,7 @@ public interface EmailService {
     public void sendEmail(User user);
 
     public void SendEmailWithQRCode(String text, User user) throws IOException, WriterException;
+    public void sendReservationEmail(User user);
 
 
 }

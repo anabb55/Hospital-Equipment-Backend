@@ -31,6 +31,7 @@ public class ReservationEquipmentStockServiceImpl implements ReservationEquipmen
 
 
 
+
     public ReservationEquipmentStock save(List<Equipment> equipments, ReservationEquipmentStock reservationEqStock,Long companyId) {
         Reservation lastReservation = reservationService.getLast();
 
@@ -79,6 +80,16 @@ public class ReservationEquipmentStockServiceImpl implements ReservationEquipmen
     }
 
 
+    public List<ReservationEquipmentStock> getByCompanyId(Long companyId){
+        return reservationEquipmentStockRepo.findByCompanyId(companyId);
+    }
 
+    public ReservationEquipmentStock getById(Long id){
+        return  reservationEquipmentStockRepo.findById(id).get();
+    }
+
+    public ReservationEquipmentStock saveStock(ReservationEquipmentStock resEqStock){
+        return reservationEquipmentStockRepo.save(resEqStock);
+    }
 }
 

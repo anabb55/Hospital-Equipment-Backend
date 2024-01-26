@@ -1,8 +1,9 @@
 package com.ISAproject.hospitalequipment.Controller;
 
-import com.ISAproject.hospitalequipment.domain.Equipment;
-import com.ISAproject.hospitalequipment.domain.EquipmentStock;
-import com.ISAproject.hospitalequipment.domain.ReservationEquipmentStock;
+import com.ISAproject.hospitalequipment.domain.*;
+import com.ISAproject.hospitalequipment.domain.enums.ReservationStatus;
+import com.ISAproject.hospitalequipment.dto.RegisterUserDTO;
+import com.ISAproject.hospitalequipment.dto.ReservationDTO;
 import com.ISAproject.hospitalequipment.dto.ReservationEqRequest;
 import com.ISAproject.hospitalequipment.dto.ReservationEquipmentStockDTO;
 import com.ISAproject.hospitalequipment.service.ReservationEquipmentStockService;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -35,5 +37,39 @@ public class ReservationEquipmentStockController {
         return new ResponseEntity<>(new ReservationEquipmentStockDTO(reservationEquipmentStock), HttpStatus.CREATED);
     }
 
+    @CrossOrigin(origins = "*")
+    @GetMapping("/getByCompanyId/{companyId}")
+    public ResponseEntity<List<ReservationEquipmentStockDTO>> getByCompanyId(@PathVariable("companyId") Long companyId){
+
+        List<ReservationEquipmentStock> reservations= reservationEquipmentStockService.getByCompanyId(companyId);
+        List<ReservationEquipmentStockDTO> reservationDTOs= new ArrayList<>();
+
+        for(ReservationEquipmentStock r: reservations){
+            if(r.getReservation().getReservationStatus()== ReservationStatus.RESERVED){
+
+                reservationDTOs.add(new ReservationEquipmentStockDTO(r));
+            }
+        }
+
+        return new ResponseEntity<>(reservationDTOs,HttpStatus.OK);
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/getUsersReserved/{companyId}")
+    public ResponseEntity<List<RegisterUserDTO>> getUsersReserved(@PathVariable("companyId") Long companyId){
+
+        List<ReservationEquipmentStock> reservations= reservationEquipmentStockService.getByCompanyId(companyId);
+        List<ReservationEquipmentStockDTO> reservationDTOs= new ArrayList<>();
+        List<RegisterUserDTO> registeredUsersDTO= new ArrayList<>();
+        for(ReservationEquipmentStock r: reservations){
+
+
+               registeredUsersDTO.add(new RegisterUserDTO(r.getReservation().getRegisteredUser()));
+               registeredUsersDTO.stream().distinct();
+
+        }
+
+        return new ResponseEntity<>(registeredUsersDTO,HttpStatus.OK);
+    }
 
 }

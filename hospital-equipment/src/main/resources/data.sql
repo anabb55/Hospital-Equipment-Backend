@@ -46,7 +46,7 @@ VALUES ( 'anoka1810@gmail.com', true, 'Tara', 'Boskovic','taric', 'student', '$2
 
 INSERT INTO users(
     email, enabled, firstname, lastname,username, occupation, password, phone_number, address_id,waslogged)
-VALUES ( 'example@gmail.com', false, 'Milos', 'Milosevic','anic', 'doctor', '2670', '064-3782-892', 2,false);
+VALUES ( 'nikolinaskiljevic@gmail.com', false, 'Milos', 'Milosevic','anic', 'doctor', '2670', '064-3782-892', 2,false);
 
 INSERT INTO users(
     email, enabled, firstname, lastname,username, occupation, password, phone_number, address_id,waslogged)
@@ -114,6 +114,10 @@ VALUES (3, 1,1, 'REGULAR');
 INSERT INTO registered_users(
     penalty_points, id,loyalty_id, user_category)
 VALUES (4, 2,2, 'REGULAR');
+
+INSERT INTO registered_users(
+    penalty_points, id,loyalty_id, user_category)
+VALUES (3, 2,2, 'REGULAR');
 
 
 
@@ -197,6 +201,12 @@ VALUES ('2023-12-27', '10:30:00','08:00:00', 4, 'PREDEFINED');
 
 
 
+
+
+
+
+
+
 INSERT INTO qrcode(
 	id, qr_code_status)
 	VALUES (1, 'NEW');
@@ -220,4 +230,10 @@ INSERT INTO reservations(
 INSERT INTO reservations(
 	appointment_id, id, penalty_points, qr_cod_id, registered_user_id, reservation_status)
 	VALUES (2, 2, 5, 2, 2, 'RESERVED');
+  
+  INSERT INTO reservation_equipment_stock(amount, equipment_stock_id,id,reservation_id)
+VALUES (20,1,1,1);
+INSERT INTO reservation_equipment_stock(amount, equipment_stock_id,id,reservation_id)
+VALUES (50,1,2,2);
+
 

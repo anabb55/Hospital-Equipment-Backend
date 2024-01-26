@@ -42,7 +42,6 @@ public class EquipmentStockController {
 
     }
 
-    //method for setting new amount instead of old
     @CrossOrigin(origins = "*")
     @PostMapping (value = "/update/{eqId}/{comId}")
     public ResponseEntity<Void> updateAmount(@PathVariable("eqId") Long equipmentId,@PathVariable("comId")  Long comapnyId,@RequestParam("amount") Long amount){

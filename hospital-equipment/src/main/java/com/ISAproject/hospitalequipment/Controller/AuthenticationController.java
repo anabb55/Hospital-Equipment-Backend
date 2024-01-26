@@ -97,5 +97,13 @@ public class AuthenticationController {
         }
     }
 
+    @RequestMapping(value="/verifyReservation", method = RequestMethod.GET)
+    public ResponseEntity<Boolean> verifyReservation(@Param("email")String email, HttpServletResponse response) throws IOException {
+
+            response.sendRedirect("http://localhost:4200/successfullReservation");
+            return new ResponseEntity<>(HttpStatus.OK);
+
+    }
+
 
 }
