@@ -24,7 +24,6 @@ INSERT INTO addresses(
     city, country, number, street,latitude,longitude)
 VALUES ( 'Nevesinje', 'BiH', '1', 'Narodnih heroja','41.802974458685824', '21.464545191207794');
 
-
 INSERT INTO role(
     id, name)
 VALUES (1, 'ROLE_REGISTERED_USER');
@@ -67,10 +66,9 @@ INSERT INTO users(
 VALUES ( 'dajanaskocajic18@gmail.com',true, 'Dajana', 'Skocajic','daks', 'nurse', '$2a$10$nCS1VJMqNHmfuQiHi9MveO43.fVv/5THgHeFIShfeGE5XYTAjaRci', '069-3782-708', 7,false);
 
 
-
 INSERT INTO user_role(
     role_id, user_id)
-VALUES (3, 1);
+VALUES (1, 1);
 
 INSERT INTO user_role(
     role_id, user_id)
@@ -111,9 +109,6 @@ VALUES (30, 3, 10);
 INSERT INTO registered_users(
     penalty_points, id,loyalty_id, user_category)
 VALUES (3, 1,1, 'REGULAR');
-INSERT INTO registered_users(
-    penalty_points, id,loyalty_id, user_category)
-VALUES (4, 2,2, 'REGULAR');
 
 INSERT INTO registered_users(
     penalty_points, id,loyalty_id, user_category)
@@ -199,41 +194,17 @@ VALUES ('2023-12-27', '10:30:00','08:00:00', 4, 'PREDEFINED');
 INSERT INTO appointments(date, end_time, start_time, administrator_id, appointment_status)
 VALUES ('2023-12-27', '10:30:00','08:00:00', 4, 'PREDEFINED');
 
+INSERT INTO qrcode(id, qr_code_status)
+VALUES (1,'PROCCESSED');
+INSERT INTO qrcode(id, qr_code_status)
+VALUES (2,'PROCCESSED');
 
+INSERT INTO reservations(appointment_id,id,penalty_points,qr_cod_id,registered_user_id,reservation_status)
+VALUES (1,1,0,1,1,'RESERVED');
+INSERT INTO reservations(appointment_id,id,penalty_points,qr_cod_id,registered_user_id,reservation_status)
+VALUES (2,2,0,2,2,'RESERVED');
 
-
-
-
-
-
-
-INSERT INTO qrcode(
-	id, qr_code_status)
-	VALUES (1, 'NEW');
-INSERT INTO qrcode(
-	id, qr_code_status)
-	VALUES (2, 'NEW');
-INSERT INTO qrcode(
-	id, qr_code_status)
-	VALUES (3, 'NEW');
-INSERT INTO qrcode(
-	id, qr_code_status)
-	VALUES (4, 'NEW');
-INSERT INTO qrcode(
-	id, qr_code_status)
-	VALUES (5, 'NEW');
-
-INSERT INTO reservations(
-	appointment_id, id, penalty_points, qr_cod_id, registered_user_id, reservation_status)
-	VALUES (1, 1, 3, 1, 1, 'RESERVED');
-
-INSERT INTO reservations(
-	appointment_id, id, penalty_points, qr_cod_id, registered_user_id, reservation_status)
-	VALUES (2, 2, 5, 2, 2, 'RESERVED');
-  
-  INSERT INTO reservation_equipment_stock(amount, equipment_stock_id,id,reservation_id)
+INSERT INTO reservation_equipment_stock(amount, equipment_stock_id,id,reservation_id)
 VALUES (20,1,1,1);
 INSERT INTO reservation_equipment_stock(amount, equipment_stock_id,id,reservation_id)
 VALUES (50,1,2,2);
-
-

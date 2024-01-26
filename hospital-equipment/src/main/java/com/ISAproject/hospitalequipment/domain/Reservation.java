@@ -1,7 +1,6 @@
 package com.ISAproject.hospitalequipment.domain;
 
 import com.ISAproject.hospitalequipment.domain.enums.AppointmentStatus;
-import com.ISAproject.hospitalequipment.domain.enums.QRCodeStatus;
 import com.ISAproject.hospitalequipment.domain.enums.ReservationStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -30,7 +29,7 @@ public class Reservation {
     @OneToMany(mappedBy = "reservation", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<ReservationEquipmentStock> reservationEquipmentStocks = new HashSet<ReservationEquipmentStock>();
 
-    @OneToOne(fetch=FetchType.EAGER)
+    @OneToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "appointment_id")
     private Appointment appointment;
 
@@ -39,19 +38,7 @@ public class Reservation {
     private QRCode qrCode;
 
     @JoinColumn(name = "registered_user_id")
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.LAZY)
     private RegisteredUser registeredUser;
-
-
-    public Reservation(){}
-    public Reservation(Long id, Long penaltyPoints, ReservationStatus reservationStatus, Appointment appointment, QRCode qrCode,RegisteredUser registeredUser){
-        this.id  = id;
-        this.penaltyPoints = penaltyPoints;
-        this.reservationStatus = reservationStatus;
-        this.appointment = appointment;
-         this. qrCode = qrCode;
-         this.registeredUser = registeredUser;
-    }
-
 
 }

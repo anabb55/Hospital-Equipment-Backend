@@ -33,8 +33,8 @@ public class SystemAdminController {
         admin.setOccupation(administrator.getOccupation());
         admin.setFirstname(administrator.getFirstname());
         admin.setLastname(administrator.getLastname());
-        admin.setPhoneNumber(admin.getPhoneNumber());
-        admin.setUsername(admin.getUsername());
+        admin.setPhoneNumber((admin.getPhoneNumber()));
+
         Address address = new Address();
         address.setId(administrator.getAddress().getId());
         address.setCity(administrator.getAddress().getCity());
@@ -42,7 +42,7 @@ public class SystemAdminController {
         address.setStreet(administrator.getAddress().getStreet());
         address.setNumber(administrator.getAddress().getNumber());
         admin.setAddress(address);
-        admin.setRoles(administrator.getRoles());
+
         admin.setUserCategory(administrator.getUserCategory());
         SystemAdmin createdAdministrator = systemAdminService.save(admin);
         if (createdAdministrator == null) {
