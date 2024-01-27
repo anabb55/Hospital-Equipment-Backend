@@ -30,7 +30,7 @@ public class Reservation {
     @OneToMany(mappedBy = "reservation", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<ReservationEquipmentStock> reservationEquipmentStocks = new HashSet<ReservationEquipmentStock>();
 
-    @OneToOne(fetch=FetchType.EAGER)
+    @OneToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "appointment_id")
     private Appointment appointment;
 
@@ -39,7 +39,7 @@ public class Reservation {
     private QRCode qrCode;
 
     @JoinColumn(name = "registered_user_id")
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.LAZY)
     private RegisteredUser registeredUser;
 
 
