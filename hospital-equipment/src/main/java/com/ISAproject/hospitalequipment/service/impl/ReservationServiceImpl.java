@@ -89,6 +89,7 @@ public class ReservationServiceImpl implements ReservationService {
     public void deleteByAppointmentId(Long appointmentId) {
        Reservation reservation = reservationRepo.findByAppointment(appointmentId);
 
+       
        reservationRepo.delete(reservation);
     }
 
