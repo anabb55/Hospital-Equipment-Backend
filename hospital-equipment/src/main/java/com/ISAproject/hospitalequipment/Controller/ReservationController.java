@@ -67,11 +67,11 @@ public class ReservationController {
     }
 
     @CrossOrigin(origins = "*")
-
     @DeleteMapping("/deleteByAppointmentId/{appointmentId}")
-    public void DeleteByAppointmentId(@PathVariable Long appointmentId){
+    public void DeleteByAppointmentId(@PathVariable Long appointmentId) {
         reservationService.deleteByAppointmentId(appointmentId);
-      
+
+    }
       @CrossOrigin(origins = "*")
     @PutMapping("/updateStatus/{resId}")
     public ResponseEntity<ReservationDTO> updateStatus(@PathVariable("resId") Long reservationId  ){
