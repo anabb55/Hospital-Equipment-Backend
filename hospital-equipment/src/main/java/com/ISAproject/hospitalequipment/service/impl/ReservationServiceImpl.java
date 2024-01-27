@@ -106,4 +106,13 @@ public class ReservationServiceImpl implements ReservationService {
         return  reservationRepo.save(reservation);
     }
 
+    public Reservation getById(Long id){
+        return reservationRepo.findById(id).get();
+    }
+
+    public Reservation saveReservation(Reservation reservation)
+    {
+
+        return reservationRepo.save(reservation);
+    }
 }

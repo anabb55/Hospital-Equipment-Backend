@@ -36,6 +36,10 @@ public interface AppointmentRepo extends JpaRepository<Appointment,Long> {
             @Param("date") LocalDate date
     );
 
+    @Query("SELECT a FROM Appointment a " +
+            "WHERE a.administrator.company.id = :companyId " +
+            "AND (a.appointmentStatus = 'TAKEN')")
+    List<Appointment> findTakenAppointmentsByCompany(@Param("companyId") Long companyId);
 
 
 

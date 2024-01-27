@@ -20,7 +20,11 @@ public class CompanyAdministrator extends User{
 
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+
+
+
+    @ManyToOne(fetch = FetchType.EAGER)
+
 
     @JoinColumn(name="company_id")
 
