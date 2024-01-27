@@ -1,4 +1,5 @@
 # Hospital-Equipment-Backend
 
-Projekat se pokrece komandom .\mvnw.cmd spring-boot:run
-unutar terminala nad fajlom hospital-equipment.
+##Build
+
+Execute `.\mvnw.cmd spring-boot:run` in the terminal inside the hospital-equipment directory.
