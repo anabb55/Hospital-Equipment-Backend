@@ -58,4 +58,10 @@ public class ReservationController {
         reservationService.getDataForQRCode();
     }
 
+    @CrossOrigin(origins = "*")
+    @DeleteMapping("/deleteByAppointmentId/{appointmentId}")
+    public void DeleteByAppointmentId(@PathVariable Long appointmentId){
+        reservationService.deleteByAppointmentId(appointmentId);
+    }
+
 }

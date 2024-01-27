@@ -23,4 +23,6 @@ public interface ReservationService {
 
     public void getDataForQRCode() throws IOException, WriterException;
 
+    void deleteByAppointmentId(Long appointmentId);
+
 }
