@@ -28,4 +28,6 @@ public interface AppointmentService {
 
     public List<Appointment> findFutureAppointmentsByUserId(Long userId);
 
+
+
 }

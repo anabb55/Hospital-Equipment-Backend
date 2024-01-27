@@ -13,6 +13,8 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Getter
@@ -54,6 +56,9 @@ public class Appointment {
     @OneToOne(mappedBy = "appointment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private Reservation reservation;
+
+    @OneToMany(mappedBy = "appointment", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private List<CanceledAppointment> canceledAppointments;
 
     public Appointment() {
 
