@@ -71,5 +71,11 @@ public class ReservationEquipmentStockController {
 
         return new ResponseEntity<>(registeredUsersDTO,HttpStatus.OK);
     }
+    @CrossOrigin(origins = "*")
+
+    @GetMapping("/totalPrice/{idAppointment}")
+    public Long getTotalPrice(@PathVariable Long idAppointment) {
+        return reservationEquipmentStockService.totalPrice(idAppointment);
+    }
 
 }

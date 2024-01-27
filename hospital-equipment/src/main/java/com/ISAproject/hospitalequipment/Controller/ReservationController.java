@@ -1,15 +1,10 @@
 package com.ISAproject.hospitalequipment.Controller;
 
 import com.ISAproject.hospitalequipment.domain.Appointment;
-import com.ISAproject.hospitalequipment.domain.CompanyAdministrator;
 import com.ISAproject.hospitalequipment.domain.RegisteredUser;
 import com.ISAproject.hospitalequipment.domain.Reservation;
-import com.ISAproject.hospitalequipment.domain.enums.AppointmentStatus;
 import com.ISAproject.hospitalequipment.domain.enums.ReservationStatus;
-import com.ISAproject.hospitalequipment.dto.AppointmentDTO;
-import com.ISAproject.hospitalequipment.dto.CompanyAdministratorDTO;
 import com.ISAproject.hospitalequipment.dto.ReservationDTO;
-import com.ISAproject.hospitalequipment.service.AppointmentService;
 import com.ISAproject.hospitalequipment.service.EmailService;
 import com.ISAproject.hospitalequipment.service.RegisteredUserService;
 import com.ISAproject.hospitalequipment.service.ReservationService;
@@ -18,10 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/reservation")
@@ -60,11 +57,22 @@ public class ReservationController {
         reservation = reservationService.create(reservation);
         return new ResponseEntity<>(new ReservationDTO(reservation), HttpStatus.CREATED);
     }
-
+    @GetMapping("/qrCode/{userId}")
+    public List<Map<String, Object>> getReservationsQRForUser(@PathVariable Long userId,
+                                                              @RequestParam(required = false) String status)
+            throws IOException, WriterException {
+        return reservationService.getDataForUserQRCode(userId, status);
+    }
     @GetMapping("/sendEmailWithQRCode")
     public void sendQRCode() throws IOException, WriterException {
         reservationService.getDataForQRCode();
     }
+    @CrossOrigin(origins = "*")
+    @GetMapping("/isReservationTaken/{idAppointment}")
+    public Boolean isReservationTaken(@PathVariable int idAppointment) {
+        return reservationService.isReservationTaken(idAppointment);
+    }
+
 
     @CrossOrigin(origins = "*")
     @PutMapping("/updateStatus/{resId}")
