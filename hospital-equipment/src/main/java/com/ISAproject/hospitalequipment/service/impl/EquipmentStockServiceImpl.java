@@ -56,4 +56,28 @@ public class EquipmentStockServiceImpl implements EquipmentStockService {
         return eqStock.getId();
     }
 
+    public void updateAmountForContract(String equipmentName, Long companyId, Long amountWanted) {
+        EquipmentStock oldEquipmentStock = equipmentStockRepo.findByEquipmentNameAndCompanyId(equipmentName, companyId);
+        Long newAmount= oldEquipmentStock.getAmount()- amountWanted;
+        if (oldEquipmentStock!=null) {
+            oldEquipmentStock.setAmount(newAmount);
+            equipmentStockRepo.save(oldEquipmentStock);
+        } else {
+
+            throw new RuntimeException("EquipmentStock not found for given equipment and company");
+        }
+    }
+
+    public boolean isAmountTooLarge(String equipmentName, Long companyId, Long amountWanted) {
+        EquipmentStock oldEquipmentStock = equipmentStockRepo.findByEquipmentNameAndCompanyId(equipmentName, companyId);
+        Long newAmount= oldEquipmentStock.getAmount()- amountWanted;
+
+        if(newAmount<0){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
 }

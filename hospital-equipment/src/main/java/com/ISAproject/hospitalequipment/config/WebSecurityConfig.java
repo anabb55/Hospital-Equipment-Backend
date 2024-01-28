@@ -78,6 +78,7 @@ public class WebSecurityConfig {
                         .requestMatchers("api/reservation/**").permitAll()
                                 .requestMatchers("api/equipmentStocks/**").permitAll()
                         .requestMatchers("api/appointments/update/{id}").hasRole("REGISTERED_USER")
+                        .requestMatchers("api/producer/**").permitAll()
                 .anyRequest().authenticated())
 
                 .cors(withDefaults())

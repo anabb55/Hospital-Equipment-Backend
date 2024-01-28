@@ -109,7 +109,9 @@ VALUES (30, 3, 10);
 INSERT INTO registered_users(
     penalty_points, id,loyalty_id, user_category)
 VALUES (3, 1,1, 'REGULAR');
-
+INSERT INTO registered_users(
+    penalty_points, id,loyalty_id, user_category)
+VALUES (3, 2,2, 'REGULAR');
 
 
 
@@ -192,15 +194,8 @@ VALUES ('2023-12-27', '10:30:00','08:00:00', 4, 'PREDEFINED');
 INSERT INTO appointments(date, end_time, start_time, administrator_id, appointment_status)
 VALUES ('2023-12-27', '10:30:00','08:00:00', 4, 'PREDEFINED');
 
-INSERT INTO qrcode(id, qr_code_status)
-VALUES (1,'PROCCESSED');
-INSERT INTO qrcode(id, qr_code_status)
-VALUES (2,'PROCCESSED');
 
-INSERT INTO reservations(appointment_id,id,penalty_points,qr_cod_id,registered_user_id,reservation_status)
-VALUES (1,1,0,1,1,'RESERVED');
-INSERT INTO reservations(appointment_id,id,penalty_points,qr_cod_id,registered_user_id,reservation_status)
-VALUES (2,2,0,2,2,'RESERVED');
+
 
 
 
