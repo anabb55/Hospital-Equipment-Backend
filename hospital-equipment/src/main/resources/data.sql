@@ -108,6 +108,7 @@ VALUES (0, 1,1, 'REGULAR');
 
 
 
+
 INSERT INTO company(name, description, grade, address_id, work_start_time, work_end_time)
 VALUES ('Corpore Sano', 'The best service', 5, 1, '08:00:00', '17:00:00');
 
@@ -183,4 +184,5 @@ VALUES ('2024-02-04', '10:30:00','08:00:00', 4, 'PREDEFINED');
 
 INSERT INTO appointments(date, end_time, start_time, administrator_id, appointment_status)
 VALUES ('2024-02-04', '12:00:00','10:30:00', 4, 'PREDEFINED');
+
 

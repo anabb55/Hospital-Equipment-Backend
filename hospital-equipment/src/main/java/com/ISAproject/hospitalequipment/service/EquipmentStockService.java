@@ -24,5 +24,9 @@ public interface EquipmentStockService {
 
     public Long deleteEquipmentStock(Long companyId, Long equipmentId);
 
+    public void updateAmountForContract(String equipmentName, Long companyId, Long amountWanted);
+
+    public boolean isAmountTooLarge(String equipmentName, Long companyId, Long amountWanted);
+
 
 }
