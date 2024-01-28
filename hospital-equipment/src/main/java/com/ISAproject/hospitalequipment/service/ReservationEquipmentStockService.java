@@ -13,6 +13,8 @@ public interface ReservationEquipmentStockService {
 
     public ReservationEquipmentStock saveStock(ReservationEquipmentStock resEqStock);
 
+    public List<ReservationEquipmentStock> findByReservationId(Long reservationId);
     public Long totalPrice(Long idAppointment);
+
 
 }

@@ -55,7 +55,7 @@ public class Company implements Serializable {
 
 
 
-    @OneToMany(mappedBy = "company", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 
     private Set<CompanyAdministrator> administrators = new HashSet<CompanyAdministrator>();
 

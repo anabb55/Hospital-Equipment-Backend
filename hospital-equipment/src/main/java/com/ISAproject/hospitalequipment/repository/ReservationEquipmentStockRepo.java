@@ -15,9 +15,16 @@ public interface ReservationEquipmentStockRepo  extends JpaRepository<Reservatio
             "WHERE e.company.id = :companyId")
     List<ReservationEquipmentStock> findByCompanyId(@Param("companyId") Long companyId);
 
+
+    @Query("SELECT res FROM ReservationEquipmentStock res " +
+            "WHERE res.reservation.id = :reservationId")
+    List<ReservationEquipmentStock> findByReservationId(@Param("reservationId") Long reservationId);
+
+
     @Query("SELECT SUM(res.totalPrice) FROM ReservationEquipmentStock res " +
             "JOIN res.reservation r " +
             "WHERE r.appointment.id = :idAppointment")
     Long sumTotalPriceForAppointment(@Param("idAppointment") Long idAppointment);
+
 
 }

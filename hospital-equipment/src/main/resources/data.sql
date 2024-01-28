@@ -37,8 +37,7 @@ VALUES (3, 'ROLE_SYSTEM_ADMIN');
 
 INSERT INTO users(
     email, enabled, firstname, lastname,username ,occupation, password, phone_number, address_id,waslogged)
-VALUES ( 'anoka1810@gmail.com', true, 'Tara', 'Boskovic','taric', 'student', '$2a$10$mD0kgZJFbHEdEM5ICKJbgecF3qjIzP.i3zVV.nszlWh8Adp4gs4K6', '066-2678-772', 1,false);
-
+VALUES ( 'dajanaskocajic18@gmail.com', true, 'Tara', 'Boskovic','taric', 'student', '$2a$10$mD0kgZJFbHEdEM5ICKJbgecF3qjIzP.i3zVV.nszlWh8Adp4gs4K6', '066-2678-772', 1,false);
 
 INSERT INTO users(
     email, enabled, firstname, lastname,username, occupation, password, phone_number, address_id,waslogged)
@@ -48,7 +47,7 @@ VALUES ( 'h.jovix@gmail.com', true, 'Milos', 'Milosevic','anic', 'doctor', '$2a$
 
 INSERT INTO users(
     email, enabled, firstname, lastname,username, occupation, password, phone_number, address_id,waslogged)
-VALUES ( 'nikolinaskiljevic@gmail.com',true, 'Nikolina', 'Skiljevic','nina', 'nurse', '$2a$10$8Nm7wMyIxo7da3VfOJcE1eCI9JQOaWv5lVpehrMBSRAuODL2u/2Oq',  '069-3782-738', 3,false);
+VALUES ( 'dajanaskocajic18@gmail.com',true, 'Nikolina', 'Skiljevic','nina', 'nurse', '$2a$10$8Nm7wMyIxo7da3VfOJcE1eCI9JQOaWv5lVpehrMBSRAuODL2u/2Oq',  '069-3782-738', 3,false);
 INSERT INTO users(
     email, enabled, firstname, lastname,username, occupation, password, phone_number, address_id,waslogged)
 VALUES ( 'janko@gmail.com',false, 'Janko', 'Jankovic','aaa', 'nurse', '36782',  '069-3782-738', 4,false);
@@ -101,10 +100,8 @@ VALUES (30, 3, 10);
 
 
 INSERT INTO registered_users(
-    penalty_points, id,loyalty_id, user_category)
-VALUES (0, 1,1, 'REGULAR');
-
-
+	accumulated_points, penalty_points, id, loyalty_id, user_category)
+	VALUES (0, 0, 1, 1, 'REGULAR');
 
 
 
@@ -185,4 +182,14 @@ VALUES ('2024-02-04', '10:30:00','08:00:00', 4, 'PREDEFINED');
 INSERT INTO appointments(date, end_time, start_time, administrator_id, appointment_status)
 VALUES ('2024-02-04', '12:00:00','10:30:00', 4, 'PREDEFINED');
 
+
+
+INSERT INTO reservations(
+	appointment_id, id, penalty_points, qr_cod_id, registered_user_id, reservation_status)
+	VALUES (1, 1, 1, null, 1, 'RESERVED');
+
+
+INSERT INTO reservation_equipment_stock(
+	amount, equipment_stock_id, id, reservation_id)
+	VALUES (3, 1, 1, 1);
 

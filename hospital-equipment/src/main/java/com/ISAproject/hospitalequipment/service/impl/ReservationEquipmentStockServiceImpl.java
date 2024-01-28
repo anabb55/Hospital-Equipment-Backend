@@ -73,6 +73,12 @@ public class ReservationEquipmentStockServiceImpl implements ReservationEquipmen
         return reservationEquipmentStockRepo.save(resEqStock);
     }
 
+    @Override
+    public List<ReservationEquipmentStock> findByReservationId(Long reservationId) {
+        return reservationEquipmentStockRepo.findByReservationId(reservationId);
+    }
+
+
     public Long totalPrice(Long idAppointment){
     return reservationEquipmentStockRepo.sumTotalPriceForAppointment(idAppointment);
     }
