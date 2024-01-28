@@ -72,4 +72,18 @@ public class ReservationEquipmentStockController {
         return new ResponseEntity<>(registeredUsersDTO,HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "*")
+    @GetMapping("/getByReservationId/{reservationId}")
+    public ResponseEntity<List<ReservationEquipmentStockDTO>> getByReservationId(@PathVariable("reservationId")Long reservationId){
+
+        List<ReservationEquipmentStock> reservations= reservationEquipmentStockService.findByReservationId(reservationId);
+        List<ReservationEquipmentStockDTO> reservationDTOs= new ArrayList<>();
+        for(ReservationEquipmentStock r: reservations){
+            ReservationEquipmentStockDTO res = new ReservationEquipmentStockDTO(r);
+            reservationDTOs.add(res);
+        }
+
+        return new ResponseEntity<>(reservationDTOs,HttpStatus.OK);
+    }
+
 }

@@ -58,4 +58,11 @@ public class EquipmentStockController {
 
         return new ResponseEntity<>(id, HttpStatus.OK);
     }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping(value = "/getById/{id}")
+    public ResponseEntity<EquipmentStock> getById(@PathVariable("id")Long id){
+        EquipmentStock equipmentStock= this.equipmentStockService.findById(id);
+        return new ResponseEntity<>(equipmentStock,HttpStatus.OK);
+    }
 }

@@ -91,5 +91,12 @@ public class ReservationEquipmentStockServiceImpl implements ReservationEquipmen
     public ReservationEquipmentStock saveStock(ReservationEquipmentStock resEqStock){
         return reservationEquipmentStockRepo.save(resEqStock);
     }
+
+    @Override
+    public List<ReservationEquipmentStock> findByReservationId(Long reservationId) {
+        return reservationEquipmentStockRepo.findByReservationId(reservationId);
+    }
+
+
 }
 

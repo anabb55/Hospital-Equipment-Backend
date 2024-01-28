@@ -14,4 +14,6 @@ public interface ReservationEquipmentStockService {
     public ReservationEquipmentStock getById(Long id);
 
     public ReservationEquipmentStock saveStock(ReservationEquipmentStock resEqStock);
+
+    public List<ReservationEquipmentStock> findByReservationId(Long reservationId);
 }
