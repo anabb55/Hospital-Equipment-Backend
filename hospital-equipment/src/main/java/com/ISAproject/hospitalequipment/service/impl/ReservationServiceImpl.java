@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
@@ -22,6 +22,8 @@ public class ReservationServiceImpl implements ReservationService {
     @Autowired
     AppointmentService appointmentService;
 
+    @Autowired
+    private QRCodeService qrCodeService;
 
     @Autowired
    private EmailService emailService;
@@ -29,6 +31,10 @@ public class ReservationServiceImpl implements ReservationService {
     public List<Reservation> getAll()
     {
         return reservationRepo.findAll();
+    }
+
+    public Boolean isReservationTaken(int idAppointment){
+        return reservationRepo.isReservationTaken(idAppointment);
     }
 
     public Reservation getLast() {
@@ -85,6 +91,71 @@ public class ReservationServiceImpl implements ReservationService {
 
     }
 
+    public List<Reservation> findByRegisteredUserId(Long userId){
+        return reservationRepo.findByRegisteredUserId(userId);
+    }
+
+
+    public List<Map<String, Object>> getDataForUserQRCode(Long userId,String status) throws WriterException, IOException {
+        List<Reservation> reservations = findByRegisteredUserId(userId);
+        List<Reservation> filteredRes=new ArrayList<>();
+        List<Map<String, Object>> reservationDataList = new ArrayList<>();
+        if (status == null || status.trim().isEmpty()) {
+            filteredRes = reservations;
+        } else {
+            for (Reservation res : reservations) {
+                if (res.getReservationStatus().toString().equals(status)) {
+                    filteredRes.add(res);
+                }
+
+            }
+        }
+        for (Reservation res : filteredRes) {
+
+            Appointment appointment = res.getAppointment();
+
+            //rezervacija
+
+
+            //termini
+            String startTime = appointment.getStartTime().toString();
+            String endTime = appointment.getEndTime().toString();
+            String date = appointment.getDate().toString();
+
+            User user = res.getRegisteredUser();
+
+            //korisnik koji preuzima
+            String name = user.getFirstname();
+            String surname = user.getLastname();
+
+            //admin kompanije
+            CompanyAdministrator admin = appointment.getAdministrator();
+            String adminName = admin.getFirstname();
+            String adminSurname = admin.getLastname();
+
+            //kompanija
+            Company company = admin.getCompany();
+            String companyName = company.getName();
+
+            String allText="Date " + date + "\n"+
+                    startTime + " - " + endTime + "\n" +
+                    "User: " + name + " " + surname + "\n" +
+                    "Admin: " + adminName + " " + adminSurname + "\n" +
+                    "Company: " + companyName;
+
+            byte[] qrCodeBytes = qrCodeService.getQRCodeImage(allText, 300, 300);
+            String qrCodeBase64 = Base64.getEncoder().encodeToString(qrCodeBytes);
+
+
+
+            Map<String, Object> reservationData = new HashMap<>();
+            reservationData.put("qrCodeBase64", qrCodeBase64);
+            reservationDataList.add(reservationData);
+        }
+
+        return reservationDataList;
+    }
+
 
     public void deleteByAppointmentId(Long appointmentId) {
        Reservation reservation = reservationRepo.findByAppointment(appointmentId);
@@ -115,4 +186,7 @@ public class ReservationServiceImpl implements ReservationService {
 
         return reservationRepo.save(reservation);
     }
+
+
+
 }

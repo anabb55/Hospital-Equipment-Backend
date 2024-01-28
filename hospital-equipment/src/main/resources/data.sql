@@ -42,7 +42,9 @@ VALUES ( 'anoka1810@gmail.com', true, 'Tara', 'Boskovic','taric', 'student', '$2
 
 INSERT INTO users(
     email, enabled, firstname, lastname,username, occupation, password, phone_number, address_id,waslogged)
-VALUES ( 'example@gmail.com', false, 'Milos', 'Milosevic','anic', 'doctor', '2670', '064-3782-892', 2,false);
+
+VALUES ( 'h.jovix@gmail.com', true, 'Milos', 'Milosevic','anic', 'doctor', '$2a$10$mD0kgZJFbHEdEM5ICKJbgecF3qjIzP.i3zVV.nszlWh8Adp4gs4K6', '064-3782-892', 2,false);
+
 
 INSERT INTO users(
     email, enabled, firstname, lastname,username, occupation, password, phone_number, address_id,waslogged)
@@ -150,24 +152,24 @@ VALUES ( 500, 5, 'elastic', 'Bandage');
 
 
 INSERT INTO equipment_stock(
-    amount, company_id, equipment_id)
-VALUES ( 100,1,1);
+    amount, company_id, equipment_id,price)
+VALUES ( 100,1,1,100);
 
 INSERT INTO equipment_stock(
-    amount, company_id, equipment_id)
-VALUES ( 200,1,2);
+    amount, company_id, equipment_id,price)
+VALUES ( 200,1,2,200);
 
 INSERT INTO equipment_stock(
-    amount, company_id, equipment_id)
-VALUES ( 200,2,3);
+    amount, company_id, equipment_id,price)
+VALUES ( 200,2,3,150);
 
 INSERT INTO equipment_stock(
-    amount, company_id, equipment_id)
-VALUES ( 200,3,1);
+    amount, company_id, equipment_id,price)
+VALUES ( 200,3,1,250);
 
 INSERT INTO equipment_stock(
-    amount, company_id, equipment_id)
-VALUES ( 200,3,2);
+    amount, company_id, equipment_id,price)
+VALUES ( 200,3,2,130);
 
 
 INSERT INTO appointments(date, end_time, start_time, administrator_id,appointment_status)
@@ -181,3 +183,4 @@ VALUES ('2024-02-04', '10:30:00','08:00:00', 4, 'PREDEFINED');
 
 INSERT INTO appointments(date, end_time, start_time, administrator_id, appointment_status)
 VALUES ('2024-02-04', '12:00:00','10:30:00', 4, 'PREDEFINED');
+
