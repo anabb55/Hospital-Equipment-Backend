@@ -1,10 +1,9 @@
 package com.ISAproject.hospitalequipment.service.impl;
 
-import com.ISAproject.hospitalequipment.domain.Appointment;
-import com.ISAproject.hospitalequipment.domain.RegisteredUser;
-import com.ISAproject.hospitalequipment.domain.Role;
+import com.ISAproject.hospitalequipment.domain.*;
 import com.ISAproject.hospitalequipment.domain.enums.UserCategory;
 import com.ISAproject.hospitalequipment.dto.UserDTO;
+import com.ISAproject.hospitalequipment.repository.LoyaltyProgramRepo;
 import com.ISAproject.hospitalequipment.repository.RegisteredUserRepo;
 import com.ISAproject.hospitalequipment.service.*;
 import jakarta.mail.MessagingException;
@@ -37,6 +36,9 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
 
     @Autowired
     private AppointmentService appointmentService;
+
+    @Autowired
+    private LoyaltyProgramRepo loyaltyProgramRepo;
 
     public List<RegisteredUser> findAll() {
         return registeredUserRepo.findAll();
@@ -92,6 +94,30 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
             regUser.setPenaltyPoints(registeredUser.getPenaltyPoints() + 1);
            return  registeredUserRepo.save(regUser);
         }
+    }
+
+    @Override
+    public RegisteredUser updateLoyaltyProgram(Long id, int winPoints, int penaltyPoints) {
+        RegisteredUser old = registeredUserRepo.findById(id).get();
+
+        if (old !=null ) {
+
+            old.setPenaltyPoints(old.getPenaltyPoints()+penaltyPoints);
+            old.setAccumulatedPoints(old.getAccumulatedPoints()+winPoints);
+
+            if(old.getAccumulatedPoints() - old.getPenaltyPoints() >5 && old.getAccumulatedPoints() - old.getPenaltyPoints()<10){
+                old.setLoyaltyProgram(loyaltyProgramRepo.findById(2L).get());
+                old.setUserCategory(UserCategory.SILVER);
+            }
+            if(old.getAccumulatedPoints() - old.getPenaltyPoints() >10){
+                old.setLoyaltyProgram(loyaltyProgramRepo.findById(3L).get());
+                old.setUserCategory(UserCategory.GOLD);
+            }
+
+            registeredUserRepo.save(old);
+            return old;
+        }
+        return null;
     }
 
     @Override

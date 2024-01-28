@@ -1,6 +1,7 @@
 package com.ISAproject.hospitalequipment.service;
 
 import com.ISAproject.hospitalequipment.domain.Appointment;
+import com.ISAproject.hospitalequipment.domain.Company;
 import com.ISAproject.hospitalequipment.domain.RegisteredUser;
 import com.ISAproject.hospitalequipment.dto.UserDTO;
 import jakarta.mail.MessagingException;
@@ -22,6 +23,8 @@ public interface RegisteredUserService {
     public RegisteredUser save(RegisteredUser registeredUser) ;
 
     RegisteredUser updatePenaltyPoints(Long userId, RegisteredUser registeredUser, Appointment appointment);
+
+    public RegisteredUser updateLoyaltyProgram(Long id, int winPoints, int penaltyPoints);
 
     Optional<RegisteredUser> findById(Long id);
 
