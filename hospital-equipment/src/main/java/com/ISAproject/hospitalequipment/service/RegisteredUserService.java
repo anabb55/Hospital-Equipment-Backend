@@ -1,11 +1,13 @@
 package com.ISAproject.hospitalequipment.service;
 
+import com.ISAproject.hospitalequipment.domain.Appointment;
 import com.ISAproject.hospitalequipment.domain.RegisteredUser;
 import com.ISAproject.hospitalequipment.dto.UserDTO;
 import jakarta.mail.MessagingException;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Optional;
 
 public interface RegisteredUserService {
     public List<RegisteredUser> findAll() ;
@@ -19,5 +21,8 @@ public interface RegisteredUserService {
 
     public RegisteredUser save(RegisteredUser registeredUser) ;
 
+    RegisteredUser updatePenaltyPoints(Long userId, RegisteredUser registeredUser, Appointment appointment);
+
+    Optional<RegisteredUser> findById(Long id);
 
 }

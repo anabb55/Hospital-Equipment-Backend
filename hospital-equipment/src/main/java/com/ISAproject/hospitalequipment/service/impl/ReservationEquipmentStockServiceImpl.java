@@ -5,7 +5,6 @@ import com.ISAproject.hospitalequipment.domain.EquipmentStock;
 import com.ISAproject.hospitalequipment.domain.Reservation;
 import com.ISAproject.hospitalequipment.domain.ReservationEquipmentStock;
 import com.ISAproject.hospitalequipment.repository.ReservationEquipmentStockRepo;
-import com.ISAproject.hospitalequipment.service.EquipmentService;
 import com.ISAproject.hospitalequipment.service.EquipmentStockService;
 import com.ISAproject.hospitalequipment.service.ReservationEquipmentStockService;
 import com.ISAproject.hospitalequipment.service.ReservationService;
@@ -13,9 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class ReservationEquipmentStockServiceImpl implements ReservationEquipmentStockService {
@@ -31,49 +28,33 @@ public class ReservationEquipmentStockServiceImpl implements ReservationEquipmen
 
 
 
-
-    public ReservationEquipmentStock save(List<Equipment> equipments, ReservationEquipmentStock reservationEqStock,Long companyId) {
+    public ReservationEquipmentStock save(List<Equipment> equipments, ReservationEquipmentStock reservationEqStock, Long companyId) {
         Reservation lastReservation = reservationService.getLast();
+        List<EquipmentStock> allStocks = equipmentStockService.getAll();
+        List<EquipmentStock> filteredStocks = new ArrayList<>();
 
-        Map<Long, Long> equipmentAmountMap = new HashMap<>();
-        List<EquipmentStock> allStocks=equipmentStockService.getAll();
-        List<EquipmentStock> stocks=new ArrayList<>();
-        for(Equipment eq:equipments)
-        {
-            for(EquipmentStock eqStock:allStocks)
-            {
-                if(eqStock.getEquipment().id.equals(eq.getId()) && eqStock.getCompany().getId().equals(companyId))
-                {
-                    stocks.add(eqStock);
+        // Filter the stocks based on equipment ID and company ID
+        for (Equipment eq : equipments) {
+            for(EquipmentStock eqStock : allStocks) {
+                if(eqStock.getEquipment().id.equals(eq.getId()) && eqStock.getCompany().getId().equals(companyId)) {
+                    filteredStocks.add(eqStock);
                 }
             }
-
         }
 
-        for (EquipmentStock eqStock : stocks) {
+        for (EquipmentStock eqStock : filteredStocks) {
             EquipmentStock existingEqStock = equipmentStockService.findById(eqStock.getId());
+            ReservationEquipmentStock newReservationEqStock = new ReservationEquipmentStock();
 
-            if (existingEqStock != null && existingEqStock.getId().equals(eqStock.getId())) {
-                Long currentAmount = equipmentAmountMap.getOrDefault(eqStock.getId(), 0L);
-                equipmentAmountMap.put(eqStock.getId(), currentAmount + existingEqStock.getAmount());
-                ReservationEquipmentStock newReservationEqStock = new ReservationEquipmentStock();
-                newReservationEqStock.setAmount(equipmentAmountMap.get(eqStock.getId()));
-                newReservationEqStock.setEquipmentStock(eqStock);
-                newReservationEqStock.setReservation(lastReservation);
+            // Set the amount and equipment stock
+            newReservationEqStock.setAmount(existingEqStock != null ? existingEqStock.getAmount() : 1L);
+            newReservationEqStock.setEquipmentStock(eqStock);
+            newReservationEqStock.setReservation(lastReservation);
 
-                reservationEquipmentStockRepo.save(newReservationEqStock);
+            newReservationEqStock.setTotalPrice(eqStock.getPrice());
 
-                equipmentAmountMap.put(eqStock.getId(), 1L);
-            } else {
-                ReservationEquipmentStock newReservationEqStock = new ReservationEquipmentStock();
-                newReservationEqStock.setAmount(1L);
-                newReservationEqStock.setEquipmentStock(eqStock);
-                newReservationEqStock.setReservation(lastReservation);
 
-                reservationEquipmentStockRepo.save(newReservationEqStock);
-
-                equipmentAmountMap.put(eqStock.getId(), 1L);
-            }
+            reservationEquipmentStockRepo.save(newReservationEqStock);
         }
 
         return reservationEqStock;
@@ -91,5 +72,10 @@ public class ReservationEquipmentStockServiceImpl implements ReservationEquipmen
     public ReservationEquipmentStock saveStock(ReservationEquipmentStock resEqStock){
         return reservationEquipmentStockRepo.save(resEqStock);
     }
+
+    public Long totalPrice(Long idAppointment){
+    return reservationEquipmentStockRepo.sumTotalPriceForAppointment(idAppointment);
+    }
+
 }
 

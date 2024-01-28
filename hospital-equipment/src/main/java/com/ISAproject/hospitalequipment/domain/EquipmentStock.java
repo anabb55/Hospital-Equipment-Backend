@@ -26,8 +26,6 @@ public class EquipmentStock {
     Equipment equipment;
 
 
-
-
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="company_id")
  
@@ -37,13 +35,17 @@ public class EquipmentStock {
     @Column(name = "amount")
     Long amount;
 
+    @Column(name = "price")
+    Long price;
+
     @OneToMany(mappedBy = "equipmentStock", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<ReservationEquipmentStock> reservationEquipmentStocks = new HashSet<ReservationEquipmentStock>();
 
-    public EquipmentStock(Equipment equipment, Company company, Long amount) {
+    public EquipmentStock(Equipment equipment, Company company, Long amount,Long price) {
         this.equipment = equipment;
         this.company = company;
         this.amount = amount;
+        this.price=price;
     }
 
     public EquipmentStock(){}

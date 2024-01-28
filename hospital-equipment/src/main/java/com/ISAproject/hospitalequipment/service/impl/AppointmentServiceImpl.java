@@ -48,6 +48,8 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentRepo.findFutureAppointmentsByUserId(userId);
     }
 
+
+
     public List<CompanyAdministrator> findAvailableAdministrator(LocalTime startTime, LocalTime endTime, LocalDate date,Long companyId){
         return  companyAdministratorService.findAvailableAdministrator(startTime,endTime,date,companyId);
     }
@@ -66,6 +68,10 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     public List<Appointment> findTakenAppointmentsByCompanyAndDate(Long companyId, LocalDate date) {
         return appointmentRepo.findTakenAppointmentsByCompanyAndDate(companyId, date);
+    }
+
+    public List<Appointment> findTakenAppointmentsByCompany(Long companyId) {
+        return appointmentRepo.findTakenAppointmentsByCompany(companyId);
     }
     public long getMaxAppointmentId() {
         List<Appointment> allAppointments = findAll();
@@ -117,4 +123,6 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
         return generatedAppointments;
     }
+
+
 }

@@ -38,7 +38,8 @@ public class CompanyAdministratorDTO extends UserDTO {
                 a.getEmail(),
                 a.getOccupation(),
                 a.getAddress(),
-                a.getPhoneNumber()
+                a.getPhoneNumber(),
+                a.getRoles()
         );
         if(a.getCompany() != null){
             this.company = new CompanyDTO(a.getCompany());
