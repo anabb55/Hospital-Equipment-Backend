@@ -18,7 +18,7 @@ public class ReservationDTO {
 
     private ReservationStatus reservationStatus;
 
-    private AppointmentDTO appointmentDTO;
+   private AppointmentDTO appointmentDTO;
 
     private RegisterUserDTO registeredUserDTO;
     public ReservationDTO(Reservation reservation)

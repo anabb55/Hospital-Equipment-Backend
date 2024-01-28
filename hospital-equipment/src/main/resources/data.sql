@@ -20,9 +20,6 @@ VALUES ( 'Nis', 'Serbia', '13', 'Vozda Karadjordja','43.32111628016304', '21.897
 INSERT INTO addresses(
     city, country, number, street,latitude,longitude)
 VALUES ( 'Beograd', 'Serbia', '36', 'Nemanjina','44.802974458685824', '20.464545191207794');
-INSERT INTO addresses(
-    city, country, number, street,latitude,longitude)
-VALUES ( 'Nevesinje', 'BiH', '1', 'Narodnih heroja','41.802974458685824', '21.464545191207794');
 
 
 INSERT INTO role(
@@ -38,7 +35,6 @@ INSERT INTO role(
 VALUES (3, 'ROLE_SYSTEM_ADMIN');
 
 
-
 INSERT INTO users(
     email, enabled, firstname, lastname,username ,occupation, password, phone_number, address_id,waslogged)
 VALUES ( 'anoka1810@gmail.com', true, 'Tara', 'Boskovic','taric', 'student', '$2a$10$mD0kgZJFbHEdEM5ICKJbgecF3qjIzP.i3zVV.nszlWh8Adp4gs4K6', '066-2678-772', 1,false);
@@ -46,7 +42,9 @@ VALUES ( 'anoka1810@gmail.com', true, 'Tara', 'Boskovic','taric', 'student', '$2
 
 INSERT INTO users(
     email, enabled, firstname, lastname,username, occupation, password, phone_number, address_id,waslogged)
+
 VALUES ( 'h.jovix@gmail.com', true, 'Milos', 'Milosevic','anic', 'doctor', '$2a$10$mD0kgZJFbHEdEM5ICKJbgecF3qjIzP.i3zVV.nszlWh8Adp4gs4K6', '064-3782-892', 2,false);
+
 
 INSERT INTO users(
     email, enabled, firstname, lastname,username, occupation, password, phone_number, address_id,waslogged)
@@ -62,15 +60,12 @@ VALUES ( 'marko@gmail.com',false, 'Marko', 'Markovic', 'aaa', 'nurse', '222345',
 INSERT INTO users(
     email, enabled, firstname, lastname,username, occupation, password, phone_number, address_id,waslogged)
 VALUES ( 'Mirko@gmail.com',false, 'Mirko', 'Mirkovic','banana', 'nurse', '36782',  '069-3782-738', 6,false);
-INSERT INTO users(
-    email, enabled, firstname, lastname,username, occupation, password, phone_number, address_id,waslogged)
-VALUES ( 'dajanaskocajic18@gmail.com',true, 'Dajana', 'Skocajic','daks', 'nurse', '$2a$10$nCS1VJMqNHmfuQiHi9MveO43.fVv/5THgHeFIShfeGE5XYTAjaRci', '069-3782-708', 7,false);
 
 
 
 INSERT INTO user_role(
     role_id, user_id)
-VALUES (3, 1);
+VALUES (1, 1);
 
 INSERT INTO user_role(
     role_id, user_id)
@@ -90,9 +85,6 @@ VALUES (2, 5);
 INSERT INTO user_role(
     role_id, user_id)
 VALUES (2, 6);
-INSERT INTO user_role(
-    role_id, user_id)
-VALUES (3, 7);
 
 
 INSERT INTO loyalty_program(
@@ -110,12 +102,7 @@ VALUES (30, 3, 10);
 
 INSERT INTO registered_users(
     penalty_points, id,loyalty_id, user_category)
-VALUES (3, 1,1, 'REGULAR');
-INSERT INTO registered_users(
-    penalty_points, id,loyalty_id, user_category)
-VALUES (4, 2,2, 'REGULAR');
-
-
+VALUES (0, 1,1, 'REGULAR');
 
 
 
@@ -186,29 +173,14 @@ VALUES ( 200,3,2,130);
 
 
 INSERT INTO appointments(date, end_time, start_time, administrator_id,appointment_status)
-VALUES ('2023-12-22', '10:00:00','08:00:00', 3, 'TAKEN');
+VALUES ('2024-01-29', '10:00:00','08:00:00', 3, 'TAKEN');
 
 INSERT INTO appointments(date, end_time, start_time, administrator_id,  appointment_status)
-VALUES ('2023-12-26', '10:00:00','08:00:00', 3,'PREDEFINED');
+VALUES ('2024-02-03', '10:00:00','08:00:00', 3,'PREDEFINED');
 
 INSERT INTO appointments(date, end_time, start_time, administrator_id, appointment_status)
-VALUES ('2023-12-27', '10:30:00','08:00:00', 4, 'PREDEFINED');
+VALUES ('2024-02-04', '10:30:00','08:00:00', 4, 'PREDEFINED');
 
 INSERT INTO appointments(date, end_time, start_time, administrator_id, appointment_status)
-VALUES ('2023-12-27', '10:30:00','08:00:00', 4, 'PREDEFINED');
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
+VALUES ('2024-02-04', '12:00:00','10:30:00', 4, 'PREDEFINED');
 

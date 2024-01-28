@@ -1,20 +1,24 @@
 package com.ISAproject.hospitalequipment.service.impl;
 
+import com.ISAproject.hospitalequipment.domain.Appointment;
 import com.ISAproject.hospitalequipment.domain.RegisteredUser;
 import com.ISAproject.hospitalequipment.domain.Role;
 import com.ISAproject.hospitalequipment.domain.enums.UserCategory;
 import com.ISAproject.hospitalequipment.dto.UserDTO;
 import com.ISAproject.hospitalequipment.repository.RegisteredUserRepo;
-import com.ISAproject.hospitalequipment.service.EmailService;
-import com.ISAproject.hospitalequipment.service.RegisteredUserService;
-import com.ISAproject.hospitalequipment.service.RoleService;
-import com.ISAproject.hospitalequipment.service.UserService;
+import com.ISAproject.hospitalequipment.service.*;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 
@@ -30,6 +34,9 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
 
     @Autowired
     private EmailService emailService;
+
+    @Autowired
+    private AppointmentService appointmentService;
 
     public List<RegisteredUser> findAll() {
         return registeredUserRepo.findAll();
@@ -63,6 +70,33 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
 
     public RegisteredUser save(RegisteredUser registeredUser) {
         return registeredUserRepo.save(registeredUser);
+    }
+
+    @Override
+    public RegisteredUser updatePenaltyPoints(Long userId, RegisteredUser registeredUser, Appointment appointment) {
+        Optional<RegisteredUser> OptionalRegUser = registeredUserRepo.findById(userId);
+
+        RegisteredUser regUser = OptionalRegUser.get();
+
+
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime appointmentDateTime = LocalDateTime.of(appointment.getDate(), appointment.getStartTime() );
+
+        long minutesDifference = ChronoUnit.MINUTES.between(now,appointmentDateTime);
+
+        if(minutesDifference<1440){
+            regUser.setPenaltyPoints(registeredUser.getPenaltyPoints() + 2);
+             return registeredUserRepo.save(regUser);
+        }
+        else {
+            regUser.setPenaltyPoints(registeredUser.getPenaltyPoints() + 1);
+           return  registeredUserRepo.save(regUser);
+        }
+    }
+
+    @Override
+    public Optional<RegisteredUser> findById(Long id) {
+        return registeredUserRepo.findById(id);
     }
 
     public boolean existsById(Integer id)

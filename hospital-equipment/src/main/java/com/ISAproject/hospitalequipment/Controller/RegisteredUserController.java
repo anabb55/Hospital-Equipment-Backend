@@ -1,6 +1,7 @@
 package com.ISAproject.hospitalequipment.Controller;
 
 import com.ISAproject.hospitalequipment.domain.Address;
+import com.ISAproject.hospitalequipment.domain.Appointment;
 import com.ISAproject.hospitalequipment.domain.RegisteredUser;
 import com.ISAproject.hospitalequipment.domain.User;
 import com.ISAproject.hospitalequipment.dto.AppointmentDTO;
@@ -15,8 +16,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -94,6 +98,32 @@ public class RegisteredUserController {
             return ResponseEntity.noContent().build();
         } else {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+    @CrossOrigin
+    @PutMapping("/updatePenaltyPoints/{UserId}")
+    public ResponseEntity<RegisterUserDTO> updatePenaltyPoints( @PathVariable Long UserId, @RequestBody AppointmentDTO appointmentDTO){
+        Optional<RegisteredUser> OptionalRegUser = registeredUserService.findById(UserId);
+
+        RegisteredUser regUser = OptionalRegUser.get();
+
+
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime appointmentDateTime = LocalDateTime.of(appointmentDTO.getDate(), appointmentDTO.getStartTime() );
+
+        long minutesDifference = ChronoUnit.MINUTES.between(now,appointmentDateTime);
+
+        if(minutesDifference<1440){
+            regUser.setPenaltyPoints(regUser.getPenaltyPoints() + 2);
+            regUser = registeredUserService.save(regUser);
+            return  new ResponseEntity<>(new RegisterUserDTO((regUser)), HttpStatus.OK);
+        }
+        else {
+            regUser.setPenaltyPoints(regUser.getPenaltyPoints() + 1);
+            regUser = registeredUserService.save(regUser);
+            return  new ResponseEntity<>(new RegisterUserDTO((regUser)), HttpStatus.OK);
         }
     }
 

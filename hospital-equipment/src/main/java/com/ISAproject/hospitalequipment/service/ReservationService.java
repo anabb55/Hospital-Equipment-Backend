@@ -24,6 +24,9 @@ public interface ReservationService {
 
     public List<Map<String, Object>> getDataForUserQRCode(Long userId, String status) throws WriterException, IOException ;
 
+
+    void deleteByAppointmentId(Long appointmentId);
+
     public Reservation getById(Long id);
 
     public Reservation saveReservation(Reservation reservation);
