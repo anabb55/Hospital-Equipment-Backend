@@ -25,6 +25,7 @@ public class EquipmentServiceImpl implements EquipmentService {
         return this.equipmentRepo.findMissingEquipmentForCompany(companyId);
     }
 
+
     @Override
     public List<Equipment> findAll() {
         return equipmentRepo.findAll();

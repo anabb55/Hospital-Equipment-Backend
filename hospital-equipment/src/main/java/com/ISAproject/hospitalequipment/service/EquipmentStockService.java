@@ -13,7 +13,7 @@ public interface EquipmentStockService {
 
     Integer findEquipmentAmountByCompany(Long companyId,Long equipmentId);
 
-
+    public EquipmentStock save(EquipmentStock eqStock);
     public void updateAmount(Long equipmentId, Long companyId, Long newAmount);
 
     public EquipmentStock  findById(Long id);
