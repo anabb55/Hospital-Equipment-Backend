@@ -125,4 +125,38 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
 
+    public boolean alreadyExistsAppointment(LocalDate date,LocalTime startTime, LocalTime endTime,Long adminId){
+        List<Appointment> appointments= appointmentRepo.findAppointmentsByAdmin(adminId);
+        if(appointments!=null) {
+            for (Appointment a : appointments) {
+                if (a.getDate().isEqual(date)) {
+                    Integer appStartHour = a.getStartTime().getHour();
+                    Integer appEndHour = a.getEndTime().getHour();
+                    Integer appStartMinutes = a.getStartTime().getMinute();
+                    Integer appEndMinutes = a.getEndTime().getMinute();
+
+                    if (startTime.getHour() > appStartHour && startTime.getHour() < appEndHour) {
+                        return true;
+                    }
+                    if (endTime.getHour() > appStartHour && endTime.getHour() < appEndHour) {
+
+                    }
+                    if (startTime.getHour() == appStartHour && startTime.getMinute() >= appStartMinutes) {
+                        return true;
+                    }
+                    if (endTime.getHour() == appStartHour && endTime.getMinute() >= appStartMinutes) {
+                        return true;
+                    }
+
+                    if (startTime.getHour() == appEndHour && startTime.getMinute() <= appEndMinutes) {
+                        return true;
+                    }
+
+                }
+
+            }
+        }
+       return false;
+    }
+
 }

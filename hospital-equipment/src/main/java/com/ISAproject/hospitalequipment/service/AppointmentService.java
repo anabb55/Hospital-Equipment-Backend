@@ -28,6 +28,6 @@ public interface AppointmentService {
 
     public List<Appointment> findFutureAppointmentsByUserId(Long userId);
 
-
+    public boolean alreadyExistsAppointment(LocalDate date,LocalTime startTime, LocalTime endTime,Long adminId);
 
 }
