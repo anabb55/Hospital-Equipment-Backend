@@ -113,4 +113,13 @@ public class ReservationController {
 
     }
 
+    @CrossOrigin(origins = "*")
+    @PutMapping("/checkExpiredReservations/")
+    public ResponseEntity<Void> checkExpiredReservations(  ){
+
+        reservationService.checkExpiredReservations();
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

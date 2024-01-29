@@ -33,4 +33,6 @@ public interface ReservationService {
 
     List<Reservation> findByRegisteredUserId(Long userId);
 
+    public void checkExpiredReservations();
+
 }
