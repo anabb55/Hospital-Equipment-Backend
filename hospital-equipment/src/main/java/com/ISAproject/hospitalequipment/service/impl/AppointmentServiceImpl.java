@@ -125,8 +125,8 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
 
-    public boolean alreadyExistsAppointment(LocalDate date,LocalTime startTime, LocalTime endTime,Long adminId){
-        List<Appointment> appointments= appointmentRepo.findAppointmentsByAdmin(adminId);
+    public boolean alreadyExistsAppointment(LocalDate date,LocalTime startTime, LocalTime endTime,Long adminId,Long companyId){
+        List<Appointment> appointments= appointmentRepo.findAppointmentsByCompany(companyId);
         if(appointments!=null) {
             for (Appointment a : appointments) {
                 if (a.getDate().isEqual(date)) {

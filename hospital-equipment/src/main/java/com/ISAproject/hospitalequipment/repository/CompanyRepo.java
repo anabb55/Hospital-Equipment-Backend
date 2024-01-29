@@ -28,6 +28,7 @@ public interface CompanyRepo extends JpaRepository<Company,Long> {
     @Query("SELECT es.equipment FROM EquipmentStock es WHERE es.company.id = :companyId AND es.equipment.name LIKE %:name%")
     List<Equipment> findEquipmentByCompanyIdAndName(@Param("companyId") Long companyId, @Param("name") String name);
 
-
+    @Query("SELECT cp FROM Company cp JOIN cp.administrators a WHERE a.id = :administratorId")
+    Company findCompanyByAdministrator(@Param("administratorId")Long id);
 
 }
