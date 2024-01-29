@@ -26,9 +26,18 @@ public class ReservationEquipmentStock {
     @Column(name = "amount")
     Long amount;
 
+    @Column(name = "total_price")
+    Long totalPrice;
 
 
+    public ReservationEquipmentStock(Long id, Reservation reservation, EquipmentStock equipmentStock, Long amount, Long totalPrice) {
+        this.id = id;
+        this.reservation = reservation;
+        this.equipmentStock = equipmentStock;
+        this.amount = amount;
+        this.totalPrice = totalPrice;
+    }
 
-
-
+    public ReservationEquipmentStock() {
+    }
 }

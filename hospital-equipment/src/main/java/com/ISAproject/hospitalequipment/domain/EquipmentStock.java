@@ -1,6 +1,8 @@
 package com.ISAproject.hospitalequipment.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,6 +16,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name="equipment_stock")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = EquipmentStock.class)
 public class EquipmentStock {
 
     @Id
@@ -22,7 +25,7 @@ public class EquipmentStock {
 
 
     @JoinColumn(name = "equipment_id")
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.LAZY)
     Equipment equipment;
 
 
@@ -35,10 +38,20 @@ public class EquipmentStock {
     @Column(name = "amount")
     Long amount;
 
+    @Column(name = "price")
+    Long price;
+
     @OneToMany(mappedBy = "equipmentStock", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<ReservationEquipmentStock> reservationEquipmentStocks = new HashSet<ReservationEquipmentStock>();
 
-    public EquipmentStock(Equipment equipment, Company company, Long amount) {
+    public EquipmentStock(Equipment equipment, Company company, Long amount,Long price) {
+        this.equipment = equipment;
+        this.company = company;
+        this.amount = amount;
+        this.price=price;
+    }
+    public EquipmentStock(Long id,Equipment equipment, Company company, Long amount) {
+        this.id = id;
         this.equipment = equipment;
         this.company = company;
         this.amount = amount;

@@ -1,13 +1,11 @@
 package com.ISAproject.hospitalequipment.Controller;
 
-import com.ISAproject.hospitalequipment.domain.Address;
-import com.ISAproject.hospitalequipment.domain.Appointment;
-import com.ISAproject.hospitalequipment.domain.RegisteredUser;
-import com.ISAproject.hospitalequipment.domain.User;
+import com.ISAproject.hospitalequipment.domain.*;
 import com.ISAproject.hospitalequipment.dto.AppointmentDTO;
 import com.ISAproject.hospitalequipment.dto.RegisterUserDTO;
 import com.ISAproject.hospitalequipment.dto.UserDTO;
 import com.ISAproject.hospitalequipment.mapper.registredUserDTOMapper;
+import com.ISAproject.hospitalequipment.repository.LoyaltyProgramRepo;
 import com.ISAproject.hospitalequipment.service.RegisteredUserService;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +29,9 @@ public class RegisteredUserController {
 
     @Autowired
     private registredUserDTOMapper userDTOMapper;
+
+    @Autowired
+    private LoyaltyProgramRepo loyaltyProgramRepo;
 
 
 
@@ -125,6 +126,14 @@ public class RegisteredUserController {
             regUser = registeredUserService.save(regUser);
             return  new ResponseEntity<>(new RegisterUserDTO((regUser)), HttpStatus.OK);
         }
+    }
+
+    @CrossOrigin(origins = "*")
+    @PutMapping("/updateLoyaltyProgram/{id}/{winPoints}/{penaltyPoints}")
+    public ResponseEntity<RegisterUserDTO> updateLoyaltyProgram(@PathVariable Long id, @PathVariable int winPoints, @PathVariable int penaltyPoints){
+
+        RegisteredUser regUser = registeredUserService.updateLoyaltyProgram(id,winPoints,penaltyPoints);
+        return  new ResponseEntity<>(new RegisterUserDTO(regUser), HttpStatus.OK);
     }
 
 
