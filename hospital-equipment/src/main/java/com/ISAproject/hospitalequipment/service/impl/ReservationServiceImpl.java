@@ -95,7 +95,7 @@ public class ReservationServiceImpl implements ReservationService {
         String endTime = appointment.getEndTime().toString();
         String date = appointment.getDate().toString();
 
-        User user = res.getRegisteredUser();
+        RegisteredUser user = res.getRegisteredUser();
 
         //korisnik koji preuzima
         String name = user.getFirstname();
@@ -110,7 +110,7 @@ public class ReservationServiceImpl implements ReservationService {
         Company company = admin.getCompany();
         String companyName = company.getName();
 
-
+        double totalPrice = equipment.getPrice()-equipment.getPrice()*user.getLoyaltyProgram().getDiscountPercentage();
         String allText="Date" + date + "\n"+ "\t"+
                 startTime + " - " + endTime + "\n" +"\t"+
                 "Reservation ID: " + res.getId()+ "\n" + "\t"+
@@ -118,12 +118,10 @@ public class ReservationServiceImpl implements ReservationService {
                 "Admin: " + adminName + " " + adminSurname + "\n" +"\t"+
                 "Company: " + companyName+"\n"+"\t"+
                 "Equipment: " + equipment.getName() +"\t"+ "description: "+ equipment.getDescription()+ "\n"+"\t"+
+                "Total price: " + totalPrice +"\n"+"\t"+
                 "Amount: " + amount;
 
         emailService.SendEmailWithQRCode(allText,user);
-
-
-
     }
 
     public List<Reservation> findByRegisteredUserId(Long userId){
