@@ -133,20 +133,20 @@ VALUES (2,6);
 
 
 INSERT INTO equipments(
-    amount, grade, description, name)
-VALUES ( 50, 5, 'Strong', 'Scissors');
+    amount, grade, description, name,price)
+VALUES ( 50, 5, 'Strong', 'Scissors',100);
 
 INSERT INTO equipments(
-    amount, grade, description, name)
-VALUES ( 2000, 4, 'Medical', 'Gloves');
+    amount, grade, description, name,price)
+VALUES ( 2000, 4, 'Medical', 'Gloves',100);
 
 INSERT INTO equipments(
-    amount, grade, description, name)
-VALUES ( 500, 5, 'Cotton', 'Coat');
+    amount, grade, description, name,price)
+VALUES ( 500, 5, 'Cotton', 'Coat',100);
 
 INSERT INTO equipments(
-    amount, grade, description, name)
-VALUES ( 500, 5, 'elastic', 'Bandage');
+    amount, grade, description, name,price)
+VALUES ( 500, 5, 'elastic', 'Bandage',100);
 
 
 INSERT INTO equipment_stock(
@@ -184,12 +184,4 @@ VALUES ('2024-02-04', '12:00:00','10:30:00', 4, 'PREDEFINED');
 
 
 
-INSERT INTO reservations(
-	appointment_id, id, penalty_points, qr_cod_id, registered_user_id, reservation_status)
-	VALUES (1, 1, 1, null, 1, 'RESERVED');
-
-
-INSERT INTO reservation_equipment_stock(
-	amount, equipment_stock_id, id, reservation_id)
-	VALUES (3, 1, 1, 1);
 

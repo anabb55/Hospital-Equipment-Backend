@@ -13,4 +13,5 @@ public interface EquipmentService {
     public List<Equipment> findAvailableEquipmentForCompany(Long companyId);
 
     public List<Equipment> findAll();
+    public Equipment update(Equipment e,Long userId);
 }
