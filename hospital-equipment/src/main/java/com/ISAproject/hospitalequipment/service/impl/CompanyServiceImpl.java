@@ -81,4 +81,8 @@ public class CompanyServiceImpl implements CompanyService {
     public List<Equipment> findEquipmentByCompanyIdAndName(Long companyId,String name){
      return  companyRepo.findEquipmentByCompanyIdAndName(companyId,name);
     }
+
+    public Company findCompanyByAdminn(Long adminId){
+        return companyRepo.findCompanyByAdministrator(adminId);
+    }
 }

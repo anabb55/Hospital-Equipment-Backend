@@ -170,8 +170,8 @@ public class AppointmentController {
     public ResponseEntity<String> createApp( @PathVariable("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
                                            @PathVariable("startTime") @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime startTime,
                                            @PathVariable("endTime") @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime endTime, @PathVariable("adminId") Long adminId){
-
-        if(!appointmentService.alreadyExistsAppointment(date,startTime,endTime,adminId)){
+        Company company= companyService.findCompanyByAdminn(adminId);
+        if(!appointmentService.alreadyExistsAppointment(date,startTime,endTime,adminId,company.getId())){
             Appointment newApp= new Appointment();
             newApp.setDate(date);
             newApp.setEndTime(endTime);

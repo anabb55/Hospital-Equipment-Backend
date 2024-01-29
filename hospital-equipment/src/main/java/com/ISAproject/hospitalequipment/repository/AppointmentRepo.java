@@ -46,5 +46,9 @@ public interface AppointmentRepo extends JpaRepository<Appointment,Long> {
             "WHERE a.administrator.id = :adminId ")
     List<Appointment> findAppointmentsByAdmin(@PathVariable("adminId") Long adminId);
 
+    @Query("SELECT a FROM Appointment a " +
+            "WHERE a.administrator.company.id = :companyId ")
+    List<Appointment> findAppointmentsByCompany(@Param("companyId") Long companyId);
+
 
 }
