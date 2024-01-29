@@ -47,7 +47,7 @@ VALUES ( 'h.jovix@gmail.com', true, 'Milos', 'Milosevic','anic', 'doctor', '$2a$
 
 INSERT INTO users(
     email, enabled, firstname, lastname,username, occupation, password, phone_number, address_id,waslogged)
-VALUES ( 'dajanaskocajic18@gmail.com',true, 'Nikolina', 'Skiljevic','nina', 'nurse', '$2a$10$8Nm7wMyIxo7da3VfOJcE1eCI9JQOaWv5lVpehrMBSRAuODL2u/2Oq',  '069-3782-738', 3,false);
+VALUES ( 'dajanaskocajic18@gmail.com',true, 'Nikolina', 'Skiljevic','nina', 'nurse', '$2a$10$mD0kgZJFbHEdEM5ICKJbgecF3qjIzP.i3zVV.nszlWh8Adp4gs4K6',  '069-3782-738', 3,false);
 INSERT INTO users(
     email, enabled, firstname, lastname,username, occupation, password, phone_number, address_id,waslogged)
 VALUES ( 'janko@gmail.com',false, 'Janko', 'Jankovic','aaa', 'nurse', '36782',  '069-3782-738', 4,false);
@@ -107,10 +107,10 @@ INSERT INTO registered_users(
 
 
 INSERT INTO company(name, description, grade, address_id, work_start_time, work_end_time)
-VALUES ('Corpore Sano', 'The best service', 5, 1, '08:00:00', '17:00:00');
+VALUES ('Corpore Sano', 'The best service', 5, 2, '08:00:00', '17:00:00');
 
 INSERT INTO company(name, description, grade, address_id, work_start_time, work_end_time)
-VALUES ('Health Company', 'Safe with us', 4, 2, '08:00:00', '17:00:00');
+VALUES ('Health Company', 'Safe with us', 4, 1, '08:00:00', '17:00:00');
 
 INSERT INTO company(name, description, grade, address_id, work_start_time, work_end_time)
 VALUES ('HealthGroup', 'Best service', 4, 3, '08:00:00', '17:00:00');
@@ -181,6 +181,9 @@ VALUES ('2024-02-04', '10:30:00','08:00:00', 4, 'PREDEFINED');
 
 INSERT INTO appointments(date, end_time, start_time, administrator_id, appointment_status)
 VALUES ('2024-02-04', '12:00:00','10:30:00', 4, 'PREDEFINED');
+
+INSERT INTO contract(amount,equipment_type,company_id,date,contract_status,longitude,latitude)
+VALUES(20,'Gloves',1,'2024-02-04','VALID','45.24702032809865', '19.840907344141257');
 
 
 

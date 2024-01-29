@@ -17,4 +17,10 @@ public interface ContractRepository extends JpaRepository<Contract,Long> {
     @Query("SELECT c FROM Contract c WHERE  c.contractStatus = :status")
     Contract getValidContract(@Param("status") ContractStatus status);
 
+    @Query("SELECT c.longitude, c.latitude FROM Contract c " +
+            "ORDER BY c.date DESC")
+    Object[] findLongitudeLatitudeOfLatestContract();
+
+
+
 }

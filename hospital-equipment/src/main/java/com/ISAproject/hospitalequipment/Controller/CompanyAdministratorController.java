@@ -3,10 +3,8 @@ package com.ISAproject.hospitalequipment.Controller;
 import com.ISAproject.hospitalequipment.domain.Address;
 import com.ISAproject.hospitalequipment.domain.Company;
 import com.ISAproject.hospitalequipment.domain.CompanyAdministrator;
-import com.ISAproject.hospitalequipment.domain.EquipmentStock;
-import com.ISAproject.hospitalequipment.dto.AppointmentDTO;
 import com.ISAproject.hospitalequipment.dto.CompanyAdministratorDTO;
-import com.ISAproject.hospitalequipment.dto.CompanyDTO;
+import com.ISAproject.hospitalequipment.dto.LocationDTO;
 import com.ISAproject.hospitalequipment.service.CompanyAdministratorService;
 import com.ISAproject.hospitalequipment.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/companyAdministrators")
@@ -74,7 +71,27 @@ public class CompanyAdministratorController {
 
         return new ResponseEntity<>(new CompanyAdministratorDTO(createdAdministrator), HttpStatus.OK);
     }
-
+//    @GetMapping("/combineLocations/{adminId}")
+//    public ResponseEntity<List<Object[]>> getCombinedLocationData(@PathVariable Long adminId) {
+//        try {
+//            List<Object[]> combinedData = companyAdministratorService.combineLocationData(adminId);
+//            if (combinedData.isEmpty()) {
+//                return ResponseEntity.noContent().build();
+//            }
+//            return ResponseEntity.ok(combinedData);
+//        } catch (Exception e) {
+//            return ResponseEntity.internalServerError().build();
+//        }
+//    }
+@GetMapping("/createLocationList/{adminId}")
+public ResponseEntity<List<LocationDTO>> getLocations(@PathVariable Long adminId) {
+    try {
+        List<LocationDTO> locations = companyAdministratorService.createLocationList(adminId);
+        return ResponseEntity.ok(locations);
+    } catch (Exception e) {
+        return ResponseEntity.internalServerError().build();
+    }
+}
     @CrossOrigin(origins = "*")
 
     @GetMapping("/getById/{id}")
