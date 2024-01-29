@@ -84,6 +84,7 @@ public class WebSecurityConfig {
                         .requestMatchers("api/reservation/**").permitAll()
                         .requestMatchers("api/equipmentStocks/**").permitAll()
                         .requestMatchers("api/appointments/update/{id}").hasRole("REGISTERED_USER")
+                        .requestMatchers("mywebsockets").permitAll()
 
                 .anyRequest().authenticated())
 
