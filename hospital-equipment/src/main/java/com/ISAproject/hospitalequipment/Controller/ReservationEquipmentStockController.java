@@ -38,14 +38,14 @@ public class ReservationEquipmentStockController {
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/getByCompanyId/{companyId}")
-    public ResponseEntity<List<ReservationEquipmentStockDTO>> getByCompanyId(@PathVariable("companyId") Long companyId){
+    @GetMapping("/getByCompanyId/{companyId}/{adminId}")
+    public ResponseEntity<List<ReservationEquipmentStockDTO>> getByCompanyId(@PathVariable("companyId") Long companyId,@PathVariable("adminId") Long adminId){
 
         List<ReservationEquipmentStock> reservations= reservationEquipmentStockService.getByCompanyId(companyId);
         List<ReservationEquipmentStockDTO> reservationDTOs= new ArrayList<>();
 
         for(ReservationEquipmentStock r: reservations){
-            if(r.getReservation().getReservationStatus()== ReservationStatus.RESERVED){
+            if(r.getReservation().getReservationStatus()== ReservationStatus.RESERVED && r.getReservation().getAppointment().getAdministrator().getId()==adminId){
 
                 reservationDTOs.add(new ReservationEquipmentStockDTO(r));
             }

@@ -171,21 +171,28 @@ public class AppointmentController {
 
     @CrossOrigin(origins = "*")
     @PostMapping(value="/createApp/{date}/{startTime}/{endTime}/{adminId}")
-    public ResponseEntity<Void> createApp( @PathVariable("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+    public ResponseEntity<String> createApp( @PathVariable("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
                                            @PathVariable("startTime") @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime startTime,
                                            @PathVariable("endTime") @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime endTime, @PathVariable("adminId") Long adminId){
 
+        if(!appointmentService.alreadyExistsAppointment(date,startTime,endTime,adminId)){
+            Appointment newApp= new Appointment();
+            newApp.setDate(date);
+            newApp.setEndTime(endTime);
+            newApp.setStartTime(startTime);
+            newApp.setAppointmentStatus(AppointmentStatus.PREDEFINED);
+            newApp.setAdministrator(this.companyAdminService.getById(adminId));
 
-        Appointment newApp= new Appointment();
-        newApp.setDate(date);
-        newApp.setEndTime(endTime);
-        newApp.setStartTime(startTime);
-        newApp.setAppointmentStatus(AppointmentStatus.PREDEFINED);
-        newApp.setAdministrator(this.companyAdminService.getById(adminId));
-        this.appointmentService.save(newApp);
+            this.appointmentService.save(newApp);
+            String message= "Successfully added app";
+            return new ResponseEntity<>(message,HttpStatus.OK);
+        }else{
+            String message= "Unable to add appointment";
+
+            return new ResponseEntity<>(message,HttpStatus.FORBIDDEN);
+        }
 
 
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 
