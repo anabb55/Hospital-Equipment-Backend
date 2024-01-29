@@ -1,6 +1,7 @@
 package com.ISAproject.hospitalequipment.service.impl;
 
 import com.ISAproject.hospitalequipment.domain.*;
+import com.ISAproject.hospitalequipment.domain.enums.ReservationStatus;
 import com.ISAproject.hospitalequipment.repository.EquipmentStockRepo;
 import com.ISAproject.hospitalequipment.repository.ReservationEquipmentStockRepo;
 import com.ISAproject.hospitalequipment.repository.ReservationRepo;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -221,6 +223,18 @@ public class ReservationServiceImpl implements ReservationService {
         return reservationRepo.save(reservation);
     }
 
+    public void checkExpiredReservations(){
+
+        List<Reservation> reservations= reservationRepo.findAll();
+        for(Reservation res:reservations){
+            if(res.getAppointment().getDate().isBefore(LocalDate.now()) && res.getReservationStatus()== ReservationStatus.RESERVED){
+                res.setReservationStatus(ReservationStatus.EXPIRED);
+                Integer newPoints=res.getRegisteredUser().getPenaltyPoints()+2;
+                res.getRegisteredUser().setPenaltyPoints(newPoints);
+                reservationRepo.save(res);
+            }
+        }
+    }
 
 
 }
