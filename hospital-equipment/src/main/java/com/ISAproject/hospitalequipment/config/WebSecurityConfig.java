@@ -72,7 +72,7 @@ public class WebSecurityConfig {
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("api/authentication/**").permitAll()
                         .requestMatchers("api/companyProfile/**").permitAll()
-                        .requestMatchers("api/registeredUsers/**").hasRole("REGISTERED_USER")
+                        .requestMatchers("api/registeredUsers/**").permitAll()
                         .requestMatchers("api/appointments/**").permitAll()
                         .requestMatchers("api/companyAdministrators/getById/**").permitAll()
                         .requestMatchers("api/companyAdministrators/update/**").permitAll()
@@ -83,9 +83,14 @@ public class WebSecurityConfig {
                         .requestMatchers("api/users/**").permitAll()
                         .requestMatchers("api/reservation/**").permitAll()
                         .requestMatchers("api/equipmentStocks/**").permitAll()
+
                         .requestMatchers("api/appointments/update/{id}").hasRole("REGISTERED_USER")
+                        .requestMatchers("mywebsockets").permitAll()
+
+                        .requestMatchers("api/appointments/update/**").hasRole("REGISTERED_USER")
 
                         .requestMatchers("api/producer/**").permitAll()
+
 
                 .anyRequest().authenticated())
 

@@ -12,9 +12,13 @@ import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
+
 
 @SpringBootApplication
 @EntityScan(basePackages = "com.ISAproject.hospitalequipment.domain")
+@EnableAsync
 
 public class HospitalEquipmentApplication {
 
@@ -22,6 +26,10 @@ public class HospitalEquipmentApplication {
 		SpringApplication.run(HospitalEquipmentApplication.class, args);
 
 	}
+
+
+
+	//bean za konekciju na RabbitMQ
 
 	@Value("${myqueue}")
 	String queue;
@@ -60,6 +68,7 @@ public class HospitalEquipmentApplication {
 	 * Registrujemo bean koji ce sluziti za konekciju na RabbitMQ gde se mi u
 	 * primeru kacimo u lokalu.
 	 */
+
 	@Bean
 	public ConnectionFactory connectionFactory() {
 		CachingConnectionFactory connectionFactory = new CachingConnectionFactory("localhost");

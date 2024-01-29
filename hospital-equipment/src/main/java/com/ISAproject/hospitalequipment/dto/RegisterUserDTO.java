@@ -25,6 +25,8 @@ import java.util.List;
 public class RegisterUserDTO extends UserDTO{
     private int penaltyPoints;
 
+    private int accumulatedPoints;
+
     @Enumerated(EnumType.STRING)
     private UserCategory userCategory;
 
@@ -47,6 +49,7 @@ public class RegisterUserDTO extends UserDTO{
         );
         this.penaltyPoints = registeredUser.getPenaltyPoints();
         this.userCategory = registeredUser.getUserCategory();
+        this.accumulatedPoints = registeredUser.getAccumulatedPoints();
         this.loyaltyProgram=new LoyaltyProgramDTO(registeredUser.getLoyaltyProgram());
 
     }

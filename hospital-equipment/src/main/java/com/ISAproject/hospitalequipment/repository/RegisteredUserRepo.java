@@ -16,4 +16,5 @@ public interface RegisteredUserRepo extends JpaRepository<RegisteredUser, Long> 
     RegisteredUser findByEmail(String email);
 
     Optional<RegisteredUser> findById(Long id);
+
 }

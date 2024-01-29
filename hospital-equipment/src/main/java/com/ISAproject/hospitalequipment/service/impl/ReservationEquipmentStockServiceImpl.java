@@ -36,7 +36,7 @@ public class ReservationEquipmentStockServiceImpl implements ReservationEquipmen
         // Filter the stocks based on equipment ID and company ID
         for (Equipment eq : equipments) {
             for(EquipmentStock eqStock : allStocks) {
-                if(eqStock.getEquipment().id.equals(eq.getId()) && eqStock.getCompany().getId().equals(companyId)) {
+                if(eqStock.getEquipment().getId().equals(eq.getId()) && eqStock.getCompany().getId().equals(companyId)) {
                     filteredStocks.add(eqStock);
                 }
             }
@@ -72,6 +72,12 @@ public class ReservationEquipmentStockServiceImpl implements ReservationEquipmen
     public ReservationEquipmentStock saveStock(ReservationEquipmentStock resEqStock){
         return reservationEquipmentStockRepo.save(resEqStock);
     }
+
+    @Override
+    public List<ReservationEquipmentStock> findByReservationId(Long reservationId) {
+        return reservationEquipmentStockRepo.findByReservationId(reservationId);
+    }
+
 
     public Long totalPrice(Long idAppointment){
     return reservationEquipmentStockRepo.sumTotalPriceForAppointment(idAppointment);
