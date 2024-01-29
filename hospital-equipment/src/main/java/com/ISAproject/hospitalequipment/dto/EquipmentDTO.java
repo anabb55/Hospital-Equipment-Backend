@@ -12,13 +12,15 @@ public class EquipmentDTO {
     private String description;
     private Double grade;
     private Long amount;
+    private Double price;
 
-    public EquipmentDTO(Long id, String name, String description, Double grade, Long amount) {
+    public EquipmentDTO(Long id, String name, String description, Double grade, Long amount,Double price) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.grade = grade;
         this.amount = amount;
+        this.price = price;
     }
 
     public EquipmentDTO(Equipment equipment)
@@ -28,6 +30,7 @@ public class EquipmentDTO {
         this.amount=equipment.getAmount();
         this.description=equipment.getDescription();
         this.grade=equipment.getGrade();
+        this.price = equipment.getPrice();
     }
 
     public EquipmentDTO(){}

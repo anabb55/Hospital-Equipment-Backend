@@ -45,4 +45,12 @@ public class EquipmentController {
         return new ResponseEntity<>(equipments, HttpStatus.OK) ;
     }
 
+    @CrossOrigin(origins = "*")
+    @PutMapping(value = "/updateEquipment/{userId}")
+    public ResponseEntity<Equipment> update(@PathVariable("userId") Long userId ,@RequestBody Equipment e){
+        Equipment equipment = equipmentService.update(e,userId);
+        return new ResponseEntity<>(equipment, HttpStatus.OK) ;
+    }
+
+
 }
