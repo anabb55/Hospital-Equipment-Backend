@@ -37,12 +37,12 @@ VALUES (3, 'ROLE_SYSTEM_ADMIN');
 
 INSERT INTO users(
     email, enabled, firstname, lastname,username ,occupation, password, phone_number, address_id,waslogged)
-VALUES ( 'dajanaskocajic18@gmail.com', true, 'Tara', 'Boskovic','taric', 'student', '123', '066-2678-772', 1,false);
+VALUES ( 'dajanaskocajic18@gmail.com', true, 'Tara', 'Boskovic','taric', 'student', '$2a$10$mD0kgZJFbHEdEM5ICKJbgecF3qjIzP.i3zVV.nszlWh8Adp4gs4K6', '066-2678-772', 1,false);
 
 INSERT INTO users(
     email, enabled, firstname, lastname,username, occupation, password, phone_number, address_id,waslogged)
 
-VALUES ( 'h.jovix@gmail.com', true, 'Milos', 'Milosevic','anic', 'doctor', '123', '064-3782-892', 2,false);
+VALUES ( 'h.jovix@gmail.com', true, 'Milos', 'Milosevic','anic', 'doctor', '$2a$10$mD0kgZJFbHEdEM5ICKJbgecF3qjIzP.i3zVV.nszlWh8Adp4gs4K6', '064-3782-892', 2,false);
 
 
 INSERT INTO users(
@@ -72,7 +72,7 @@ VALUES (1, 2);
 
 INSERT INTO user_role(
     role_id, user_id)
-VALUES (3, 3);
+VALUES (2, 3);
 INSERT INTO user_role(
     role_id, user_id)
 VALUES (2, 4);
@@ -100,8 +100,8 @@ VALUES (30, 3, 10);
 
 
 INSERT INTO registered_users(
-	accumulated_points, penalty_points, id, loyalty_id, user_category)
-	VALUES (0, 0, 1, 1, 'REGULAR');
+    accumulated_points, penalty_points, id, loyalty_id, user_category)
+VALUES (0, 0, 1, 1, 'REGULAR');
 
 
 
@@ -133,20 +133,20 @@ VALUES (2,6);
 
 
 INSERT INTO equipments(
-    amount, grade, description, name,price)
-VALUES ( 50, 5, 'Strong', 'Scissors',100);
+    amount, grade, description, name)
+VALUES ( 50, 5, 'Strong', 'Scissors');
 
 INSERT INTO equipments(
-    amount, grade, description, name,price)
-VALUES ( 2000, 4, 'Medical', 'Gloves',100);
+    amount, grade, description, name)
+VALUES ( 2000, 4, 'Medical', 'Gloves');
 
 INSERT INTO equipments(
-    amount, grade, description, name,price)
-VALUES ( 500, 5, 'Cotton', 'Coat',100);
+    amount, grade, description, name)
+VALUES ( 500, 5, 'Cotton', 'Coat');
 
 INSERT INTO equipments(
-    amount, grade, description, name,price)
-VALUES ( 500, 5, 'elastic', 'Bandage',100);
+    amount, grade, description, name)
+VALUES ( 500, 5, 'elastic', 'Bandage');
 
 
 INSERT INTO equipment_stock (amount, company_id, equipment_id, price, version)
@@ -166,22 +166,18 @@ VALUES (200, 3, 2, 130, 0);
 
 
 
-INSERT INTO appointments(date, end_time, start_time,version, administrator_id,appointment_status)
-VALUES ('2024-01-29', '10:00:00','08:00:00',0, 3, 'TAKEN');
+INSERT INTO appointments(date, end_time, start_time, administrator_id,appointment_status)
+VALUES ('2024-01-29', '10:00:00','08:00:00', 3, 'TAKEN');
 
-INSERT INTO appointments(date, end_time, start_time,version, administrator_id,  appointment_status)
-VALUES ('2024-02-03', '10:00:00','08:00:00',0, 3,'PREDEFINED');
+INSERT INTO appointments(date, end_time, start_time, administrator_id,  appointment_status)
+VALUES ('2024-02-03', '10:00:00','08:00:00', 3,'PREDEFINED');
 
-INSERT INTO appointments(date, end_time, start_time,version, administrator_id, appointment_status)
-VALUES ('2024-02-04', '10:30:00','08:00:00',0, 4, 'PREDEFINED');
+INSERT INTO appointments(date, end_time, start_time, administrator_id, appointment_status)
+VALUES ('2024-02-04', '10:30:00','08:00:00', 4, 'PREDEFINED');
 
-INSERT INTO appointments(date, end_time, start_time,version, administrator_id, appointment_status)
-VALUES ('2024-02-04', '12:00:00','10:30:00',0, 4, 'PREDEFINED');
+INSERT INTO appointments(date, end_time, start_time, administrator_id, appointment_status)
+VALUES ('2024-02-04', '12:00:00','10:30:00', 4, 'PREDEFINED');
 
 INSERT INTO contract(amount,equipment_type,company_id,date,contract_status,longitude,latitude)
 VALUES(20,'Gloves',1,'2024-02-04','VALID','45.24702032809865', '19.840907344141257');
-
-
-
-
 

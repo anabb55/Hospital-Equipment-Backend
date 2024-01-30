@@ -2,10 +2,7 @@ package com.ISAproject.hospitalequipment.Controller;
 
 import com.ISAproject.hospitalequipment.domain.*;
 import com.ISAproject.hospitalequipment.domain.enums.ReservationStatus;
-import com.ISAproject.hospitalequipment.dto.RegisterUserDTO;
-import com.ISAproject.hospitalequipment.dto.ReservationDTO;
-import com.ISAproject.hospitalequipment.dto.ReservationEqRequest;
-import com.ISAproject.hospitalequipment.dto.ReservationEquipmentStockDTO;
+import com.ISAproject.hospitalequipment.dto.*;
 import com.ISAproject.hospitalequipment.service.ReservationEquipmentStockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +18,13 @@ public class ReservationEquipmentStockController {
 
     @Autowired
     private ReservationEquipmentStockService reservationEquipmentStockService;
+
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/returnEquipment/{appointmentId}")
+    public ResponseEntity<EquipmentStockDTO> returnEquipment(@PathVariable("appointmentId") Long appointmentId){
+        return new ResponseEntity<>(new EquipmentStockDTO((reservationEquipmentStockService.returnEquipment(appointmentId))), HttpStatus.OK);
+    }
 
     @CrossOrigin(origins = "*")
     @PostMapping("/processReservation")
