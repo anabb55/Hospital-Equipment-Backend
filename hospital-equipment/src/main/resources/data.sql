@@ -170,26 +170,19 @@ INSERT INTO equipment_stock(
 VALUES ( 200,3,2,130);
 
 
-INSERT INTO appointments(date, end_time, start_time, administrator_id,appointment_status)
-VALUES ('2024-01-29', '10:00:00','08:00:00', 3, 'TAKEN');
+INSERT INTO appointments(date, end_time, start_time,version, administrator_id,appointment_status)
+VALUES ('2024-01-29', '10:00:00','08:00:00',0, 3, 'TAKEN');
 
-INSERT INTO appointments(date, end_time, start_time, administrator_id,  appointment_status)
-VALUES ('2024-02-03', '10:00:00','08:00:00', 3,'PREDEFINED');
+INSERT INTO appointments(date, end_time, start_time,version, administrator_id,  appointment_status)
+VALUES ('2024-02-03', '10:00:00','08:00:00',0, 3,'PREDEFINED');
 
-INSERT INTO appointments(date, end_time, start_time, administrator_id, appointment_status)
-VALUES ('2024-02-04', '10:30:00','08:00:00', 4, 'PREDEFINED');
+INSERT INTO appointments(date, end_time, start_time,version, administrator_id, appointment_status)
+VALUES ('2024-02-04', '10:30:00','08:00:00',0, 4, 'PREDEFINED');
 
-INSERT INTO appointments(date, end_time, start_time, administrator_id, appointment_status)
-VALUES ('2024-02-04', '12:00:00','10:30:00', 4, 'PREDEFINED');
-
-
-
-INSERT INTO reservations(
-	appointment_id, id, penalty_points, qr_cod_id, registered_user_id, reservation_status)
-	VALUES (1, 1, 1, null, 1, 'RESERVED');
+INSERT INTO appointments(date, end_time, start_time,version, administrator_id, appointment_status)
+VALUES ('2024-02-04', '12:00:00','10:30:00',0, 4, 'PREDEFINED');
 
 
-INSERT INTO reservation_equipment_stock(
-	amount, equipment_stock_id, id, reservation_id)
-	VALUES (3, 1, 1, 1);
+
+
 
