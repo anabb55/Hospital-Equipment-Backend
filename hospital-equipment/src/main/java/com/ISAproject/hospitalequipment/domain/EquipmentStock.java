@@ -1,14 +1,11 @@
 package com.ISAproject.hospitalequipment.domain;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Columns;
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,6 +20,8 @@ public class EquipmentStock {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
+    @Version
+    private Long version = 0L;
 
     @JoinColumn(name = "equipment_id")
     @ManyToOne(fetch=FetchType.LAZY)

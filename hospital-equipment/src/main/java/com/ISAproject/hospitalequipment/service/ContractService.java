@@ -9,4 +9,6 @@ public interface ContractService {
     public Contract getValidContract();
 
     public Contract save(Contract contract);
+
+    public Object[] findLongitudeLatitudeOfLatestContract();
 }

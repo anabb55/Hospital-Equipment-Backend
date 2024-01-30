@@ -74,21 +74,17 @@ public class WebSecurityConfig {
                         .requestMatchers("api/companyProfile/**").permitAll()
                         .requestMatchers("api/registeredUsers/**").permitAll()
                         .requestMatchers("api/appointments/**").permitAll()
-                        .requestMatchers("api/companyAdministrators/getById/**").permitAll()
-                        .requestMatchers("api/companyAdministrators/update/**").permitAll()
-                        .requestMatchers("api/companyAdministrators/save/**").hasRole("SYSTEM_ADMIN")
-                        .requestMatchers("api/companyAdministrators/getAll/**").permitAll()
+                        .requestMatchers("api/loyaltyProgram/**").hasRole("SYSTEM_ADMIN")
+                        .requestMatchers("api/companyAdministrators/**").permitAll()
                         .requestMatchers("api/systemAdmins/**").permitAll()
                         .requestMatchers("api/addresses/**").permitAll()
                         .requestMatchers("api/users/**").permitAll()
                         .requestMatchers("api/reservation/**").permitAll()
                         .requestMatchers("api/equipmentStocks/**").permitAll()
-
+                        .requestMatchers("api/equipments/**").permitAll()
                         .requestMatchers("api/appointments/update/{id}").hasRole("REGISTERED_USER")
                         .requestMatchers("mywebsockets").permitAll()
-
                         .requestMatchers("api/appointments/update/**").hasRole("REGISTERED_USER")
-
                         .requestMatchers("api/producer/**").permitAll()
 
 

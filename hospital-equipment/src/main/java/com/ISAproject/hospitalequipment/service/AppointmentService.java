@@ -28,12 +28,16 @@ public interface AppointmentService {
 
     public List<Appointment> findFutureAppointmentsByUserId(Long userId);
 
+
     Appointment updateStatus(Long id, AppointmentDTO appointmentDTO);
 
     Appointment cancelAppointment(Long id, AppointmentDTO appointmentDTO, Long userId);
 
     Appointment saveAppointment(Long companyId, AppointmentDTO appointmentDTO);
 
+
+
+    public boolean alreadyExistsAppointment(LocalDate date,LocalTime startTime, LocalTime endTime,Long adminId,Long companyId);
 
 
 }

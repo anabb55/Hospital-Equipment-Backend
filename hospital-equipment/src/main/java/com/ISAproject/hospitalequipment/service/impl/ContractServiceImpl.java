@@ -20,6 +20,9 @@ public class ContractServiceImpl implements ContractService {
             return false;
         }
     }
+    public Object[] findLongitudeLatitudeOfLatestContract(){
+        return contractRepo.findLongitudeLatitudeOfLatestContract();
+    }
 
     public Contract getValidContract(){
         return contractRepo.getValidContract(ContractStatus.VALID);

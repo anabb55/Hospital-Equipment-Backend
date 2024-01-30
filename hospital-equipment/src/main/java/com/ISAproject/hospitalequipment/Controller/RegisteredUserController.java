@@ -1,6 +1,8 @@
 package com.ISAproject.hospitalequipment.Controller;
 
-import com.ISAproject.hospitalequipment.domain.*;
+import com.ISAproject.hospitalequipment.domain.Address;
+import com.ISAproject.hospitalequipment.domain.RegisteredUser;
+import com.ISAproject.hospitalequipment.domain.User;
 import com.ISAproject.hospitalequipment.dto.AppointmentDTO;
 import com.ISAproject.hospitalequipment.dto.RegisterUserDTO;
 import com.ISAproject.hospitalequipment.dto.UserDTO;
@@ -9,17 +11,13 @@ import com.ISAproject.hospitalequipment.repository.LoyaltyProgramRepo;
 import com.ISAproject.hospitalequipment.service.RegisteredUserService;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/registeredUsers")
@@ -41,7 +39,9 @@ public class RegisteredUserController {
     @CrossOrigin(origins = "*")
     @GetMapping("/getById/{id}")
     public ResponseEntity<RegisterUserDTO> getUser(@PathVariable Integer id) {
-        RegisteredUser registeredUser = registeredUserService.findOne(id);
+        System.out.println("Requested ID: " + id);
+
+        RegisteredUser registeredUser = registeredUserService.getById(id);
 
         if (registeredUser == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -70,7 +70,7 @@ public class RegisteredUserController {
     @CrossOrigin
     @PutMapping("/update/{id}")
     public ResponseEntity<Void> update(@RequestBody RegisterUserDTO registerUserDTO, @PathVariable Integer id) {
-        RegisteredUser registeredUser = registeredUserService.findOne(id);
+        RegisteredUser registeredUser = registeredUserService.getById(id);
 
         if (registeredUser == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

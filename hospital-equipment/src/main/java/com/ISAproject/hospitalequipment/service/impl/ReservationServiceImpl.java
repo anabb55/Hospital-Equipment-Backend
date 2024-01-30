@@ -1,6 +1,7 @@
 package com.ISAproject.hospitalequipment.service.impl;
 
 import com.ISAproject.hospitalequipment.domain.*;
+import com.ISAproject.hospitalequipment.domain.enums.ReservationStatus;
 import com.ISAproject.hospitalequipment.repository.EquipmentStockRepo;
 import com.ISAproject.hospitalequipment.repository.ReservationEquipmentStockRepo;
 import com.ISAproject.hospitalequipment.repository.ReservationRepo;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -95,7 +97,7 @@ public class ReservationServiceImpl implements ReservationService {
         String endTime = appointment.getEndTime().toString();
         String date = appointment.getDate().toString();
 
-        User user = res.getRegisteredUser();
+        RegisteredUser user = res.getRegisteredUser();
 
         //korisnik koji preuzima
         String name = user.getFirstname();
@@ -110,7 +112,7 @@ public class ReservationServiceImpl implements ReservationService {
         Company company = admin.getCompany();
         String companyName = company.getName();
 
-
+        double totalPrice = equipment.getPrice()-equipment.getPrice()*user.getLoyaltyProgram().getDiscountPercentage();
         String allText="Date" + date + "\n"+ "\t"+
                 startTime + " - " + endTime + "\n" +"\t"+
                 "Reservation ID: " + res.getId()+ "\n" + "\t"+
@@ -118,12 +120,10 @@ public class ReservationServiceImpl implements ReservationService {
                 "Admin: " + adminName + " " + adminSurname + "\n" +"\t"+
                 "Company: " + companyName+"\n"+"\t"+
                 "Equipment: " + equipment.getName() +"\t"+ "description: "+ equipment.getDescription()+ "\n"+"\t"+
+                "Total price: " + totalPrice +"\n"+"\t"+
                 "Amount: " + amount;
 
         emailService.SendEmailWithQRCode(allText,user);
-
-
-
     }
 
     public List<Reservation> findByRegisteredUserId(Long userId){
@@ -223,6 +223,18 @@ public class ReservationServiceImpl implements ReservationService {
         return reservationRepo.save(reservation);
     }
 
+    public void checkExpiredReservations(){
+
+        List<Reservation> reservations= reservationRepo.findAll();
+        for(Reservation res:reservations){
+            if(res.getAppointment().getDate().isBefore(LocalDate.now()) && res.getReservationStatus()== ReservationStatus.RESERVED){
+                res.setReservationStatus(ReservationStatus.EXPIRED);
+                Integer newPoints=res.getRegisteredUser().getPenaltyPoints()+2;
+                res.getRegisteredUser().setPenaltyPoints(newPoints);
+                reservationRepo.save(res);
+            }
+        }
+    }
 
 
 }

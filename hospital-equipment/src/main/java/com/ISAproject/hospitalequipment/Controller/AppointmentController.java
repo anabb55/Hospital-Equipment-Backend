@@ -1,17 +1,13 @@
 package com.ISAproject.hospitalequipment.Controller;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
 import com.ISAproject.hospitalequipment.domain.*;
+import com.ISAproject.hospitalequipment.domain.enums.AppointmentStatus;
+import com.ISAproject.hospitalequipment.dto.AppointmentDTO;
 import com.ISAproject.hospitalequipment.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.ISAproject.hospitalequipment.domain.enums.AppointmentStatus;
-import com.ISAproject.hospitalequipment.dto.AppointmentDTO;
-import com.ISAproject.hospitalequipment.dto.UserDTO;
-import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Propagation;
@@ -81,7 +77,7 @@ public class AppointmentController {
 
         return new ResponseEntity<>(appointmentDTOS, HttpStatus.OK);
     }
-
+    @CrossOrigin(origins = "*")
     @GetMapping("/futureAppointment/{userId}")
     public ResponseEntity<List<AppointmentDTO>> getFutureAppointments(  @PathVariable Long userId){
         List<Appointment> futureAppointments = appointmentService.findFutureAppointmentsByUserId(userId);
@@ -95,9 +91,9 @@ public class AppointmentController {
 
 
     @CrossOrigin(origins = "*")
-
     @PostMapping(value="/create/{companyId}")
     public ResponseEntity<AppointmentDTO> saveAppointment(@PathVariable Long companyId, @RequestBody AppointmentDTO appointmentDTO) {
+
 //        Appointment appointment = new Appointment();
 //        appointment.setId(appointmentDTO.getId());
 //        appointment.setDate(appointmentDTO.getDate());
@@ -135,11 +131,11 @@ public class AppointmentController {
         return new ResponseEntity<>(new AppointmentDTO(appointmentService.saveAppointment(companyId, appointmentDTO)), HttpStatus.CREATED);
     }
 
-    @CrossOrigin
+   
+
+    @CrossOrigin(origins = "*")
     @PutMapping(value = "/update/{id}/{userId}")
-
     public ResponseEntity<AppointmentDTO> cancelAppointment(@PathVariable Long id, @RequestBody AppointmentDTO appointmentDTO, @PathVariable Long userId) {
-
 
 
         return new ResponseEntity<>(new AppointmentDTO(appointmentService.cancelAppointment(id,appointmentDTO,userId)), HttpStatus.OK);
@@ -149,35 +145,43 @@ public class AppointmentController {
 
 
 
+
     @CrossOrigin
     @PutMapping(value = "/update/{id}")
-
     public ResponseEntity<AppointmentDTO> update(@PathVariable Long id, @RequestBody AppointmentDTO appointmentDTO) {
-
 
 
         return new ResponseEntity<>(new AppointmentDTO(appointmentService.updateStatus(id,appointmentDTO)), HttpStatus.OK);
 
+         }
 
-    }
+
+    
 
     @CrossOrigin(origins = "*")
     @PostMapping(value="/createApp/{date}/{startTime}/{endTime}/{adminId}")
-    public ResponseEntity<Void> createApp( @PathVariable("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+    public ResponseEntity<String> createApp( @PathVariable("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
                                            @PathVariable("startTime") @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime startTime,
                                            @PathVariable("endTime") @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime endTime, @PathVariable("adminId") Long adminId){
+        Company company= companyService.findCompanyByAdminn(adminId);
+        if(!appointmentService.alreadyExistsAppointment(date,startTime,endTime,adminId,company.getId())){
+            Appointment newApp= new Appointment();
+            newApp.setDate(date);
+            newApp.setEndTime(endTime);
+            newApp.setStartTime(startTime);
+            newApp.setAppointmentStatus(AppointmentStatus.PREDEFINED);
+            newApp.setAdministrator(this.companyAdminService.getById(adminId));
+
+            this.appointmentService.save(newApp);
+            String message= "Successfully added app";
+            return new ResponseEntity<>(message,HttpStatus.OK);
+        }else{
+            String message= "Unable to add appointment";
+
+            return new ResponseEntity<>(message,HttpStatus.FORBIDDEN);
+        }
 
 
-        Appointment newApp= new Appointment();
-        newApp.setDate(date);
-        newApp.setEndTime(endTime);
-        newApp.setStartTime(startTime);
-        newApp.setAppointmentStatus(AppointmentStatus.PREDEFINED);
-        newApp.setAdministrator(this.companyAdminService.getById(adminId));
-        this.appointmentService.save(newApp);
-
-
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 

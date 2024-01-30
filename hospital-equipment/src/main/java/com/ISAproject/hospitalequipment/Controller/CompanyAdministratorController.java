@@ -3,10 +3,8 @@ package com.ISAproject.hospitalequipment.Controller;
 import com.ISAproject.hospitalequipment.domain.Address;
 import com.ISAproject.hospitalequipment.domain.Company;
 import com.ISAproject.hospitalequipment.domain.CompanyAdministrator;
-import com.ISAproject.hospitalequipment.domain.EquipmentStock;
-import com.ISAproject.hospitalequipment.dto.AppointmentDTO;
 import com.ISAproject.hospitalequipment.dto.CompanyAdministratorDTO;
-import com.ISAproject.hospitalequipment.dto.CompanyDTO;
+import com.ISAproject.hospitalequipment.dto.LocationDTO;
 import com.ISAproject.hospitalequipment.service.CompanyAdministratorService;
 import com.ISAproject.hospitalequipment.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/companyAdministrators")
@@ -29,7 +26,6 @@ public class CompanyAdministratorController {
     private CompanyService companyService;
 
     @CrossOrigin(origins = "*")
-
     @GetMapping("/getAll")
     public ResponseEntity<List<CompanyAdministratorDTO>> getAll(){
         List<CompanyAdministrator> administrators= companyAdministratorService.findAll();
@@ -43,7 +39,6 @@ public class CompanyAdministratorController {
         return new ResponseEntity<>(companyAdministratorDTOs, HttpStatus.OK);
     }
     @CrossOrigin(origins = "*")
-
     @PostMapping("/save")
     public ResponseEntity<CompanyAdministratorDTO> createAdministrator(@RequestBody CompanyAdministratorDTO administrator) {
 
@@ -74,7 +69,27 @@ public class CompanyAdministratorController {
 
         return new ResponseEntity<>(new CompanyAdministratorDTO(createdAdministrator), HttpStatus.OK);
     }
-
+//    @GetMapping("/combineLocations/{adminId}")
+//    public ResponseEntity<List<Object[]>> getCombinedLocationData(@PathVariable Long adminId) {
+//        try {
+//            List<Object[]> combinedData = companyAdministratorService.combineLocationData(adminId);
+//            if (combinedData.isEmpty()) {
+//                return ResponseEntity.noContent().build();
+//            }
+//            return ResponseEntity.ok(combinedData);
+//        } catch (Exception e) {
+//            return ResponseEntity.internalServerError().build();
+//        }
+//    }
+@GetMapping("/createLocationList/{adminId}")
+public ResponseEntity<List<LocationDTO>> getLocations(@PathVariable Long adminId) {
+    try {
+        List<LocationDTO> locations = companyAdministratorService.createLocationList(adminId);
+        return ResponseEntity.ok(locations);
+    } catch (Exception e) {
+        return ResponseEntity.internalServerError().build();
+    }
+}
     @CrossOrigin(origins = "*")
 
     @GetMapping("/getById/{id}")
@@ -93,8 +108,7 @@ public class CompanyAdministratorController {
     @PutMapping("/update/{id}")
     public ResponseEntity<CompanyAdministratorDTO> update(@PathVariable Long id, @RequestBody CompanyAdministratorDTO administrator) {
 
-        CompanyAdministrator companyAdministrator  = new CompanyAdministrator();
-        companyAdministrator.setId(id);
+        CompanyAdministrator companyAdministrator  = companyAdministratorService.getById(id);
         companyAdministrator.setEmail(administrator.getEmail());
         companyAdministrator.setUsername(administrator.getUsername());
         companyAdministrator.setPassword(administrator.getPassword());
@@ -112,20 +126,16 @@ public class CompanyAdministratorController {
         companyAdministrator.setAddress(address);
 
         Company company = companyService.getById(administrator.getCompany().getId());
-        company.setWorkEndTime(administrator.getCompany().getWorkEndTime());
-        company.setWorkStartTime(administrator.getCompany().getWorkStartTime());
-        company.setName(administrator.getCompany().getName());
-        company.setId(administrator.getCompany().getId());
-        company.setGrade(administrator.getCompany().getGrade());
-        company.setDescription(administrator.getCompany().getDescription());
+        //company.setWorkEndTime(administrator.getCompany().getWorkEndTime());
+        //company.setWorkStartTime(administrator.getCompany().getWorkStartTime());
+        //company.setName(administrator.getCompany().getName());
+        //company.setId(administrator.getCompany().getId());
+        //company.setGrade(administrator.getCompany().getGrade());
+        //company.setDescription(administrator.getCompany().getDescription());
         //company.setEquipmentStocks(administrator.getCompany().get());
 
-        Set<CompanyAdministrator> admins = company.getAdministrators();
-        company.setAdministrators(admins);
-        companyService.update(company, company.getId());
-
+        companyAdministrator.setCompany(company);
         CompanyAdministrator updatedAdmin = companyAdministratorService.update(companyAdministrator, id);
-        admins.add(updatedAdmin);
 
         if (updatedAdmin == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

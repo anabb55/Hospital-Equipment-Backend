@@ -37,6 +37,11 @@ public interface CompanyAdministratorRepo extends JpaRepository<CompanyAdministr
             @Param("companyId") Long companyId);
 
 
+    @Query("SELECT l.latitude, l.longitude FROM CompanyAdministrator a " +
+            "JOIN a.company c " +
+            "JOIN c.address l " +
+            "WHERE a.id = :adminId")
+    Object[] findCompanyLocationByAdminId(@Param("adminId") Long adminId);
 
 
 

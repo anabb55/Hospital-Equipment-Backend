@@ -1,6 +1,8 @@
 package com.ISAproject.hospitalequipment.service.impl;
 
-import com.ISAproject.hospitalequipment.domain.*;
+import com.ISAproject.hospitalequipment.domain.Appointment;
+import com.ISAproject.hospitalequipment.domain.RegisteredUser;
+import com.ISAproject.hospitalequipment.domain.Role;
 import com.ISAproject.hospitalequipment.domain.enums.UserCategory;
 import com.ISAproject.hospitalequipment.dto.UserDTO;
 import com.ISAproject.hospitalequipment.repository.LoyaltyProgramRepo;
@@ -10,11 +12,7 @@ import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.UnsupportedEncodingException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
@@ -44,8 +42,8 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
         return registeredUserRepo.findAll();
     }
 
-    public RegisteredUser findOne(Integer id) {
-        return registeredUserRepo.findById(Long.valueOf(id)).orElseGet(null);
+    public RegisteredUser getById(Integer id){
+        return registeredUserRepo.findById(Long.valueOf(id)).get();
     }
 
     public RegisteredUser createRegisteredUser(UserDTO userDTO) throws MessagingException {

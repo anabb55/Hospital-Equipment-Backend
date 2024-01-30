@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
 import org.springframework.transaction.annotation.Propagation;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
@@ -45,6 +47,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 
     }
+
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     public Appointment updateStatus(Long id, AppointmentDTO appointmentDTO){
@@ -103,6 +106,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
 
+    @Transactional
     public Appointment createExtraOrdinaryAppointment(Appointment appointment, AppointmentDTO appointmentDTO){
 
         return appointmentRepo.save(appointment);
@@ -114,7 +118,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
 
-
+    @Transactional
     public List<CompanyAdministrator> findAvailableAdministrator(LocalTime startTime, LocalTime endTime, LocalDate date,Long companyId){
         return  companyAdministratorService.findAvailableAdministrator(startTime,endTime,date,companyId);
     }
@@ -192,6 +196,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 
 
+
     @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     public List<Appointment> generateRandomAppointments(Long companyId, LocalDate date) {
         List<Appointment> takenAppointments = findTakenAppointmentsByCompanyAndDate(companyId, date);
@@ -228,5 +233,39 @@ public class AppointmentServiceImpl implements AppointmentService {
         return generatedAppointments;
     }
 
+
+    public boolean alreadyExistsAppointment(LocalDate date,LocalTime startTime, LocalTime endTime,Long adminId,Long companyId){
+        List<Appointment> appointments= appointmentRepo.findAppointmentsByCompany(companyId);
+        if(appointments!=null) {
+            for (Appointment a : appointments) {
+                if (a.getDate().isEqual(date)) {
+                    Integer appStartHour = a.getStartTime().getHour();
+                    Integer appEndHour = a.getEndTime().getHour();
+                    Integer appStartMinutes = a.getStartTime().getMinute();
+                    Integer appEndMinutes = a.getEndTime().getMinute();
+
+                    if (startTime.getHour() > appStartHour && startTime.getHour() < appEndHour) {
+                        return true;
+                    }
+                    if (endTime.getHour() > appStartHour && endTime.getHour() < appEndHour) {
+
+                    }
+                    if (startTime.getHour() == appStartHour && startTime.getMinute() >= appStartMinutes) {
+                        return true;
+                    }
+                    if (endTime.getHour() == appStartHour && endTime.getMinute() >= appStartMinutes) {
+                        return true;
+                    }
+
+                    if (startTime.getHour() == appEndHour && startTime.getMinute() <= appEndMinutes) {
+                        return true;
+                    }
+
+                }
+
+            }
+        }
+       return false;
+    }
 
 }

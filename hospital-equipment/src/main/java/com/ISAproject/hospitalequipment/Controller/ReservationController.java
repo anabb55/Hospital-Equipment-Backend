@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,7 +36,7 @@ public class ReservationController {
     @PostMapping("/createReservation/{registerUserId}")
     public ResponseEntity<ReservationDTO> createReservation(@RequestBody ReservationDTO reservationDTO,@PathVariable Long registerUserId) {
         Reservation reservation = new Reservation();
-        RegisteredUser user=registeredUserService.findOne(Math.toIntExact(registerUserId));
+        RegisteredUser user=registeredUserService.getById(Math.toIntExact(registerUserId));
         reservation.setPenaltyPoints(0L);
         reservation.setRegisteredUser(user);
         reservation.setReservationStatus(ReservationStatus.RESERVED);
@@ -45,11 +44,11 @@ public class ReservationController {
         return new ResponseEntity<>(new ReservationDTO(reservation), HttpStatus.CREATED);
     }
 
-
+    @CrossOrigin(origins = "*")
     @PostMapping("/createReservationPredefined/{UserId}")
     public ResponseEntity<ReservationDTO> createReservationPredefined(@RequestBody Appointment appointment,@PathVariable Long UserId) {
         Reservation reservation = new Reservation();
-        RegisteredUser user=registeredUserService.findOne(Math.toIntExact(UserId));
+        RegisteredUser user=registeredUserService.getById(Math.toIntExact(UserId));
         reservation.setPenaltyPoints(0L);
         reservation.setRegisteredUser(user);
         reservation.setReservationStatus(ReservationStatus.RESERVED);
@@ -85,12 +84,20 @@ public class ReservationController {
     public ResponseEntity<ReservationDTO> updateStatus(@PathVariable("resId") Long reservationId  ){
         Reservation reservation= reservationService.getById(reservationId);
        reservation.setReservationStatus(ReservationStatus.TAKEN);
-
-
         reservationService.saveReservation(reservation);
         emailService.sendReservationEmail(reservation.getRegisteredUser());
         return new ResponseEntity<>(new ReservationDTO(reservation),HttpStatus.OK);
 }
+
+    @CrossOrigin(origins = "*")
+    @PutMapping("/updateStatusToExpired/{resId}")
+    public ResponseEntity<ReservationDTO> updateStatusToExpired(@PathVariable("resId") Long reservationId  ){
+        Reservation reservation= reservationService.getById(reservationId);
+        reservation.setReservationStatus(ReservationStatus.EXPIRED);
+        reservationService.saveReservation(reservation);
+        emailService.sendReservationEmail(reservation.getRegisteredUser());
+        return new ResponseEntity<>(new ReservationDTO(reservation),HttpStatus.OK);
+    }
     @GetMapping("/getAll")
     public ResponseEntity<List<ReservationDTO>> getAll() {
         List<Reservation> reservations= reservationService.getAll();
@@ -104,6 +111,15 @@ public class ReservationController {
         return new ResponseEntity<>(reservationDTOS, HttpStatus.OK);
 
 
+    }
+
+    @CrossOrigin(origins = "*")
+    @PutMapping("/checkExpiredReservations/")
+    public ResponseEntity<Void> checkExpiredReservations(  ){
+
+        reservationService.checkExpiredReservations();
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

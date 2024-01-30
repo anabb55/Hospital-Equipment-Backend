@@ -3,7 +3,6 @@ package com.ISAproject.hospitalequipment.service.impl;
 import com.ISAproject.hospitalequipment.domain.Equipment;
 import com.ISAproject.hospitalequipment.domain.EquipmentStock;
 import com.ISAproject.hospitalequipment.repository.EquipmentStockRepo;
-import com.ISAproject.hospitalequipment.service.EquipmentService;
 import com.ISAproject.hospitalequipment.service.EquipmentStockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +23,11 @@ public class EquipmentStockServiceImpl implements EquipmentStockService {
 
     public Integer findEquipmentAmountByCompany(Long companyId,Long equipmentId){
         return this.equipmentStockRepo.findAmountByCompanyAndEquipment(companyId,equipmentId);
+    }
+
+
+    public EquipmentStock save(EquipmentStock eqStock) {
+        return equipmentStockRepo.save(eqStock);
     }
 
     public List<EquipmentStock> getAll()

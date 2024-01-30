@@ -20,13 +20,20 @@ public class LoyaltyProgram {
     private int penaltyThreshold;
     private int discountPercentage;
 
-    @OneToMany(mappedBy = "loyaltyProgram", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "loyaltyProgram", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<RegisteredUser> registeredUsers = new HashSet<RegisteredUser>();
 
     public LoyaltyProgram(int pointsPerEquipment, int penaltyThreshold, int discountPercentage) {
         this.pointsPerEquipment = pointsPerEquipment;
         this.penaltyThreshold = penaltyThreshold;
         this.discountPercentage = discountPercentage;
+    }
+
+    public LoyaltyProgram(LoyaltyProgram loyaltyProgram){
+        this.pointsPerEquipment = loyaltyProgram.getPointsPerEquipment();
+        this.discountPercentage = loyaltyProgram.getDiscountPercentage();
+        this.id = loyaltyProgram.getId();
+        this.penaltyThreshold = loyaltyProgram.getPenaltyThreshold();
     }
 
 
