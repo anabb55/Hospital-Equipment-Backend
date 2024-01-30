@@ -8,8 +8,10 @@ import com.ISAproject.hospitalequipment.repository.ReservationEquipmentStockRepo
 import com.ISAproject.hospitalequipment.service.EquipmentStockService;
 import com.ISAproject.hospitalequipment.service.ReservationEquipmentStockService;
 import com.ISAproject.hospitalequipment.service.ReservationService;
+import jakarta.persistence.OptimisticLockException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -28,13 +30,12 @@ public class ReservationEquipmentStockServiceImpl implements ReservationEquipmen
     private ReservationService reservationService;
 
 
-
+@Transactional
     public ReservationEquipmentStock save(List<Equipment> equipments, ReservationEquipmentStock reservationEqStock, Long companyId) {
-        Reservation lastReservation = reservationService.getLast();
+    try { Reservation lastReservation = reservationService.getLast();
         List<EquipmentStock> allStocks = equipmentStockService.getAll();
-        Map<Long, Integer> equipmentCount = new HashMap<>(); // Mapa za praćenje količine
+        Map<Long, Integer> equipmentCount = new HashMap<>();
 
-        // Popunite mapu sa količinama
         for (Equipment eq : equipments) {
             equipmentCount.put(eq.getId(), equipmentCount.getOrDefault(eq.getId(), 0) + 1);
         }
@@ -65,7 +66,11 @@ public class ReservationEquipmentStockServiceImpl implements ReservationEquipmen
             }
         }
 
-        return reservationEqStock;
+        return reservationEqStock;}
+    catch (OptimisticLockException e) {
+        throw new RuntimeException("Conflict occurred. Please retry.", e);
+    }
+
     }
 
 
