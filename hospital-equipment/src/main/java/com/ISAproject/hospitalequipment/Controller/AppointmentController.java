@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
@@ -34,11 +36,6 @@ public class AppointmentController {
     @Autowired
     private CompanyService companyService;
 
-    @Autowired
-    private CanceledAppointmentService canceledAppointmentService;
-
-    @Autowired
-    private UserService userService;
 
     @CrossOrigin(origins = "*")
 
@@ -96,62 +93,70 @@ public class AppointmentController {
     @CrossOrigin(origins = "*")
     @PostMapping(value="/create/{companyId}")
     public ResponseEntity<AppointmentDTO> saveAppointment(@PathVariable Long companyId, @RequestBody AppointmentDTO appointmentDTO) {
-        Appointment appointment = new Appointment();
-        appointment.setId(appointmentDTO.getId());
-        appointment.setDate(appointmentDTO.getDate());
-        appointment.setAppointmentStatus(AppointmentStatus.TAKEN);
-        appointment.setEndTime(appointmentDTO.getEndTime());
 
-        Company company = companyService.getById(companyId);
+//        Appointment appointment = new Appointment();
+//        appointment.setId(appointmentDTO.getId());
+//        appointment.setDate(appointmentDTO.getDate());
+//        appointment.setAppointmentStatus(AppointmentStatus.TAKEN);
+//        appointment.setEndTime(appointmentDTO.getEndTime());
+//
+//        Company company = companyService.getById(companyId);
+//
+//
+//        if (company == null) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//
+//
+//        List<CompanyAdministrator> administrators = appointmentService.findAvailableAdministrator(appointmentDTO.getStartTime(),appointmentDTO.getEndTime(), appointmentDTO.getDate(),companyId);
+//
+//        if (administrators == null || administrators.isEmpty()) {
+//            throw new IllegalStateException("No available administrators found.");
+//        }
+//
+//        for (CompanyAdministrator administrator : administrators) {
+//            if (administrator.getCompany().getId().equals(companyId)){
+//                appointment.setAdministrator(administrator);
+//                break;
+//            }
+//        }
+//
+//
+//
+//
+//        appointment.setStartTime(appointmentDTO.getStartTime());
+//
+//        appointmentService.save(appointment);
 
-
-        if (company == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-        List<CompanyAdministrator> administrators = appointmentService.findAvailableAdministrator(appointmentDTO.getStartTime(),appointmentDTO.getEndTime(), appointmentDTO.getDate(),companyId);
-
-        if (administrators == null || administrators.isEmpty()) {
-            throw new IllegalStateException("No available administrators found.");
-        }
-
-        for (CompanyAdministrator administrator : administrators) {
-            if (administrator.getCompany().getId().equals(companyId)) {
-                appointment.setAdministrator(administrator);
-                break;
-            }
-        }
-        appointment.setStartTime(appointmentDTO.getStartTime());
-        appointmentService.save(appointment);
-        return new ResponseEntity<>(new AppointmentDTO(appointment), HttpStatus.CREATED);
+        return new ResponseEntity<>(new AppointmentDTO(appointmentService.saveAppointment(companyId, appointmentDTO)), HttpStatus.CREATED);
     }
+
+   
 
     @CrossOrigin(origins = "*")
-
     @PutMapping(value = "/update/{id}/{userId}")
-    public ResponseEntity<AppointmentDTO> update(@PathVariable Long id, @RequestBody AppointmentDTO appointmentDTO, @PathVariable Long userId) {
+    public ResponseEntity<AppointmentDTO> cancelAppointment(@PathVariable Long id, @RequestBody AppointmentDTO appointmentDTO, @PathVariable Long userId) {
 
 
-        Optional<Appointment> appointmentOptional = appointmentService.findById(id);
-        Appointment appointment = appointmentOptional.get();
-        User user = userService.getById(userId);
-         if(appointment.getAppointmentStatus() == AppointmentStatus.PREDEFINED) {
-             appointment.setAppointmentStatus(AppointmentStatus.TAKEN);
-        }
+        return new ResponseEntity<>(new AppointmentDTO(appointmentService.cancelAppointment(id,appointmentDTO,userId)), HttpStatus.OK);
 
-         else if(appointment.getAppointmentStatus()==AppointmentStatus.TAKEN){
-             appointment.setAppointmentStatus(AppointmentStatus.PREDEFINED);
-             CanceledAppointment canceledAppointment = new CanceledAppointment();
-             canceledAppointment.setAppointment(appointment);
-             canceledAppointment.setUser(user);
-             canceledAppointmentService.save(canceledAppointment);
-
-
-         }
-         appointmentService.save(appointment);
-         return new ResponseEntity<>(new AppointmentDTO(appointment), HttpStatus.OK);
 
     }
+
+
+
+
+    @CrossOrigin
+    @PutMapping(value = "/update/{id}")
+    public ResponseEntity<AppointmentDTO> update(@PathVariable Long id, @RequestBody AppointmentDTO appointmentDTO) {
+
+
+        return new ResponseEntity<>(new AppointmentDTO(appointmentService.updateStatus(id,appointmentDTO)), HttpStatus.OK);
+
+         }
+
+
+    
 
     @CrossOrigin(origins = "*")
     @PostMapping(value="/createApp/{date}/{startTime}/{endTime}/{adminId}")

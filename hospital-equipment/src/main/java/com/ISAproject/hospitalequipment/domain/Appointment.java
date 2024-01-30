@@ -4,8 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.ISAproject.hospitalequipment.domain.enums.AppointmentStatus;
-import jakarta.persistence.*;
+
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.persistence.*;
+
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +21,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 @Getter
 @Setter
@@ -30,6 +36,8 @@ public class Appointment {
     public long id;
 
 
+   @Version
+   public Integer version = 0;
 
     @NotEmpty
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
@@ -70,6 +78,7 @@ public class Appointment {
         this.endTime = endTime;
         this.startTime = startTime;
         this.appointmentStatus = appointmentStatus;
+
     }
 
 

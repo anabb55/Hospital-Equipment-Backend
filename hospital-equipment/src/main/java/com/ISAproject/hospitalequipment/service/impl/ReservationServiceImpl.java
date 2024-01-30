@@ -5,10 +5,7 @@ import com.ISAproject.hospitalequipment.domain.enums.ReservationStatus;
 import com.ISAproject.hospitalequipment.repository.EquipmentStockRepo;
 import com.ISAproject.hospitalequipment.repository.ReservationEquipmentStockRepo;
 import com.ISAproject.hospitalequipment.repository.ReservationRepo;
-import com.ISAproject.hospitalequipment.service.AppointmentService;
-import com.ISAproject.hospitalequipment.service.EmailService;
-import com.ISAproject.hospitalequipment.service.QRCodeService;
-import com.ISAproject.hospitalequipment.service.ReservationService;
+import com.ISAproject.hospitalequipment.service.*;
 import com.google.zxing.WriterException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +35,8 @@ public class ReservationServiceImpl implements ReservationService {
     @Autowired
    private EmailService emailService;
 
+
+
     public List<Reservation> getAll()
     {
         return reservationRepo.findAll();
@@ -56,6 +55,8 @@ public class ReservationServiceImpl implements ReservationService {
             return null;
         }
     }
+
+
 
 
     public void getDataForQRCode() throws IOException, WriterException {
@@ -197,6 +198,11 @@ public class ReservationServiceImpl implements ReservationService {
        Reservation reservation = reservationRepo.findByAppointment(appointmentId);
 
        reservationRepo.delete(reservation);
+    }
+
+
+    public Reservation findByAppointmentId(Long appointmentId) {
+       return reservationRepo.findByAppointment(appointmentId);
     }
 
 
