@@ -1,17 +1,13 @@
 package com.ISAproject.hospitalequipment.Controller;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
 import com.ISAproject.hospitalequipment.domain.*;
+import com.ISAproject.hospitalequipment.domain.enums.AppointmentStatus;
+import com.ISAproject.hospitalequipment.dto.AppointmentDTO;
 import com.ISAproject.hospitalequipment.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.ISAproject.hospitalequipment.domain.enums.AppointmentStatus;
-import com.ISAproject.hospitalequipment.dto.AppointmentDTO;
-import com.ISAproject.hospitalequipment.dto.UserDTO;
-import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -84,7 +80,7 @@ public class AppointmentController {
 
         return new ResponseEntity<>(appointmentDTOS, HttpStatus.OK);
     }
-
+    @CrossOrigin(origins = "*")
     @GetMapping("/futureAppointment/{userId}")
     public ResponseEntity<List<AppointmentDTO>> getFutureAppointments(  @PathVariable Long userId){
         List<Appointment> futureAppointments = appointmentService.findFutureAppointmentsByUserId(userId);
@@ -98,7 +94,6 @@ public class AppointmentController {
 
 
     @CrossOrigin(origins = "*")
-
     @PostMapping(value="/create/{companyId}")
     public ResponseEntity<AppointmentDTO> saveAppointment(@PathVariable Long companyId, @RequestBody AppointmentDTO appointmentDTO) {
         Appointment appointment = new Appointment();
@@ -114,40 +109,32 @@ public class AppointmentController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-
         List<CompanyAdministrator> administrators = appointmentService.findAvailableAdministrator(appointmentDTO.getStartTime(),appointmentDTO.getEndTime(), appointmentDTO.getDate(),companyId);
 
+        if (administrators == null || administrators.isEmpty()) {
+            throw new IllegalStateException("No available administrators found.");
+        }
+
         for (CompanyAdministrator administrator : administrators) {
-            if (administrator.getCompany().getId().equals(companyId)){
+            if (administrator.getCompany().getId().equals(companyId)) {
                 appointment.setAdministrator(administrator);
                 break;
             }
         }
-
-
-
-
         appointment.setStartTime(appointmentDTO.getStartTime());
-
         appointmentService.save(appointment);
-
         return new ResponseEntity<>(new AppointmentDTO(appointment), HttpStatus.CREATED);
     }
 
+    @CrossOrigin(origins = "*")
 
-    @CrossOrigin
     @PutMapping(value = "/update/{id}/{userId}")
     public ResponseEntity<AppointmentDTO> update(@PathVariable Long id, @RequestBody AppointmentDTO appointmentDTO, @PathVariable Long userId) {
 
 
         Optional<Appointment> appointmentOptional = appointmentService.findById(id);
-
         Appointment appointment = appointmentOptional.get();
-
         User user = userService.getById(userId);
-
-
-
          if(appointment.getAppointmentStatus() == AppointmentStatus.PREDEFINED) {
              appointment.setAppointmentStatus(AppointmentStatus.TAKEN);
         }
@@ -161,11 +148,8 @@ public class AppointmentController {
 
 
          }
-
-
-        appointmentService.save(appointment);
-
-        return new ResponseEntity<>(new AppointmentDTO(appointment), HttpStatus.OK);
+         appointmentService.save(appointment);
+         return new ResponseEntity<>(new AppointmentDTO(appointment), HttpStatus.OK);
 
     }
 

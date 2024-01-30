@@ -15,7 +15,10 @@ public class SystemAdminDto extends UserDTO{
 
     @Enumerated(EnumType.STRING)
     private UserCategory userCategory;
+
+
     public SystemAdminDto(){}
+
 
     public SystemAdminDto(SystemAdmin admin){
         super(
