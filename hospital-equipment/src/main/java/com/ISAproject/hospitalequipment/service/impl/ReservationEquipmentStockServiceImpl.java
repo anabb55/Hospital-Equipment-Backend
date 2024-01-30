@@ -75,6 +75,7 @@ public class ReservationEquipmentStockServiceImpl implements ReservationEquipmen
 
 
 
+
     public List<ReservationEquipmentStock> getByCompanyId(Long companyId){
         return reservationEquipmentStockRepo.findByCompanyId(companyId);
     }
