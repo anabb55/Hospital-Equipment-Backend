@@ -109,7 +109,12 @@ public class WebSecurityConfig {
         return (web) -> web.ignoring().requestMatchers(HttpMethod.POST, "api/authentication/login")
 
                 .requestMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "favicon.ico",
-                        "/*/*.html", "/*/*.css", "/*/*.js");
+                        "/*/*.html", "/*/*.css", "/*/*.js")
+                .requestMatchers("/v2/api-docs",
+                        "/configuration/**",
+                        "/swagger*/**",
+                        "/webjars/**");
+
 
     }
 

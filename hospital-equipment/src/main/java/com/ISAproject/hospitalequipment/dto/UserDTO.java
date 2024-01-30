@@ -31,6 +31,7 @@ public class UserDTO {
     private String phoneNumber;
 
     private boolean waslogged;
+
     private List<Role> roles;
     public UserDTO() {
     }
