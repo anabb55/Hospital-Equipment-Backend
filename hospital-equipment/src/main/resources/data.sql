@@ -37,12 +37,12 @@ VALUES (3, 'ROLE_SYSTEM_ADMIN');
 
 INSERT INTO users(
     email, enabled, firstname, lastname,username ,occupation, password, phone_number, address_id,waslogged)
-VALUES ( 'dajanaskocajic18@gmail.com', true, 'Tara', 'Boskovic','taric', 'student', '$2a$10$mD0kgZJFbHEdEM5ICKJbgecF3qjIzP.i3zVV.nszlWh8Adp4gs4K6', '066-2678-772', 1,false);
+VALUES ( 'dajanaskocajic18@gmail.com', true, 'Tara', 'Boskovic','taric', 'student', '123', '066-2678-772', 1,false);
 
 INSERT INTO users(
     email, enabled, firstname, lastname,username, occupation, password, phone_number, address_id,waslogged)
 
-VALUES ( 'h.jovix@gmail.com', true, 'Milos', 'Milosevic','anic', 'doctor', '$2a$10$mD0kgZJFbHEdEM5ICKJbgecF3qjIzP.i3zVV.nszlWh8Adp4gs4K6', '064-3782-892', 2,false);
+VALUES ( 'h.jovix@gmail.com', true, 'Milos', 'Milosevic','anic', 'doctor', '123', '064-3782-892', 2,false);
 
 
 INSERT INTO users(
