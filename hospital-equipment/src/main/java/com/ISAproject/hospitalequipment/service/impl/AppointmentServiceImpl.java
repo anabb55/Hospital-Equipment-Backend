@@ -9,6 +9,7 @@ import com.ISAproject.hospitalequipment.service.CompanyAdministratorService;
 import com.ISAproject.hospitalequipment.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -36,7 +37,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     }
 
-
+    @Transactional
 
     public Appointment createExtraOrdinaryAppointment(Appointment appointment, AppointmentDTO appointmentDTO){
 
@@ -49,7 +50,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
 
-
+    @Transactional
     public List<CompanyAdministrator> findAvailableAdministrator(LocalTime startTime, LocalTime endTime, LocalDate date,Long companyId){
         return  companyAdministratorService.findAvailableAdministrator(startTime,endTime,date,companyId);
     }
@@ -88,7 +89,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 
 
-
+    @Transactional
     public List<Appointment> generateRandomAppointments(Long companyId, LocalDate date) {
         List<Appointment> takenAppointments = findTakenAppointmentsByCompanyAndDate(companyId, date);
         long nextId=increaseAppointmentId();
