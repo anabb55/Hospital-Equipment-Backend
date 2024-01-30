@@ -166,17 +166,17 @@ VALUES (200, 3, 2, 130, 0);
 
 
 
-INSERT INTO appointments(date, end_time, start_time, administrator_id,appointment_status)
-VALUES ('2024-01-29', '10:00:00','08:00:00', 3, 'TAKEN');
+INSERT INTO appointments(date, end_time, start_time,version, administrator_id,appointment_status)
+VALUES ('2024-01-29', '10:00:00','08:00:00',0, 3, 'TAKEN');
 
-INSERT INTO appointments(date, end_time, start_time, administrator_id,  appointment_status)
-VALUES ('2024-02-03', '10:00:00','08:00:00', 3,'PREDEFINED');
+INSERT INTO appointments(date, end_time, start_time,version, administrator_id,  appointment_status)
+VALUES ('2024-02-03', '10:00:00','08:00:00',0, 3,'PREDEFINED');
 
-INSERT INTO appointments(date, end_time, start_time, administrator_id, appointment_status)
-VALUES ('2024-02-04', '10:30:00','08:00:00', 4, 'PREDEFINED');
+INSERT INTO appointments(date, end_time, start_time,version, administrator_id, appointment_status)
+VALUES ('2024-02-04', '10:30:00','08:00:00',0, 4, 'PREDEFINED');
 
-INSERT INTO appointments(date, end_time, start_time, administrator_id, appointment_status)
-VALUES ('2024-02-04', '12:00:00','10:30:00', 4, 'PREDEFINED');
+INSERT INTO appointments(date, end_time, start_time,version, administrator_id, appointment_status)
+VALUES ('2024-02-04', '12:00:00','10:30:00',0, 4, 'PREDEFINED');
 
 INSERT INTO contract(amount,equipment_type,company_id,date,contract_status,longitude,latitude)
 VALUES(20,'Gloves',1,'2024-02-04','VALID','45.24702032809865', '19.840907344141257');
