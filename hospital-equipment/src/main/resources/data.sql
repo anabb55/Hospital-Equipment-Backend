@@ -181,3 +181,17 @@ VALUES ('2024-02-04', '12:00:00','10:30:00', 4, 'PREDEFINED');
 INSERT INTO contract(amount,equipment_type,company_id,date,contract_status,longitude,latitude)
 VALUES(20,'Gloves',1,'2024-02-04','VALID','45.24702032809865', '19.840907344141257');
 
+INSERT INTO public.reservations (
+    appointment_id, id, penalty_points, qr_cod_id, registered_user_id, reservation_status
+) VALUES (
+             1, 1, 0, null, 1, 'RESERVED'
+         );
+
+
+
+
+
+
+
+
+

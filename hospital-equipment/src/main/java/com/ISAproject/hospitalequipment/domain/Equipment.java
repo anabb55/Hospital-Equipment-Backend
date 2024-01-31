@@ -1,21 +1,19 @@
 package com.ISAproject.hospitalequipment.domain;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
+import java.io.Serializable;
 import java.util.Set;
 
 @Setter
 @Getter
 @Entity
 @Table(name="equipments")
-public class Equipment {
+public class Equipment implements Serializable {
 
     @Id
     @NotNull
@@ -51,4 +49,11 @@ public class Equipment {
         this.price = price;
     }
     public Equipment(){}
+
+    public Equipment(Long amount, Double grade, String description, String name) {
+        this.name = name;
+        this.description = description;
+        this.grade = grade;
+        this.amount = amount;
+    }
 }

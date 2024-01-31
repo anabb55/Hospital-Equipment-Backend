@@ -1,14 +1,14 @@
 package com.ISAproject.hospitalequipment.service.impl;
 
 import com.ISAproject.hospitalequipment.domain.Address;
-import com.ISAproject.hospitalequipment.domain.Role;
 import com.ISAproject.hospitalequipment.domain.User;
 import com.ISAproject.hospitalequipment.dto.UserDTO;
 import com.ISAproject.hospitalequipment.repository.UserRepo;
 import com.ISAproject.hospitalequipment.service.RoleService;
 import com.ISAproject.hospitalequipment.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +24,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private RoleService roleService;
+
 
     @Transactional
     public User createUser(User user,UserDTO userDTO){
@@ -55,7 +56,9 @@ public class UserServiceImpl implements UserService {
         return  userRepo.findAll();
     }
 
-   public User findByEmail(String email) {return userRepo.findByEmail(email);}
+    public User findByEmail(String email) {
+            return    userRepo.findByEmail(email);
+      }
 
     public User save(User user){
         return userRepo.save(user);
@@ -65,6 +68,7 @@ public class UserServiceImpl implements UserService {
 
         return userRepo.getById(id);
     }
+
 
 
 }
