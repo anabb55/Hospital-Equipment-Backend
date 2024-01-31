@@ -51,7 +51,7 @@ public class ProducerController {
             if (equipmentStockService.isAmountTooLarge(validContract.getEquipmentType(), validContract.getCompanyId(), validContract.getAmount())) {
 
                 //slucaj da nema dovoljno opreme
-                String queue = "deliveryMessage";
+                String queue = "spring-boot1";
                 String message = "No enough amount for wanted equipment, contract becomes invalid ";
                 producer.sendTo(queue, message);
                 validContract.setContractStatus(ContractStatus.INVALID);

@@ -27,6 +27,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 
@@ -223,9 +224,10 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     public boolean alreadyExistsAppointment(LocalDate date,LocalTime startTime, LocalTime endTime,Long adminId,Long companyId){
         List<Appointment> appointments= appointmentRepo.findAppointmentsByCompany(companyId);
+
         if(appointments!=null) {
             for (Appointment a : appointments) {
-                if (a.getDate().isEqual(date)) {
+                if (a.getDate().isEqual(date) ) {
                     Integer appStartHour = a.getStartTime().getHour();
                     Integer appEndHour = a.getEndTime().getHour();
                     Integer appStartMinutes = a.getStartTime().getMinute();
@@ -247,12 +249,38 @@ public class AppointmentServiceImpl implements AppointmentService {
                     if (startTime.getHour() == appEndHour && startTime.getMinute() <= appEndMinutes) {
                         return true;
                     }
+                    if(endTime.getHour() == appEndHour && endTime.getMinute() <= appEndMinutes){
+                        return true;
+                    }
+                    if(startTime.getHour()<appStartHour && appStartHour<endTime.getHour()){
+                        return true;
+                    }
+                    if(appEndHour>startTime.getHour() && appEndHour<endTime.getHour()){
+                        return true;
+                    }
 
                 }
 
             }
         }
        return false;
+    }
+
+
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+    public Appointment AddPredefinedAppointment(LocalDate date,LocalTime startTime, LocalTime endTime,Long adminId,Long companyId){
+        if(!alreadyExistsAppointment(date,startTime,endTime,adminId,companyId)) {
+            Appointment newApp = new Appointment();
+            newApp.setDate(date);
+            newApp.setEndTime(endTime);
+            newApp.setStartTime(startTime);
+            newApp.setAppointmentStatus(AppointmentStatus.PREDEFINED);
+            newApp.setAdministrator(this.companyAdministratorService.getById(adminId));
+
+            save(newApp);
+            return newApp;
+        }
+        return null;
     }
 
 }

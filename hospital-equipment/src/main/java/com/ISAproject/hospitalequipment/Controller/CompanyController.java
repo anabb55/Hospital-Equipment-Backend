@@ -1,9 +1,6 @@
 package com.ISAproject.hospitalequipment.Controller;
 
-import com.ISAproject.hospitalequipment.domain.Address;
-import com.ISAproject.hospitalequipment.domain.Company;
-import com.ISAproject.hospitalequipment.domain.Equipment;
-import com.ISAproject.hospitalequipment.domain.RegisteredUser;
+import com.ISAproject.hospitalequipment.domain.*;
 import com.ISAproject.hospitalequipment.dto.CompanyDTO;
 import com.ISAproject.hospitalequipment.dto.RegisterUserDTO;
 import com.ISAproject.hospitalequipment.service.CompanyService;
@@ -85,9 +82,15 @@ public class CompanyController {
     }
 
     @GetMapping("/byEquipment/{equipmentId}")
-    public List<Company> getByEquipment(@PathVariable Long equipmentId){
+    public ResponseEntity<List<CompanyDTO>> getByEquipment(@PathVariable Long equipmentId){
         List<Company> companies= companyService.findCompaniesByEquipment(equipmentId);
-        return companies;
+        List<CompanyDTO> companyDTOs = new ArrayList<>();
+
+        for (Company s : companies) {
+            companyDTOs.add(new CompanyDTO(s));
+        }
+
+        return new ResponseEntity<>(companyDTOs, HttpStatus.OK);
     }
 
 
@@ -164,5 +167,16 @@ public class CompanyController {
         return new ResponseEntity<>(equipmentList, HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "*")
+    @GetMapping("/isAdminToCompany/{companyId}/{adminId}")
+    public ResponseEntity<Boolean> isAdminToCompany(@PathVariable("companyId") Long companyId,@PathVariable("adminId") Long adminId){
+        Company company= companyService.getById(companyId);
+        for(CompanyAdministrator ca: company.getAdministrators()){
+            if(ca.getId()==adminId){
+                return new ResponseEntity<>(true, HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>(false, HttpStatus.OK);
+    }
 
 }
