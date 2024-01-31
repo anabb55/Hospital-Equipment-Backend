@@ -134,7 +134,7 @@ public ResponseEntity<List<LocationDTO>> getLocations(@PathVariable Long adminId
         //company.setDescription(administrator.getCompany().getDescription());
         //company.setEquipmentStocks(administrator.getCompany().get());
 
-       // companyAdministrator.setCompany(company);
+       //companyAdministrator.setCompany(company);
 
         Company company= new Company();
         company.setId(administrator.getCompany().getId());
