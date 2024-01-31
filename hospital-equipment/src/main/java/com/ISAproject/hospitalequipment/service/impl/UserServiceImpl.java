@@ -25,7 +25,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RoleService roleService;
 
-    private final Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Transactional
     public User createUser(User user,UserDTO userDTO){
@@ -70,9 +69,6 @@ public class UserServiceImpl implements UserService {
         return userRepo.getById(id);
     }
 
-    public void removeFromCache() {
-        LOG.info("Users removed from cache!");
 
-    }
 
 }
