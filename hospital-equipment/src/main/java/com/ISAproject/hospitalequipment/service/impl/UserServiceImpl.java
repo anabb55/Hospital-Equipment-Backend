@@ -1,14 +1,13 @@
 package com.ISAproject.hospitalequipment.service.impl;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.ISAproject.hospitalequipment.domain.Address;
-import com.ISAproject.hospitalequipment.domain.Role;
 import com.ISAproject.hospitalequipment.domain.User;
 import com.ISAproject.hospitalequipment.dto.UserDTO;
 import com.ISAproject.hospitalequipment.repository.UserRepo;
 import com.ISAproject.hospitalequipment.service.RoleService;
 import com.ISAproject.hospitalequipment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +23,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private RoleService roleService;
+
+    private final Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Transactional
     public User createUser(User user,UserDTO userDTO){
@@ -62,9 +63,14 @@ public class UserServiceImpl implements UserService {
     }
 
     public User getById(Long id){
+        LOG.info("User with id: " + id + " successfully cached!");
 
         return userRepo.getById(id);
     }
 
+    public void removeFromCache() {
+        LOG.info("Users removed from cache!");
+
+    }
 
 }
