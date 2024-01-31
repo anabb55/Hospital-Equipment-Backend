@@ -1,6 +1,7 @@
 <config xmlns='http://www.ehcache.org/v3'
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core-3.0.xsd">
+        xsi:schemaLocation="http://www.ehcache.org/v3
+            http://www.ehcache.org/schema/ehcache-core-3.8.xsd">
 
 <!--    &lt;!&ndash; Persistent cache directory &ndash;&gt;-->
 <!--    <persistence directory="cache-example/cache" />-->

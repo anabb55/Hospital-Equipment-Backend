@@ -116,6 +116,9 @@
             <scope>provided</scope>
         </dependency>
 
+
+
+
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
@@ -161,6 +164,7 @@
         <dependency>
             <groupId>org.ehcache</groupId>
             <artifactId>ehcache</artifactId>
+            <version>3.8.1</version>
         </dependency>
         <dependency>
             <groupId>javax.cache</groupId>
