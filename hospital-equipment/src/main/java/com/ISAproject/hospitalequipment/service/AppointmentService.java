@@ -38,6 +38,6 @@ public interface AppointmentService {
 
 
     public boolean alreadyExistsAppointment(LocalDate date,LocalTime startTime, LocalTime endTime,Long adminId,Long companyId);
-
+    public Appointment AddPredefinedAppointment(LocalDate date,LocalTime startTime, LocalTime endTime,Long adminId,Long companyId);
 
 }
