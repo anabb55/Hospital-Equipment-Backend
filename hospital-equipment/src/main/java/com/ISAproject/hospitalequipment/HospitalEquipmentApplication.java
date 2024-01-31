@@ -14,11 +14,12 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableAsync;
 
+@EnableCaching
 
 @SpringBootApplication
 @EntityScan(basePackages = "com.ISAproject.hospitalequipment.domain")
 @EnableAsync
-@EnableCaching
+
 
 public class HospitalEquipmentApplication {
 

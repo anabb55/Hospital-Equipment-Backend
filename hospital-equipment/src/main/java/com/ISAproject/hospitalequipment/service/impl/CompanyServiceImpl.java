@@ -23,6 +23,8 @@ public class CompanyServiceImpl implements CompanyService {
     @Autowired
     private CompanyAdministratorService adminService;
 
+
+
     public List<Company> getAll(){
         return companyRepo.findAll();
     }

@@ -6,13 +6,14 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.Set;
 
 @Setter
 @Getter
 @Entity
 @Table(name="equipments")
-public class Equipment {
+public class Equipment implements Serializable {
 
     @Id
     @NotNull
