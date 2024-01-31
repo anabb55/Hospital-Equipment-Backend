@@ -3,15 +3,19 @@ package com.ISAproject.hospitalequipment.Controller;
 import com.ISAproject.hospitalequipment.domain.Appointment;
 import com.ISAproject.hospitalequipment.domain.RegisteredUser;
 import com.ISAproject.hospitalequipment.domain.Reservation;
+import com.ISAproject.hospitalequipment.domain.WaitGroup;
 import com.ISAproject.hospitalequipment.domain.enums.ReservationStatus;
+import com.ISAproject.hospitalequipment.dto.AppointmentDTO;
 import com.ISAproject.hospitalequipment.dto.ReservationDTO;
 import com.ISAproject.hospitalequipment.service.EmailService;
 import com.ISAproject.hospitalequipment.service.RegisteredUserService;
 import com.ISAproject.hospitalequipment.service.ReservationService;
 import com.google.zxing.WriterException;
+import jakarta.persistence.OptimisticLockException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -32,16 +36,28 @@ public class ReservationController {
     @Autowired
     private EmailService emailService;
 
-    @CrossOrigin(origins = "*")
-    @PostMapping("/createReservation/{registerUserId}")
-    public ResponseEntity<ReservationDTO> createReservation(@RequestBody ReservationDTO reservationDTO,@PathVariable Long registerUserId) {
-        Reservation reservation = new Reservation();
-        RegisteredUser user=registeredUserService.getById(Math.toIntExact(registerUserId));
-        reservation.setPenaltyPoints(0L);
-        reservation.setRegisteredUser(user);
-        reservation.setReservationStatus(ReservationStatus.RESERVED);
-        reservation = reservationService.save(reservation);
-        return new ResponseEntity<>(new ReservationDTO(reservation), HttpStatus.CREATED);
+    private WaitGroup waitGroup = new WaitGroup(2);
+
+
+
+
+    @CrossOrigin
+    @PutMapping(value = "/update/{id}/{userId}")
+    public ResponseEntity<AppointmentDTO> update(@PathVariable Long id, @RequestBody AppointmentDTO appointmentDTO, @PathVariable Long userId) {
+        waitGroup.done();
+        try {
+            waitGroup.await();
+        } catch (InterruptedException e) {
+            System.out.println("Error happening");
+        }
+
+        try {
+            Appointment app = reservationService.updateStatus(id,appointmentDTO, userId);
+            reservationService.createAppointmentReservation(id, appointmentDTO, userId);
+            return new ResponseEntity<>(new AppointmentDTO(app), HttpStatus.OK);
+        } catch (ObjectOptimisticLockingFailureException ex) {
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
     }
 
     @CrossOrigin(origins = "*")

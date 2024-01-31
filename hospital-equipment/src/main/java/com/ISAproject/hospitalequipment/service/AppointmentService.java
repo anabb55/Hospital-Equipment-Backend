@@ -29,7 +29,7 @@ public interface AppointmentService {
     public List<Appointment> findFutureAppointmentsByUserId(Long userId);
 
 
-    Appointment updateStatus(Long id, AppointmentDTO appointmentDTO);
+
 
     Appointment cancelAppointment(Long id, AppointmentDTO appointmentDTO, Long userId);
 

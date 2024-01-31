@@ -1,6 +1,8 @@
 package com.ISAproject.hospitalequipment.service;
 
+import com.ISAproject.hospitalequipment.domain.Appointment;
 import com.ISAproject.hospitalequipment.domain.Reservation;
+import com.ISAproject.hospitalequipment.dto.AppointmentDTO;
 import com.google.zxing.WriterException;
 
 import java.io.IOException;
@@ -29,6 +31,8 @@ public interface ReservationService {
 
     Reservation findByAppointmentId(Long appointmentId);
 
+    Appointment updateStatus(Long id, AppointmentDTO appointmentDTO, Long UserId);
+
     public Reservation getById(Long id);
 
     public Reservation saveReservation(Reservation reservation);
@@ -37,6 +41,6 @@ public interface ReservationService {
 
     public void checkExpiredReservations();
 
-
+    public Reservation createAppointmentReservation(Long id, AppointmentDTO appointmentDTO, Long UserId);
 
 }

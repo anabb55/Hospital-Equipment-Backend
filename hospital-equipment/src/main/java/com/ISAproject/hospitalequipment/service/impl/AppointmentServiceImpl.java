@@ -2,6 +2,7 @@ package com.ISAproject.hospitalequipment.service.impl;
 
 import com.ISAproject.hospitalequipment.domain.*;
 import com.ISAproject.hospitalequipment.domain.enums.AppointmentStatus;
+import com.ISAproject.hospitalequipment.domain.enums.ReservationStatus;
 import com.ISAproject.hospitalequipment.dto.AppointmentDTO;
 import com.ISAproject.hospitalequipment.repository.AppointmentRepo;
 import com.ISAproject.hospitalequipment.service.*;
@@ -42,36 +43,14 @@ public class AppointmentServiceImpl implements AppointmentService {
     private UserService userService;
 
 
+
+
     public List<Appointment> getFreeAppointmentsByCompany(Long companyId) {
         return appointmentRepo.findFreeAppointmentsByCompany(companyId);
 
 
     }
 
-
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
-    public Appointment updateStatus(Long id, AppointmentDTO appointmentDTO){
-
-        try{
-            Optional<Appointment> appointmentOptional = appointmentRepo.findById(id);
-
-            Appointment appointment = appointmentOptional.get();
-
-            if(appointment.getAppointmentStatus() == AppointmentStatus.PREDEFINED) {
-                appointment.setAppointmentStatus(AppointmentStatus.TAKEN);
-            }
-
-            appointmentRepo.save(appointment);
-
-            return appointment;
-
-        }catch (OptimisticLockException ex){
-            throw  new RuntimeException("Enable to update status");
-        }
-
-
-
-    }
 
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
@@ -99,7 +78,7 @@ public class AppointmentServiceImpl implements AppointmentService {
             return appointment;
 
         } catch (OptimisticLockException ex){
-          throw  new RuntimeException("enable to update status");
+          throw  new RuntimeException("can't update status");
         }
 
 
