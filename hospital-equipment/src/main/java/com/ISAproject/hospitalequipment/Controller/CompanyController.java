@@ -82,9 +82,15 @@ public class CompanyController {
     }
 
     @GetMapping("/byEquipment/{equipmentId}")
-    public List<Company> getByEquipment(@PathVariable Long equipmentId){
+    public ResponseEntity<List<CompanyDTO>> getByEquipment(@PathVariable Long equipmentId){
         List<Company> companies= companyService.findCompaniesByEquipment(equipmentId);
-        return companies;
+        List<CompanyDTO> companyDTOs = new ArrayList<>();
+
+        for (Company s : companies) {
+            companyDTOs.add(new CompanyDTO(s));
+        }
+
+        return new ResponseEntity<>(companyDTOs, HttpStatus.OK);
     }
 
 
