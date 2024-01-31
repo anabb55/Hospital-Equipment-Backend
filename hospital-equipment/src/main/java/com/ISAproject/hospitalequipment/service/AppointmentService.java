@@ -3,6 +3,7 @@ package com.ISAproject.hospitalequipment.service;
 import com.ISAproject.hospitalequipment.domain.Appointment;
 import com.ISAproject.hospitalequipment.domain.CompanyAdministrator;
 import com.ISAproject.hospitalequipment.dto.AppointmentDTO;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
@@ -18,6 +19,7 @@ public interface AppointmentService {
     List<Appointment>generateRandomAppointments(Long companyId,LocalDate date);
     List<Appointment> findTakenAppointmentsByCompanyAndDate(Long companyId,LocalDate date);
     List<Appointment> findTakenAppointmentsByCompany(Long companyId);
+
     Optional<Appointment> findById(Long id);
 
     Appointment save(Appointment appointment);
@@ -29,7 +31,7 @@ public interface AppointmentService {
     public List<Appointment> findFutureAppointmentsByUserId(Long userId);
 
 
-    Appointment updateStatus(Long id, AppointmentDTO appointmentDTO);
+
 
     Appointment cancelAppointment(Long id, AppointmentDTO appointmentDTO, Long userId);
 

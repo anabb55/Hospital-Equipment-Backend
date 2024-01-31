@@ -2,12 +2,18 @@ package com.ISAproject.hospitalequipment.service.impl;
 
 import com.ISAproject.hospitalequipment.domain.*;
 import com.ISAproject.hospitalequipment.domain.enums.AppointmentStatus;
+import com.ISAproject.hospitalequipment.domain.enums.ReservationStatus;
 import com.ISAproject.hospitalequipment.dto.AppointmentDTO;
 import com.ISAproject.hospitalequipment.repository.AppointmentRepo;
 import com.ISAproject.hospitalequipment.service.*;
 
+import io.github.resilience4j.ratelimiter.RequestNotPermitted;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import jakarta.persistence.OptimisticLockException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -52,30 +58,6 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
 
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
-    public Appointment updateStatus(Long id, AppointmentDTO appointmentDTO){
-
-        try{
-            Optional<Appointment> appointmentOptional = appointmentRepo.findById(id);
-
-            Appointment appointment = appointmentOptional.get();
-
-            if(appointment.getAppointmentStatus() == AppointmentStatus.PREDEFINED) {
-                appointment.setAppointmentStatus(AppointmentStatus.TAKEN);
-            }
-
-            appointmentRepo.save(appointment);
-
-            return appointment;
-
-        }catch (OptimisticLockException ex){
-            throw  new RuntimeException("Enable to update status");
-        }
-
-
-
-    }
-
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     public Appointment cancelAppointment(Long id, AppointmentDTO appointmentDTO, Long userId) {
@@ -102,7 +84,7 @@ public class AppointmentServiceImpl implements AppointmentService {
             return appointment;
 
         } catch (OptimisticLockException ex){
-          throw  new RuntimeException("enable to update status");
+          throw  new RuntimeException("can't update status");
         }
 
 
@@ -169,9 +151,12 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointment;
     }
 
+
     public List<Appointment> findAll() {
         return appointmentRepo.findAll();
     }
+
+
 
     public Optional<Appointment> findById(Long id){
         return  appointmentRepo.findById(id);

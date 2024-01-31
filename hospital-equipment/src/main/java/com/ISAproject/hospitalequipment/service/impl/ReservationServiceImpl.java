@@ -1,14 +1,19 @@
 package com.ISAproject.hospitalequipment.service.impl;
 
 import com.ISAproject.hospitalequipment.domain.*;
+import com.ISAproject.hospitalequipment.domain.enums.AppointmentStatus;
 import com.ISAproject.hospitalequipment.domain.enums.ReservationStatus;
+import com.ISAproject.hospitalequipment.dto.AppointmentDTO;
 import com.ISAproject.hospitalequipment.repository.EquipmentStockRepo;
 import com.ISAproject.hospitalequipment.repository.ReservationEquipmentStockRepo;
 import com.ISAproject.hospitalequipment.repository.ReservationRepo;
 import com.ISAproject.hospitalequipment.service.*;
 import com.google.zxing.WriterException;
+import jakarta.persistence.OptimisticLockException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 
@@ -35,6 +40,9 @@ public class ReservationServiceImpl implements ReservationService {
     @Autowired
    private EmailService emailService;
 
+    @Autowired
+    private RegisteredUserService registeredUserService;
+
 
 
     public List<Reservation> getAll()
@@ -54,6 +62,36 @@ public class ReservationServiceImpl implements ReservationService {
         } else {
             return null;
         }
+    }
+
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+    public Appointment updateStatus(Long id, AppointmentDTO appointmentDTO, Long UserId){
+            Optional<Appointment> appointmentOptional = appointmentService.findById(id);
+
+            Appointment appointment = appointmentOptional.get();
+
+            if(appointment.getAppointmentStatus() == AppointmentStatus.PREDEFINED) {
+                appointment.setAppointmentStatus(AppointmentStatus.TAKEN);
+            }
+
+            appointment = appointmentService.save(appointment);
+
+            return appointment;
+    }
+
+    public Reservation createAppointmentReservation (Long id, AppointmentDTO appointmentDTO, Long UserId) {
+        Optional<Appointment> appointmentOptional = appointmentService.findById(id);
+        Appointment appointment = appointmentOptional.get();
+
+        Reservation reservation = new Reservation();
+        RegisteredUser user=registeredUserService.getById(Math.toIntExact(UserId));
+        reservation.setPenaltyPoints(0L);
+        reservation.setRegisteredUser(user);
+        reservation.setReservationStatus(ReservationStatus.RESERVED);
+        reservation.setAppointment(appointment);
+        reservation = create(reservation);
+
+        return reservation;
     }
 
 
@@ -216,7 +254,7 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     public Reservation create(Reservation reservation){
-        return  reservationRepo.save(reservation);
+        return reservationRepo.save(reservation);
     }
 
     public Reservation getById(Long id){

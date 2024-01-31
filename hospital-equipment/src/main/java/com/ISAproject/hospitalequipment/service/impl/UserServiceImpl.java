@@ -7,6 +7,10 @@ import com.ISAproject.hospitalequipment.dto.UserDTO;
 import com.ISAproject.hospitalequipment.repository.UserRepo;
 import com.ISAproject.hospitalequipment.service.RoleService;
 import com.ISAproject.hospitalequipment.service.UserService;
+import io.github.resilience4j.ratelimiter.RequestNotPermitted;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,6 +18,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -24,6 +30,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private RoleService roleService;
+
+
 
     @Transactional
     public User createUser(User user,UserDTO userDTO){
@@ -51,9 +59,12 @@ public class UserServiceImpl implements UserService {
 
     }
 
+//    @RateLimiter(name = "standard", fallbackMethod = "standardFallback")
     public List<User> findAll() {
         return  userRepo.findAll();
     }
+
+
 
    public User findByEmail(String email) {return userRepo.findByEmail(email);}
 

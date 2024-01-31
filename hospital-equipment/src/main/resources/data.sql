@@ -58,7 +58,7 @@ VALUES ( 'marko@gmail.com',false, 'Marko', 'Markovic', 'aaa', 'nurse', '222345',
 
 INSERT INTO users(
     email, enabled, firstname, lastname,username, occupation, password, phone_number, address_id,waslogged)
-VALUES ( 'Mirko@gmail.com',false, 'Mirko', 'Mirkovic','banana', 'nurse', '36782',  '069-3782-738', 6,false);
+VALUES ( 'ana.boskovicc18@gmail.com',true, 'Mirko', 'Mirkovic','banana', 'nurse', '$2a$10$WtyrzCE8BuUc.6hd/T66ZuX1HsfMqCXzORWIfgJayO6fvB36fK6dm',  '069-3782-738', 6,false);
 
 
 
@@ -83,7 +83,7 @@ VALUES (2, 5);
 
 INSERT INTO user_role(
     role_id, user_id)
-VALUES (2, 6);
+VALUES (1, 6);
 
 
 INSERT INTO loyalty_program(
@@ -102,6 +102,10 @@ VALUES (30, 3, 10);
 INSERT INTO registered_users(
     accumulated_points, penalty_points, id, loyalty_id, user_category)
 VALUES (0, 0, 1, 1, 'REGULAR');
+
+INSERT INTO registered_users(
+    accumulated_points, penalty_points, id, loyalty_id, user_category)
+VALUES (0, 0, 6, 1, 'REGULAR');
 
 
 
@@ -133,20 +137,20 @@ VALUES (2,6);
 
 
 INSERT INTO equipments(
-    amount, grade, description, name)
-VALUES ( 50, 5, 'Strong', 'Scissors');
+    amount, grade, description, name,price)
+VALUES ( 50, 5, 'Strong', 'Scissors', 0);
 
 INSERT INTO equipments(
-    amount, grade, description, name)
-VALUES ( 2000, 4, 'Medical', 'Gloves');
+    amount, grade, description, name, price)
+VALUES ( 2000, 4, 'Medical', 'Gloves',0);
 
 INSERT INTO equipments(
-    amount, grade, description, name)
-VALUES ( 500, 5, 'Cotton', 'Coat');
+    amount, grade, description, name, price)
+VALUES ( 500, 5, 'Cotton', 'Coat', 0);
 
 INSERT INTO equipments(
-    amount, grade, description, name)
-VALUES ( 500, 5, 'elastic', 'Bandage');
+    amount, grade, description, name, price)
+VALUES ( 500, 5, 'elastic', 'Bandage',0);
 
 
 INSERT INTO equipment_stock (amount, company_id, equipment_id, price, version)
@@ -166,17 +170,17 @@ VALUES (200, 3, 2, 130, 0);
 
 
 
-INSERT INTO appointments(date, end_time, start_time, administrator_id,appointment_status)
-VALUES ('2024-01-29', '10:00:00','08:00:00', 3, 'TAKEN');
+INSERT INTO appointments(date, end_time, start_time,version, administrator_id,appointment_status)
+VALUES ('2024-01-29', '10:00:00','08:00:00',0, 3, 'TAKEN');
 
-INSERT INTO appointments(date, end_time, start_time, administrator_id,  appointment_status)
-VALUES ('2024-02-03', '10:00:00','08:00:00', 3,'PREDEFINED');
+INSERT INTO appointments(date, end_time, start_time,version, administrator_id,  appointment_status)
+VALUES ('2024-02-03', '10:00:00','08:00:00',0, 3,'PREDEFINED');
 
-INSERT INTO appointments(date, end_time, start_time, administrator_id, appointment_status)
-VALUES ('2024-02-04', '10:30:00','08:00:00', 4, 'PREDEFINED');
+INSERT INTO appointments(date, end_time, start_time,version, administrator_id, appointment_status)
+VALUES ('2024-02-04', '10:30:00','08:00:00',0, 4, 'PREDEFINED');
 
-INSERT INTO appointments(date, end_time, start_time, administrator_id, appointment_status)
-VALUES ('2024-02-04', '12:00:00','10:30:00', 4, 'PREDEFINED');
+INSERT INTO appointments(date, end_time, start_time,version, administrator_id, appointment_status)
+VALUES ('2024-02-04', '12:00:00','10:30:00',0, 4, 'PREDEFINED');
 
 INSERT INTO contract(amount,equipment_type,company_id,date,contract_status,longitude,latitude)
 VALUES(20,'Gloves',1,'2024-02-04','VALID','45.24702032809865', '19.840907344141257');

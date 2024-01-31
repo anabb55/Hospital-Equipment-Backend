@@ -1,5 +1,6 @@
 package com.ISAproject.hospitalequipment.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,6 +20,7 @@ public class LoyaltyProgram {
     private int pointsPerEquipment;
     private int penaltyThreshold;
     private int discountPercentage;
+
 
     @OneToMany(mappedBy = "loyaltyProgram", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<RegisteredUser> registeredUsers = new HashSet<RegisteredUser>();

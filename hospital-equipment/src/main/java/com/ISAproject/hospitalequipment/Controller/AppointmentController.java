@@ -37,6 +37,7 @@ public class AppointmentController {
     private CompanyService companyService;
 
 
+
     @CrossOrigin(origins = "*")
 
 
@@ -93,41 +94,6 @@ public class AppointmentController {
     @CrossOrigin(origins = "*")
     @PostMapping(value="/create/{companyId}")
     public ResponseEntity<AppointmentDTO> saveAppointment(@PathVariable Long companyId, @RequestBody AppointmentDTO appointmentDTO) {
-
-//        Appointment appointment = new Appointment();
-//        appointment.setId(appointmentDTO.getId());
-//        appointment.setDate(appointmentDTO.getDate());
-//        appointment.setAppointmentStatus(AppointmentStatus.TAKEN);
-//        appointment.setEndTime(appointmentDTO.getEndTime());
-//
-//        Company company = companyService.getById(companyId);
-//
-//
-//        if (company == null) {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//
-//
-//        List<CompanyAdministrator> administrators = appointmentService.findAvailableAdministrator(appointmentDTO.getStartTime(),appointmentDTO.getEndTime(), appointmentDTO.getDate(),companyId);
-//
-//        if (administrators == null || administrators.isEmpty()) {
-//            throw new IllegalStateException("No available administrators found.");
-//        }
-//
-//        for (CompanyAdministrator administrator : administrators) {
-//            if (administrator.getCompany().getId().equals(companyId)){
-//                appointment.setAdministrator(administrator);
-//                break;
-//            }
-//        }
-//
-//
-//
-//
-//        appointment.setStartTime(appointmentDTO.getStartTime());
-//
-//        appointmentService.save(appointment);
-
         return new ResponseEntity<>(new AppointmentDTO(appointmentService.saveAppointment(companyId, appointmentDTO)), HttpStatus.CREATED);
     }
 
@@ -144,16 +110,13 @@ public class AppointmentController {
     }
 
 
+   @GetMapping("/findById/{id}")
+   public ResponseEntity<AppointmentDTO> findAll(@PathVariable Long id){
 
-
-    @CrossOrigin
-    @PutMapping(value = "/update/{id}")
-    public ResponseEntity<AppointmentDTO> update(@PathVariable Long id, @RequestBody AppointmentDTO appointmentDTO) {
-
-
-        return new ResponseEntity<>(new AppointmentDTO(appointmentService.updateStatus(id,appointmentDTO)), HttpStatus.OK);
-
-         }
+        Optional<Appointment> app = appointmentService.findById(id);
+        Appointment appointment = app.get();
+        return new ResponseEntity<>(new AppointmentDTO(appointment), HttpStatus.OK);
+   }
 
 
     
