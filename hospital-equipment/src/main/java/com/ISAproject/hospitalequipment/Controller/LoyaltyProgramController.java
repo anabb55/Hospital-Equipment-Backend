@@ -1,7 +1,9 @@
 package com.ISAproject.hospitalequipment.Controller;
 
+import com.ISAproject.hospitalequipment.domain.Company;
 import com.ISAproject.hospitalequipment.domain.Equipment;
 import com.ISAproject.hospitalequipment.domain.LoyaltyProgram;
+import com.ISAproject.hospitalequipment.dto.CompanyDTO;
 import com.ISAproject.hospitalequipment.dto.LoyaltyProgramDTO;
 import com.ISAproject.hospitalequipment.service.LoyaltyProgramService;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -11,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -21,9 +24,13 @@ public class LoyaltyProgramController {
     LoyaltyProgramService loyaltyProgramService;
 
     @GetMapping(value = "/findAll")
-    public ResponseEntity<List<LoyaltyProgram>> findAll(){
+    public ResponseEntity<List<LoyaltyProgramDTO>> findAll(){
         List<LoyaltyProgram> loyaltyPrograms = loyaltyProgramService.findAll();
-        return new ResponseEntity<>(loyaltyPrograms, HttpStatus.OK) ;
+        List<LoyaltyProgramDTO> loyaltyProgramDTOS = new ArrayList<>();
+        for (LoyaltyProgram s : loyaltyPrograms) {
+            loyaltyProgramDTOS.add(new LoyaltyProgramDTO(s));
+        }
+        return new ResponseEntity<>(loyaltyProgramDTOS, HttpStatus.OK) ;
     }
 
 

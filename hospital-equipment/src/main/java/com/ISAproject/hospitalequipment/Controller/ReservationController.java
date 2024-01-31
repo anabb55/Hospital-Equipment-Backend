@@ -11,6 +11,7 @@ import com.ISAproject.hospitalequipment.service.EmailService;
 import com.ISAproject.hospitalequipment.service.RegisteredUserService;
 import com.ISAproject.hospitalequipment.service.ReservationService;
 import com.google.zxing.WriterException;
+import jakarta.mail.MessagingException;
 import jakarta.persistence.OptimisticLockException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,7 +40,17 @@ public class ReservationController {
     private WaitGroup waitGroup = new WaitGroup(2);
 
 
+    @CrossOrigin(origins = "*")
+    @PostMapping("/createReservation/{registerUserId}")
+    public ResponseEntity<ReservationDTO> createReservation(@RequestBody ReservationDTO reservationDTO,@PathVariable Long registerUserId) {
+        Reservation reservation = new Reservation();
+        RegisteredUser user=registeredUserService.getById(Math.toIntExact(registerUserId));
 
+        reservation.setRegisteredUser(user);
+        reservation.setReservationStatus(ReservationStatus.RESERVED);
+        reservation = reservationService.save(reservation);
+        return new ResponseEntity<>(new ReservationDTO(reservation), HttpStatus.CREATED);
+    }
 
     @CrossOrigin
     @PutMapping(value = "/update/{id}/{userId}")
@@ -65,7 +76,6 @@ public class ReservationController {
     public ResponseEntity<ReservationDTO> createReservationPredefined(@RequestBody Appointment appointment,@PathVariable Long UserId) {
         Reservation reservation = new Reservation();
         RegisteredUser user=registeredUserService.getById(Math.toIntExact(UserId));
-        reservation.setPenaltyPoints(0L);
         reservation.setRegisteredUser(user);
         reservation.setReservationStatus(ReservationStatus.RESERVED);
         reservation.setAppointment(appointment);
@@ -97,7 +107,7 @@ public class ReservationController {
     }
       @CrossOrigin(origins = "*")
     @PutMapping("/updateStatus/{resId}")
-    public ResponseEntity<ReservationDTO> updateStatus(@PathVariable("resId") Long reservationId  ){
+    public ResponseEntity<ReservationDTO> updateStatus(@PathVariable("resId") Long reservationId  ) throws MessagingException {
         Reservation reservation= reservationService.getById(reservationId);
        reservation.setReservationStatus(ReservationStatus.TAKEN);
         reservationService.saveReservation(reservation);
@@ -107,7 +117,7 @@ public class ReservationController {
 
     @CrossOrigin(origins = "*")
     @PutMapping("/updateStatusToExpired/{resId}")
-    public ResponseEntity<ReservationDTO> updateStatusToExpired(@PathVariable("resId") Long reservationId  ){
+    public ResponseEntity<ReservationDTO> updateStatusToExpired(@PathVariable("resId") Long reservationId  ) throws MessagingException {
         Reservation reservation= reservationService.getById(reservationId);
         reservation.setReservationStatus(ReservationStatus.EXPIRED);
         reservationService.saveReservation(reservation);

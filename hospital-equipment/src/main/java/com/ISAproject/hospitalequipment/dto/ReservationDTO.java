@@ -25,7 +25,6 @@ public class ReservationDTO {
     {   if(reservation!=null) {
         this.id = reservation.getId();
         this.reservationStatus = reservation.getReservationStatus();
-        this.penaltyPoints = reservation.getPenaltyPoints();
         this.appointmentDTO = new AppointmentDTO(reservation.getAppointment());
         this.registeredUserDTO = new RegisterUserDTO(reservation.getRegisteredUser());
     }

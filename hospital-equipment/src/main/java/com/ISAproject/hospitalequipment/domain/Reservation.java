@@ -21,8 +21,7 @@ public class Reservation {
     @NotNull
     private Long id;
 
-    @NotNull
-    private Long penaltyPoints;
+
 
     @Enumerated(EnumType.STRING)
     private ReservationStatus reservationStatus;
@@ -34,9 +33,6 @@ public class Reservation {
     @JoinColumn(name = "appointment_id")
     private Appointment appointment;
 
-    @OneToOne
-    @JoinColumn(name = "qr_cod_id")
-    private QRCode qrCode;
 
     @JoinColumn(name = "registered_user_id")
     @ManyToOne(fetch=FetchType.LAZY)
@@ -44,12 +40,10 @@ public class Reservation {
 
 
     public Reservation(){}
-    public Reservation(Long id, Long penaltyPoints, ReservationStatus reservationStatus, Appointment appointment, QRCode qrCode,RegisteredUser registeredUser){
+    public Reservation(Long id, ReservationStatus reservationStatus, Appointment appointment, RegisteredUser registeredUser){
         this.id  = id;
-        this.penaltyPoints = penaltyPoints;
         this.reservationStatus = reservationStatus;
         this.appointment = appointment;
-         this. qrCode = qrCode;
          this.registeredUser = registeredUser;
     }
 

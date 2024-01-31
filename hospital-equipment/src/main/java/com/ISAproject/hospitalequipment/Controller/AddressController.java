@@ -1,6 +1,9 @@
 package com.ISAproject.hospitalequipment.Controller;
 
 import com.ISAproject.hospitalequipment.domain.Address;
+import com.ISAproject.hospitalequipment.domain.LoyaltyProgram;
+import com.ISAproject.hospitalequipment.dto.AddressDTO;
+import com.ISAproject.hospitalequipment.dto.LoyaltyProgramDTO;
 import com.ISAproject.hospitalequipment.service.AddressService;
 import com.ISAproject.hospitalequipment.service.impl.AddressServiceImpl;
 import io.github.resilience4j.ratelimiter.RequestNotPermitted;
@@ -34,7 +37,16 @@ public class AddressController {
 
 
     @PostMapping(value = "/save")
-    public Address save(@RequestBody Address address) {
-        return addressService.save(address);
+    public ResponseEntity<AddressDTO> save(@RequestBody AddressDTO address) {
+        Address addres = new Address();
+        addres.setId(address.getId());
+        addres.setCountry(address.getCountry());
+        addres.setNumber(address.getNumber());
+        addres.setStreet(address.getStreet());
+        addres.setLatitude(0.0);
+        addres.setLongitude(0.0);
+        addres.setCity(address.getCity());
+        addressService.save(addres);
+        return new ResponseEntity<>(new AddressDTO(addres), HttpStatus.OK) ;
     }
 }

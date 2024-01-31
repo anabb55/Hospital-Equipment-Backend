@@ -85,7 +85,6 @@ public class ReservationServiceImpl implements ReservationService {
 
         Reservation reservation = new Reservation();
         RegisteredUser user=registeredUserService.getById(Math.toIntExact(UserId));
-        reservation.setPenaltyPoints(0L);
         reservation.setRegisteredUser(user);
         reservation.setReservationStatus(ReservationStatus.RESERVED);
         reservation.setAppointment(appointment);

@@ -16,11 +16,8 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+
 
 @SpringBootApplication
 @EntityScan(basePackages = "com.ISAproject.hospitalequipment.domain")
@@ -31,27 +28,6 @@ public class HospitalEquipmentApplication {
 		SpringApplication.run(HospitalEquipmentApplication.class, args);
 
 	}
-
-
-	public void run(ApplicationArguments args) throws Exception {
-		openSwaggerUI();
-	}
-
-	private void openSwaggerUI() {
-		String swaggerUiUrl = "http://localhost:8081/swagger-ui/index.html";
-		System.out.println("Swagger UI is available at: " + swaggerUiUrl);
-	}
-@Bean
-	public Docket api() {
-		return new Docket(DocumentationType.SWAGGER_2)
-				.select()
-				.apis(RequestHandlerSelectors.any())
-				.paths(PathSelectors.any())
-				.build()
-				.useDefaultResponseMessages(false);
-	}
-
-
 
 
 	//bean za konekciju na RabbitMQ

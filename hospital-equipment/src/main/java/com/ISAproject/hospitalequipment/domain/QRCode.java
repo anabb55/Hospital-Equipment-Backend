@@ -20,7 +20,5 @@ public class QRCode {
     @Enumerated(EnumType.STRING)
     private QRCodeStatus qrCodeStatus;
 
-    @OneToOne(mappedBy = "qrCode", cascade = CascadeType.ALL)
-    private Reservation reservation;
 
 }

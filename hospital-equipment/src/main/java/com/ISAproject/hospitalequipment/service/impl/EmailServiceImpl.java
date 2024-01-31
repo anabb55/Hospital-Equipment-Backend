@@ -102,19 +102,24 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Async
-    public void sendReservationEmail(User user)  {
+    public void sendReservationEmail(User user) throws  MessagingException {
         String subject = "Reservation confirmation";
 
         String titile="Reservation Confirmation";
         String text ="To confirm taking your reservation, please click here : " + "http://localhost:8081/api/authentication/verifyReservation?email=" + user.getEmail();
 
-        try {
-            sendMess(user, subject,text);
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message,true);
+
+        helper.setFrom("isaisaprojekat.com");
+
+        helper.setTo(user.getEmail());
+        helper.setSubject(subject);
+
+
+
+        helper.setText(text);
+        javaMailSender.send(message);
 
 
     }
