@@ -99,6 +99,7 @@ public class CompanyAdministratorImpl implements CompanyAdministratorService {
             old.setPhoneNumber(admin.getPhoneNumber());
             old.setPassword(admin.getPassword());
             addressService.update(admin.getAddress());
+            old.setCompany(admin.getCompany());
             return companyAdministratorRepo.save(old);
         }else{
             return null;

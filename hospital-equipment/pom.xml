@@ -159,7 +159,7 @@
         </dependency>
 
         <!-- Swagger dependencies START -->
-        <!-- Swagger dependencies START
+        <!-- Swagger dependencies START -->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-boot-starter</artifactId>
@@ -172,9 +172,19 @@
             <version>4.0.4</version>
             <scope>provided</scope>
         </dependency>
- -->
+
 
         <!-- Swagger dependencies END -->
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+
+
+
 
         <!-- Swagger dependencies END -->
 
