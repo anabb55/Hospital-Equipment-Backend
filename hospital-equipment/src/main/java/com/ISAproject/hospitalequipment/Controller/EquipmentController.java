@@ -17,7 +17,19 @@ public class EquipmentController {
     @Autowired
     public EquipmentService equipmentService;
     @CrossOrigin(origins = "*")
+    @GetMapping(value = "/removeCache")
+    public ResponseEntity<String> removeFromCache() {
+        equipmentService.removeFromCache();
+        return ResponseEntity.ok("Products successfully removed from cache!");
+    }
 
+    @CrossOrigin(origins = "*")
+
+    @GetMapping(value = "/cache")
+    public ResponseEntity<Equipment> findEquipmentByName(String name){
+        Equipment equipmentByName = equipmentService.findEquipmentByName(name);
+        return new ResponseEntity<>(equipmentByName, HttpStatus.OK) ;
+    }
     @GetMapping(value = "/byCompany")
     public ResponseEntity<List<Equipment>> getByCompany(Long companyId){
         List<Equipment> equipmentsByCompany = equipmentService.getByCompany(companyId);
@@ -26,8 +38,8 @@ public class EquipmentController {
     @CrossOrigin(origins = "*")
 
     @GetMapping(value = "/findByName")
-    public ResponseEntity<List<Equipment>> findEquipmentByName(String name){
-        List<Equipment> equipmentsByName = equipmentService.findEquipmentByName(name);
+    public ResponseEntity<List<Equipment>> findEquipmentsByName(String name){
+        List<Equipment> equipmentsByName = equipmentService.findEquipmentsByName(name);
         return new ResponseEntity<>(equipmentsByName, HttpStatus.OK) ;
     }
     @CrossOrigin(origins = "*")
