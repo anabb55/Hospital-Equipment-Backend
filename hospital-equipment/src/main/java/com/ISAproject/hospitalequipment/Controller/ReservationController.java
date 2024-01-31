@@ -44,12 +44,12 @@ public class ReservationController {
     @CrossOrigin
     @PutMapping(value = "/update/{id}/{userId}")
     public ResponseEntity<AppointmentDTO> update(@PathVariable Long id, @RequestBody AppointmentDTO appointmentDTO, @PathVariable Long userId) {
-        waitGroup.done();
-        try {
-            waitGroup.await();
-        } catch (InterruptedException e) {
-            System.out.println("Error happening");
-        }
+//        waitGroup.done();
+//        try {
+//            waitGroup.await();
+//        } catch (InterruptedException e) {
+//            System.out.println("Error happening");
+//        }
 
         try {
             Appointment app = reservationService.updateStatus(id,appointmentDTO, userId);
