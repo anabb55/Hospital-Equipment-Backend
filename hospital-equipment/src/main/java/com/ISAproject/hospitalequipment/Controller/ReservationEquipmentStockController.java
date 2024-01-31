@@ -100,7 +100,7 @@ public class ReservationEquipmentStockController {
     @GetMapping("/isEquipmentReserved/{eqId}/{companyId}")
     public ResponseEntity<Boolean> isEquipmentReserved(@PathVariable("eqId")Long equipmentId,@PathVariable("companyId") Long companyId){
         List<ReservationEquipmentStock> reservations= reservationEquipmentStockService.getByCompanyId(companyId);
-        
+
         if(reservations!=null) {
             for (ReservationEquipmentStock res : reservations) {
                 if (res.getEquipmentStock().getEquipment().getId() == equipmentId && res.getReservation().getReservationStatus() == ReservationStatus.RESERVED) {

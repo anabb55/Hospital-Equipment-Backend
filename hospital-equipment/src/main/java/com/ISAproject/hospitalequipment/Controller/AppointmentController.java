@@ -164,6 +164,7 @@ public class AppointmentController {
                                            @PathVariable("startTime") @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime startTime,
                                            @PathVariable("endTime") @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime endTime, @PathVariable("adminId") Long adminId){
         Company company= companyService.findCompanyByAdminn(adminId);
+        /*
         if(!appointmentService.alreadyExistsAppointment(date,startTime,endTime,adminId,company.getId())){
             Appointment newApp= new Appointment();
             newApp.setDate(date);
@@ -180,8 +181,16 @@ public class AppointmentController {
 
             return new ResponseEntity<>(message,HttpStatus.FORBIDDEN);
         }
+    */
+       Appointment newApp= appointmentService.AddPredefinedAppointment(date,startTime,endTime,adminId,company.getId());
+        if(newApp!=null){
+            String message= "Successfully added app";
+            return new ResponseEntity<>(message,HttpStatus.OK);
+        }else{
+            String message= "Unable to add appointment";
 
-
+            return new ResponseEntity<>(message,HttpStatus.FORBIDDEN);
+        }
     }
 
 
