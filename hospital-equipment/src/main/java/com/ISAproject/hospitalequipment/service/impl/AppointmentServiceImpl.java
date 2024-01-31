@@ -21,6 +21,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 
@@ -40,6 +41,8 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Autowired
     private UserService userService;
+
+
 
 
     public List<Appointment> getFreeAppointmentsByCompany(Long companyId) {
@@ -236,6 +239,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     public boolean alreadyExistsAppointment(LocalDate date,LocalTime startTime, LocalTime endTime,Long adminId,Long companyId){
         List<Appointment> appointments= appointmentRepo.findAppointmentsByCompany(companyId);
+
         if(appointments!=null) {
             for (Appointment a : appointments) {
                 if (a.getDate().isEqual(date) ) {
