@@ -23,7 +23,7 @@ public class AddressController {
     @Autowired
     private AddressService addressService;
 
-    private final Logger LOG = LoggerFactory.getLogger(AddressController.class);
+
 
     @GetMapping("/getAll")
 
@@ -32,16 +32,11 @@ public class AddressController {
         return addressService.findAll();
     }
 
-    public ResponseEntity<List<Address>> anaFallback(RequestNotPermitted rnp) {
-        LOG.warn("Prevazidjen broj poziva u ogranicenom vremenskom intervalu");
-        System.out.println("Usao sam ovde");
-        return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).build();
 
-    }
 
 
     @PostMapping("/save")
-    @RateLimiter(name = "ana", fallbackMethod = "anaFallback")
+
     public Address save(@RequestBody Address address) {
         return addressService.save(address);
     }

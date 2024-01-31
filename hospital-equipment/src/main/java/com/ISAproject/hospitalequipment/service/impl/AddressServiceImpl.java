@@ -25,7 +25,7 @@ public class AddressServiceImpl implements AddressService {
     private AddressRepo addressRepo;
 
 
-
+    private final Logger LOG = LoggerFactory.getLogger(AddressServiceImpl.class);
 
 
 
@@ -37,8 +37,16 @@ public class AddressServiceImpl implements AddressService {
 
 
 
+    @RateLimiter(name = "ana", fallbackMethod = "anaFallback")
     public Address save(Address address){
              return addressRepo.save(address);
+    }
+
+    public Address anaFallback( Address address, RequestNotPermitted rnp) {
+        LOG.warn("Prevazidjen broj poziva u ogranicenom vremenskom intervalu");
+
+        throw rnp;
+
     }
      
      public Address update(Address address){
