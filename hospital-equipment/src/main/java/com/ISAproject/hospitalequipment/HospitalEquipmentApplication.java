@@ -24,7 +24,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EntityScan(basePackages = "com.ISAproject.hospitalequipment.domain")
 @EnableAsync
-public class HospitalEquipmentApplication implements ApplicationRunner{
+public class HospitalEquipmentApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(HospitalEquipmentApplication.class, args);
