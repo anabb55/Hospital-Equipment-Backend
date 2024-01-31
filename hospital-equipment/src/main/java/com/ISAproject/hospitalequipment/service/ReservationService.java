@@ -27,10 +27,16 @@ public interface ReservationService {
 
     void deleteByAppointmentId(Long appointmentId);
 
+    Reservation findByAppointmentId(Long appointmentId);
+
     public Reservation getById(Long id);
 
     public Reservation saveReservation(Reservation reservation);
 
     List<Reservation> findByRegisteredUserId(Long userId);
+
+    public void checkExpiredReservations();
+
+
 
 }

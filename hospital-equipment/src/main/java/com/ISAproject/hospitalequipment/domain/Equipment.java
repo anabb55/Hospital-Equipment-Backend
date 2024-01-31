@@ -28,6 +28,8 @@ public class Equipment implements Serializable {
     public Double grade;
 
     public Long amount;
+    public Double price;
+
 
 
     @JsonIgnore
@@ -36,7 +38,7 @@ public class Equipment implements Serializable {
 
     private Set<EquipmentStock> equipmentStocks;
 
-    public Equipment(Long id,String name, String description, String type, Double grade, Long amount){
+    public Equipment(Long id,String name, String description, String type, Double grade, Long amount,Double price){
 
         this.id = id;
         this.name = name;
@@ -44,6 +46,7 @@ public class Equipment implements Serializable {
         this.type = type;
         this.grade = grade;
         this.amount = amount;
+        this.price = price;
     }
     public Equipment(){}
 

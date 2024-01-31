@@ -2,10 +2,7 @@ package com.ISAproject.hospitalequipment.Controller;
 
 import com.ISAproject.hospitalequipment.domain.*;
 import com.ISAproject.hospitalequipment.domain.enums.ReservationStatus;
-import com.ISAproject.hospitalequipment.dto.RegisterUserDTO;
-import com.ISAproject.hospitalequipment.dto.ReservationDTO;
-import com.ISAproject.hospitalequipment.dto.ReservationEqRequest;
-import com.ISAproject.hospitalequipment.dto.ReservationEquipmentStockDTO;
+import com.ISAproject.hospitalequipment.dto.*;
 import com.ISAproject.hospitalequipment.service.ReservationEquipmentStockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +18,13 @@ public class ReservationEquipmentStockController {
 
     @Autowired
     private ReservationEquipmentStockService reservationEquipmentStockService;
+
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/returnEquipment/{appointmentId}")
+    public ResponseEntity<EquipmentStockDTO> returnEquipment(@PathVariable("appointmentId") Long appointmentId){
+        return new ResponseEntity<>(new EquipmentStockDTO((reservationEquipmentStockService.returnEquipment(appointmentId))), HttpStatus.OK);
+    }
 
     @CrossOrigin(origins = "*")
     @PostMapping("/processReservation")
@@ -38,14 +42,14 @@ public class ReservationEquipmentStockController {
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/getByCompanyId/{companyId}")
-    public ResponseEntity<List<ReservationEquipmentStockDTO>> getByCompanyId(@PathVariable("companyId") Long companyId){
+    @GetMapping("/getByCompanyId/{companyId}/{adminId}")
+    public ResponseEntity<List<ReservationEquipmentStockDTO>> getByCompanyId(@PathVariable("companyId") Long companyId,@PathVariable("adminId") Long adminId){
 
         List<ReservationEquipmentStock> reservations= reservationEquipmentStockService.getByCompanyId(companyId);
         List<ReservationEquipmentStockDTO> reservationDTOs= new ArrayList<>();
 
         for(ReservationEquipmentStock r: reservations){
-            if(r.getReservation().getReservationStatus()== ReservationStatus.RESERVED){
+            if(r.getReservation().getReservationStatus()== ReservationStatus.RESERVED && r.getReservation().getAppointment().getAdministrator().getId()==adminId){
 
                 reservationDTOs.add(new ReservationEquipmentStockDTO(r));
             }
@@ -91,5 +95,21 @@ public class ReservationEquipmentStockController {
 
         return new ResponseEntity<>(reservationDTOs,HttpStatus.OK);
     }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/isEquipmentReserved/{eqId}/{companyId}")
+    public ResponseEntity<Boolean> isEquipmentReserved(@PathVariable("eqId")Long equipmentId,@PathVariable("companyId") Long companyId){
+        List<ReservationEquipmentStock> reservations= reservationEquipmentStockService.getByCompanyId(companyId);
+
+        if(reservations!=null) {
+            for (ReservationEquipmentStock res : reservations) {
+                if (res.getEquipmentStock().getEquipment().getId() == equipmentId && res.getReservation().getReservationStatus() == ReservationStatus.RESERVED) {
+                    return new ResponseEntity<>(true, HttpStatus.OK);
+                }
+            }
+        }
+        return new ResponseEntity<>(false,HttpStatus.OK);
+    }
+
 
 }

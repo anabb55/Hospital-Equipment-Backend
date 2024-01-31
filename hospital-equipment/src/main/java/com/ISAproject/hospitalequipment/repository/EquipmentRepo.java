@@ -22,5 +22,6 @@ public interface EquipmentRepo extends JpaRepository<Equipment,Long> {
             "WHERE e NOT IN (SELECT es.equipment FROM EquipmentStock es WHERE es.company.id = :companyId)")
     List<Equipment> findMissingEquipmentForCompany(@Param("companyId") Long companyId);
 
+    Equipment save(Equipment equipment);
 
 }

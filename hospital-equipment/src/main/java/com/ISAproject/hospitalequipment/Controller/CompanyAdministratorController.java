@@ -26,7 +26,6 @@ public class CompanyAdministratorController {
     private CompanyService companyService;
 
     @CrossOrigin(origins = "*")
-
     @GetMapping("/getAll")
     public ResponseEntity<List<CompanyAdministratorDTO>> getAll(){
         List<CompanyAdministrator> administrators= companyAdministratorService.findAll();
@@ -40,7 +39,6 @@ public class CompanyAdministratorController {
         return new ResponseEntity<>(companyAdministratorDTOs, HttpStatus.OK);
     }
     @CrossOrigin(origins = "*")
-
     @PostMapping("/save")
     public ResponseEntity<CompanyAdministratorDTO> createAdministrator(@RequestBody CompanyAdministratorDTO administrator) {
 
@@ -108,17 +106,16 @@ public ResponseEntity<List<LocationDTO>> getLocations(@PathVariable Long adminId
 
     @CrossOrigin(origins = "*")
     @PutMapping("/update/{id}")
-    public ResponseEntity<CompanyAdministratorDTO> update(@PathVariable Long id, @RequestBody CompanyAdministratorDTO administrator) {
+    public ResponseEntity<CompanyAdministratorDTO> update(@PathVariable("id") Long id, @RequestBody CompanyAdministratorDTO administrator) {
 
         CompanyAdministrator companyAdministrator  = new CompanyAdministrator();
-        companyAdministrator.setId(id);
+        companyAdministrator.setId(administrator.getId());
         companyAdministrator.setEmail(administrator.getEmail());
         companyAdministrator.setUsername(administrator.getUsername());
         companyAdministrator.setPassword(administrator.getPassword());
         companyAdministrator.setOccupation(administrator.getOccupation());
         companyAdministrator.setFirstname(administrator.getFirstname());
         companyAdministrator.setLastname(administrator.getLastname());
-
         companyAdministrator.setPhoneNumber(administrator.getPhoneNumber());
             Address address = new Address();
             address.setId(administrator.getAddress().getId());
@@ -128,21 +125,30 @@ public ResponseEntity<List<LocationDTO>> getLocations(@PathVariable Long adminId
             address.setNumber(administrator.getAddress().getNumber());
         companyAdministrator.setAddress(address);
 
-        Company company = companyService.getById(administrator.getCompany().getId());
+       // Company company = companyService.getById(administrator.getCompany().getId());
+        //company.setWorkEndTime(administrator.getCompany().getWorkEndTime());
+        //company.setWorkStartTime(administrator.getCompany().getWorkStartTime());
+        //company.setName(administrator.getCompany().getName());
+        //company.setId(administrator.getCompany().getId());
+        //company.setGrade(administrator.getCompany().getGrade());
+        //company.setDescription(administrator.getCompany().getDescription());
+        //company.setEquipmentStocks(administrator.getCompany().get());
+
+       // companyAdministrator.setCompany(company);
+
+        Company company= new Company();
+        company.setId(administrator.getCompany().getId());
         company.setWorkEndTime(administrator.getCompany().getWorkEndTime());
         company.setWorkStartTime(administrator.getCompany().getWorkStartTime());
         company.setName(administrator.getCompany().getName());
         company.setId(administrator.getCompany().getId());
         company.setGrade(administrator.getCompany().getGrade());
         company.setDescription(administrator.getCompany().getDescription());
-        //company.setEquipmentStocks(administrator.getCompany().get());
 
-        Set<CompanyAdministrator> admins = company.getAdministrators();
-        company.setAdministrators(admins);
-        companyService.update(company, company.getId());
+
+         companyAdministrator.setCompany(company);
 
         CompanyAdministrator updatedAdmin = companyAdministratorService.update(companyAdministrator, id);
-        admins.add(updatedAdmin);
 
         if (updatedAdmin == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -30,6 +30,23 @@ public class ReservationEquipmentStockServiceImpl implements ReservationEquipmen
     private ReservationService reservationService;
 
 
+
+
+         @Transactional(readOnly = false)
+        public EquipmentStock returnEquipment(Long appointmentId) {
+        Reservation reservation = reservationService.findByAppointmentId(appointmentId);
+
+        ReservationEquipmentStock reservationEquipmentStock = reservationEquipmentStockRepo.findByReservation(reservation.getId());
+
+       EquipmentStock equipmentStock = equipmentStockService.findById(reservationEquipmentStock.getEquipmentStock().getId());
+
+       equipmentStock.setAmount(equipmentStock.getAmount() + reservationEquipmentStock.getAmount());
+
+       equipmentStockService.save(equipmentStock);
+
+       return equipmentStock;
+
+    }
 @Transactional
     public ReservationEquipmentStock save(List<Equipment> equipments, ReservationEquipmentStock reservationEqStock, Long companyId) {
     try { Reservation lastReservation = reservationService.getLast();

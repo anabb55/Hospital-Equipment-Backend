@@ -44,7 +44,7 @@ public class ReservationController {
         return new ResponseEntity<>(new ReservationDTO(reservation), HttpStatus.CREATED);
     }
 
-
+    @CrossOrigin(origins = "*")
     @PostMapping("/createReservationPredefined/{UserId}")
     public ResponseEntity<ReservationDTO> createReservationPredefined(@RequestBody Appointment appointment,@PathVariable Long UserId) {
         Reservation reservation = new Reservation();
@@ -84,12 +84,20 @@ public class ReservationController {
     public ResponseEntity<ReservationDTO> updateStatus(@PathVariable("resId") Long reservationId  ){
         Reservation reservation= reservationService.getById(reservationId);
        reservation.setReservationStatus(ReservationStatus.TAKEN);
-
-
         reservationService.saveReservation(reservation);
         emailService.sendReservationEmail(reservation.getRegisteredUser());
         return new ResponseEntity<>(new ReservationDTO(reservation),HttpStatus.OK);
 }
+
+    @CrossOrigin(origins = "*")
+    @PutMapping("/updateStatusToExpired/{resId}")
+    public ResponseEntity<ReservationDTO> updateStatusToExpired(@PathVariable("resId") Long reservationId  ){
+        Reservation reservation= reservationService.getById(reservationId);
+        reservation.setReservationStatus(ReservationStatus.EXPIRED);
+        reservationService.saveReservation(reservation);
+        emailService.sendReservationEmail(reservation.getRegisteredUser());
+        return new ResponseEntity<>(new ReservationDTO(reservation),HttpStatus.OK);
+    }
     @GetMapping("/getAll")
     public ResponseEntity<List<ReservationDTO>> getAll() {
         List<Reservation> reservations= reservationService.getAll();
@@ -103,6 +111,15 @@ public class ReservationController {
         return new ResponseEntity<>(reservationDTOS, HttpStatus.OK);
 
 
+    }
+
+    @CrossOrigin(origins = "*")
+    @PutMapping("/checkExpiredReservations/")
+    public ResponseEntity<Void> checkExpiredReservations(  ){
+
+        reservationService.checkExpiredReservations();
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

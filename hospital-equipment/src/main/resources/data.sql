@@ -100,8 +100,8 @@ VALUES (30, 3, 10);
 
 
 INSERT INTO registered_users(
-	accumulated_points, penalty_points, id, loyalty_id, user_category)
-	VALUES (0, 0, 1, 1, 'REGULAR');
+    accumulated_points, penalty_points, id, loyalty_id, user_category)
+VALUES (0, 0, 1, 1, 'REGULAR');
 
 
 
@@ -186,6 +186,7 @@ INSERT INTO public.reservations (
 ) VALUES (
              1, 1, 0, null, 1, 'RESERVED'
          );
+
 
 
 
