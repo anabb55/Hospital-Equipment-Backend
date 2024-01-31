@@ -110,7 +110,13 @@ public class AppointmentController {
     }
 
 
+   @GetMapping("/findById/{id}")
+   public ResponseEntity<AppointmentDTO> findAll(@PathVariable Long id){
 
+        Optional<Appointment> app = appointmentService.findById(id);
+        Appointment appointment = app.get();
+        return new ResponseEntity<>(new AppointmentDTO(appointment), HttpStatus.OK);
+   }
 
 
     
