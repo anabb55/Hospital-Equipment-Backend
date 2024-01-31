@@ -15,6 +15,7 @@ import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 import springfox.documentation.builders.PathSelectors;
@@ -23,11 +24,10 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-
 @SpringBootApplication
 @EntityScan(basePackages = "com.ISAproject.hospitalequipment.domain")
 @EnableAsync
-public class HospitalEquipmentApplication {
+public class HospitalEquipmentApplication implements ApplicationRunner{
 
 	public static void main(String[] args) {
 		SpringApplication.run(HospitalEquipmentApplication.class, args);
@@ -40,12 +40,10 @@ public class HospitalEquipmentApplication {
 	}
 
 	private void openSwaggerUI() {
-		String swaggerUiUrl = "http://localhost:5555/swagger-ui/index.html";
+		String swaggerUiUrl = "http://localhost:8081/swagger-ui/index.html";
 		System.out.println("Swagger UI is available at: " + swaggerUiUrl);
 	}
-
-
-	@Bean
+@Bean
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
