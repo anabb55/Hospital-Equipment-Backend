@@ -1,5 +1,5 @@
 # Hospital Equipment Management Web Application
-Backend for https://github.com/HelenaJovic/hospital-equipment-frontend. 
+Frontend for https://github.com/anabb55/Hospital-Equipment-Frontend. 
 
 ## Build
 
